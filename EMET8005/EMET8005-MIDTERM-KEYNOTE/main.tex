@@ -1,0 +1,79 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+% \begin{center}
+% \huge
+% \vspace*{1.0in} ECON8013 
+% \\\vspace{0.5in} ASSIGNMENT 1
+% \normalsize
+% \\\vspace{0.5in} \textsc{By}
+% \\\vspace{0.1in} \textsc{Zeming Wang}
+% \\\vspace{0.1in} \textsc{u6114134}
+% \normalsize
+% % \\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+% % \\\vspace{0.1in} \textsc{Tutor: Long}
+% % \normalsize
+% \\\vspace{0.5in} \textsc{Due: 8 March, 2017}
+% \end{center}
+
+% \newpage
+
+\setcounter{page}{1}
+
+
+\begin{enumerate}
+    \item \textit{Randomized Control Trial} is a type of experiment in which the people participating in the trial are \textit{randomly} allocated to either the group receiving the treatment or to a group receiving no treatment (or placebo treatment) as the control.
+    Under \textit{randomization}, the only systematic difference between the groups is the applied treatment. Therefore, any difference in group outcomes is attributed to the treatment. This allows researchers to determine the effects of the treatment while \textit{holding other things equal} (other things are equal on average). 
+    
+    \item Define two potential outcomes: $Y_{0i}$ is the value of the outcome variable for individual $i$ if he is not treated, and $Y_{1i}$ is the value of the outcome variable for individual $i$ if he is treated. The \textit{causal effect of treatment} of individual $i$ is $Y_{1i} - Y_{0i}$. However, an individual $i$ cannot be treated and not be treated at the same time. We define \textit{average treatment effect} for a population as $E(Y_{1i} - Y_{0i})$ to reflect causal effect on average. 
+
+    \item Average treatment effect can be identified by \textit{random assignment}. Let $D_i$ be an indicator for the individual $i$ being assigned to be treated ($D_i=1$) or not to be treated ($D_i=0$). The difference in average observed outcomes can be written as 
+        \begin{align*}
+            &  E(Y_i | D_i=1) - E(Y_i | D_i=0) \\
+            &= E(Y_{1i} | D_i=1) - E(Y_{0i} | D_i=0) \\
+            &= \underbrace{E(Y_{1i} | D_i=1) - E(Y_{0i} | D_i=1)}_\textrm{ATT} 
+             + \underbrace{E(Y_{0i} | D_i=1) - E(Y_{0i} | D_i=0)}_\textrm{Bias} \\
+            &= \underbrace{E(Y_{1i} | D_i=1) - E(Y_{1i} | D_i=0)}_\textrm{Bias} 
+             + \underbrace{E(Y_{1i} | D_i=0) - E(Y_{0i} | D_i=0)}_\textrm{ATU} \\
+        \end{align*}
+    ATT is the \textit{average treatment effect on the treated}, and ATU is the \textit{average treatment effect on the untreated}. In random assignment, $E(Y_{0i} | D_i=1)$ and $E(Y_{0i} | D_i=0)$ are the same since they are both drawn from the same underlying population, so as $E(Y_{1i} | D_i=1)$ and $E(Y_{1i} | D_i=0)$. Therefore with randomisation the bias terms vanish, the difference in average observed outcomes reveals the average treatment effect. 
+    
+    \item The \textit{sampling distribution} of an estimator is the distribution of all the possible values an estimator can get if we repeatedly draw samples from the population. The sampling distribution tells us how far the estimator tends to vary from the parameter of interest. In practice when we only get one sample, the sampling distribution helps us to tell how typical our sample is. 
+    
+    \item A \textit{hypothesis test} is a statistical test that is used to determine whether there is enough evidence in a sample of data to infer that a certain condition is true for the entire population. A hypothesis test examines two opposing hypotheses about a population: the null hypothesis ($H_0$) and the alternative hypothesis ($H_1$).  The \textit{sample spaces} is the set of all possible samples, which can be split into the \textit{rejection region} for $H_0$ and the \textit{acceptance region} for $H_0$. The rejection/acceptance region is constructed in a way that makes lower probability of decision error. There are two types of errors in a hypothesis test: \textit{Type I Error} refers to the decision error that $H_0$ is rejected but it is actually true; \textit{Type II Error} refers to the decision error that $H_0$ is actually false but the test fails to reject it. 
+    
+    \item The Law of Large Numbers (LLN): Let $Z_1, Z_2, \dots$ be \textit{iid} random variables. Let $\bar{Z}_N$ denote the sample mean of a sample of size $N$. Then for any $\epsilon > 0$, we have 
+    $$P(|\bar{Z}_N - E(Z_i)| < \epsilon) \rightarrow 1\ \textrm{as}\ N \rightarrow \infty$$
+    or denoted as $\bar{Z}_N \rightarrow^{p} E(Z_i)\ \textrm{as}\ N \rightarrow \infty $.
+    
+    \item Central Limit Theorem (CLT): Let $Z_1, Z_2, \dots$ be \textit{iid} random variables. Let $\bar{Z}_N$ denote the sample mean of a sample of size $N$. Then for any constant $c$ we have 
+    $$P\left( \frac{\bar{Z}_N-E(Z_i)}{\sqrt{Var(Z_i)/N}} < c \right) \rightarrow P(N(0,1) < c)\ \textrm{as}\ N \rightarrow \infty$$
+    or denoted as $\bar{Z}_N \overset{A}{\sim} N\left( E(Z_i), \frac{Var(Z_i)}{N} \right)\ \textrm{as}\ N \rightarrow \infty$.
+    
+    \item \textit{Omitted Variable Bias}: multiple regression is a way to make other things equal, but the equality is generated only for variables included as controls in the regression model. Failure to include enough controls or the right controls leaves us with selection bias. The selection bias generated by inadequate controls is called \textit{omitted variable bias}.
+    
+    \item \textit{Multicollinearity} is a phenomenon in which two or more regressors in a multiple regression model are highly correlated, meaning that one can be linearly predicted from the others with a substantial degree of accuracy. In case of perfect multicollinearity the design matrix $X$ has less than full rank, and therefore the moment matrix $X^TX$ cannot be inverted. Under these circumstances, the ordinary least-squares (OLS) estimator $\hat{\beta }_\textrm{OLS}=(X^TX)^{-1}X^Ty$ does not exist.
+
+
+\end{enumerate}
+
+\end{document}

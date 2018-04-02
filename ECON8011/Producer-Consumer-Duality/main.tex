@@ -1,0 +1,186 @@
+
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{array,multirow}
+\usepackage{makecell}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[margin=1.5in]{geometry}
+
+\title{Producer and Consumer Duality}
+
+\begin{document}
+%\maketitle
+
+%\section*{Producer Duality}
+\noindent
+Assumptions:
+\begin{enumerate}
+  \item $Y$ is convex, closed and free disposal
+  \item $F$ is convex, continuous and increasing
+  \item $f$ is concave, continuous and (strictly) increasing
+\end{enumerate}
+
+\setlength\extrarowheight{10pt}
+\begin{table}[H]
+  \caption{Producer Duality}
+  \begin{tabular}{lll}
+     \hline\hline
+      Problem
+       & $\underset{y \in \mathbb{R}^L}{\max}\ p \cdot y \textrm{ s.t. } F(y) \leq 0$
+       & $\underset{z \in \mathbb{R}_{+}^{L-1}}{\min}\ w \cdot z \textrm{ s.t. } f(z) \geq q$
+      \\
+      FOC & \parbox{.35\textwidth}{
+              $$\dfrac{\ \frac{\partial F}{\partial y_k}\ }{ \frac{\partial F}{\partial y_l} } = \dfrac{p_k}{p_l}$$
+            }
+          & \parbox{.35\textwidth}{
+              $$\dfrac{\ \frac{\partial f}{\partial z_k}\ }{ \frac{\partial F}{\partial z_l} } = \dfrac{w_k}{w_l}$$
+            }
+      \\\hline
+      Value Function & Profit function: $\pi(p)$
+                     & Cost function: $c(w,q)$
+      \\
+      Properties
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item $\pi(\lambda p)=\lambda \pi(p)$
+                \item convex function of $p$
+              \end{enumerate}
+          }
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item $c(\lambda w,q) = \lambda c(w,q)$
+                \item concave function of $w$
+                \item convex function of $q$
+                \item increasing in $q$
+              \end{enumerate}
+          }
+      \\\hline
+      Solution & Supply correspondence: $y(p)$ & \makecell[l]{Conditional factor demand\\correspondence: $z(w,q)$}
+      \\
+      Properties
+          & \parbox{.4\textwidth}{
+              \begin{enumerate}[(a)]
+                \item $y(\lambda p) = y(p)$
+                \item Convex-valued
+                \item Single-valued, if \\$Y$ strictly convex
+              \end{enumerate}
+          }
+          & \parbox{.4\textwidth}{
+              \begin{enumerate}[(a)]
+                \item $z(\lambda w,q) = z(w,q)$
+                \item Convex-valued
+                \item Single-valued, if \\$f$ strictly concave
+              \end{enumerate}
+          }
+      \\
+      \makecell[l]{Comparative\\Statics} & Hotelling's Identity & Shepard's Lemma
+      \\
+         & \parbox{.35\textwidth}{
+             $$\dfrac{\partial \pi(p)}{\partial p_l}=y_l(p)$$
+             $$D y(p) = D^2 \pi(p)$$
+             positive semidefinite
+         }
+         & \parbox{.35\textwidth}{
+            $$\dfrac{\partial c(w,q)}{\partial w_k}=z_k(w,q)$$
+            $$D_w z(w,q) = D_w^2 c(w,q)$$
+            negative semidefinite
+         }
+      \\
+      \\
+    \hline\hline
+  \end{tabular}
+\end{table}
+\noindent
+Caveat: If the production set $Y$ exhibits non-decreasing return to scale,
+then either $\pi(p) = 0$ or $\pi(p)=+\infty$.
+
+
+
+%\section*{Consumer Duality}
+
+%\setlength\extrarowheight{10pt}
+\begin{table}
+  \caption{Consumer Duality}
+  \begin{tabular}{lcc}
+     \hline\hline
+      Problem
+       & $\underset{x \geq 0}{\max}\ u(x) \textrm{ s.t. } p \cdot x \leq y$
+       & $\underset{x \geq 0}{\min}\ p \cdot x \textrm{ s.t. } u(x) \geq u$
+      \\
+      FOC & $\dfrac{\partial u(x)}{\partial x_i} = \lambda p_i$
+          & $\lambda\dfrac{\partial u(x)}{\partial x_i} = p_i$
+      \\\hline
+      Value Function & Indirect utility function: $u(p,y)$
+                     & Expenditure function: $e(p,u)$
+      \\
+      Properties
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item continuous
+                \item $v(\lambda p, \lambda y) = v(p,y)$
+                \item strictly increasing in $y$
+                \item nonincreasing in $p$
+                \item quasiconvex in $p$
+              \end{enumerate}
+          }
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item continuous
+                \item $e(\lambda p,u) = \lambda e(p,u)$
+                \item strictly increasing in $v$
+                \item nondecreasing in $p$
+                \item concave in $p$
+              \end{enumerate}
+          }
+      \\\hline
+      Solution & Marshallian demand: $D(p,y)$ & Hicksian demand: $h(p,u)$
+      \\
+      Properties
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item upper semicontinuous
+                \item $D(\lambda p, \lambda y) = D(p,y)$;
+                \item budget balanceness:
+                      $$p \cdot x^* = y\ \forall x^* \in D(p,y)$$
+                \item convex-valued if $u(x)$ is quasiconcave;
+                \item single-valued and continuous if
+                      $u(x)$ is strictly quasiconcave.
+              \end{enumerate}
+          }
+          & \parbox{.35\textwidth}{
+              \begin{enumerate}[(a)]
+                \item upper semicontinuous
+                \item $h(\lambda p,u) = h(p,u)$
+                \item no excess utility:
+                      $$u(x^h) = v\ \forall x^h \in h(p,u)$$
+                \item convex-valued if $u(x)$ is quasiconcave;
+                \item single-valued and continuous if
+                      $u(x)$ is strictly quasiconcave
+              \end{enumerate}
+          }
+      \\
+         & Roy's Identity & Shepard's Lemma
+      \\
+         & \parbox{.35\textwidth}{
+             $$d_i(p,y) = - \frac{\frac{\partial v(p,y)}{\partial p_i}}
+                                {\frac{\partial v(p,y)}{\partial y}}$$
+         }
+         & \parbox{.35\textwidth}{
+            $$h_i(p,u) = \frac{\partial e(p,u)}{\partial p_i}$$
+         }
+      \\\hline
+      Duality
+      & $D(p,y)=h(p,v(p,y))$ & $h(p,y)=D(p,e(p,u))$
+      \\
+      & $v(p,e(p,u))=u$ & $e(p,v(p,y))=y$
+      \\
+    \hline\hline
+  \end{tabular}
+\end{table}
+
+\end{document}

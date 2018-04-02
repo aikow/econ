@@ -1,0 +1,252 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.1 of REVTeX, October 2009
+%
+%   Copyright (c) 2009 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-1}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+\usepackage{enumitem}
+
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+
+\title[STAT7055 - INTRODUCTORY STATISTICS FOR BUSINESS AND FINANCE]{EXAM CHEAT SHEET (PART II)}
+\maketitle
+
+% \begin{quotation}
+% The ``lead paragraph'' is encapsulated with the \LaTeX\ 
+% \verb+quotation+ environment and is formatted as a single paragraph before the first section heading. 
+% (The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.) 
+% Note that numbered references are allowed in the lead paragraph.
+% %
+% The lead paragraph will only be found in an article being prepared for the journal \textit{Chaos}.
+% \end{quotation}
+
+\section{Hypothesis Testing}
+
+\begin{itemize}[label={}]
+\item Null Hypothesis ($H_0$): Always involves ``$=$" sign.
+\item Alternative Hypothesis ($H_1$): ``$<$", ``$>$" or ``$\neq$".
+\item One-Tailed Test: $H_1$ involves ``$<$" or ``$>$".
+\item Two-Tailed Test: $H_1$ involves ``$\neq$"".
+\item Rejection Region: Reject $H_0$ if falling in this range.
+\item $p$-value: Reject $H_0$ if $p$-value is very \textit{small}.
+\item Type I Error ($\alpha$): Reject $H_0$ when it is true.
+\item Type II Error ($\beta$): Fail to reject $H_0$ when it is false.
+\item Significance Level: $\alpha=P(\textrm{Type I Error})$
+\item Testing $\mu$ ($\sigma^2$ known): $Z=\dfrac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}$
+\item Testing $\mu$ ($\sigma^2$ unknown): $T=\dfrac{\bar{X}-\mu_0}{s/\sqrt{n}}$ {\small (Df. = $n-1$)} 
+\item Testing Population Proportion $p$: $Z=\dfrac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$
+\end{itemize}
+
+% \subsection{Testing $\mu$ ($\sigma^2$ Known)}
+% \begin{itemize}[label={}]
+% \item Hypotheses: $H_0: \mu=\mu_0$; $H_1: \mu(\neq,<,>)\mu_0$
+% \item Test Statistic: $Z=\dfrac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}$
+% \item Confidence Interval: $\bar{X} \pm z_{\frac{\alpha}{2}}\dfrac{\sigma}{\sqrt{n}}$
+% \end{itemize}
+
+% \subsection{Testing $\mu$ ($\sigma^2$ Unknown)}
+% \begin{itemize}[label={}]
+% \item Hypotheses: $H_0: \mu=\mu_0$; $H_1: \mu(\neq,<,>)\mu_0$
+% \item Test Statistic: $T=\dfrac{\bar{X}-\mu_0}{s/\sqrt{n}}$
+% \item Confidence Interval: $\bar{X} \pm t_{\frac{\alpha}{2},n-1}\dfrac{s}{\sqrt{n}}$
+% \end{itemize}
+
+% \subsection{Testing Population Proportion $p$}
+% \begin{itemize}[label={}]
+% \item Hypotheses: $H_0: p=p_0$; $H_1: p(\neq,<,>)p_0$
+% \item Test Statistic: $Z=\dfrac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$
+% \item Confidence Interval: $\hat{p} \pm z_{\frac{\alpha}{2}}\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n}}$
+% \end{itemize}
+
+
+\section{Comparing Two Populations}
+
+\begin{itemize}[label={}]
+\item Paired Samples: $T = \dfrac{\bar{X}_D - \mu_D}{s_D / \sqrt{n}}$
+\item Independent Samples: 
+\item Testing $\mu_1-\mu_2$ ($\sigma_1^2$, $\sigma_2^2$ known):\\\\ 
+$Z = \dfrac{(\bar{X}_1-\bar{X}_2) - (\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}$
+\item Testing $\mu_1-\mu_2$ ($\sigma_1^2$, $\sigma_2^2$ unknown): \\\\
+$T = \dfrac{(\bar{X}_1-\bar{X}_2) - (\mu_1-\mu_2)}{\sqrt{s_p^2\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}$ {\small (Df. =  $n_1+n_2-2$)}
+\item {\small \textit{Pooled Sample Variance}:\\\\
+$s_p^2 = \dfrac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}$}
+\item Testing $\sigma_1^2 = \sigma_2^2$: $F=\dfrac{s_1^2}{s_2^2}$ ($s_1^2>s_2^2$) 
+\item {\small RR.: $F > F_{\frac{\alpha}{2}, n_1-1, n_2-1}$}
+\item Testing $p_1-p_2=D_0$: $Z = \dfrac{(\hat{p}_1-\hat{p}_2) - (p_1-p_2)}{\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}}$ \\
+\item Testing $p_1-p_2=0$: $Z = \dfrac{\hat{p}_1-\hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}$
+\item {\small \textit{Combined Proportion}: $\hat{p} = \dfrac{n_1\hat{p}_1+n_2\hat{p}_2}{n_1+n_2}$}
+\end{itemize}
+
+
+\section{Analysis of Variance (ANOVA)}
+
+\subsection{One-Way ANOVA}
+\begin{itemize}[label={}]
+\item Hypotheses: $\mu_1=\mu_2=\dots=\mu_k$ ($k$ levels)
+\item ANOVA Table: \\\\
+{\footnotesize
+$\begin{array}{cccc}
+\hline
+& \textrm{Sum Sq.} & \textrm{Df.} & \textrm{Mean Sq.} \\
+\hline
+\textrm{Factor} & SST=\sum_{j}^{k} n_j(\bar{Y}_j-\bar{Y})^2 & k-1 & MST=\frac{SST}{k-1} \\
+\textrm{Error} & SSE=\sum_{j}^{k}\sum_{i}^{n_j} (Y_{ij}-\bar{Y}_j)^2 & n-k & MSE=\frac{SSE}{n-k} \\
+\hline
+\textrm{Total} & SS_{\textrm{Total}}=\sum_{j}^{k}\sum_{i}^{n_j} (Y_{ij}-\bar{Y})^2 & n-1 \\
+\hline
+\end{array}$
+}
+\item Test Statistic: 
+$F = \frac{MST}{MSE}$ {\small (RR.: $F > F_{\alpha, k-1, n-k}$)}
+\end{itemize}
+
+\subsection{Two-Way ANOVA}
+\begin{itemize}[label={}]
+\item Main Effects Hypotheses: Population means at different levels of \textit{a factor} are all equal.
+\item Interaction Hypotheses: There is no \textit{interaction} between factors.
+\item Interaction: Two factors \textit{interact} when the effect of one factor on the response variable is altered by the level of the other factor.
+{\small
+\item Complete Factorial Experiment: There are data collected for all treatments.
+\item Balanced Experiment: Number of observations for each treatment (also called \textit{replicates}) are the same.
+}
+\item ANOVA Table:\\\\
+{\footnotesize
+$\begin{array}{cccc}
+\hline
+ & \textrm{Sum Sq.} & \textrm{Df.} & \textrm{Mean Sq.} \\
+\hline
+\textrm{Factor A} & SS_A & a-1 & MS_A=\frac{SS_A}{a-1} \\
+\textrm{Factor B} & SS_B & b-1 & MS_B=\frac{SS_B}{b-1} \\
+\textrm{Interaction} & SS_{AB} & (a-1)(b-1) & MS_{AB}=\frac{SS_{AB}}{(a-1)(b-1)} \\
+\textrm{Error} & SSE & n-ab & MSE=\frac{SSE}{n-ab} \\
+\hline
+\textrm{Total} & SS(\textrm{Total}) & n-1 \\
+\hline
+\end{array}$
+}
+\item Test Statistics: 
+{\small
+\item $F_A = \frac{MS_A}{MSE}$ (RR.: $F_A > F_{\alpha,a-1,n-ab}$)
+\item $F_B = \frac{MS_B}{MSE}$ (RR.: $F_B > F_{\alpha,b-1,n-ab}$)
+\item $F_{AB} = \frac{MS_{AB}}{MSE}$ (RR.: $F_{AB} > F_{\alpha,(a-1)(b-1),n-ab}$)
+}
+\end{itemize}
+
+\section{Chi-Squared Test}
+
+% \subsection{Goodness-of-Fit Test}
+\begin{itemize}[label={}]
+\item Goodness-of-Fit Test:
+\item $\chi^2=\sum_{i}^{k} \dfrac{(f_i-e_i)^2}{e_i}$ {\small(RR.: $\chi^2 > \chi^2_{\alpha,k-1}$)}
+\item Test of Contingency Table:
+\item $\chi^2=\sum_i^r\sum_j^c \dfrac{(f_{ij}-e_{ij})^2}{e_{ij}}$ {\small(RR.: $\chi^2 > \chi^2_{\alpha,(r-1)(c-1)}$)}
+\item $e_{ij} = \dfrac{i^{\textrm{th}}\ \textrm{row total} \times j^{\textrm{th}}\ \textrm{column total}}{\textrm{sample size}}$
+% \item RR.: $\chi^2 > \chi^2_{\alpha,(r-1)(c-1)}$
+\end{itemize}
+
+
+\section{Linear Regression}
+
+\subsection{Simple Linear Regression}
+\begin{itemize}[label={}]
+\item Regression Model: $Y = \beta_0 + \beta_1X + \epsilon$
+\item Model Assumption: $\epsilon_i \overset{iid}{\sim} N(0, \sigma_{\epsilon}^2)$
+{\footnotesize
+\item Errors $\epsilon_i$ are assumed to be: (i) normally distributed; (ii) with mean equal to $0$; (iii) with constant variance $\sigma_{\epsilon}^2$ regardless of $X$; (iv) independent with each other.
+}
+\item Fitted Model: $\hat{Y}=\hat{\beta}_0 + \hat{\beta}_1X$
+\item Parameter Estimation: 
+\item $\hat{\beta}_1=\dfrac{s_{XY}}{s_X^2}$, $\hat{\beta}_0=\bar{Y}-\hat{\beta}_1\bar{X}$
+\item Residual: $e_i=Y_i-\hat{Y}_i$
+\item ANOVA Table for Regression:\\\\
+{\footnotesize
+$\begin{array}{cccc}
+\hline
+& \textrm{Sum Sq.} & \textrm{Df.} & \textrm{Mean Sq.} \\
+\hline
+\textrm{Regression} & SSR=\sum_{i}^n (\hat{Y}_i-\bar{Y})^2 & 1 & MSR=SSR \\
+\textrm{Residual} & SSE=\sum_{i}^n (Y_i-\hat{Y}_i)^2 & n-2 & MSE=\frac{SSE}{n-2} \\
+\hline
+\textrm{Total} & SS_{\textrm{Total}}=\sum_{i}^n (Y_i-\bar{Y})^2 & n-1 \\
+\hline
+\end{array}
+$}
+\item Testing Overall Significance: $\beta_1=0$ or $\rho=0$
+\item Testing $\beta_1=c$: $T=\dfrac{\hat{\beta}_1-c}{s_{\hat{\beta}_1}}$ {\small (Df. = $n-2$)}
+\item $s_{\hat{\beta}_1} = \sqrt{\dfrac{\frac{1}{n-2}\sum_i^n e_i^2}{(n-1)s_X^2}} = \dfrac{s_{\epsilon}}{\sqrt{(n-1)s_X^2}}$\\
+\item Testing $\beta_0=c$: $T=\dfrac{\hat{\beta}_0-c}{s_{\hat{\beta}_0}}$ {\small (Df. = $n-2$)} \\
+\item $s_{\hat{\beta}_0} = s_{\hat{\beta}_1}\times \sqrt{\dfrac{\sum_{i}^n X_i^2}{n}}$
+\item Testing $\rho=0$: $T=\dfrac{r\sqrt{n-2}}{\sqrt{1-r^2}}$ {\small (Df. = $n-2$)}
+\item Coefficient of Determination: 
+\item $R^2=\dfrac{s_{XY}^2}{s_X^2s_Y^2}=\dfrac{SSR}{SS(\textrm{Total})}$
+\item Estimating $\sigma_{\epsilon}$: $s_{\epsilon} = \sqrt{\dfrac{\sum_{i}^n e_i^2}{n-2}} = \sqrt{\dfrac{SSE}{n-2}}$ 
+\item Point Estimation: $\hat{y}_g=\hat{\beta}_0+\hat{\beta}_1x_g$
+\item {\small Prediction Interval for \textit{expected} (or \textit{particular}) value:}
+\item $\hat{y}_g\pm t_{\frac{\alpha}{2},n-2}\times s_{\epsilon}\sqrt{\dfrac{1}{n}+\dfrac{(x_g-\bar{X})^2}{(n-1)s_X^2}\Bigg(+1\Bigg)}$
+% \item Confidence Interval for the expected value: 
+% \item $\hat{y}_g\pm t_{\frac{\alpha}{2},n-2}\times s_{\epsilon}\sqrt{\dfrac{1}{n}+\dfrac{(x_g-\bar{X})^2}{(n-1)s_X^2}}$
+\end{itemize}
+
+\subsection{Multiple Linear Regression}
+\begin{itemize}[label={}]
+\item Regression Model: $Y=\beta_0+\beta_1X_1+\dots+\beta_kX_k+\epsilon$
+\item Fitted Model: $\hat{Y}=\hat{\beta}_0+\hat{\beta}_1X_1+\dots+\hat{\beta}_kX_k$
+\item ANOVA Table for Regression:\\\\
+{\footnotesize
+$\begin{array}{cccc}
+\hline
+& \textrm{Sum Sq.} & \textrm{Df.} & \textrm{Mean Sq.} \\
+\hline
+\textrm{Regression} & SSR=\sum_{i}^n (\hat{Y}_i-\bar{Y})^2 & k & MSR=\frac{SSR}{k} \\
+\textrm{Residual} & SSE=\sum_{i}^n (Y_i-\hat{Y}_i)^2 & n-k-1 & MSE=\frac{SSE}{n-k-1} \\
+\hline
+\textrm{Total} & SS_{\textrm{Total}}=\sum_{i}^n (Y_i-\bar{Y})^2 & n-1 \\
+\hline
+\end{array}
+$}
+\item Testing Overall Significance: {\small $\beta_1=\beta_2=\dots=\beta_k=0$}
+\item Test Statistic: $F=\frac{MSR}{MSE}$ {\small (RR.: $F > F_{\alpha,k,n-k-1}$)}
+\item Testing Individual Coefficient Parameters: $\beta_j=c$
+\item {\footnotesize Interpretation: All other independent variables being  considered, $X_j$ has a significant linear relationship with $Y$.}
+\item Test Statistic: $T=\dfrac{\hat{\beta}_j-c}{s_{\hat{\beta}_j}}$ {\small (Df. = $n-k-1$)}
+\item Estimating $\sigma_{\epsilon}$: $s_{\epsilon} = \sqrt{\dfrac{\sum_{i}^n e_i^2}{n-k-1}}$
+\item Multiple $R^2$: $R^2=\frac{SSR}{SS(\textrm{Total})}$
+\item Adjusted $R^2$: {\footnotesize  $R_{adj}^2=1-\dfrac{(n-1)(1-R^2)}{n-k-1}=1-\dfrac{\frac{SSE}{n-k-1}}{\frac{SS(\textrm{Total})}{n-1}}$}
+\item Multicollinearity: Independent variables are correlated with each other.
+\item Interaction Model: {\footnotesize $Y=\beta_0+\beta_1X+\beta_2Y+\beta_3(X\times Y)+\epsilon$}
+\end{itemize}
+
+\end{document}
+

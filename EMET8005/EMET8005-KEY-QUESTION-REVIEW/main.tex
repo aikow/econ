@@ -1,0 +1,453 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.1 of REVTeX, October 2009
+%
+%   Copyright (c) 2009 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-1}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\renewcommand{\vec}[1]{\bm{#1}} 
+\newcommand{\mat}[1]{\bm{#1}}    
+\newcommand{\set}[1]{\mathcal{#1}}
+\newcommand{\term}[1]{\emph{#1}}
+\newcommand{\norm}[1]{\|#1\|}
+
+\definecolor{lightgray}{gray}{0.7}
+
+% \fontsize{10mm}{8mm}\selectfont
+
+\setlength\parindent{0pt} % zero indentation
+
+\begin{document}
+
+%\preprint{AIP/123-QED}
+
+\title[EMET8005 - INTRODUCTORY ECONOMETRICS]{KEY QUESTIONS REVIEW}% Force line breaks with \\
+
+
+% \author{A. Author}
+%  \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+% \author{B. Author}%
+%  \email{Second.Author@institution.edu.}
+% \affiliation{ 
+% Authors' institution and/or address%\\This line break forced with \textbackslash\textbackslash
+% }%
+
+% \author{C. Author}
+%  \homepage{http://www.Second.institution.edu/~Charlie.Author.}
+% \affiliation{%
+% Second institution and/or address%\\This line break forced% with \\
+% }%
+
+% \date{\today}% It is always \today, today,
+%              %  but any date may be explicitly specified
+
+% \begin{abstract}
+% An article usually includes an abstract, a concise summary of the work
+% covered at length in the main body of the article. It is used for
+% secondary publications and for information retrieval purposes. 
+% %
+% Valid PACS numbers may be entered using the \verb+\pacs{#1}+ command.
+% \end{abstract}
+
+% \pacs{Valid PACS appear here}% PACS, the Physics and Astronomy
+%                              % Classification Scheme.
+% \keywords{Suggested keywords}%Use showkeys class option if keyword
+%                               %display desired
+\maketitle
+
+% \begin{quotation}
+% The ``lead paragraph'' is encapsulated with the \LaTeX\ 
+% \verb+quotation+ environment and is formatted as a single paragraph before the first section heading. 
+% (The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.) 
+% Note that numbered references are allowed in the lead paragraph.
+% %
+% The lead paragraph will only be found in an article being prepared for the journal \emph{Chaos}.
+% \end{quotation}
+
+\section*{How randomized controlled trials work?}
+
+The problem for causal inference is that an individual cannot be treated and untreated
+at the same time. Therefore, instead of comparing individuals we compare groups. If
+the treatment group and the control group have similar characteristics, and if we only
+administer the treatment to the former, then we can attribute subsequent differences in
+outcomes to the treatment.\\
+
+A randomized controlled trial works by allocating a large number of individuals randomly
+to either of the two groups. Random allocation and the law of large numbers imply that
+the two groups have the same characteristics on average. Therefore, if the randomization
+is successful and the two groups are large, we interpret differences in outcomes as causal
+effects of treatment.\\
+
+If individuals are not randomly assigned to the treatment and control groups, there is
+the risk of systematic differences in (observed and unobserved) characteristics other than
+the treatment. In this case, we cannot know whether observed differences in outcomes is
+caused by the treatment or whether they represent other factors just as reverse causality,
+unobserved heterogeneity, or self-selection.\\
+
+Random allocation can be difficult to implement in practice, both in the initial stage
+and during the trial (sample attrition). It is therefore important to check that the final
+samples are balanced.\\
+
+\section*{What is average treatment effect?}
+
+The framework defines potential outcomes with treatment, $Y_{1i}$, and potential outcome
+without treatment, $Y_{0i}$. The observed outcome is $Y_i = D_iY_{1i} + (1-D_i)Y_{0i}$, 
+where $D_i$ is an indicator of treatment. The counterfactual outcome is the potential
+outcomes which is not unobserved.\\
+
+With this notation, the causal effect of treatment for entity $i$ is $Y_{1i} - Y_{0i}$. 
+The average treatment effect is $$ATE = E(Y_{1i} - Y_{0i}) = E(Y_{1i}) - E(Y_{0i})$$
+
+If individuals are randomly allocated to the treatment and control groups, then
+$$E(Y_{0i}) = E(Y_{0i}|D_i = 1) = E(Y_{0i}|D_i = 0)$$
+$$E(Y_{1i}) = E(Y_{1i}|D_i = 1) = E(Y_{1i}|D_i = 0)$$
+so the average treatment effect can be written as:
+\begin{align*}
+ATE &= E(Y_{1i}) - E(Y_{0i}) \\
+    &= E(Y_{1i}|D_i = 1) - E(Y_{0i}|D_i = 0) \\
+    &= E(Y_i|D_i = 1) - E(Y_i|D_i = 0)
+\end{align*}
+The last equation is important, because $Y_i$ is observed while $Y_{1i}$ and $Y_{0i}$ are not.\\
+
+In words, the result means that the difference in average outcomes between the treatment
+and control groups is the average treatment effect.\\
+
+
+% \section*{What is the sampling distribution of an estimator?}
+
+% The sampling distribution refers to the distribution of statistics (such as moments, regression
+% parameters, confidence intervals, and test statistics) computed from a sample
+% drawn from some given population.\\
+
+% The sampling distribution arises by considering the values the statistics take across different
+% (usually independent) random samples of data from the given population.\\
+
+% The sampling distribution is not the distribution of the sample per se, rather the
+% distribution of statistics computed from the sample.\\
+
+% The sampling distribution can be used to assess the precision and uncertainty of the
+% estimates.\\
+
+
+\section*{What is the law of large numbers and the central limit theorem?}
+
+Khinchin's law of large numbers say that if observations are independently
+sampled from the same distribution and the sample size is large, then the sample average
+will be close to the population average with high probability. (Assuming the population mean
+exists.) Formally, the probability that the (absolute) difference between the sample mean and
+the population mean exceed a fixed constant will converge to zero as the sample size increases.
+Intuitively, if sampling was done randomly and the sample size is large, knowing the sample
+average is as good as knowing the population average.\\
+
+The central limit theorem (CLT) concerns the sampling distribution of the sample average.
+The Lindeberg-Levy CLT says that if the observations in a sample are \textit{iid} random variables
+and the sample size is large, then sampling distribution of the standardized sample average
+(obtained by subtracting the mean of the average and dividing by the standard deviation of the
+average) will be close to a standard normal distribution. (Assuming the population variance
+exists.) This means that we can approximate the sampling distribution of the sample mean
+using a normal distribution with appropriate mean and variance.\\
+
+% \section*{What is the principles of hypothesis tests?}
+
+% The sample space, ie the set of all possible samples, is split into
+% the rejection region, where samples are very unlikely to fall if the null hypothesis is true, and
+% acceptance region, where samples are likely to fall if the null hypotheses is true. We reject or
+% accept a null hypothesis depending on which region samples at hand fall. Regardless of whether
+% a null hypotheses is true or false, a sample can fall in either the rejection or acceptance region.
+% This leads to an error in hypotheses testing. There are two types of errors. Type 1 error refers
+% to an error incurred when a null hypothesis is rejected even if it is true. Type 2 error refers to
+% an error incurred when a null hypothesis is not rejected even if it is false.\\
+
+\section*{What is self-selection bias?}
+
+When we estimate treatment effects we (usually) compare outcomes between a treatment
+group (who experience the treatment) and a control group (consisting of untreated
+individuals).\\
+
+In general, differences in outcomes between the treatment and control group can be a
+causal effect of the treatment, or they can reflect the fact that the two groups consist of
+different individuals who have different characteristics and different experiences, and who
+make different choices.\\
+
+The term self-selection refer to phenomenon that when the treatment and control
+groups are not formed in a controlled manner (ie not controlled by an external experimenter)
+and individuals self-select into one of the groups, they have their self-interest
+in mind and so naturally the treatment group will consist of individuals who prefer or
+benefit from the treatment and the control group will consist of people who prefer or
+benefit from non-treatment.\\
+
+This implies that individual characteristics are not identically distributed in the two groups,
+so difference in outcomes cannot be attributed to the treatment alone.\\
+
+Example: Suppose we compare participants and non-participants in a job training program
+to identify a causal effect of the job training on labour market outcomes. If treatment is
+self-selected, more productive, more motivated, or younger people may be more willing
+to attend the job training. In this case, the treatment and control groups may differ
+substantially in productivity, motivation, or age. This implies the difference in labour
+market outcomes between treatment and control groups may be either due to the job
+training, or due to the difference in the aforementioned factors, or both.\\
+
+Even in randomised controlled trials, self-selection issues can arise at the end of the trial
+if participants can choose to drop out or continue during the trial. Attrition from the
+trial leads to the same problem described above, where at the end of the trial the two
+groups are not comparable.\\
+
+\section*{What is omitted variable bias?}
+
+Omitted variable bias and selection bias essentially refer to the same
+issue, namely that an estimate does not have causal interpretation. The bias arises when there
+are confounding factors (unobserved heterogeneity) that are not controlled for. That is, when
+we compare average outcomes for groups with different levels of treatment we are not holding
+other things equal (on average).\\
+
+We tend to use the term selection bias in a non-regression context (e.g. when we analyse a
+randomised controlled trial) and when we want to emphasize that the confounding factors have
+to do with the choices individuals make. For example, people choosing different levels of health
+insurance based on their view of their own health condition and their general risk attitude.\\
+
+The term omitted variable bias is used more generally, and also covers confounding factors
+that individuals have little control over. For example, the climate may play a role when comparing
+health outcomes between Sydney and Hobart. \\
+
+As another example, suppose we seek to estimate the causal effect of education on labour
+market outcomes. Students with higher ability probably tend to invest more in education.
+Since students self-select their levels of education, comparison among different levels of education
+leads to selection bias. If we run a regression of labour outcomes on years of education
+without controlling for ability we are likely to see some omitted variable bias.\\
+
+
+\section*{What is full rank assumption in multiple regression?}
+
+The full rank assumption is needed in order to identify the population
+parameters of interest. If the full rank assumption is not satisfied, the parameters that determine
+the regression function are not uniquely determined.\\
+
+The full rank assumption fails when there are linear dependencies among the regressors. For
+example, suppose we estimate gender differences in labour market outcomes. In estimation,
+including both male and female dummies and a constant term will introduce a linear dependency,
+because $female\_dummy + male\_dummy - 1 = 0$.\\
+
+As another example, suppose we estimate effects of time allocation on academic achievement.
+If we include time sleeping, time awake, and also total time, there is a linear dependence
+if $time\_sleeping + time\_awake = total\_time$.\\
+
+\section*{How does multiple regression reveal causal effect?}
+
+The linear (in parameters) regression model allows estimation of the
+population regression function, so the question is really about whether the population regression
+function with control variables identify causal effects.\\
+
+Let $Y_i$ be the dependent variable, let $T_i$ be treatment variable, and let $\vec{A}_i$ be a vector of
+control variables. Consider the modern causal model
+$$Y_i = \gamma T_i + \vec{A}_i^T \vec{\delta} + \lambda + V_i$$
+
+In this model, $\gamma$ may represent the casual effect of $T_i$ on $Y_i$, if we are able to hold all other
+things equal. Mathematically, the key condition is
+$$E(V_i|T_i, \vec{A}_i) = E(V_i|\vec{A}_i)$$
+That is, holding $\vec{A}_i$ constant, the average of $V_i$ is the same for all values of $T_i$, as good as
+randomised.\\
+
+But there is still the caveat that holding other things equal cannot distinguish between
+causal effects, reverse causality, and simultaneity. And the interpretation of $\vec{\delta}$ 
+is still difficult -- a mixture of causality, confounders, omitted variable bias.\\
+
+\section*{How does the difference in differences approach estimate causal effects? }
+
+DD estimates the difference between the changes of the treatment group and control group across time. 
+In notation, let $Y_i$ denote the outcome, $G_i$ be the group dummy ($1$ if treated, $0$ otherwise), 
+and $P_i$ be the time period dummy ($1$ if aftermath, $0$ otherwise). The DD estimator of the 
+average treatment effect is:
+
+\begin{align*}
+    ATE &= \{E(Y_i|G_i=1, P_i=1) - E(Y_i|G_i=1, P_i=0)\} \\
+        &- \{E(Y_i|G_i=0, P_i=1) - E(Y_i|G_i=0, P_i=0)\}
+\end{align*}
+
+DD can be estimated using a regression framework, 
+$$ E(Y_i|G_i, P_i) = \alpha G_i + \eta P_i + \delta G_iP_i + \kappa $$
+where $\delta$ captures the DD effect.\\
+
+If we can assume that the treatment group would experience the same change as the control group 
+without the treatment (\term{counter-factual outcome}), then the difference in the changes of 
+the two group must be attributed to the treatment effect. This is known as the common trends 
+assumption. DD is only valid if the common trends assumption holds. \\
+
+The \term{common trends} assumption essentially states, in the absence of intervention, 
+the group-specific differences are constant over time. One way to provide support for the 
+common trend assumption is to show that the trends are similar in some periods before treatment, 
+and the treatment is the only new change. \\
+
+\section*{What is heterogeneity bias in estimating a fixed effects model?}
+
+\term{Heterogeneity bias} is a kind of omitted variable bias that is caused by omitted variables 
+that are fixed for an individual over time. In a fixed effects model, 
+$$ Y_{it} = \vec{\beta}^T \mat{X}_{it} + \lambda_2 B2_{it} + \cdots + \lambda_T BT_{it} + V_{it} $$
+
+the error term can be decomposed as:
+$$ V_{it} = A_i + U_{it} $$
+
+$A_i$ is called the \term{fixed effect}, which represents time-invariant unobserved factors;
+$U_{it}$ is called the \term{idiosyncratic error term}, which represents time-varying unobserved factors.\\
+
+In a regression, if the aggressor $\mat{X}_{it}$ is correlated with $A_i$, then the OLS estimator is bias. 
+This bias induced by failing to control the time-invariant factors in analyzing panel data is called 
+heterogeneity bias. \\
+
+The heterogeneity bias in this case can be avoided by using First-Difference (FD), Fixed-effects (FE), 
+or Least Square Dummy Variable (LSDV) techiques. \\
+
+
+\section*{How does an instrument variable work?}
+
+A good instrument variable effects assignment to treatment group, but does \emph{not} have indirect effects 
+through unobservables on potential outcomes, nor any direct effects on potential outcomes. 
+If an instrument variable satisfies these requirements, then using the instrument automatically sorts people 
+into two groups where the treatment effect is different across groups, but the unobserved variables have the 
+same means.In this way, it works like a proxy for random assignment. So any difference in outcomes must be 
+attributable to the treatment. \\
+
+Mathematically, suppose there is a \emph{structural} model:
+$$ Y_i = \beta X_i  {\color{lightgray}+\gamma Z_i} + U_i $$
+where $E(U_i|X_i) \neq 0$. If this model is estimated directly by OLS, $\hat{\beta}$ will surely be biased.
+
+Suppose we have an instrument $Z_i$ that satisfies:
+    \begin{itemize}
+        \item Instrument relevance: $Cov(Z_i, X_i) \neq 0$;
+        \item Instrument exogeneity: $Cov(Z_i, U_i) = 0$;
+        \item Exclusion restriction: $\gamma = 0$;
+    \end{itemize}
+
+Since $Cov(Z_i, X_i) \neq 0$, we can construct a linear projection:
+$$ X_i = \pi Z_i + V_i $$
+where $\pi \neq 0$ and $E(V_i|Z_i) = 0$. And the reduced form model for $Y_i$:
+$$ Y_i = \beta \pi Z_i + (U_i + \beta V_i) = \delta Z_i + R_i $$
+
+Since $Z_i$ is uncorrelated with $U_i$, OLS is consistent for $\delta$ and $\pi$.
+And we can recover the true $\beta$ by the ratio $\delta / \pi$. \\
+
+
+\section*{What is maximum likelihood estimation?}
+
+Suppose we have a random sample $X_1, X_2, \dots, X_n$ whose probability distribution depends on some 
+unknown parameter $\theta$. A maximum likelihood estimator $\hat{\theta}$ would be the value that maximizes 
+the probability of getting the data observed. \\
+
+In practice, suppose the probability of observing $X_i = x_i$ is given by
+$$ P(X_i = x_i) = f(x_i; \theta) $$
+
+Then the \term{likelihood function}
+$$ L(\theta) = P(X_1=x_1, \dots, X_n=x_n) = \Pi_{i=1}^{n} f(x_i; \theta) $$
+represents the probability of getting all the data points observed. 
+A good estimator $\hat{\theta}$ would be the one that maximizes $L(\theta)$. \\
+
+If the following assumptions are satisfied:
+    \begin{itemize}
+        \item The model is correctly specified (linear or nonlinear);
+        \item The first-order conditions have a unique solution (full rank);
+        \item Very large observations are unlikely;
+        \item Random sampling;
+    \end{itemize}
+Then the ML estimator $\hat{\theta}$ is unbiased and has approximately normal distribution.\\
+
+
+\section*{What is stationary time series?}
+
+A time series $\{Y_t\}$ is \term{stationary} if its probability distribution (mean, variance, etc.) 
+does not change over time. If a time series is stationary, historical relationships in the series 
+can be generalized to the future. \\
+
+For example, white noise is stationary. Let $V$ be any scalar random variable, then the time series 
+$$ Y_t = V \textrm{ for all } t $$
+is stationary. \\
+
+The \term{linear deterministic trend} model 
+$$ Y_t = \beta_1 t + \beta_0 + U_t $$
+is non-stationary. Since $E(Y_t) = \beta_1 t$ is not the same for all $t$.\\
+
+The \term{random walk}
+$$ Y_t = Y_{t-1} + U_t,\qquad E(U_t|Y_{t-1}, Y_{t-2}, \dots)=0 $$
+is non-stationary. Since the variance $Var(Y_t) = Var(Y_{t-1}) + Var(U_t)$ increases over time. \\
+
+If a time series is not stationary, then the asymptotic sampling distribution is not normal, and 
+the OLS standard errors are invalid are misleading. This is known as \term{spurious regression}. \\
+
+Stationarity can be tested by \term{Dickey-Fuller Test}. Consider the $AR(p)$ model:
+$$ \Delta Y_t = {\color{lightgray}{\alpha t + }} \delta Y_{t-1} + \gamma_1 \Delta Y_{t-1} + 
+     \cdots + \gamma_p \Delta Y_{t-p} + \beta_0 + U_t 
+$$
+
+Dickey-Fuller tests:
+    \begin{itemize}
+        \item[{}] $H_0$: $\delta = 0$ ($Y_t$ is a stochastic trend)
+        \item[{}] $H_1$: $\delta \neq 0$ ($Y_t$ is stationary)
+    \end{itemize}
+
+$\alpha t$ is included in the model for testing stationarity around a deterministic trend. \\
+
+
+\section*{What is an autoregressive distributed lag model?}
+
+An autoregressive distributed lag model (ADL($p$, $q$)) is defined as:
+\begin{align*}
+    & E(Y_t|Y_{t-1},\dots,Y_{t-p}, \mat{X}_{t-1}, \dots, \mat{X}_{t-q}) \\
+    & = \beta_1 Y_{t-1} + \cdots + \beta_p Y_{t-p} 
+    + \mat{X}_{t-1}^T \vec{\delta_1} + \cdots + \mat{X}_{t-q}^T \vec{\delta_q} + \beta_0
+\end{align*}
+
+The OLS estimator is asymptotically normally distributed if:
+    \begin{itemize}
+        \item The model is \emph{dynamically complete}  i.e.
+            \begin{align*}
+                & E(Y_t|Y_{t-1},\dots,Y_{t-p}, \mat{X}_{t-1}, \dots, \mat{X}_{t-q}) \\
+                & = E(Y_t|Y_{t-1}, Y_{t-2}, \dots \mat{X}_{t-1}, \mat{X}_{t-2}, \dots)
+            \end{align*}
+        
+        \item The distribution of $\{Y_t, \mat{X}_t\}$ is \emph{stationary};
+        \item The series $\{Y_t, \mat{X}_t\}$ is \emph{weakly dependent} i.e. 
+                $\{Y_t, \mat{X}_t\}$ and $\{Y_{t-j}, \mat{X}_{t-j}\}$ are independent 
+                for large $j$;
+        \item Large values of $\{Y_t, \mat{X}_t\}$ are unlikely (forth moments exists);
+        \item No perfect collinearity.
+    \end{itemize}
+    
+If all above assumptions hold, the LLN and CLT work for time series, and we can do statistical 
+inference as usual. \\
+
+% \section*{}\vspace{5in}
+
+\end{document}
+%
+% ****** End of file aipsamp.tex ******

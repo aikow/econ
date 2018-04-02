@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}  
+\usepackage{array,multirow}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\title{PROBLEM SET 2}
+% \author{ 
+%     \textsc{Zeming Wang} 
+%     \thanks{u6114134@anu.edu.au}
+% }
+\date{}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+
+The alternatives the consumer faced and the choice s/he made can be summarized in the table below:
+    
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccccc}
+    \hline\hline
+    \multirow{2}{*}{Price} & \multirow{2}{*}{Choice}  & \multicolumn{3}{c}{Alternatives} \\\cline{3-5}
+                          &                         & $(1,2,2)$ & $(2,1,2)$ & $(2,2,1)$ \\
+    \hline
+    $p_1=(2,1,2)$         & $x_1=(1,2,2)$           & \textcolor{red}{8} & \textcolor{gray}{9} & 8 \\
+    $p_2=(2,2,1)$         & $x_2=(2,1,2)$           & 8 & \textcolor{red}{8} & \textcolor{gray}{9} \\
+    $p_3=(1,2,2)$         & $x_3=(2,2,1)$           & \textcolor{gray}{9} & 8 & \textcolor{red}{8} \\
+    \hline
+    \end{tabular}
+    % \caption{Caption}
+    % \label{tab:my_label}
+\end{table}
+
+The unfeasible bundles are grayed out since the consumer's wealth $y=8$; 
+and the consumer's choice is highlighted red. \\
+
+We can verify the weak axiom of revealed preference (WARP) against the three price vectors:
+{\small
+\begin{enumerate}[(i)]
+    \item For $p_1=(2,1,2)$, bundle $x_1=(1,2,2)$ is chosen; bundle $x_3=(2,2,1)$ is also feasible; 
+          but in the situation $x_3=(2,2,1)$ is chosen, namely $p_3=(1,2,2)$, bundle  $x_1=(1,2,2)$
+          is not feasible;
+    \item For $p_2=(2,2,1)$, bundle $x_2=(2,1,2)$ is chosen; bundle $x_1=(1,2,2)$ is also feasible; 
+          but in the situation $x_1=(1,2,2)$ is chosen, namely $p_1=(2,1,2)$, bundle $x_2=(2,1,2)$
+          is not feasible;
+    \item For $p_3=(1,2,2)$, bundle $x_3=(2,2,1)$ is chosen; bundle $x_2=(2,1,2)$ is also feasible;
+          but in the situation $x_2=(2,1,2)$ is chosen, namely $p_2=(2,2,1)$, bundle $x_3=(2,2,1)$
+          is not feasible.
+\end{enumerate}
+}
+Therefore the weak axiom of revealed preference (WARP) is satisfied. \\
+
+For the revealed preferences to be compatible with the generalized axiom of revealed preference (GARP),
+the preferences must satisfy: $$x_1 \sim x_2 \sim x_3$$
+
+To show this, recall the consumer's choice at different price vectors:
+\begin{align*}
+    \textrm{(i)} & \implies x_1 \succeq x_3 \\
+    \textrm{(ii)} & \implies x_2 \succeq x_1 \\
+    \textrm{(iii)} & \implies x_3 \succeq x_2
+\end{align*}
+Therefore we have: $$ x_1 \succeq x_3 \succeq x_2 \succeq x_1 $$
+If any of the two relations hold strict, we end up with a strict revealed preference cycle, 
+which violates the GARP. To maintain GARP non-violated, it is only possible when $x_1 \sim x_2 \sim x_3$.\\
+
+\section*{Question 2}
+
+\begin{enumerate}
+\item Allais paradox violates the Independence Axiom \\
+
+In Allais paradox, there are four lotteries:
+\[
+l_1 = 
+\begin{cases}
+    \$55,000\quad & \textrm{with prob. } 0.33 \\
+    \$48,000\quad & \textrm{with prob. } 0.66 \\
+    \$0\quad & \textrm{with prob. } 0.01
+\end{cases} 
+\qquad
+l_2 = \$48,000 \quad \textrm{with prob. 1.00}
+\]
+\[
+l_3 = 
+\begin{cases}
+    \$55,000\quad & \textrm{with prob. } 0.33 \\
+    \$0 \quad & \textrm{with prob. } 0.67
+\end{cases} 
+\qquad
+l_4 = 
+\begin{cases}
+    \$48,000 \quad & \textrm{with prob. } 0.34 \\
+    \$0 \quad & \textrm{with prob. } 0.66
+\end{cases}
+\]
+The revealed preferences are $l_2 \succ l_1$ and $l_3 \succ l_4$.\\
+
+To show this violates the Inpendence Axiom,
+Let $\delta_{55}$ denotes the probability distribution that assigns probably $1$ to outcome $\$55,000$;
+$\delta_{48}$ denotes the probability distribution that assigns probably $1$ to outcome $\$48,000$;
+$\delta_{0}$ denotes the probability distribution that assigns probably $1$ to outcome $\$0$.
+Then $l_1, l_2, l_3, l_4$ can be treated as compound lotteries of $\delta_{55}, \delta_{48}, \delta_0$.
+\begin{align*}
+    l_1 &= 0.33 \delta_{55} + 0.66 \delta_{48} + 0.01 \delta_{0} \\
+    l_2 &= 1.00 \delta_{48} \\
+    l_3 &= 0.33 \delta_{55} + 0.67 \delta_{0} \\
+    l_4 &= 0.34 \delta_{48} + 0.66 \delta_{0}
+\end{align*}
+Therefore,
+\begin{align*}
+    l_2 \succ l_1 &\iff  \delta_{48} \succ 0.33 \delta_{55} + 0.66 \delta_{48} + 0.01 \delta_{0} \\
+                  &\iff 0.66\delta_{48} + 0.34\delta_{48} \succ 0.33 \delta_{55} + 0.66 \delta_{48} + 0.01 \delta_{0}
+\end{align*}
+Applying the Independence Axiom, $\delta_{48}$ can be replaced by $\delta_{0}$:
+$$ 0.66\delta_{0} + 0.34\delta_{48} \succ 0.33 \delta_{55} + 0.67 \delta_{0} $$
+
+But this implies $l_4 \succ l_3 $ which contradicts with the revealed preference. \\
+
+
+\item Ellsberg paradox violates the Sure-Thing Principle \\
+
+In Ellsberg paradox, the state space is $$S = \{ red, blue, green \}$$
+Define subspace $T \subset S$ as $$T=\{ red\ \textrm{or}\ blue \};\ T^C=\{ green \}$$
+There are four acts:
+$$ b_1 = 
+    \begin{cases}
+        \$100 \quad & \textrm{if the ball is red} \\
+        \$0   \quad & \textrm{otherwise}
+    \end{cases} \qquad
+    b_2 = 
+     \begin{cases}
+         \$100 \quad & \textrm{if the ball is blue} \\
+         \$0   \quad & \textrm{otherwise}
+     \end{cases}
+$$
+$$ b_3 = 
+    \begin{cases}
+        \$0   \quad & \textrm{if the ball is blue} \\
+        \$100 \quad & \textrm{otherwise}
+    \end{cases} \qquad
+    b_4 = 
+     \begin{cases}
+         \$0   \quad & \textrm{if the ball is red} \\
+         \$100 \quad & \textrm{otherwise}
+     \end{cases}
+$$
+
+If $s \in T^C$, i.e. the ball is green,
+$$ b_1(green) = b_2(green) = \$0 $$
+$$ b_3(green) = b_4(green) = \$100 $$
+
+If $s \in T$, the ball is either red or blue. If the ball is red, 
+$$ b_1(red) = b_3(red) = \$100 $$
+$$ b_2(red) = b_4(red) = \$0 $$ 
+
+If the ball is blue, 
+$$ b_1(blue) = b_3(blue) = \$0 $$
+$$ b_2(blue) = b_4(blue) = \$100 $$ 
+
+Therefore, $b_1 = b_3, b_2 = b_4$ whenever $s \in T$; 
+$b_1 = b_2, b_3 = b_4$ whenever $s \in T^C$.\\
+
+According to the Sure Thing Principle, we should have
+$$ b_1 \succ b_2 \iff b_3 \succ b_4 $$
+
+However, this contradicts with the revealed preferences. 
+So the revealed preferences in this case violate the Sure Thing Principle. \\
+
+\end{enumerate}
+
+\end{document}

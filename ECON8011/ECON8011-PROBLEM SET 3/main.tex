@@ -1,0 +1,355 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{array,multirow}
+\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{bm}
+
+\title{PROBLEM SET 3}
+% \author{
+%     \textsc{Zeming Wang}
+%     \thanks{u6114134@anu.edu.au}
+% }
+\date{}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+Consider the single-output technology whose production function is given by
+\[ f(z)=(z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}} \]
+for $\rho \leq 1$
+
+\begin{enumerate}
+    \item Derive the profit function $\pi(p)$ and supply function $y(p)$. \\
+
+    The profit maximization problem is
+    \[ \underset{z\geq 0}{\max}\ pf(z) - w\cdot z\]
+
+    Notice that $f(z)$ has constant return to scale:
+    \[ f(\lambda z)
+       =\left((\lambda z_1)^{\rho} + (\lambda z_2)^{\rho}\right)^{\frac{1}{\rho}}
+       =\lambda (z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}}
+       =\lambda f(z)
+    \]
+    Therefore, the firms will either have $y(p)=\pi(p)=0$,
+    or $y(p)=\pi(p)=+\infty$, depending on the value of $p$ and $w$.
+    Because if there exists some $z$ that makes $\pi = pf(z)-w\cdot z > 0$, 
+    the firm could arbitrarily scale up production and the profit explodes to 
+    infinity. 
+    $pf(\lambda z)-w\cdot \lambda z = \lambda (pf(z)-w\cdot z) \to +\infty$ 
+    as $\lambda \to +\infty$. 
+    If the prevailing $p$ and $w$ are such that $\pi = pf(z)-w\cdot z \leq 0$ 
+    for all $z$, the firm would rather produce nothing and the profit is zero. \\
+    
+    % Suppose $p > 0$ and $w >> 0$.\\
+    %
+    % Firstly, if $\rho=1$, the problem boils down to
+    % \[ \underset{z\geq 0}{\max}\ p (z_1+z_2) - w_1z_1 - w_2z_2\]
+    %
+    % If $p \leq \min\{w_1,w_2\}$, the optimal choice for the firm is to product
+    % nothing. In this case, $y(p)=0$, $\pi(p)=0$.If $p > w_i$, $i \in \{1,2\}$,
+    % the firm will product $z_i$ as much as possible and $\pi(p)=+\infty$. \\
+    %
+    % Now consider the case $p<0$.
+    % The first-order condition is
+    % \[ \nabla f(z) = \frac{w}{p} \]
+    % Or equivalently,
+    % \begin{equation}
+    %     \label{eqn:z1}
+    %     (z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}}\ z_1 =
+    %       \left(\frac{w_1}{p}\right)^{\frac{1}{\rho-1}}
+    % \end{equation}
+    % \begin{equation}
+    %     \label{eqn:z2}
+    %     (z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}}\ z_2 =
+    %       \left(\frac{w_2}{p}\right)^{\frac{1}{\rho-1}}
+    % \end{equation}
+    % Notice that, since $f(z)$ is concave, the first-order condition is also
+    % sufficient. \\
+    %
+    % (\ref{eqn:z1}) / (\ref{eqn:z2}) gives:
+    % \begin{equation}
+    %     \label{eqn:div}
+    %     \frac{z_1}{z_2} = \left(\frac{w_1}{w_2}\right)^{\frac{1}{\rho-1}}
+    % \end{equation}
+    % Rearrange (\ref{eqn:z1}) and replace (\ref{eqn:div}) into (\ref{eqn:z1}),
+    % \[ \left[\left(\frac{z_1}{z_2}\right)^{\rho}+1\right]^{\frac{1}{\rho}}\
+    %     z_1 z_2 = \left(\frac{w_1}{p}\right)^{\frac{1}{\rho-1}}
+    % \]
+    % \[ \left[
+    %       \left(\frac{w_1}{w_2}\right)^{\frac{\rho}{\rho-1}}+1
+    %     \right]^{\frac{1}{\rho}}\ z_1 z_2 =
+    %     \left(\frac{w_1}{p}\right)^{\frac{1}{\rho-1}}
+    % \]
+    % Thus we have,
+    % \begin{equation}
+    %     \label{eqn:mul}
+    %     z_1z_2 = p^{-\frac{1}{\rho-1}}
+    %       \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+    %          {-\frac{1}{\rho}}(w_1w_2)^{\frac{1}{\rho-1}}
+    % \end{equation}
+    %
+    % (\ref{eqn:div}) $\times$ (\ref{eqn:mul}) and solve for $z_1$:
+    % \[ z_1 = \sqrt{p^{-\frac{1}{\rho-1}}
+    %       \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+    %          {-\frac{1}{\rho}}}\ w_1^{\frac{1}{\rho-1}}
+    % \]
+    %
+    % (\ref{eqn:div}) / (\ref{eqn:mul}) and solve for $z_2$:
+    % \[ z_2 = \sqrt{p^{-\frac{1}{\rho-1}}
+    %       \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+    %           {-\frac{1}{\rho}}}\ w_2^{\frac{1}{\rho-1}}
+    % \]
+    %
+    % Substitute $z_1,z_2$ into $f(z)$ gives the \emph{supply function}:
+    % \[ y(p) = f(z(w,p)) = \sqrt{p^{-\frac{1}{\rho-1}}
+    %       \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+    %           {\frac{1}{\rho}}}
+    % \]
+    %
+    % The \emph{profit function} is therefore,
+    % \begin{align*}
+    %     \pi(p) &= p y(p) - w_1z_1 - w_2z_2 \\
+    %            &= p \sqrt {
+    %                     p^{-\frac{1}{\rho-1}}
+    %                     \left(
+    %                         w_1^{\frac{\rho}{\rho-1}} +
+    %                         w_2^{\frac{\rho}{\rho-1}}
+    %                     \right)^{\frac{1}{\rho}}
+    %                 } - \sqrt {
+    %                     p^{-\frac{1}{\rho-1}}
+    %                     \left(
+    %                         w_1^{\frac{\rho}{\rho-1}} +
+    %                         w_2^{\frac{\rho}{\rho-1}}
+    %                     \right)^{-\frac{1}{\rho}}
+    %                 }
+    %                 \left(
+    %                     w_1^{\frac{\rho}{\rho-1}} +
+    %                     w_2^{\frac{\rho}{\rho-1}}
+    %                 \right) \\
+    %            &= \sqrt {
+    %                    p^{-\frac{1}{\rho-1}}
+    %                    \left( w_1^{\frac{\rho}{\rho-1}} +
+    %                           w_2^{\frac{\rho}{\rho-1}}
+    %                    \right)^{-\frac{1}{\rho}}
+    %               }
+    %               \left[ p \left( w_1^{\frac{\rho}{\rho-1}} +
+    %                               w_2^{\frac{\rho}{\rho-1}}
+    %                       \right)^{\frac{1}{\rho}} -
+    %                       \left( w_1^{\frac{\rho}{\rho-1}} +
+    %                              w_2^{\frac{\rho}{\rho-1}}
+    %                       \right)
+    %               \right]
+    % \end{align*}
+    %
+\item Derive the cost function $c(w,q)$ and conditional factor demand
+      correspondence $z(w,q)$.\\
+
+The cost minimization problem is
+\[ \underset{z\geq 0}{\min}\ w \cdot z\quad \textrm{s.t.}\ f(z) \geq q \]
+
+First consider the case $\rho=1$. The problem boils down to 
+\[ \underset{z\geq 0}{\min}\ w_1z_1+w_2z_2 \quad \textrm{s.t.}\ z_1+z_2 \geq q \]
+
+In this case, the firm will produce entirely with whichever input is cheaper. 
+So it is easy to conclude
+\[ 
+    z(w,q) = 
+    \begin{cases}
+        (q,0)\quad \textrm{if } w_1 < w_2 \\
+        (0,q)\quad \textrm{if } w_1 > w_2 \\
+        \{ (z_1,z_2): z_1+z_2=q \}\quad \textrm{if } w_1=w_2
+    \end{cases}
+\]
+The cost function is therefore,
+\[ 
+    c(w,q) = 
+    \begin{cases}
+        w_1 q \quad \textrm{if } w_1 < w_2 \\
+        w_2 q \quad \textrm{if } w_1 \geq w_2 
+    \end{cases}
+\]
+
+For the case $\rho<1$. Set up a Lagrangian to solve the problem.
+\[ \mathcal{L} = w \cdot z - \lambda (f(z)-q)\]
+
+Suppose $w >> 0$. 
+Since $w\cdot z$ and $f(z)$ are both strictly increasing functions, 
+the inequality constraint $f(z)\geq q$ must hold with equality in optimal solutions. 
+Assume at the moment the non-negative constraint $z\geq 0$ is not binding, and 
+discuss this later. \\
+
+The first-order conditions are:
+\begin{align*}
+    w - \lambda \nabla f(z) &= 0 \\
+    f(z) - q &= 0
+\end{align*}
+Or equivalently, 
+\begin{align}
+   \lambda (z_1^{\rho}+z_2^{\rho})^{\frac{1}{\rho}-1}z_1^{\rho-1} &= w_1 \label{eqn:z1}\\
+   \lambda (z_1^{\rho}+z_2^{\rho})^{\frac{1}{\rho}-1}z_2^{\rho-1} &= w_2 \label{eqn:z2}\\
+   (z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}} &= q \label{eqn:q}
+\end{align}
+
+We can derive the following relationship by (\ref{eqn:z1})/(\ref{eqn:z2}):
+\begin{equation}
+    \label{eqn:div2}
+    \frac{z_1}{z_2} = \left(\frac{w_1}{w_2}\right)^{\frac{1}{\rho-1}}
+\end{equation}
+
+Rearrange (\ref{eqn:q}) and substitute (\ref{eqn:div2}) in:
+\[ (z_1^{\rho} + z_2^{\rho})^{\frac{1}{\rho}} = q \]
+\[ \left[ \left( \frac{z_1}{z_2} \right)^{\rho} + 1
+   \right]^{\frac{1}{\rho}}\ z_2 = q
+\]
+\[ \left[ \left(\frac{w_1}{w_2}\right)^{\frac{\rho}{\rho-1}} + 1
+   \right]^{\frac{1}{\rho}}\ z_2 = q
+\]
+
+Solve for $z_2$ gives
+\begin{align*}
+  z_2 &= q \left[\left(\frac{w_1}{w_2}\right)^
+           {\frac{\rho}{\rho-1}}+1\right]^{-\frac{1}{\rho}} \\
+      &= q \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+           {-\frac{1}{\rho}}\ w_2^{\frac{1}{\rho-1}}
+\end{align*}
+
+Similarly, solve for $z_1$ gives
+\[ z_1 = q \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+             {-\frac{1}{\rho}}\ w_1^{\frac{1}{\rho-1}}
+\]
+
+For $q>0$ and $w>>0$, we always have $z>>0$, so the non-negative constraint 
+never binds, i.e. there is no corner solution for $\rho<1$. \\
+
+Thus, the \emph{conditional factor demand correspondence} is
+\[ z = q \left(w_1^{\frac{\rho}{\rho-1}} + w_2^{\frac{\rho}{\rho-1}}\right)^
+              {-\frac{1}{\rho}}\
+        \left(w_1^{\frac{1}{\rho-1}}, w_2^{\frac{1}{\rho-1}} \right)
+\]
+
+Therefore, the \emph{cost function} is
+\[ c(w,q) = w_1z_1 + w_2z_2
+          = q\left( w_1^{\frac{\rho}{\rho-1}} +
+                   w_2^{\frac{\rho}{\rho-1}}
+            \right)^{1-\frac{1}{\rho}} 
+\]
+\end{enumerate}
+
+\section*{Question 2}
+Consider the utility function
+\[ u(x_1,x_2) = 2x_1^{\frac{1}{2}} + 4x_2^{\frac{1}{2}} \]
+\begin{enumerate}
+  \item Write the consumer's expenditure minimization problem.\\
+
+  The consumer's expenditure minimization problem is
+  \begin{align*}
+    \underset{x \geq 0}{\min}\ & p_1x_1 + p_2x_2\quad \\
+    &\textrm{s.t.}\ 2x_1^{\frac{1}{2}} + 4x_2^{\frac{1}{2}} \geq v
+  \end{align*}
+
+  \item Derive the expenditure problem for this problem.\\
+
+  Notice that the utility constraint must be binding. 
+  And also assume at the moment the non-negative constraint does not bind. 
+  Define the Lagrange function:
+  \[  \mathcal{L} = p_1x_1 + p_2x_2 - \lambda
+       (2x_1^{\frac{1}{2}} + 4x_2^{\frac{1}{2}} - v)
+  \]
+
+  The first-order conditions are:
+  \begin{align}
+    p_1 - \lambda x_1^{-\frac{1}{2}} &= 0 \label{eqn:c1} \\
+    p_2 - 2\lambda x_2^{-\frac{1}{2}} &= 0 \label{eqn:c2} \\
+    2x_1^{\frac{1}{2}} + 4x_2^{\frac{1}{2}} - v &= 0 \label{eqn:c3}
+  \end{align}
+
+  From (\ref{eqn:c1}) and (\ref{eqn:c2}), we can derive
+  \[ x_1^{\frac{1}{2}} =  \frac{\lambda}{p_1}, \quad
+     x_2^{\frac{1}{2}} =  \frac{2\lambda}{p_2} \]
+
+  Substitute them into (\ref{eqn:c3}) and solve for lambda,
+  \[ \frac{2\lambda}{p_1} + \frac{8\lambda}{p_2} = v \]
+  \[  \lambda = \frac{p_1p_2v}{8p_1 + 2p_2} \]
+
+  Substitute $\lambda$ back to (\ref{eqn:c1}) and (\ref{eqn:c2}) and
+  solve for $x_1$ and $x_2$:
+  \[ x_1 = \left( \frac{p_2v}{8p_1 + 2p_2} \right)^2, \quad
+     x_2 = \left( \frac{p_1v}{4p_1 +  p_2} \right)^2 \]
+  which are the \emph{Hicksian demands} for both goods.\\
+
+  Notice that for $v>0$ and $p>>0$, we always have $x>>0$, which implies 
+  there is no corner solution for this problem. \\
+  
+  Therefore, the \emph{expanditure function} is solely given by
+  \begin{align*}
+    e(p,v) = p_1 \left( \frac{p_2v}{8p_1 + 2p_2} \right)^2 +
+              p_2 \left( \frac{p_1v}{4p_1 +  p_2} \right)^2
+           = \frac{p_1 p_2 v^2}{16p_1 + 4p_2}
+  \end{align*}
+
+
+  \item Verify that the expenditure function satisfies properties (a)-(d) of
+        Proposition 10.4 in Kreps (2013).\\
+
+  \begin{enumerate}
+    \item The expenditure function is Homogeneous of degree 1. \\
+    \[ e(\lambda p, v) =
+        \frac{\lambda p_1\cdot \lambda p_2 v^2}{4\lambda (4p_1 + p_2)} =
+        \frac{\lambda p_1 p_2 v^2}{4 (4p_1 + p_2)} =
+        \lambda e(p,v)
+    \]
+
+    \item For every $p$, $e(p,v)=0$ if $v=u(0)$ and $e(p,v)>0$ if $v>u(0)$.\\
+
+    This is obvious by observing that $u(0)=0$, and $e(p,v)=0$ if $v=0$, while
+    $e(p,v)>0$ if $v>0$.\\
+
+    \item The expenditure is strictly increasing in $v$
+          and nondecreasing in $p$.\\
+    \[ \frac{\partial e(p,v)}{\partial v} =
+         \frac{p_1 p_2 v}{2(4p_1 + p_2)}  > 0 \quad
+         \textrm{if}\ v > 0
+    \]
+    And, $\lim_{v \to 0^{+}}\ e(p,v) = 0$. So $e(p,v)$ is strictly increasing
+    in $v$ for $v \geq 0$.
+
+    \[  \frac{\partial e(p,v)}{\partial p_1} =
+           \left( \frac{p_2v}{8p_1 + 2p_2} \right)^2 \geq 0
+    \]
+    \[  \frac{\partial e(p,v)}{\partial p_2} =
+            \left( \frac{p_1v}{4p_1 +  p_2} \right)^2 \geq 0
+    \]
+    Therefore, $e(p,v)$ is nondecreasing in $p$. \\
+
+    \item The expenditure function $e(p,v)$ is concave in $p$.\\
+
+    The Hessian matrix of $e(p,v)$ with respect to $p$ is
+    \[  H = \frac{2v^2}{(4p_1 + p_2)^3}
+          \begin{bmatrix}
+            -p_2^2 & p_1p_2 \\
+            p_1p_2 & -p_1^2
+          \end{bmatrix}
+    \]
+    Verify all its principal minors,
+    \[ |-p_2^2| \leq 0, \quad |-p_1^2| \leq 0,\quad
+       \begin{vmatrix}
+         -p_2^2 & p_1p_2 \\
+         p_1p_2 & -p_1^2
+       \end{vmatrix} = 0 \geq 0
+    \]
+    So the Hessian matrix $H$ is negative semidefinite.
+    Hence, the expenditure function $e(p,v)$ is concave in $p$.\\
+
+  \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

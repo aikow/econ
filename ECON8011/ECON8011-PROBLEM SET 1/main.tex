@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+\title{PROBLEM SET 1}
+% \author{ 
+%     \textsc{Zeming Wang} 
+%     \thanks{u6114134@anu.edu.au}
+% }
+\date{}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1}
+Prove that if $X$ is a finite set and $\succeq$ is complete and 
+transitive, then the function $u: X \to \mathbb{R}$ defined by 
+$u(x) = \#\textrm{NBT}(x)$ satisfies $u(x) \geq u(y) \Leftrightarrow x \succeq y$.
+
+\begin{proof} $\quad$
+
+\begin{itemize}
+\item Necessity. Suppose $x \succeq y$. Then we have 
+$\textrm{NBT}(y) \subseteq \textrm{NBT}(x)$ (by Proposition 9).
+Since $X$ is finite, $\textrm{NBT}(x)$ and $\textrm{NBT}(y)$ are both countable, it must follow that 
+$\#\textrm{NBT}(y) \leq \#\textrm{NBT}(x)$. 
+It means, by definition, $u(y) \leq u(x)$.
+
+\item Sufficiency. Suppose $u(x) \geq u(y)$. By definition, 
+$\#\textrm{NBT}(y) \leq \#\textrm{NBT}(x)$. 
+Since NBT sets nest, it suggests that it must be the case 
+$\textrm{NBT}(y) \subseteq \textrm{NBT}(x)$, 
+which implies $x \succeq y$ (Proposition 9).
+\end{itemize}    
+\end{proof}
+
+
+\section*{Question 2}
+Suppose that $u(\cdot)$ is a continuous utility function 
+representing $\succeq$. Show that $\succeq$ is complete, 
+transitive, and continuous. 
+
+\begin{proof}
+Since preference $\succeq$ can be represented by a utility 
+function $u: X \to \mathbb{R}$. By Proposition 5, the preference 
+is complete and transitive. So we only have to prove that 
+the continuity of the utility function suggests the continuity 
+of the preference relation. We try to prove this by proving that 
+if $u$ is continuous, then the set $\textrm{SBT}(x)$ 
+is an open set. \\
+
+By definition, $x \succeq y \Leftrightarrow u(x) \geq u(y)$. 
+Therefore we can define $\textrm{SBT}(x)$ in terms of the 
+utility function: 
+$\textrm{SBT}(x) = \{y \in X: y \succ x\} 
+                 = \{ y \in X: u(y) > u(x) \}$\\
+
+Note that any set like $\{z \in \mathbb{R}: z > a \}$ is open.
+So the set $U = \{ u: u > u_x \}$ is open (where $u_x=u(x))$. 
+That means, for any $u \in U$, there exists $\epsilon>0$ 
+such that for any $u'$ with $|u'-u|<\epsilon$, we have $u' \in U$. \\
+
+While the continuity of $u(\cdot)$ suggests, given that $\epsilon$, 
+there must exist an $\delta>0$ such that whenever 
+$|y'-y|<\delta$, we have $|u(y')-u(y)|<\epsilon$, 
+which implies $u(y') \in U$.\\
+
+So for any $y \in \textrm{SBT}(x)$, there exists an $\delta$, whenever $|y'-y|<\delta$, we have $u(y') \in U$ and hence 
+$y' \in SBT(x)$. That proves $\textrm{SBT}(x)$ is an open set,
+which, by Proposition 1.14, is equivalent to that 
+the preference $\succeq$ is continuous.
+
+\end{proof}
+
+\end{document}
