@@ -1,0 +1,193 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} EMET1001 
+\\\vspace{0.5in} ASSIGNMENT 10
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+\\\vspace{0.1in} \textsc{Tutor: Long}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: Oct. 10, 2016}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+\subsection*{Chapter 13 Problems}
+\vspace{0.1in}
+
+\begin{enumerate}
+    \item[1. ] The function $f$ defined for all $(x, y)$ by $$f(x, y) = -2x^2 + 2xy - y^2 + 18x - 14y + 4$$ has a maximum. 
+    Find the corresponding values of $x$ and $y$. Use the sufficient conditions to prove that is has a maximum point. \\
+    
+    \textbf{Solution}: First order conditions are:
+    \begin{align*}
+        f_x &= -4x + 2y + 18 &= 0 \\
+        f_y &= 2x - 2y - 14  &= 0 \\
+    \end{align*}
+    Solve the equations, we get:
+    $$ x = 2,\ y = -5 $$
+    We can prove this is a maximum point by checking the second order conditions:
+    \begin{align*}
+        f_{xx} &= -4 < 0 \\
+        f_{yy} &= -2 < 0 \\
+        f_{xy} &= 2 \\   
+        f_{xx} & f_{yy} - (f_{xy})^2 = 4 > 0
+    \end{align*}
+    Therefore, it is the maximum point. \\
+    
+    \item[4. ] Find the stationary points of the following functions:
+        \begin{enumerate}
+            \item[(a)] $ f(x,y) = x^3 - x^2y + y^2 $ \\
+            
+            \textbf{Solution}:
+            \begin{align*}
+                f_x &= 3x^2 - 2xy &= 0 \\
+                f_y &= -x^2 + 2y  &= 0 \\                
+            \end{align*}
+            Solve for $(x,y)$, we have the stationary points:
+            $$ (0,0),\ \textrm{or}\ \Big( 3, \frac{9}{2}\Big) $$
+
+            \item[(b)] $ f(x,y) = 4y^3 + 12x^2y - 24x^2 - 24y^2 $ \\
+            
+            \textbf{Solution}:
+            \begin{align*}
+                f_x &= 24xy - 48x          &= 0 \\
+                f_y &= 12y^2 + 12x^2 - 48y &= 0 \\
+            \end{align*}
+            
+            Rearrange the first equation:
+            $$  24x(y-2) = 0 $$
+            Therefore,
+            $$ x = 0,\ \textrm{or}\ y = 2 $$
+            
+            If $x = 0$, substitute it into the second equation:
+            $$ 12y^2 - 48y = 0 $$
+            which yields:
+            $$ y=0,\ \textrm{or}\ y=4 $$
+            
+            If $y=2$, substitute it into the second equation:
+            $$ 48 + 12x^2 - 96 = 0 $$
+            which yields:
+            $$ x=2,\ \textrm{or}\ x=-2 $$
+            
+            Therefore, we have $4$ stationary points:
+            $$(0,0),\ (0,4),\ (2,2),\ (-2,2)$$
+        \end{enumerate}
+        
+    \item[5. ] Define $$ f(x,y,a) = ax^2 -2x + y^2 - 4ay $$ where $a$ is a parameter. For each fixed $a \neq 0$, find the point $(x^*(a), y^*(a))$ that makes the function $f$ stationary with respect to $(x,y)$. Find also the value function $f^*(a)=f(x^*(a), y^*(a), a)$, and verify the envelope theorem in this case. \\
+    
+    \textbf{Solution}: Find the FOCs first:
+    \begin{align*}
+        f_x &= 2ax -2  &= 0 \\
+        f_y &= 2y - 4a &= 0 \\
+    \end{align*}
+    Solve the equations and get the stationary point:
+    \begin{align*}
+        x^* &= \frac{1}{a} \\
+        y^* &= 2a \\
+    \end{align*}
+    The value function is:
+    $$ f^*(a) = f(x^*, y^*, a) = -\frac{1}{a}-4a^2 $$
+    To verify the envelop theorem, differentiate the value function:
+    $$ f^*_a(a) = \frac{1}{a^2} - 8a $$
+    Differentiate the objective function:
+    $$ f_a(x,y,a) = x^2 - 4y $$
+    Substitute $(x^*, y^*)$ in:
+    $$ f_a(x^*, y^*,a) = \frac{1}{a^2} - 8a $$
+    we can see that:
+    $$ f^*_a(a) = f_a(x^*, y^*, a)$$
+    That verifies the envelope theorem.
+      
+\end{enumerate}
+
+
+\subsection*{Chapter 14 Problems}
+\vspace{0.1in}
+
+\begin{enumerate}
+    \item[1. ] 
+        \begin{enumerate}
+            \item[(a)] Solve the following problem using the Lagrange multiplier method: $$ \max{ f(x,y)=3x+4y }\ \textrm{subject to}\ g(x,y)=x^2+y^2 = 225 $$
+            
+            \textbf{Solution}: The Lagrangian is:
+            $$ \mathcal{L}(x,y) = 3x+4y-\lambda(x^2+y^2-225) $$
+            FOCs are:
+            \begin{align*}
+                \mathcal{L}_x &= 3 - 2\lambda x = 0 \\
+                \mathcal{L}_y &= 4 - 2\lambda y = 0 \\
+                x^2 &+ y^2 = 225 \\
+            \end{align*}
+            Solve the equation we have:
+            \begin{align*}
+                \lambda &= \frac{1}{6} \\
+                x &= 9 \\
+                y &= 12 \\
+            \end{align*}
+            
+            \item[(b)] Suppose $225$ is changed to $224$. What is the approximate change in the optimal value of $f$. \\
+            
+            \textrm{Solution}: The Lagrange multiplier $\lambda$ at the solution is just the rate of change of the value function. So if $225$ is changed to $224$, the change of value function $f^*$ is approximately $\frac{1}{6}$.
+            
+        \end{enumerate}
+    
+    \item[6. ] Consider the utility maximization problem with separable utility function: $$ \max{u(x,y)=v(x)+w(y)}\ \textrm{subject to}\ px + qy = m $$ where $v'(x)>0,w'(y)>0,v''(x)\leq 0,w''(y)\leq 0$.
+        \begin{enumerate}
+            \item[(a)] State the first-order conditions for utility maximization.\\
+            
+            \textbf{Solution}: First-order conditions are:
+            \begin{align*}
+                \mathcal{L}_x &= v'(x) - \lambda p = 0 \\
+                \mathcal{L}_y &= w'(y) - \lambda q = 0 \\
+                px &+ qy = m \\
+            \end{align*}
+            
+            \item[(b)] Why are these conditions sufficient for optimality? \\
+            
+            \textbf{Solution}: We can show these conditions are sufficient by showing that the Lagrangian is concave. \\
+            
+            Given that $v'(x)>0,w'(y)>0,v''(x)\leq 0,w''(y)\leq 0$, we know both $v(x)$ and $w(y)$ are concave. That is, for $k \in [0,1]$, we have:
+            $$ v(kx_1 + (1-k)x_2) \geq kv(x_1) + (1-k)v(x_2) $$
+            $$ w(ky_1 + (1-k)y_2) \geq kw(y_1) + (1-k)w(y_2) $$
+            
+            Therefore we have:
+            \begin{align*}
+                       \ & \mathcal{L}( kx_1 + (1-k)x_2, ky_1 + (1-k)y_2 ) 
+                \\    =\ & v(kx_1 + (1-k)x_2) + w(ky_1 + (1-k)y_2) - \lambda(p(kx_1 + (1-k)x_2) + 
+                \\       & q(ky_1 + (1-k)y_2) - m)
+                \\ \geq\ & (kv(x_1) + (1-k)v(x_2)) + (kw(y_1) + (1-k)w(y_2)) - \lambda(p(kx_1 + (1-k)x_2) + 
+                \\       & q(ky_1 + (1-k)y_2) - m)
+                \\    =\ & k( v(x_1)+w(y_1)-\lambda(px_1+qy_1-m) ) + (1-k)( v(x_2)+w(y_2) - \lambda(px_2+qy_2-m) )
+                \\    =\ & k\mathcal{L}(x_1,y_1) + (1-k)\mathcal{L}(x_2,y_2)
+            \end{align*}
+            which shows $\mathcal{L}$ is concave and thus the conditions are sufficient.
+        \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

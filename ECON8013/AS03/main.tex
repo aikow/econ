@@ -1,0 +1,424 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+%% The following code is a workaround to insert vertical line 
+%% in matrix environment.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+%% End of the trick
+
+
+\begin{document}
+
+\title{\textsc{ECON8013: Assignment Week 3}}\maketitle
+
+\begin{enumerate}
+    \item[1. ] Suppose $x_i = d_i(p,y)$ is the demand for Good $i$, and $\lambda=\lambda(p,y)$. 
+    In the special case where there are only two goods, the following equations must be satisfied:
+        \begin{align*}
+            \frac{\partial u}{\partial x_1} - \lambda p_1 &= 0 \\
+            \frac{\partial u}{\partial x_2} - \lambda p_2 &= 0 \\
+            p_1 x_1 + p_2 x_2 - y &= 0 \\ 
+        \end{align*}
+    where $\dfrac{\partial u}{\partial x_1}=v_1'$, $\dfrac{\partial u}{\partial x_2}=v_2'$.
+    It is reasonably to view this system as a $\mathbb{R}^5 \to \mathbb{R}^3$ function:
+        $$ F(v_1' - \lambda p_1, v_2' - \lambda p_2, p_1 x_1 + p_2 x_2 - y) = 0 $$
+    The Jacobian matrix of $F$: $J = [J_1|J_2]$ can be written as:
+        \begin{equation*}
+            \begin{pmatrix}[ccc|ccc]
+                v_1'' &      0 & -p_1    & -\lambda &        0 &  0 \\
+                0     &  v_2'' & -p_2    &        0 & -\lambda &  0 \\
+                p_1   &  p_2   &    0    &      x_1 &      x_2 & -1 \\
+            \end{pmatrix}
+        \end{equation*}
+    Columns in $J$ represents $\dfrac{\partial F}{\partial x_1}$, $\dfrac{\partial F}{\partial x_2}$,
+    $\dfrac{\partial F}{\partial \lambda}$, $\dfrac{\partial F}{\partial p_1}$, 
+    $\dfrac{\partial F}{\partial p_2}$, $\dfrac{\partial F}{\partial y}$ respectively.
+    
+    Since $v_1'' < 0$, $v_2'' < 0$, we can check,
+        \begin{equation*}
+            |J_1| = \begin{vmatrix}
+                v_1'' &      0 & -p_1  \\
+                0     &  v_2'' & -p_2  \\
+                p_1   &  p_2   &    0  \\                
+            \end{vmatrix}
+            = p_1^2 v_2'' + p_2^2 v_1'' < 0
+        \end{equation*}    
+    Thus, by the Implicit Function Theorem, we know $x_1,\ x_2,\ \lambda$ can be viewed as implicit functions 
+    of $p_1,\ p_2,\ y$ at each optimal solution to the system. And further, 
+        \begin{equation*}
+            \begin{pmatrix}
+                \frac{\partial x_1}{\partial y} \\
+                \frac{\partial x_2}{\partial y} \\
+                \frac{\partial \lambda}{\partial y} \\
+            \end{pmatrix} = 
+            \begin{pmatrix}
+                v_1'' &      0 & -p_1  \\
+                0     &  v_2'' & -p_2  \\
+                p_1   &  p_2   &    0  \\                
+            \end{pmatrix}^{-1}
+            \begin{pmatrix}
+                0 \\
+                0 \\
+                1 \\
+            \end{pmatrix}
+        \end{equation*}
+    By inverting the matrix $J_1$, we have, 
+        \begin{align*}
+            \begin{pmatrix}
+                \frac{\partial x_1}{\partial y} \\
+                \frac{\partial x_2}{\partial y} \\
+                \frac{\partial \lambda}{\partial y} \\
+            \end{pmatrix} &= 
+            \frac{v_1'' v_2''}{p_1^2 v_2'' + p_2^2 v_1''}
+            \begin{pmatrix}
+                \frac{v_2''}{p_1^2 v_2'' + p_2^2 v_1''}-\frac{p_1^2}{{v_1''}^2} & -\frac{p_1 p_2}{v_1'' v_2''} & \frac{p_1}{v_1''} \\
+                -\frac{p_1 p_2}{v_1'' v_2''} & \frac{v_1''}{p_1^2 v_2'' + p_2^2 v_1''}-\frac{p_1^2}{{v_1''}^2} & \frac{p_2}{v_2''}  \\
+                -\frac{p_1}{v_1''}  &  -\frac{p_2}{v_2''} & 1  \\                
+            \end{pmatrix}
+            \def\arraystretch{1.3}
+            \begin{pmatrix}
+                0 \\
+                0 \\
+                1 \\
+            \end{pmatrix} \\
+            &= \frac{v_1'' v_2''}{p_1^2 v_2'' + p_2^2 v_1''}
+            \begin{pmatrix}
+                \frac{p_1}{v_1''} \\
+                \frac{p_2}{v_2''} \\
+                1
+            \end{pmatrix}
+        \end{align*}    
+    Since $v_1'' < 0$, $v_2'' < 0$, we can tell both $\dfrac{\partial x_1}{\partial y} > 0$ and
+    $\dfrac{\partial x_2}{\partial y} > 0$. In other words,  $d_i(p, y)$ is strictly increasing 
+    in $y$ for $i = 1,\ 2$. \\
+    
+    
+    \item[2. ] Find all local minima and maxima of the following functions.
+    \begin{enumerate}
+        \item[a)] $f(x, y, z) = 3x^2 + 2xy + 2y^2 - xz + z^2 - 6z + 7y + 103.5$ \\
+        
+        The First-Order Condition is,
+        \[
+            \nabla f(x,y,z) = 
+            \begin{pmatrix} 
+                6x + 2y - z \\
+                2x + 4y + 7 \\
+                -x + 2z - 6 \\
+            \end{pmatrix} = 
+            \begin{pmatrix}
+            0 \\
+            0 \\
+            0 \\
+            \end{pmatrix}
+        \]
+        Solving the linear system yields the critical point:
+        \[
+            \def\arraystretch{1.3}
+            \begin{pmatrix}
+                x \\
+                y \\
+                z \\
+            \end{pmatrix} = 
+            \def\arraystretch{1.3}
+            \begin{pmatrix}
+                \ \ \frac{13}{9} \\
+                -   \frac{89}{36} \\
+                \ \ \frac{67}{18} \\
+            \end{pmatrix}
+        \]
+        Checking the Second-Order Condition, the Hessian matrix:
+        \[
+            H = \begin{pmatrix}
+                6 & 2 & -1 \\
+                2 & 4 & 0  \\
+                -1 & 0 & 2 \\
+            \end{pmatrix}
+        \]
+        The leading principal minors: $|H_1| = 6 > 0$, $|H_2| = 20 > 0$, $|H_3| = 36 > 0$. 
+        So the Hessian matrix is positive definite. Thus the critical point is a local minima. \\
+        
+        
+        \item[b)] $f(x, y) = 7x^4 - 3x^2y + 9y^2 + x$ \\
+        
+        First-Order Condition:
+        \begin{align*}
+            28x^3 - 6xy + 1 &= 0 \\
+            -3x^2 + 18y &= 0 \\
+        \end{align*}
+        
+        From the second equation, we have $6y = x^2$. Substitute it into the first equation,
+        $$ 28x^3 - x^3 + 1 = 0 $$
+        Solve for $x$ we get $x = -\dfrac{1}{3}$, and $y = \dfrac{1}{54}$. So the critical point is:
+        $$ (x, y) = \left( -\frac{1}{3}, \frac{1}{54} \right) $$
+        
+        Check the Hessian matrix at the critical point for the Second-Order Condition:
+        \[
+            H = 
+            \left.\begin{pmatrix}
+                84x^2 - 6y  &  -6x  \\
+                -6x         &  18   \\
+            \end{pmatrix}
+            \right\rvert_{(x, y) = \left( -\frac{1}{3}, \frac{1}{54} \right)}   
+            = \begin{pmatrix}
+                \frac{83}{9} &  2 \\
+                2            & 18 \\
+            \end{pmatrix}
+        \]
+        Check its leading pricipal minors: $|H_1| = \dfrac{83}{9} > 0$, $|H_2| = 162 > 0$. 
+        So the Hessian matrix is positive definite. Thus the critical point is a local minima.\\
+        
+        \item[c)] \[ f(\alpha, \beta) = \left\vert 
+            \begin{pmatrix} 2 \\ 3 \\ 5 \end{pmatrix} - 
+            \begin{pmatrix}
+                1 & 1 \\
+                1 & 2 \\
+                1 & 3 \\
+            \end{pmatrix}
+            \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+            \right\vert^2
+        \]
+        
+        Unpack the matrix notation, 
+        $$ f(\alpha, \beta) = (\alpha + \beta -2)^2 + (\alpha + 2\beta -3)^2 + (\alpha + 3\beta -5)^2 $$
+        
+        First-Order Condition:
+        \begin{align*}
+            \frac{\partial f}{\partial \alpha} &=  6\alpha + 12\beta - 20 = 0 \\ 
+            \frac{\partial f}{\partial \beta}  &= 12\alpha + 28\beta - 46 = 0 
+        \end{align*}
+        
+        Solving the linear system, we get:
+        $$  (x,y) = \left( \frac{1}{3},\ \frac{3}{2} \right)$$
+        
+        The Hessian matrix is:
+        \[  H = 
+            \begin{pmatrix}
+                6  & 12 \\
+                12 & 28 \\
+            \end{pmatrix}
+        \]
+        
+        Checking leading principal minors: $|H_1| = 6 > 0$, $|H_2| = 24 > 0$. 
+        So the Hessian matrix is positive definite and we thus conclude the critical point is a local minima.\\
+        
+    \end{enumerate}
+
+
+    \item[3. ] Let $f(x,y) = -ax^2 + 2xy - y^2 + bx + 12y - b^2 \log a$.
+        \begin{enumerate}
+            \item[a)] \[ 
+                \nabla f =
+                \begin{pmatrix}
+                    -2ax + 2y + b \\
+                    2x - 2y + 12 \\
+                \end{pmatrix}
+            \]
+            \[
+                H(f) = 
+                \begin{pmatrix}
+                    -2a &  2 \\
+                    2   & -2 \\
+                \end{pmatrix}
+            \]
+            For $a > 1$, we have $|H_1| = -2a < 0$, $|H_2| = 4a - 4 > 0$. So $H$ is nonsingular and negative definite. 
+            Therefore, $\nabla f(x,y)=0$ always has a unique solution, say, $(x^*,y^*)$. 
+            Meanwhile, $f(x,y)$ is concave and the solution $(x^*,y^*)$ is the global maximum.\\
+            
+            \item[b)] For $a=b=2$, the First-Order Conditions are:
+                \begin{align*}
+                    -4x + 2y + 2 &= 0 \\
+                    2x  - 2y + 12 &= 0 
+                \end{align*}
+                Solve the linear system gives the unique maximum:
+                $$ (x,y) = (7, 13) $$
+                
+            \item[c)] Define $F(x,y) = ( -2ax + 2y + b,\ 2x - 2y + 12 )$. 
+            Suppose $(x^*, y^*)$ is the critical point that solves the optimization problem. 
+            Then by the First-Order Condition, $(x^*, y^*)$ must satisfy $$F(x^*, y^*) = 0$$
+            
+            Let $J=[J_1|J_2]$ be the Jacobian matrix of $F$ around $(x^*, y^*)$. 
+            \[
+                J = \begin{pmatrix}[cc|cc]
+                    -2a & 2 & -2x^* & 1 \\
+                    2 & -2 & 0 & 0 \\
+                \end{pmatrix}
+            \]
+            
+            For $a > 1$, $|J_1| > 0$. By the Implicit Function Theorem, we know $x^*, y^*$ are 
+            implicit functions of $a$ and $b$. And further, 
+            \begin{align*}
+                \def\arraystretch{1.3}
+                \begin{pmatrix}
+                    \frac{\partial x^*}{\partial a} & \frac{\partial x^*}{\partial b} \\
+                    \frac{\partial y^*}{\partial a} & \frac{\partial y^*}{\partial b} \\
+                \end{pmatrix} &= 
+                \begin{pmatrix}
+                    -2a & 2 \\
+                    2 & -2  \\
+                \end{pmatrix}^{-1}
+                 \begin{pmatrix}
+                    2x^* & -1 \\
+                    0 & 0 \\
+                \end{pmatrix}\\[1em] 
+                &= \frac{1}{2-2a}
+                \begin{pmatrix}
+                    1 & 1 \\
+                    1 & a \\
+                \end{pmatrix}
+                \begin{pmatrix}
+                    2x^* & -1 \\
+                    0 & 0 \\
+                \end{pmatrix}\\[1em]
+                &= \frac{1}{2-2a}
+                \begin{pmatrix}
+                    2x^* & -1 \\
+                    2x^* & -1 \\
+                \end{pmatrix}
+            \end{align*}
+        
+        By reading off the entries of the Jacobian matrix, we know $\dfrac{\partial x^*}{\partial b}>0$, 
+        $\dfrac{\partial y^*}{\partial b}>0$. So both $x^*$ and $y^*$ are increasing on $b$.\\
+        
+        But the monotonicity of $x^*$ and $y^*$ with respect to $a$ depends on the value
+        of the critical point $x^*$. \\
+        
+        If $x^*>0$, $ \dfrac{\partial x^*}{\partial a}<0$, $\dfrac{\partial y^*}{\partial a}<0$, 
+        $x^*$ and $y^*$ are decreasing on $a$.\\ 
+        
+        If $x^*<0$, $ \dfrac{\partial x^*}{\partial a}>0$, $\dfrac{\partial y^*}{\partial a}>0$, 
+        $x^*$ and $y^*$ are increasing on $a$.\\ 
+        
+        If $x^*=0$, $x^*$ and $y^*$ are not affected by the change of $a$. \\
+        
+        \end{enumerate}
+        
+    \item[4. ] Let $f(K,L) = (KL)^{\frac{1}{3}} - rK - wL$, and $\pi(r,w)=\underset{K,L}{\max} f(K,L)$.
+        \begin{enumerate}
+            \item[a)] Let $(r'', w'') = t (r,w) + (1-t)(r',w')$ where $t \in [0,1]$.
+            Suppose $(K^*,L^*)$ is the optimal solution for the objective function with parameters $(r'', w'')$, i.e.
+                $$ \pi (r'', w'') = (K^* L^*)^{\frac{1}{3}} - r''K^* - w''L^* $$
+            
+            But $(K^*,L^*)$ may not be the optimal solution for $(r, w)$ or $(r', w')$, therefore,
+                $$ \pi (r, w) \geq  (K^* L^*)^{\frac{1}{3}} - rK^* - wL^* $$
+                $$ \pi (r', w') \geq  (K^* L^*)^{\frac{1}{3}} - r'K^* - w'L^* $$
+            
+            Thus we have, 
+                \begin{align*}
+                    \pi (r'', w'') &= \pi (t (r,w) + (1-t)(r',w')) \\
+                                   &= \pi (tr+(1-t)r', tw+(1-t)w') \\
+                                   &= (K^* L^*)^{\frac{1}{3}} - (tr+(1-t)r')K^* - (tw+(1-t)w')L^* \\
+                                   &= t((K^* L^*)^{\frac{1}{3}} - rK^* - wL^*) + (1-t)((K^* L^*)^{\frac{1}{3}} - r'K^* - w'L^*) \\
+                                   &\leq t\pi (r, w) + (1-t)\pi (r', w')
+                \end{align*}
+            which proves $\pi$ is a convex function. \\
+            
+            \item[b)] The Hessian matrix of $f(K,L)$ can be computed as:
+            \[
+                H = \frac{1}{9}(KL)^{-\frac{2}{3}}
+                \def\arraystretch{1.3}
+                \begin{pmatrix}
+                    -2\frac{L}{K} & 1 \\
+                    1 & -2\frac{K}{L} \\
+                \end{pmatrix}
+            \]
+            The leading principal minors are: 
+            $$|H_1| = -\dfrac{2}{9}\dfrac{L}{K}(KL)^{-\frac{2}{3}} < 0 $$
+            $$|H_2| = \dfrac{1}{27}(KL)^{-\frac{4}{3}} > 0 $$
+            for all $K,L > 0$. 
+            So we can tell the Hessian matrix is negative definite and the objective function 
+            $f(K,L)$ is strictly concave. Therefore the optimal choice $(K^*, L^*)$ must be unique.\\
+            
+            \item[c)] Every optimal choice $(K^*, L^*)$ must satisfy the equation:
+            $$ \nabla f(K^*, L^*) =0 $$
+            Let $J=[J_1|J_2]$ be the Jacobian matrix of of $\nabla f$ at $(K^*, L^*)$. 
+            \[
+                J_1 = \frac{1}{9}(K^* L^*)^{-\frac{2}{3}}
+                \def\arraystretch{1.3}
+                \begin{pmatrix}
+                    -2\frac{L^*}{K^*} & 1 \\
+                    1 & -2\frac{K^*}{L^*} \\
+                \end{pmatrix},\
+                J_2 = \begin{pmatrix}
+                -1 & 0 \\
+                0 & -1 \\
+                \end{pmatrix}
+            \]
+            
+            By Implicit Function Theorem, we have,
+            \[
+                \def\arraystretch{1.3}
+                \begin{pmatrix}
+                    \frac{\partial K^*}{\partial r} & \frac{\partial K^*}{\partial w} \\
+                    \frac{\partial L^*}{\partial r} & \frac{\partial L^*}{\partial w} \\
+                \end{pmatrix}  = J_1^{-1}(-J_2) 
+                 = -3(KL)^{\frac{2}{3}} 
+                \begin{pmatrix}
+                    2\frac{K^*}{L^*} & 1 \\
+                    1 & 2\frac{L^*}{K^*} \\ 
+                \end{pmatrix}
+            \]
+            Check all of its principal minors: 
+            \begin{align*}
+                \Delta_1 &= -3(KL)^{\frac{2}{3}} \cdot 2\frac{K^*}{L^*} \leq 0 \\
+                \Delta_1 &= -3(KL)^{\frac{2}{3}} \cdot 2\frac{L^*}{K^*} \leq 0 \\
+                \Delta_2 &= 27(KL)^{\frac{4}{3}} \geq 0 
+            \end{align*}
+            Therefore the Jacobian matrix is symmetric and negative semi-definite.\\
+            
+        \end{enumerate}
+        
+        
+        \item[5. ] Suppose $f: \mathbb{R}^n_{++} \to \mathbb{R}^n$ is homogeneous with degree $n$. 
+        Then for all $a>0$, 
+        $$ f(ax) = a^n f(x) $$
+        Let $y = ax$, then $\dfrac{\partial y_i}{\partial a} = x_i$. 
+        Take derivative of $f(y)$ with respect to $a$:
+        $$ \frac{\partial f(y)}{\partial a} = \sum_{i=1}^{n} \frac{\partial f}{\partial y_i} \cdot
+            \frac{\partial y_i}{\partial a} = \sum_{i=1}^{n} x_i \frac{\partial f}{\partial y_i}
+        $$
+        Meanwhile, 
+        $$ \frac{\partial f(y)}{\partial a} = \frac{\partial}{\partial a} a^n f(x) = na^{n-1}f(x) $$
+        Therefore,
+        $$ \sum_{i=1}^{n} x_i \frac{\partial f}{\partial y_i} = na^{n-1}f(x) $$
+        
+        Let $a=1$, then $y=x$, therefore we have:
+        $$ \sum_{i=1}^{n} x_i \frac{\partial f}{\partial x_i} = nf(x) $$
+        This proves the Euler’s homogeneous function theorem.\\
+        
+        \item[6. ] Suppose $f_1, f_2, \dots, f_n$ are all convex functions on a convex set $\Omega$.
+        That means for any $x,y \in \Omega$, and $t \in [0,1]$, we have
+        $$ f_i(tx + (1-t)y)  \leq tf_i(x) + (1-t)f_i(y) $$
+        for $i = 1,2,\dots,n$. Let $f = f_1 + f_2 + \dots + f_n$.
+        
+        \begin{enumerate}
+            \item[a)] $f$ is also a convex function can be shown as below:
+                \begin{align}
+                    f(tx + (1-t)y) &=    \sum_{i=1}^{n} f_i( tx + (1-t)y ) \\
+                                   &\leq \sum_{i=1}^{n} tf_i(x) + (1-t)f_i(y) \\
+                                   &= t \sum_{i=1}^{n} f_i(x) + (1-t) \sum_{i=1}^{n} f_i(y) \\
+                                   &= t f(x) + (1-t) f(y)
+                \end{align}
+        
+            \item[b)] If any of $f_i$ is strictly convex, i.e.
+            $$ f_i(tx + (1-t)y)  < tf_i(x) + (1-t)f_i(y) $$
+            The inequality in the above Equation (2) must be held with a strictly-less-than, 
+            which proves that $f$ must also be strictly convex.\\
+            
+        \end{enumerate}
+        
+        
+\end{enumerate}
+
+\end{document}

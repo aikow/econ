@@ -1,0 +1,226 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} EMET1001 
+\\\vspace{0.5in} ASSIGNMENT 4
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+\\\vspace{0.1in} \textsc{Tutor: Long}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: Aug. 15, 2016}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+\begin{enumerate}
+    
+    \item[8.] 
+    
+        \begin{enumerate}
+            \item[(a)] Find $y'$ when $y$ is given implicitly by the equation $$ x^2 - xy + 2y^2 = 7 $$
+            
+            Take derivative on both side of the equation with respect to $x$:
+            $$ 2x - y - xy' + 2yy' = 0 $$
+            
+            Solve for $y'$, we get:
+            $$ y' = \frac{2x - y}{x - 2y} $$
+            
+            \item[(b)] Find the points where the graph has horizontal tangent and the points where it has vertical tangent. \\
+            
+            The points where the graph has horizontal tangent must have $y'$ equaling $0$ at that points.\\
+            
+            We know, $y'=0$ when $ 2x = y $. Substitute $y$ using $2x$ into the original equation:
+            $$ x^2 - x \cdot 2x + 2(2x)^2 = 7 $$
+            
+            Solve the equation, we get $x = \pm 1$.\\
+            
+            Therefore, there are two points: $(1, 2)$ and $(-1, -2)$, where the graph has horizontal tangent. \\
+            
+            To find the points where the graph has vertical tangent, we first find derivative $x'$ respect to $y$:
+            $$ 2xx' - x'y - x + 4y = 0 $$
+            
+            Solve for $x'$:
+            $$ x' = \frac{x - 4y}{2x - y}$$
+            
+            Let $x'=0$, we get $x = 4y$. Substitute this to the original equation:
+            $$ (4y)^2 - 4y^2 + 2y^2 = 7 $$
+            
+            Solve $y$ we get $y = \pm \dfrac{\sqrt{2}}{2}$, and thus, $x = \pm 2\sqrt{2}$ \\
+            
+            Therefore, the two points where the graph has vertical tangent line are: $(2\sqrt{2}, \frac{\sqrt{2}}{2})$ and $(-2\sqrt{2}, -\frac{\sqrt{2}}{2})$.
+            
+        \end{enumerate}
+        
+    \item[12.] Find the quadratic approximations to the following functions about $x = 0$.
+    
+        \begin{enumerate}
+            \item[(a)] $ f(x) = \ln{(2x + 4)} $ \\
+            
+            The quadratic approximation of $f(x)$ at $x=0$ is given by:
+            $$ f(x) \approx f(0) + f'(0)x + \frac{f''(0)}{2}x^2 $$
+            
+            So we have to figure out $f(0)$, $f'(0)$ and $f''(0)$ respectively.
+            $$ f(x) = \ln{(2x + 4)} \implies f(0) = \ln{4} $$
+            $$ f'(x) = \frac{1}{x+2} \implies f'(0) = \frac{1}{2} $$
+            $$ f''(0) = -\frac{1}{(x+2)^2} \implies f''(0) = -\frac{1}{4} $$
+           
+            Therefore, the approximation is:
+            $$ f(x) \approx \ln{4} + \frac{1}{2}x - \frac{1}{8}x^2 $$
+            
+            \item[(b)] $ g(x) = (1 + x)^{-\frac{1}{2}} $ \\
+            
+            Follow the similar steps as above:
+            $$ g(x) = (1+x)^{-\frac{1}{2}} \implies g(0) = 1 $$
+            $$ g'(x) = -\frac{1}{2}(1+x)^{-\frac{3}{2}} \implies g'(0) = -\frac{1}{2} $$
+            $$ g''(x) = \frac{3}{4}(1+x)^{-\frac{5}{2}} \implies g''(0) = \frac{3}{4} $$
+            
+            Therefore, the approximation of $g(x)$ is:
+            $$ g(x) \approx 1 - \frac{1}{2}x + \frac{3}{8}x^2 $$
+            
+            \item[(c)] $ h(x) = xe^{2x} $
+            
+            $$ h(x) = xe^{2x} \implies h(0) = 0 $$
+            $$ h'(x) = e^{2x} + 2xe^{2x} \implies h'(0) = 1 $$
+            $$ h''(x) = 2e^{2x} + 2h'(x) \implies h''(0) = 4 $$
+            
+            Therefore, the approximation of $h(x)$ is:
+            $$ h(x) \approx x + 2x^2 $$
+            
+        \end{enumerate}
+    
+    \item[20.] Find the elasticities of the functions given by the following formulas.
+    
+        \begin{enumerate}
+            \item[(a)] $ 50x^5 $ \\
+            
+            We know the elasticity of power function $y=Ax^a$ is just $a$. 
+            
+            Therefore the elasticity of this formula is simply:
+            $$ El = 5 $$
+            
+            \item[(b)] $ \sqrt[3]{x} $
+            
+            $$ El = \frac{1}{3} $$
+            
+            \item[(c)] $ x^3 + x^5 $
+            \begin{equation*}
+            \begin{aligned}
+                El &= \frac{x}{y}\cdot\frac{dy}{dx} \\
+                   &= \frac{x}{x^3+x^5}\cdot(3x^2+5x^4) \\
+                   &= \frac{5(x^3+x^5)-2x^3}{x^3+x^5} \\
+                   &= 5 - \frac{2}{x^2+1}
+            \end{aligned}
+            \end{equation*}
+            
+            \item[(d)] $ \dfrac{x-1}{x+1} $
+            \begin{equation*}
+            \begin{aligned}
+                El &= \frac{x}{y}\cdot\frac{dy}{dx} \\
+                   &= \frac{x}{\frac{x-1}{x+1}}\cdot\frac{(x+1)-(x-1)}{(x+1)^2} \\
+                   &= x\cdot\frac{x+1}{x-1}\cdot\frac{2}{(x+1)^2} \\
+                   &= \frac{2x}{x^2-1}
+            \end{aligned}
+            \end{equation*}
+        \end{enumerate}
+    
+    \item[23.] Evaluate the limits:
+        \begin{enumerate}
+            \item[(a)] $ \lim_{x \rightarrow 3^{-}} (x^2-3x+2) $ \\
+            
+            Function $f(x) = x^2-3x+2$ is continuous at $x = 3$, so the limit is just the the value $f(3)$:
+            $$ \lim_{x \rightarrow 3^{-}} (x^2-3x+2) = 3^2 -3 \cdot 3 + 2 = 2 $$
+            
+            \item[(b)] $ \lim_{x \rightarrow -2^{+}} \dfrac{x^2-3x+14}{x+2} $\\
+            
+            As $x \rightarrow -2^{+}$, the numerator approaches constant value $24$. While the denominator approaches $0^{+}$. Therefore the entire fraction approaches $+\infty$.
+            $$ \lim_{x \rightarrow -2^{+}} \dfrac{x^2-3x+14}{x+2} = \infty $$
+            
+            \item[(c)] $ \lim_{x \rightarrow -1} \dfrac{3-\sqrt{x+17}}{x+1} $\\
+            
+            As $x \rightarrow -1$, the numerator approaches $3-\sqrt{16}=-1$, which is a fixed number. But it makes a difference to the denominator whether $x$ approaches $-1$ from left or right.\\
+            
+            As $x \rightarrow -1^{+}$, $x+1 \rightarrow 0^{+}$, which drives the whole fraction to $-\infty$. 
+            As $x \rightarrow -1^{-}$, $x+1 \rightarrow 0^{-}$, which drives the whole fraction to $+\infty$. \\
+            
+            Since the left limit does not equal the right limit, the limit does not exist.
+            
+            \item[(f)] $ \lim_{x \rightarrow 4} \dfrac{x-4}{2x^2-32} $
+            
+            \begin{equation*}
+            \begin{aligned}
+                \lim_{x \rightarrow 4} \dfrac{x-4}{2x^2-32} 
+                &= \lim_{x \rightarrow 4} \dfrac{x-4}{2(x+4)(x-4)} \\
+                &= \lim_{x \rightarrow 4} \dfrac{1}{2(x+4)} \\
+                &= \frac{1}{16}
+            \end{aligned}
+            \end{equation*}
+            
+            \item[(i)] $ \lim_{x \rightarrow \infty} \dfrac{(\ln{x})^2}{3x^2} $
+            
+            \begin{equation*}
+            \begin{aligned}
+                \lim_{x \rightarrow \infty} \dfrac{(\ln{x})^2}{3x^2}
+                &= \lim_{x \rightarrow \infty} \bigg( \dfrac{\ln{x}}{\sqrt{3}x} \bigg)^2 \\
+                &= \bigg( \lim_{x \rightarrow \infty} \dfrac{\ln{x}}{\sqrt{3}x} \bigg)^2 \\
+                &= \bigg( \lim_{x \rightarrow \infty} \dfrac{1/x}{\sqrt{3}} \bigg)^2,\ \textrm{by L'Hospital rule} \\
+                &= (0)^2 = 0
+            \end{aligned}
+            \end{equation*}
+            
+        \end{enumerate}
+    
+    \item[25.] Evaluate $$ \lim_{x \rightarrow 0} \frac{a^x-b^x}{e^{ax}-e^{bx}} $$ 
+    $a \neq b$, $a$ and $b$ positive. \\
+    
+    The Taylor series equivalence of exponential functions is:
+    $$ e^x = \sum_{n=0}^{\infty} \dfrac{1}{n!}x^n $$
+    
+    Since $a^x = e^{\ln{a^x}} = e^{x\ln{a}}$, we have:
+    $$ a^x \approx 1 + \ln{a}\cdot x + O(|x|^2) $$
+    $$ b^x \approx 1 + \ln{b}\cdot x + O(|x|^2) $$ 
+    
+    Meanwhile,
+    $$ e^{ax} \approx 1 + ax + O(|x|^2) $$
+    $$ e^{bx} \approx 1 + bx + O(|x|^2) $$
+    
+    Substitute these polynomial approximations into the original formula:
+    \begin{equation*}
+    \begin{aligned}
+        \lim_{x \rightarrow 0} \frac{a^x-b^x}{e^{ax}-e^{bx}}
+        &= \lim_{x \rightarrow 0} \frac{(1+\ln{a}\cdot x) - (1+\ln{b}\cdot x)}{(1+ax) - (1+bx)} \\
+        &= \lim_{x \rightarrow 0} \frac{(\ln{a} - \ln{b})x}{(a - b)x} \\
+        &= \lim_{x \rightarrow 0} \frac{\ln{a} - \ln{b}}{a - b} \\
+        &= \frac{\ln{a} - \ln{b}}{a - b}
+    \end{aligned}
+    \end{equation*}
+    which is the final answer.
+    
+\end{enumerate}
+
+\end{document}

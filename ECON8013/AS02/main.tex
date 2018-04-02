@@ -1,0 +1,411 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+% \begin{center}
+% \huge
+% \vspace*{1.0in} ECON8013 
+% \\\vspace{0.5in} ASSIGNMENT 1
+% \normalsize
+% \\\vspace{0.5in} \textsc{By}
+% \\\vspace{0.1in} \textsc{Zeming Wang}
+% \\\vspace{0.1in} \textsc{u6114134}
+% \normalsize
+% % \\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+% % \\\vspace{0.1in} \textsc{Tutor: Long}
+% % \normalsize
+% \\\vspace{0.5in} \textsc{Due: 8 March, 2017}
+% \end{center}
+
+% \newpage
+
+\setcounter{page}{1}
+
+
+\begin{enumerate}
+    \item[1. ] Determine whether each of the following matrices is a valid covariance matrix:
+    
+        \begin{enumerate}
+            \item [(a)] $\begin{pmatrix} 1 &1 &0 \\ 2 &3 &1 \\ 0 &1 &4 \end{pmatrix}$ \\
+            
+            This is not a valid covariance matrix, because it is not symmetric. \\
+            
+            \item[(b)] $\begin{pmatrix}1 &3 &4 \\ 5 &8 &2 \end{pmatrix}$ \\
+            
+            This is not a valid covariance matrix, since it is not a square matrix. \\
+            
+            \item[(c)] $\begin{pmatrix} 2 &1 &0 \\ 1 &1.5 &2 \\ 0 &2 &4 \end{pmatrix}$ \\
+            
+            The matrix is both square and symmetric. It has to be positive (semi)definite in order to be a covariance matrix. Eigen-decompose the matrix with Python\footnote{Package \textbf{numpy} is assumed in all Python code in this paper and is referred to as \textbf{np}.}:
+            
+            \begin{minted}{python}
+            np.linalg.eig(np.array([[2,1,0], [1,1.5,2], [0,2,4]]))
+            \end{minted}
+
+            The output is as follows:
+            
+            \begin{minted}{python}
+            (array([ 0.        ,  2.31385934,  5.18614066]),
+             array([[-0.40824829, -0.89907808,  0.1580884 ],
+                    [ 0.81649658, -0.28218405,  0.50369186],
+                    [-0.40824829,  0.33470998,  0.84929533]]))
+            \end{minted}
+            
+            All eigenvalues are non-negative. So the matrix is positive semi-definite and thus a valid covariance matrix. \\
+            
+            \item[(d)] $\begin{pmatrix}1.5 &3.7 \\ 3.7 &4.3 \end{pmatrix}$ \\
+            
+            This matrix is both square and symmetric. Use the same method as in (c) to eigen-decompose the matrix:
+            
+            \begin{minted}{python}
+           (array([-1.05600809,  6.85600809]), 
+            array([[-0.82276731, -0.56837835],
+                   [0.56837835, -0.82276731]]))
+            \end{minted}
+            
+            One of the eigenvalues is negative. The matrix is non-definite. Therefore it is not a valid covariance matrix. \\
+            
+        \end{enumerate}
+    
+    
+    \item[2. ] Consider a system whose state is described by a vector $y_t$ and evolves according to the law $y_{t+1} = Ay_t$, where
+    $$ \begin{pmatrix}0.8 &-0.2 \\ 1.6 &0.3 \end{pmatrix} $$
+    Given an initial state $y_0$, will $y_t$ approach infinity (i.e. $|y_t| \rightarrow \infty$)? Will $y_t$ converge to zero? Explain how your answer depends on $y_0$. \\
+    
+    \textbf{Solution}: Suppose the matrix (denoted by $A$) can be eigen-decomposed to:
+    $$ A = PDP^{-1} $$
+    where $D=\begin{pmatrix}\lambda_1 & \\ &\lambda_2 \end{pmatrix}$.\\
+    
+    Perform the decomposition using Python:
+    
+    \begin{minted}{python}
+    np.linalg.eig(np.array([[0.8, -0.2], [1.6, 0.3]]))
+    \end{minted}
+    
+    The output is:
+    
+    \begin{minted}{python}
+    (array([ 0.55+0.50744458j,  0.55-0.50744458j]),
+     array([[ 0.14731391+0.29901459j,  0.14731391-0.29901459j],
+            [ 0.94280904+0.j        ,  0.94280904-0.j        ]]))
+    \end{minted}
+    
+    As we can see, matrix $A$ has two complex eigenvalues and it can be easily verified that:
+    $$ |\lambda_1| = |\lambda_2| < 1 $$
+    Therefore we have:
+    $$ \lambda_1^n \rightarrow 0,\ \lambda_2^n \rightarrow 0\ \textrm{as}\ n \rightarrow \infty $$
+    Hence,
+    $$ A^n = PD^nP^{-1} \rightarrow O\ \textrm{as}\ n \rightarrow \infty $$
+    
+    By definition, $y_{t}=A^t y_0$. If $t \rightarrow \infty$, $y_t$ will converge to zero, no matter what given $y_0$ is. \\
+    
+    
+    \item[3.] The direction of the sunshine is represented by vector $w = (0,-\cos\theta_s,-\sin\theta_s)$ where $\theta_s$ is the latitude of the place directly facing the sun. A city with latitude $\theta$ has coordinate $v_0 = (0,\cos\theta,\sin\theta)$ at noon, and has coordinate 
+    $$ v_\phi = 
+        \begin{pmatrix} 
+            \cos\phi &-\sin\phi &0 \\ 
+            \sin\phi &\cos\phi &0 \\ 
+            0 &0 &1 
+        \end{pmatrix} v_0 $$
+    at time $\phi$. $\left( -\frac{\pi}{2} \leq \theta, \theta_s \leq \frac{\pi}{2} \right)$
+    
+    \begin{enumerate}
+        \item[(a)] Verify that the matrix in front of $v_0$ is orthogonal. What is its determinant? \\
+        
+        \textbf{Solution}: A matrix $O$ is orthogonal if and only if $O^TO=I$. Verity the matrix in frount of $v_0$:
+        \begin{align*}
+            & 
+            \begin{pmatrix} 
+                \cos\phi &-\sin\phi &0 \\ 
+                \sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix}^T 
+            \begin{pmatrix} 
+                \cos\phi &-\sin\phi &0 \\ 
+                \sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix} \\
+            =& 
+            \begin{pmatrix} 
+                \cos\phi &\sin\phi &0 \\ 
+                -\sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix} 
+            \begin{pmatrix} 
+                \cos\phi &-\sin\phi &0 \\ 
+                \sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix} \\
+            =&
+            \begin{pmatrix} 
+                \cos^2 \phi + \sin^2\phi & & \\
+                 & \sin^2 \phi + \cos^2 \phi & \\
+                 & & 1
+            \end{pmatrix}\\
+            =& 
+            \begin{pmatrix} 
+                1 & & \\
+                 &1 & \\
+                 & &1 \\
+            \end{pmatrix}
+        \end{align*}
+        
+        Therefore the matrix is orthogonal is verified. \\
+        
+        Further more, the determinant of the matrix is:
+        $$ \begin{vmatrix} 
+                \cos\phi &-\sin\phi &0 \\ 
+                \sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{vmatrix}
+            =\cos^2 \phi + \sin^2 \phi = 1
+        $$
+        
+        \item[(b)] Express day-time condition $v_\phi \cdot w < 0$ in terms of $\theta$, $\theta_s$ and $\phi$. \\
+        
+        \textbf{Solution}: 
+        \begin{align*}
+            v_\phi \cdot w &= v_\phi^T w \\
+            &= v_0^T
+            \begin{pmatrix} 
+                \cos\phi &-\sin\phi &0 \\ 
+                \sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix}^T  
+            w \\
+            &= 
+            \begin{pmatrix}0 & \cos\theta & \sin\theta \end{pmatrix}
+            \begin{pmatrix} 
+                \cos\phi &\sin\phi &0 \\ 
+                -\sin\phi &\cos\phi &0 \\ 
+                0 &0 &1 
+            \end{pmatrix} 
+            \begin{pmatrix}
+                0 \\ -\cos\theta \\ -\sin\theta 
+            \end{pmatrix}\\    
+            &= -\cos\phi \cos\theta \cos\theta_s - \sin\theta \sin\theta_s
+        \end{align*}
+        
+        Therefore, the condition for $ v_\phi \cdot w < 0$ can be expressed as $$ \cos\phi \cos\theta \cos\theta_s + \sin\theta \sin\theta_s >0 $$
+        
+        
+        \item[(c)] Find the range for $\theta$ when polar night happens,i.e. $v_\phi \cdot w > 0$ for all $\phi$. \\
+        
+        \textbf{Solution}: According to the result from (b), $v_\phi \cdot w > 0$ for all $\phi$ is equivalent to:
+        $$ \cos\phi \cos\theta \cos\theta_s + \sin\theta \sin\theta_s < 0 $$
+        for all $\phi$.\\
+        
+        Since $ -\frac{\pi}{2} \leq \theta, \theta_s \leq \frac{\pi}{2}$, we know $0 \leq \cos\theta, \cos\theta_s \leq 1 $, $-1 \leq \cos\phi \leq 1$. Therefore,
+        $$ \cos\phi \cos\theta \cos\theta_s + \sin\theta \sin\theta_s \leq
+        \cos\theta \cos\theta_s + \sin\theta \sin\theta_s
+        $$
+        
+        So it is necessary for $v_\phi \cdot w > 0$ to hold for all $\phi$ that
+        $$\cos\theta \cos\theta_s + \sin\theta \sin\theta_s < 0$$
+        
+        which is equivalent to 
+        $$ \cos (\theta - \theta_s) < 0 $$
+        
+        With $-\pi \leq \theta - \theta_s \leq \pi$, the range for $\theta$ is $\{\theta\ |\ \frac{\pi}{2} < |\theta - \theta_s| < \pi \}$.\\
+        
+        \item[(d)] Find the condition on $\theta$ and $\theta_s$ such that the sun rises at $\phi = -\frac{\pi}{2}$ and sets at $\phi = \frac{\pi}{2}$. \\
+        
+        \textbf{Solution}: The necessary condition would be:
+        $$ \cos\left(-\frac{\pi}{2}\right) \cos\theta \cos\theta_s + \sin\theta \sin\theta_s = 0 $$
+        and
+         $$ \cos\left(\frac{\pi}{2}\right) \cos\theta \cos\theta_s + \sin\theta \sin\theta_s = 0 $$
+         
+         which implies:
+         $$ \sin\theta \sin\theta_s = 0 $$
+         
+    \end{enumerate}
+    
+    
+    \item[4. ] Consider an unknown three-dimensional vector of interest $\theta$. There are three estimators of $\theta$ with covariance matrices $V_1$, $V_2$ and $V_3$, respectively, where
+    $$ V_1 = 
+    \begin{pmatrix}
+        2 & 1 & 0 \\
+        1 & 3 & 1 \\
+        0 & 1 & 3 \\
+    \end{pmatrix} $$
+    $$ V_2 = 
+    \begin{pmatrix}
+        3 & 0 & 1 \\
+        0 & 5 & 0 \\
+        1 & 0 & 7 \\
+    \end{pmatrix} $$
+    $$ V_3 = 
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        1 & 2 & 3 \\
+        0 & 3 & 10 \\
+    \end{pmatrix} $$
+    
+    In general, an estimator with covariance matrix $V$ is (weakly) better than one with covariance matrix $\tilde{V}$ if $a^T V a \leq a^T \tilde{V} a$ for every vector $a$.
+    \begin{enumerate}
+        \item[(a)] Is Estimator 1 (with covariance $V_1$) weakly better than Estimator 2 (with covariance matrix $V_2$)? \\
+        
+        \textbf{Solution}: \\
+        
+        Eigen-decompose matrix $V_1$:
+        
+        \begin{minted}{python}
+        np.linalg.eig(np.array([[2, 1, 0], [1, 3, 1], [0, 1, 3]]))
+        
+        (array([ 1.19806226,  2.55495813,  4.2469796 ]),
+         array([[ 0.73697623,  0.59100905,  0.32798528],
+                [-0.59100905,  0.32798528,  0.73697623],
+                [ 0.32798528, -0.73697623,  0.59100905]]))
+        \end{minted}
+        
+        Eigen-decompose matrix $V_2$:
+        
+        \begin{minted}{python}
+        np.linalg.eig(np.array([[3, 0, 1], [0, 5, 0], [1, 0, 7]]))
+        
+        (array([ 2.76393202,  7.23606798,  5.        ]),
+         array([[-0.97324899, -0.22975292,  0.        ],
+                [ 0.        ,  0.        ,  1.        ],
+                [ 0.22975292, -0.97324899,  0.        ]]))
+        \end{minted}
+        
+        Eigen-decompose matrix $V_3$:
+        
+        \begin{minted}{python}
+        np.linalg.eig(np.array([[1, 1, 0], [1, 2, 3], [0, 3, 10]]))
+        
+        (array([  0.04674087,   1.94317866,  11.01008047]),
+         array([[-0.70865758, -0.70483283,  0.03186092],
+                [ 0.67553431, -0.66478329,  0.31893037],
+                [-0.20361199,  0.24753557,  0.94724247]]))   
+        \end{minted}
+        
+        Suppose a symmetric matrix $V$ can be decomposed to $V=PDP^{-1}$ where $PP^T = P^TP = I$ and $D=\begin{pmatrix}\lambda_1 & & \\ & \lambda_2 & \\ & & \lambda_3 \end{pmatrix}$, then 
+        $$ a^T V a = a^T PDP^{-1} a = a^T PDP^T a = (P^Ta)^T D (P^Ta) $$
+        
+        Let $b = P^Ta = (b_1, b_2, b_3)$, then $a^TVa$ can be rewritten as:
+        $$ a^TVa = b^TDb = 
+        \begin{pmatrix}b_1 & b_2 & b_3\end{pmatrix} 
+        \begin{pmatrix}\lambda_1 & & \\ & \lambda_2 & \\ & & \lambda_3 \end{pmatrix}
+        \begin{pmatrix}b_1 \\ b_2 \\ b_3\end{pmatrix}
+        = \lambda_1 b_1^2 + \lambda_2 b_2^2 + \lambda_3 b_3^2
+        $$
+        
+        As we can see from the above decomposition results, the three eigenvalues of $V_1$ are all smaller than those of $V_2$. So it must follows:
+        $$ a^T V_1 a < a^T V_2 a\ \textrm{for all}\ a $$
+        
+        Therefore estimator 1 is weakly better than estimator 2.\\
+        
+        \item[(b)] Is Estimator 1 weakly better than Estimator 3? \\
+        
+        \textbf{Solution}: No. According to the decomposition results in (a), eigenvalues of $V_1$ are not all smaller than the eigenvalues of $V_3$. So there is the possibility that, for some vector $a$, $a^TV_1a > a^TV_3a$ might hold true. \\
+        
+        A counter-example would be $a = (1,1,0)^T$.
+        $$ a^T V_1 a = 
+        \begin{pmatrix}1 &1 &0\end{pmatrix} 
+        \begin{pmatrix}
+            2 & 1 & 0 \\
+            1 & 3 & 1 \\
+            0 & 1 & 3 \\
+        \end{pmatrix}
+        \begin{pmatrix}1\\ 1\\ 0\end{pmatrix}
+        = 7
+        $$
+        
+        $$ a^T V_3 a = 
+        \begin{pmatrix}1 &1 &0\end{pmatrix} 
+        \begin{pmatrix}
+            1 & 1 & 0 \\
+            1 & 2 & 3 \\
+            0 & 3 & 10 \\
+        \end{pmatrix}
+        \begin{pmatrix}1\\ 1\\ 0\end{pmatrix}
+        = 5
+        $$
+        Therefore, estimator 1 is not necessarily weakly better than estimator 3. \\
+    \end{enumerate}
+
+
+    \item[5. ] A matrix $J$ is a Jordan block if its diagonal entries are all the same (denoted by $\lambda$), the entries immediately above the diagonal are one, and other entries are zero.
+    \begin{enumerate}
+        \item[(a)] Let $J$ be a $2 \times 2$ Jordan block whose diagonal entries equal $\lambda$. Show that
+        $$ J^n = 
+        \begin{pmatrix}
+            \lambda^n & n\lambda^{n-1} \\
+            0 & \lambda^n \\
+        \end{pmatrix} $$
+        
+        \textbf{Proof}: Prove by induction. For $n=1$, the equation holds by definition. Assume the equation holds for $n=k$. Then for $n=k+1$, we have:
+        
+        $$ J^{k+1} = J^k J =  
+        \begin{pmatrix}
+            \lambda^k & k\lambda^{k-1} \\
+            0 & \lambda^k \\
+        \end{pmatrix} 
+        \begin{pmatrix}
+        \lambda & 1 \\
+        0 & \lambda
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            \lambda^{k+1} & (k+1)\lambda^{k} \\
+            0 & \lambda^{k+1} \\
+        \end{pmatrix} 
+        $$
+        Therefore the equation holds for all $n$. \\
+        
+        \item[(b)] Let $J$ be a $3 \times 3$ Jordan block whose diagonal entries equal $\lambda$. Show that
+        $$ J^n = 
+        \begin{pmatrix}
+            \lambda^n & n\lambda^{n-1} & \frac{1}{2}n(n-1)\lambda^{n-2} \\
+            0 & \lambda^{n} & n\lambda^{n-1} \\
+            0 & 0 & \lambda^n \\
+        \end{pmatrix}
+        $$
+        
+        \textbf{Prove}: Prove by induction. For $n=1$, the equation holds by definition. Assume the equation holds for $n=k$. Then for $n=k+1$, we have:
+        
+        \begin{align*}
+        J^{k+1} = J^k J &= 
+        \begin{pmatrix}
+            \lambda^k & k\lambda^{k-1} & \frac{1}{2}k(k-1)\lambda^{k-2} \\
+            0 & \lambda^{k} & k\lambda^{k-1} \\
+            0 & 0 & \lambda^k \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            \lambda & 1 & 0 \\
+            0 & \lambda & 1 \\
+            0 & 0 & \lambda \\
+        \end{pmatrix}\\
+        &= 
+        \begin{pmatrix}
+            \lambda^{k+1} & (k+1)\lambda^{k} & \frac{1}{2}(k+1)k\lambda^{k-1} \\
+            0 & \lambda^{k+1} & (k+1)\lambda^{k} \\
+            0 & 0 & \lambda^{k+1} \\
+        \end{pmatrix}
+        \end{align*}
+        
+        which proves that the equation holds for all $n$. \flushright $\square$
+        
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

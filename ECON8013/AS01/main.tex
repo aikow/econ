@@ -1,0 +1,152 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+% \begin{center}
+% \huge
+% \vspace*{1.0in} ECON8013 
+% \\\vspace{0.5in} ASSIGNMENT 1
+% \normalsize
+% \\\vspace{0.5in} \textsc{By}
+% \\\vspace{0.1in} \textsc{Zeming Wang}
+% \\\vspace{0.1in} \textsc{u6114134}
+% \normalsize
+% % \\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+% % \\\vspace{0.1in} \textsc{Tutor: Long}
+% % \normalsize
+% \\\vspace{0.5in} \textsc{Due: 8 March, 2017}
+% \end{center}
+
+% \newpage
+
+\setcounter{page}{1}
+
+
+\begin{enumerate}
+    \item[1. ] Determine whether each of the following subsets of $\mathbb{R}^3$ is a vector subspace of $\mathbb{R}^3$.
+        \begin{enumerate}
+            \item[(a)] $ \mathbf{A} = \{(x,y,z) \in \mathbb{R}^3: x + 2y + 3z = 1\} $
+            \item[(b)] $ \mathbf{B} = \{(x,y,z) \in \mathbb{R}^3: x + 2y + 3z = 0\ \textrm{and}\ 3y + 4z = 0 \} $
+            \item[(c)] $ \mathbf{C} = \{(x,y,z) \in \mathbb{R}^3: x^2 + y^2 + z^2 \leq 1 \} $
+            \item[(d)] $ \mathbf{D} = \{(t,2t,5t): t \in \mathbb{R}^3 \} $
+        \end{enumerate}
+        
+      \textbf{Solution}: 
+        \begin{enumerate}
+            \item[(a)] $\mathbf{A}$ is not a vector subspace, since $(0,0,0) \not\in \mathbf{A}. $
+            
+            \item[(b)] $\mathbf{B}$ is equivalent to: $ \left\{(x,y,z) \in \mathbb{R}^3: \begin{pmatrix}1 &2 &3\\0 &3 &4\end{pmatrix} \begin{pmatrix}x\\y\\z\end{pmatrix} = 0 \right\} $.\\
+            So $\mathbf{B}$ is the kernel of matrix $\begin{pmatrix}1 &2 &3\\0 &3 &4\end{pmatrix}$. We know the kernel of a matrix forms a subspace, therefore $\mathbf{B}$ is a vector subspace of $\mathbb{R}^3$.
+            
+            \item[(c)] $\mathbf{C}$ is not a vector subspace. A counter-example would be: 
+            Let $\mathbf{a} = (0.5,0.5,0.5)$. Clearly, $\mathbf{a} \in \mathbf{C}$. However, $2\mathbf{a} \not\in \mathbf{C}$.
+            
+            \item[(d)] $\mathbf{D}$ is a vector subspace. We can proof this by checking: 
+            (i) $\mathbf{0} \in \mathbf{D}$; 
+            (ii) If $\mathbf{a} \in \mathbf{D}$ and $\mathbf{b} \in \mathbf{D}$, then $\mathbf{a} + \mathbf{b} = (a, 2a, 5a) + (b, 2b, 5b) = (a+b, 2(a+b), 5(a+b)) \in \mathbf{D}$; 
+            (iii) If $\mathbf{a} \in \mathbf{D}$ and $\forall\lambda \in \mathbb{R}$, then $\lambda\mathbf{a} = \lambda(a, 2a, 5a) =  (\lambda a, 2\lambda a, 5\lambda a) \in \mathbf{D}$.
+        \end{enumerate}
+    
+    \item[2. ] Show that $v_1 = (1,3)$ and $v_2 = (3,5)$ form a basis of $\mathbb{R}^2$ and represent $(1,1)$ and $(0,6)$ as linear combinations of $v_1$ and $v_2$. \\
+    
+    \textbf{Solution}: The determinants of matrix $[v_1, v_2]$ is:
+    $$ \begin{vmatrix}1 &3\\3 &5\end{vmatrix} = -4 \neq 0 $$
+    which suggests that $v_1$ and $v_2$ are linearly independent and thus form a basis a $\mathbb{R}^2$.\\
+    
+    To represent $(1,1)$ as a linear combination of $v_1$ and $v_2$, solve the linear system:
+    $$\begin{pmatrix}1 &3\\3 &5\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}1\\1\end{pmatrix}$$
+    we get $(x,y) = (-\frac{1}{2}, \frac{1}{2})$. Therefore $(1,1)$ can be represented as:
+    $$ \begin{pmatrix}1\\1\end{pmatrix} = -\frac{1}{2}\begin{pmatrix}1\\3\end{pmatrix} + \frac{1}{2}\begin{pmatrix}3\\5\end{pmatrix} $$
+    
+    Similarly, we can represent $(0,6)$ as the following:
+    $$ \begin{pmatrix}0\\6\end{pmatrix} = \frac{9}{2}\begin{pmatrix}1\\3\end{pmatrix} - \frac{3}{2}\begin{pmatrix}3\\5\end{pmatrix} $$
+    
+    
+    \item[3. ] Determine the rank and dimension of kernel of each of the following matrices:
+        \begin{enumerate}
+            \item[(a)] $$ \begin{pmatrix}2 &2.5 \\ 1.5 &5\end{pmatrix} $$
+            \item[(b)] $$ \begin{pmatrix}1 &4 &7 \\ 2 &5 &8 \\ 3 &6 &9 \end{pmatrix} $$
+            \item[(c)] $$ \begin{pmatrix}1 &5 &3 \\ 0 &0 &4 \\ 2 &3.5 &7 \\ -1 &-2 &-3\end{pmatrix} $$
+        \end{enumerate}
+        
+        \textbf{Solution}:
+        \begin{enumerate}
+            \item[(a)] Apply row reduction to the matrix:
+            $$ \begin{pmatrix}2 &2.5 \\ 1.5 &5\end{pmatrix} \rightarrow \begin{pmatrix}1 &1.25 \\ 1.5 &5\end{pmatrix} \rightarrow \begin{pmatrix}1 &1.25 \\ 0 &3.125\end{pmatrix} \rightarrow \begin{pmatrix}1 &1.25 \\ 0 &1\end{pmatrix}$$
+            So the matrix has full rank of $2$ and the dimension of its kernel is $0$.
+            
+            \item[(b)] Apply row reduction to the matrix:
+            $$ \begin{pmatrix}1 &4 &7 \\ 2 &5 &8 \\ 3 &6 &9 \end{pmatrix} \rightarrow 
+               \begin{pmatrix}1 &4 &7 \\ 0 &-3 &-6 \\ 0 &-6 &-12 \end{pmatrix} \rightarrow
+               \begin{pmatrix}1 &4 &7 \\ 0 &1 &2 \\ 0 &-6 &-12 \end{pmatrix} \rightarrow 
+               \begin{pmatrix}1 &4 &7 \\ 0 &1 &2 \\ 0 &0 &0 \end{pmatrix}
+            $$
+            So the matrix has rank of $2$ and the dimension of its kernel is $1$.
+            
+            \item[(c)] Apply row reduction to the transposed matrix:
+            $$ \begin{pmatrix}1 &0 &2 &-1 \\5 &0 &3.5 &-2 \\3 &4 &7 &-3\end{pmatrix} \rightarrow
+               \begin{pmatrix}1 &0 &2 &-1 \\0 &4 &1 &0 \\0 &0 &-6.5 &3\end{pmatrix} \rightarrow
+               \begin{pmatrix}1 &0 &2 &-1 \\0 &1 &1/4 &0 \\0 &0 &1 &-6/13\end{pmatrix}
+            $$
+            So the matrix has rank $3$ and the dimension of the kernel is $1$.
+            
+        \end{enumerate}
+        
+        
+    \item[4. ] Consider a one-period financial market with three possible states at Date 1 and three assets: a stoke, a riskless bond, and a risky bond. The stock pays 1 in State 1, 2 in State 2, 3 in State 3. The riskless bond pays 1 in every state. The risky bond pays 0 in State 1, 1 in States 2 and 3. The prices of stock, riskless bond, and risky bond at Date 0 are 1.5, 0.9, and 0.5, respectively. Determine whether the market is complete and whether it satisfies the Law of One Price. Suppose a call option contract on the stock with strike price $K = 2$ is introduced, which pays $\textrm{max} \{S - K, 0\}$ at Date 1, where $S$ denotes the value of the stock at Date 1. Given the prices of stock, riskless bond and risky bond, can you determine the price of the call option at Date 0? \\
+    
+    \textbf{Solution}: The payoff matrix in Date 1 is:
+    $$ \mathbf{A} = \begin{pmatrix}1 &1 &0 \\ 2 &1 &1 \\ 3 &1 &1 \end{pmatrix} $$
+    with three columns representing the stock, the rickless bond and the risky bond respectively and three rows representing the three states. \\
+    
+    Reduce the matrix to echolon form:
+    $$ \begin{pmatrix}1 &1 &0 \\ 2 &1 &1 \\ 3 &1 &1 \end{pmatrix} \rightarrow 
+    \begin{pmatrix}1 &1 &0 \\ 0 &-1 &1 \\ 0 &-2 &1 \end{pmatrix} \rightarrow 
+    \begin{pmatrix}1 &1 &0 \\ 0 &1 &-1 \\ 0 &0 &1 \end{pmatrix} $$
+    So we can conclude that matrix $\mathbf{A}$ has full rank and the market is \textit{complete}. 
+    And it follows that there must exist a state price vector $\mathbf{q}$ such that $\mathbf{p}^T = \mathbf{q}^T\mathbf{A}$, which implies the market satisfies the Law of One Price. \\
+    
+    Now we try to figure out the value of $\mathbf{q}$. Since $\mathbf{p}^T = \mathbf{q}^T\mathbf{A}$, we have $\mathbf{p} = \mathbf{A}^T \mathbf{q}$, i.e.
+    $$ \begin{pmatrix}1.5\\0.9\\0.5\end{pmatrix} = \begin{pmatrix}1 &2 &3\\1 &1 &1\\0 &1 &1\end{pmatrix} \begin{pmatrix}q_1\\q_2\\q_3\end{pmatrix}$$
+    Solve the system we have $\mathbf{q}^T = (0.4\ 0.4\ 0.1)$.\\
+    
+    The option's payout at Date 1, according to the definition, is given by: 
+    $$ \mathbf{B} = \begin{pmatrix}0\\0\\1\end{pmatrix}$$ 
+    The price of option at Date 0, $p$, must satisfy $p=\mathbf{q}^T \mathbf{B}$. Hence, the price of the option is:
+    $$ p = \begin{pmatrix}0.4 &0.4 &0.1\end{pmatrix} \begin{pmatrix}0\\0\\1\end{pmatrix} = 0.1 $$
+    
+    
+    \item[5. ] Let $V_1$ and $V_2$ be vector subspaces of $\mathbb{R}^n$ and $V_2 \subset V_1$. Show that
+        \begin{enumerate}
+            \item[(a)] $ \textrm{dim} V_2 \leq \textrm{dim} V_1 $.
+            \item[(b)] If $ \textrm{dim} V_2 = \textrm{dim} V_1 $, then $ V_1 = V_2 $.
+        \end{enumerate}
+     
+     \textbf{Proof}: 
+        \begin{enumerate}
+            \item[(a)] Let $d_1=\textrm{dim} V_1$ and $d_2=\textrm{dim} V_1$, $d_1 \leq n$, $d_2 \leq n$. If we suppose $d_2 > d_1$, then we should be able to find $d_2$ linearly independent vectors in $V_2$ $$\{ v_1, v_2, v_3, \cdots, v_{d_2}\}$$ which forms the basis of $V_2$. Since $V_2 \subset V_1$, that means these $d_2$ vectors must also be in $V_1$, which implies that we can find $d_2 > d_1$ linearly independent vectors in $V_1$. That contradicts with the fact that $V_1$'s dimension is $d_1$. Therefore, it cannot be the case that $ \textrm{dim} V_2 > \textrm{dim} V_1 $.
+            
+            \item[(b)] As $V_2 \subset V_1$, to prove $V_1=V_2$, we only need to proof $V_1 \subset V_2$. Suppose there exists a vector $v$ such that $v \in V_1$ but $v \not\in V_2$. Let $ \textrm{dim} V_2 = \textrm{dim} V_1 = d \leq n $, and let $\{ v_1, v_2, \cdots, v_d\}$ be a basis for $V_2$. As $V_2 \subset V_1$, these vectors must also be in $V_1$. Since $V_1$ has dimension $d$ and $v_1, v_2, \cdots, v_d$ are linearly independent, it must follow that $v \in V_1$ can be represented as a linear combination of $v_1, v_2, \cdots, v_d$. This implies that $v$ in in the span of $\{ v_1, v_2, \cdots, v_d\}$, i.e. $v$ is within $V_2$ ($\{ v_1, v_2, \cdots, v_d\}$ spans $V_2$). That contradicts with our assumption $v \not\in V_2$. Therefore our assumption is wrong. Every $v$ in $V_1$ must also be in $V_2$, i.e. $V_1 \subset V_2$. Hence, $ V_1 = V_2 $.
+            
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

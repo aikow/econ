@@ -1,0 +1,138 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} EMET1001 
+\\\vspace{0.5in} ASSIGNMENT 9
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+\\\vspace{0.1in} \textsc{Tutor: Long}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: Oct. 4, 2016}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+\begin{enumerate}
+    
+    \item[1.] In the following cases, find $\frac{dz}{dt}$ by using the chain rule:
+        \begin{enumerate}
+            \item[(a)] $z = F(x, y) = 6x + y^3, x = 2t^2, y = 3t^3$ 
+                \begin{equation*}
+                \begin{aligned}
+                    \frac{dz}{dt} 
+                    &= \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt} \\
+                    &= 6 \cdot 4t + 3y^3 \cdot 9t^2 \\
+                    &= 24t + 3(3t^3)^2 \cdot 9t^2 \\
+                    &= 24t + 243t^8 \\
+                \end{aligned}
+                \end{equation*}
+      
+            \item[(b)] $z = F(x, y) = x^p + y^p, x = at, y = bt$
+                \begin{equation*}
+                \begin{aligned}
+                    \frac{dz}{dt} 
+                    &= \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt} \\
+                    &= px^{p-1} \cdot a + py^{p-1} \cdot b \\
+                    &= pa^pt^{p-1} + pb^pt^{p-1} \\
+                \end{aligned}
+                \end{equation*}
+                
+            \item[(c)] Check the answers by first substituting the expressions for $x$ and $y$ and then differentiating. \\
+            
+            Part (a): 
+            $$z = 6 \cdot 2t^2 + (3t^3)^3 = 12t^2 + 27t^9$$
+            $$\frac{dz}{dt} = 24t + 243t^8$$
+            
+            Part (b): 
+            $$z = (at)^p + (bt)^p = a^pt^p + b^pt^p$$
+            $$ \frac{dz}{dt} = pa^pt^{p-1} + pb^pt^{p-1}$$
+            
+            We can see the results by first substituting the expressions for $x$ and $y$ are exactly the same as the results by using the chain rule.
+        \end{enumerate}
+
+    
+    \item[6. ] The equation $$x^3 \ln{x} + y^3 \ln{y} = 2z^3 \ln{z}$$ defines $z$ as a differentiable function of $x$ and $y$ in a neighborhood of the point $(x, y, z) = (e, e, e)$. Calculate $z_1(e, e)$ and $z_{11}(e, e)$. \\
+    
+    Solution: Differentiate both side of the equation with respect to $x$:
+    $$ 3x^2 \cdot \ln{x} + x^3 \cdot \frac{1}{x} = (6z^2 \cdot \ln{z} + 2z^3 \cdot \frac{1}{z})\frac{\partial z}{\partial x} $$
+    Rearrange the equation:
+    $$ \frac{\partial z}{\partial x} = \frac{3x^2\ln{x} + x^2}{6z^2\ln{z} + 2z^2}$$
+    Therefore,
+    $$ z_1(e,e) = \frac{3e^2 + e^2}{6e^2 + 2e^2} = \frac{1}{2}$$
+    As for $z_{11}(e,e)$, differentiate $\frac{\partial z}{\partial x}$ again respect to $x$:
+    $$ \frac{\partial^2 z}{\partial x^2} = \frac{(6x\ln{x}+5x)(6z^2\ln{z}+2z^2)-(3x^2\ln{x}+x^2)(12z\ln{z}+10z)\frac{\partial z}{\partial x}}{(6z^2\ln{z} + 2z^2)^2}$$
+    Therefore,
+    $$z_{11}(e,e) = \frac{11e\cdot 8e^2 - 4e^2 \cdot 22e \cdot \frac{1}{2}}{(8e^2)^2} = \frac{11}{16e}$$
+    
+    \item[9. ] Find the degree of homogeneity, if any, of the functions:
+        \begin{enumerate}
+            \item[(a)] $f(x, y) = 3x^3y^{-4} + 2xy^{-2}$
+            $$ f(tx, ty) = 3(tx)^3(ty)^{-4} + 2(tx)(ty)^{-2} = t^{-1}(3x^3y^{-4} + 2xy^{-2}) = t^{-1}f(x,y)$$
+            Therefore $f(x,y)$ is homogeneous of degree $-1$. \\
+            
+            \item[(b)] $Y(K, L) = (K^a + L^a)^{2c}e^{K^2/L^2}$
+            $$ Y(tK, tL) = \Big( (tK)^a + (tL)^a \Big)^{2c}e^{\frac{(tK)^2}{(tL)^2}} = t^{2ac}(K^a + L^a)^{2c}e^{K^2/L^2} = t^{2ac}Y(K,L) $$
+            Therefore $Y(K,L)$ is homogeneous of degree $2ac$. \\
+            
+            \item[(c)] $f(x_1, x_2) = 5x_1^4 + 6x_1x_2^3$
+            $$ f(tx_1, tx_2) = 5(tx_1)^4 + 6(tx_1)(tx_2)^3 = t^4(5x_1^4 + 6x_1x_2^3) = t^4f(x_1,x_2) $$
+            Therefore $f(x_1, x_2)$ is homogeneous of degree $4$. \\
+            
+            \item[(d)] $F(x_1, x_2, x_3) = e^{x_1+x_2+x_3}$ \\
+            
+            $F(x_1, x_2, x_3)$ is not homogeneous of any degree. 
+            We can prove this by assuming $F$ is homogeneous of degree $k$:
+            $$ F(tx_1, tx_2, tx_3)=t^kF(x_1, x_2, x_3) $$
+            $$ e^{t(x_1+x_2+x_3)} = t^ke^{x_1+x_2+x_3} $$
+            $$ e^{(t-1)(x_1+x_2+x_3)} = t^k $$
+            Take logarithm to both side of the equation:
+            $$ (t-1)(x_1+x_2+x_3) = \ln{t^k} = k\ln{t} $$
+            Solve for $k$:
+            $$ k = \frac{t-1}{\ln{t}}(x_1+x_2+x_3) $$
+            As we can see, $k$ is not independent of $x_1, x_2, x_3$. That is to say we cannot find a constant $k$ that makes $F$ homogeneous.
+        \end{enumerate}
+
+    \item[12. ] Find the degree of homogeneity of the functions:
+        \begin{enumerate}
+            \item[(a)] $f(x, y) = xg(y/x)$, where $g$ is an arbitrary function of one variable.
+            $$ f(tx, ty) = tx g(ty/tx) = tx g(y/x) = tf(x,y) $$
+            Therefore $f(x,y)$ is homogeneous of degree $1$. \\
+            
+            \item[(b)] $F(x, y, z) = z^kf(x/z, y/z)$, where $f$ is an arbitrary function of two variables.
+            $$ F(tx, ty,tz) = (tz)^kf(tx/tz,ty/tz) = t^kz^kf(x/z, y/z) = t^kF(x,y,z)$$
+            Therefore $F(x,y,z)$ is homogeneous of degree $k$. \\
+            
+            \item[(c)] $G(K,L,M,N) = K^{a-b} L^{b-c} M^{c-d} N^{d-a}$, where $a$, $b$, $c$, and $d$ are constants.
+            $$ G(tK,tL,tM,tN) = (tK)^{a-b} (tL)^{b-c} (tM)^{c-d} (tN)^{d-a} = t^0 G(K,L,M,N) $$
+            Therefore $G(K,L,M,N)$ is homogeneous of degree $0$.\\
+        \end{enumerate}
+      
+\end{enumerate}
+
+\end{document}

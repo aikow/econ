@@ -1,0 +1,155 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} EMET1001 
+\\\vspace{0.5in} ASSIGNMENT 12
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+\\\vspace{0.1in} \textsc{Tutor: Long}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: Oct. 24, 2016}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+
+\begin{enumerate}
+    \item[1. ] Calculate the following determinants:
+        \begin{enumerate}
+            \item[(a)] $\begin{vmatrix} 5 & -2 \\ 3 & -2 \end{vmatrix}$
+            $$\begin{vmatrix} 5 & -2 \\ 3 & -2 \end{vmatrix} = 5 \times (-2) - 3 \times (-2) = -4$$
+            \item[(b)] $\begin{vmatrix} 1 & a \\ a & 1 \end{vmatrix}$
+            $$\begin{vmatrix} 1 & a \\ a & 1 \end{vmatrix} = 1 \times 1 - a \cdot a = 1-a^2$$
+        \end{enumerate}
+    
+    \item[2. ] Calculate the determinants:
+        \begin{enumerate}
+            \item[(a)] $\begin{vmatrix} 2 & 2 & 3 \\ 0 & 3 & 5 \\ 0 & 4 & 6 \end{vmatrix}$
+            $$\begin{vmatrix} 2 & 2 & 3 \\ 0 & 3 & 5 \\ 0 & 4 & 6 \end{vmatrix} = (-1)^{1+1}\cdot 2\cdot \begin{vmatrix}3 & 5 \\ 4 & 6 \end{vmatrix} = 2\cdot (18 - 20) = -4$$
+            \item[(a)] $\begin{vmatrix} 4 & 5 & 6 \\ 5 & 6 & 8 \\ 6 & 7 & 9 \end{vmatrix}$
+            $$\begin{vmatrix} 4 & 5 & 6 \\ 5 & 6 & 8 \\ 6 & 7 & 9 \end{vmatrix} = 216 + 240 + 210 - 216 - 225 - 224 = 1$$
+        \end{enumerate}
+    
+    \item[3. ] Find $A$ when $$(A^{-1} - 2I)' = -2\begin{pmatrix}1 &1\\1 &0\end{pmatrix}$$
+    \textbf{Solution}: 
+    \begin{align*}
+                        &\ (A^{-1} - 2I)' = -2\begin{pmatrix}1 &1\\1 &0\end{pmatrix} \\
+        \Leftrightarrow &\ (A^{-1} - 2I)' = \begin{pmatrix}-2 &-2\\-2 &0\end{pmatrix} \\
+        \Leftrightarrow &\ A^{-1} - 2I = \begin{pmatrix}-2 &-2\\-2 &0\end{pmatrix} \\
+        \Leftrightarrow &\ A^{-1} = \begin{pmatrix}0 &-2\\-2 &2\end{pmatrix} \\
+        \Leftrightarrow &\ A = \begin{pmatrix}0 &-2\\-2 &2\end{pmatrix}^{-1} \\
+        \Leftrightarrow &\ A = \begin{pmatrix}-1/2 &-1/2\\-1/2 &0\end{pmatrix}
+    \end{align*}
+    
+    \item[4. ] Let $$A_t = \begin{pmatrix}1 &0 &t\\2 &1 &t\\0 &1 &1\end{pmatrix}\ \textrm{and}\ B=\begin{pmatrix}1 &0 &0\\0 &0 &1\\0 &1 &0\end{pmatrix}$$
+        \begin{enumerate}
+            \item[(a)] For what values of $t$ does $A_t$ have an inverse? \\\\
+            \textbf{Solution}: $A_t$ has an inverse if and only if $|A_t| \neq 0$.
+            $$|A_t| = \begin{vmatrix}1 &0 &t\\2 &1 &t\\0 &1 &1\end{vmatrix} = t+1$$
+            Therefore, $A_t$ has an inverse as long as $t \neq -1$. \\
+            
+            \item[(b)] Find a matrix $X$ such that $B+XA_1^{-1}=A_1^{-1}$ \\\\
+            \textbf{Solution}:
+            $$ B+XA_1^{-1}=A_1^{-1} \Leftrightarrow B = (I-X)A_1^{-1} \Leftrightarrow BA_1=I-X \Leftrightarrow X=I-BA_1 $$
+            $$X = \begin{pmatrix}1 &0 &0\\0 &1 &0\\0 &0 &1\end{pmatrix} - \begin{pmatrix}1 &0 &0\\0 &0 &1\\0 &1 &0\end{pmatrix}\begin{pmatrix}1 &0 &1\\2 &1 &1\\0 &1 &1\end{pmatrix} = \begin{pmatrix}0 &0 &-1\\0 &0 &-1\\-2 &-1 &0\end{pmatrix} $$\\
+        \end{enumerate}
+    
+    \item[6. ] For what values of $t$ does the system of equations
+                \begin{align*}
+                    -2x + 4y -tz &= t - 4 \\
+                    -3x + y + tz &= 3 - 4t \\
+                    (t-2)x - 7y + 4z &= 23 
+                \end{align*}
+                have a unique solution for the three variables $x$, $y$, and $z$? \\
+                
+       \textbf{Solution}: Rewrite the equations in matrix form:
+       $$\begin{pmatrix}-2 &4 &-t\\-3 &1 &t\\t-2 &-7 &4\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}t-4\\3-4t\\23\end{pmatrix}$$
+       The equations have a unique solution if and only if the determinant of the coefficient matrix is not zero, i.e.
+       $$\begin{vmatrix}-2 &4 &-t\\-3 &1 &t\\t-2 &-7 &4\end{vmatrix}=5(t-1)(t-8) \neq 0$$
+       Therefore, if $t \neq 1$ and $t \neq 8$, the system has a unique solution. \\
+               
+    \item[10. ] 
+        \begin{enumerate}
+            \item[(a)] For what values of $a$ does the system of equations
+                        \begin{align*}
+                            ax + y + 4z &= 2 \\
+                            2x + y + a^2z &= 2 \\
+                            x - 3z &= a
+                        \end{align*}
+                        have one, none, or infinitely many solutions? \\
+                
+                \textbf{Solution}: Rewrite the equations in matrix form:
+                $$\begin{pmatrix}a &1 &4\\2 &1 &a^2\\1 &0 &-3\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}2\\2\\a\end{pmatrix}$$
+                Perform Guass elimination to diagonalize the argumented matrix:
+                \begin{align*}
+                                & \left( \begin{array}{ccc|c} a &1 &4 &2\\2 &1 &a^2 &2\\1 &0 &-3 &a \end{array} \right) \\
+                    \rightarrow & \left( \begin{array}{ccc|c} 1 &0 &-3 &a\\a &1 &4 &2\\2 &1 &a^2 &2 \end{array} \right) \\
+                    \rightarrow & \left( \begin{array}{ccc|c} 1 &0 &-3 &a\\0 &1 &3a+4 &2-a^2\\0 &1 &a^2+6 &2-2a \end{array} \right) \\
+                    \rightarrow & \left( \begin{array}{ccc|c} 1 &0 &-3 &a\\0 &1 &3a+4 &2-a^2\\0 &0 &a^2-3a+2 &a^2-2a \end{array} \right) 
+                \end{align*}
+                Note the right bottom entry of the coefficient matrix $a^2-3a-2=0$ if and only if $a=1$ or $a=2$.\\
+                
+                If $a \neq 1$ and $a \neq 2$, the three columns are independent, the coefficient matrix has full rank. Therefore the system has a unique solution. \\
+                
+                If $a=1$, the argumented matrix becomes:
+                $$\left( \begin{array}{ccc|c} 1 &0 &-3 &1\\0 &1 &7 &1\\0 &0 &0 &-1 \end{array} \right)$$
+                Note that the third row cannot be satisfied for any $x,y,z$. Therefore the system has no solution in this case.\\
+                
+                If $a=2$, the argumented matrix becomes:
+                $$\left( \begin{array}{ccc|c} 1 &0 &-3 &2\\0 &1 &10 &-2\\0 &0 &0 &0 \end{array} \right)$$
+                Because the coefficient matrix has rank $2$, less than the number of unknown variables, there are infinite number of solutions. \\
+                
+            \item[(b)] Replace the right-hand sides $2$, $2$, and $a$ by $b_1$, $b_2$, and $b_3$, respectively. Find a necessary and sufficient condition for the new system of equations to have infinitely many solutions. \\
+            
+            \textbf{Solution}: Replace $2$, $2$, and $a$ by $b_1$, $b_2$, and $b_3$, and perform Gauss elimination:
+            \begin{align*}
+                \rightarrow & \left(\begin{array}{ccc|c} a &1 &4 &b_1\\2 &1 &a^2 &b_2\\1 &0 &-3 &b_3 \end{array}\right) \\
+                \rightarrow & \left(\begin{array}{ccc|c} 1 &0 &-3 &b_3\\a &1 &4 &b_1\\2 &1 &a^2 &b_2 \end{array}\right) \\
+                \rightarrow & \left(\begin{array}{ccc|c} 1 &0 &-3 &b_3\\0 &1 &3a+4 &b_1-ab_3\\0 &1 &a^2+6 &b_2-2b_3 \end{array}\right) \\
+                \rightarrow & \left(\begin{array}{ccc|c} 1 &0 &-3 &b_3\\0 &1 &3a+4 &b_1-ab_3\\0 &0 &a^2-3a+2 &b_2-b_1+(a-2)b_3 \end{array}\right) 
+            \end{align*}
+            For the system of equations to have infinitely many solutions, it must be case that $a=1$ or $a=2$. \\
+            
+            If $a=1$,  the argumented matrix becomes:
+            $$\left(\begin{array}{ccc|c} 1 &0 &-3 &b_3\\0 &1 &7 &b_1-b_3\\0 &0 &0 &b_2-b_1-b_3 \end{array}\right)$$
+            It has infinitely many solutions iff $b_2-b_1-b_3=0$. \\
+            
+            If $a=2$,  the argumented matrix becomes:
+            $$\left(\begin{array}{ccc|c} 1 &0 &-3 &b_3\\0 &1 &10 &b_1-2b_3\\0 &0 &0 &b_2-b_1 \end{array}\right)$$
+            It has infinitely many solutions iff $b_2-b_1=0$. \\
+            
+            Therefore, the necessary and sufficient condition for the new system to have infinitely many solutions is:
+            $$a=1,b_2=b_1+b_3\hspace{0.2in}\textrm{or}\hspace{0.2in} a=2,b_1=b_2$$
+            
+        \end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

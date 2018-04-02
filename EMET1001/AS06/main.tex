@@ -1,0 +1,112 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+%\title{EMET1001: ASSIGNMENT WEEK 2}
+%\author{ZEMING WANG - U6114134}
+
+
+%\maketitle
+%\vspace{1in}
+
+%TUTOR: LONG
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} EMET1001 
+\\\vspace{0.5in} ASSIGNMENT 8
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Tutorial: Thur. 2-3 pm}
+\\\vspace{0.1in} \textsc{Tutor: Long}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: Sept. 27, 2016}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+\begin{enumerate}
+    
+    \item[3.] Let $f(x,y,z) = \sqrt{x^2 + y^2 + z^2}$. Calculate $f(3,4,0)$, $f(-2,1,3)$, and $f(tx,ty,tz)$ for $t \geq 0$. \\
+    
+    Solution:
+    $$ f(3,4,0) = \sqrt{3^2 + 4^2 +0^2} = 5 $$
+    $$ f(-2,1,3) = \sqrt{(-2)^2 + 1^2 + 3^3} = \sqrt{14} $$
+    $$ f(tx, ty, tz) = \sqrt{(tx)^2 + (ty)^2 + (tz)^2} = t\sqrt{x^2+y^2+z^2} $$
+    
+    \item[6.] For which pairs of numbers $(x,y)$ are the functions given by the following formulas defined?
+    
+        \begin{enumerate}
+            \item[(a)] $3xy^3 - 45x^4 - 3y$ \\
+            
+            The function is well-defined for all real numbers, so $(x,y) \in \mathbb{R}^2$.\\
+            
+            \item[(b)] $\sqrt{1 - xy}$ \\
+            
+            $1-xy$ must be non-negative, i.e. $ 1 - xy \geq 0 \Leftrightarrow xy \leq 1$. Therefore, $(x,y) \in \{(x,y): xy \leq 1\}$.\\
+            
+            \item[(c)] $\ln{(2 - (x^2 + y^2))}$ \\
+            
+            The domain of $\ln{}$ function contains only positive numbers, which implies $2 - (x^2 + y^2) > 0 \Leftrightarrow x^2 + y^2 < 2$. Therefore, $(x,y) \in \{ (x,y): x^2 + y^2 < 2 \}$.
+            
+        \end{enumerate}
+    
+    \item[9. ] Let $f$ be defined for all $(x,y)$ by $f(x,y)=(x-2)^2(y+3)^2$.
+        \begin{enumerate}
+            \item[(a)] Calculate $f(0, 0)$, $f(-2, -3)$, and $f(a + 2, b - 3)$. \\
+            
+            Solution: 
+            $$ f(0,0) = (0-2)^2(0+3)^2 = 36 $$
+            $$ f(-2,-3) = (-2-2)^2(-3+3)^2 = 0 $$
+            $$ f(a+2,b-3) = (a+2-2)^2(b-3+3)^2 = a^2b^2 $$
+            
+            \item[(b)] Find $f_x$ and $f_y$. \\
+            
+            Solution:
+            $$ f_x = 2(x-2)(y+3)^2 $$
+            $$ f_y = 2(x-2)^2(y+3) $$
+
+        \end{enumerate}
+        
+    \item[11. ] For each $c \neq 0$,verify that $x-y = c$ is a level curve for $$ F(x,y) = \ln{(x^2 - 2xy + y^2)} + e^{2x-2y} $$ 
+    
+    Solution: Substitute $x-y=c$ into $F$, we have:
+    $$ F(x,y) = \ln{(x-y)^2} + e^{2(x-y)} = \ln{c^2} + e^{2c} $$
+    which is a constant. That means, all $(x,y)$ that satisfy $x-y = c$ yield the same value from $F(x,y)$. Therefore, $x-y=c$ is a level curve for $F(x,y)$ for all $c \neq 0$.
+    
+    \item[13. ] Find the partial elasticities of z w.r.t. $x$ and $y$ in the following cases.
+        \begin{enumerate}
+            \item[(a)] $z = x^3y^{-4}$
+            $$ E_x = \frac{\partial z}{\partial x}\frac{x}{z} = 3x^2y^{-4} \cdot \frac{x}{x^3y^{-4}} = 3 $$
+            $$ E_y = \frac{\partial z}{\partial y}\frac{y}{z} = -4x^3y^{-5} \cdot \frac{y}{x^3y^{-4}} = -4 $$
+            
+            \item[(b)] $z =\ln{(x^2 + y^2)}$
+            $$ E_x = \frac{\partial z}{\partial x}\frac{x}{z} = \frac{2x}{x^2+y^2} \cdot \frac{x}{\ln{(x^2+y^2)}} = \frac{2x^2}{(x^2+y^2)\ln{(x^2+y^2)}} $$
+            $$ E_y = \frac{\partial z}{\partial y}\frac{y}{z} = \frac{2y}{x^2+y^2} \cdot \frac{y}{\ln{(x^2+y^2)}} = \frac{2y^2}{(x^2+y^2)\ln{(x^2+y^2)}} $$
+            
+            \item[(c)] $z = e^{x+y}$
+            $$ E_x = \frac{\partial z}{\partial x}\frac{x}{z} = e^{x+y}\frac{x}{e^{x+y}} = x $$
+            $$ E_y = \frac{\partial z}{\partial y}\frac{y}{z} = e^{x+y}\frac{y}{e^{x+y}} = y $$
+            
+            \item[(d)] $z = \sqrt{x^2 + y^2}$
+            $$ E_x = \frac{\partial z}{\partial x}\frac{x}{z} = \frac{2x}{2\sqrt{x^2+y^2}} \cdot \frac{x}{\sqrt{x^2+y^2}} = \frac{x^2}{x^2+y^2} $$
+            $$ E_y = \frac{\partial z}{\partial y}\frac{y}{z} = \frac{2y}{2\sqrt{x^2+y^2}} \cdot \frac{y}{\sqrt{x^2+y^2}} = \frac{y^2}{x^2+y^2} $$
+            
+        \end{enumerate}
+        
+\end{enumerate}
+
+\end{document}

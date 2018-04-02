@@ -1,0 +1,246 @@
+%This is a LaTeX template for homework assignments
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+\usepackage{svg}
+
+%% The following code is a workaround to insert vertical line 
+%% in matrix environment.
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+%% End of the trick
+
+
+\begin{document}
+
+\title{\textsc{ECON8013: Assignment Week 4}}\maketitle
+
+\begin{enumerate}
+    \item[1. ] For any $(x,y,z) \in \mathbb{R}^3$, the distance from $(x,y,z)$ to origin $(0,0,0)$ is 
+    $$ r = \sqrt{x^2 + y^2 + z^2} $$
+    For a given surface, finding the point on it that is closest to the origin is equivalent to 
+    finding the point on the surface that minimize $r^2$.
+    
+        \begin{enumerate}
+            \item[(a)] $\{(x,y,z) \in \mathbb{R}^3: x^2 + y^2 - z^2 = 1 \}$ \\
+            
+            For any $(x,y,z)$ on the surface, we have $x^2 + y^2 = z^2 + 1$.
+            So the distance from $(x,y,z)$ to the origin is:
+            $$ r^2= x^2 + y^2 + z^2 = 2 z^2 + 1 \geq 1  $$
+            
+            The minimal $r^2$ is achieved when $z=0$ and meanwhile $x^2 + y^2=1$. \\
+            
+            Therefore, the points on the surface that are closed to the origin are in the set
+            $\{ (x,y,z) \in \mathbb{R}^3: x^2 + y^2 =1,\ z=0 \}$. The minimal distance is $1$. \\
+            
+            \item[(b)] $\{(x,y,z) \in \mathbb{R}^3: x^2 + y^2 - z^2 = -1 \}$ \\
+            
+            For any point $(x,y,z)$ on this surface, we have $x^2 + y^2 = z^2 - 1$.
+            Notice as $x^2 + y^2 = z^2 - 1 \geq 0$, so that $z^2 \geq 1$. So we have, 
+            $$ r^2= x^2 + y^2 + z^2 = 2 z^2 - 1 \geq 1  $$
+            
+            The minimal $r^2$ is achieved when $z^2=1$ and $x^2 + y^2=0$. Therefore, 
+            there are two points that are the closest to the origin: $(0,0,1)$ and $(0,0,-1)$.
+            The minimal distance is $1$. \\
+            
+            \item[(c)] $\{(x,y,z) \in \mathbb{R}^3: (x+3)^2 + (y-3)^2 + (z-2)^2 = 1 \}$ \\
+            
+            Now we try to solve optimization problem:
+            $$ \underset{x,y,z}{\min}\ x^2 + y^2 + z^2\ \textrm{s.t.}\ (x+3)^2 + (y-3)^2 + (z-2)^2 = 1 $$
+            
+            Define the Lagrangian function: 
+            $$ \mathcal{L} = x^2 + y^2 + z^2 - \lambda((x+3)^2 + (y-3)^2 + (z-2)^2 -1) $$
+            
+            The First-Order Conditions are:
+            \begin{align*}
+                2x - 2\lambda (x + 3) &= 0 \\
+                2y - 2\lambda (y - 3) &= 0 \\
+                2z - 2\lambda (z - 2) &= 0  \\
+                (x+3)^2 + (y-3)^2 + (z-2)^2 &= 1
+            \end{align*}
+            
+            Solve the systems we get two critical points:
+            $$ (x^*, y^*, z^*, \lambda^*) = \left(-\frac{3(1+\sqrt{22})}{\sqrt{22}}, \frac{3(1+\sqrt{22})}{\sqrt{22}}, \frac{2(1+\sqrt{22})}{\sqrt{22}}, 1+\sqrt{22}\right) $$
+            $$ (x^*, y^*, z^*, \lambda^*) = \left(\frac{3(1-\sqrt{22})}{\sqrt{22}}, -\frac{3(1-\sqrt{22})}{\sqrt{22}}, -\frac{2(1-\sqrt{22})}{\sqrt{22}}, 1-\sqrt{22}\right) $$
+            
+            For the first critical point, the distance to origin is $(1+\sqrt{22})^2$; 
+            for the second critical point, the distance to original is $(1-\sqrt{22})^2$.
+            The second distance is shorter, so the closest point to the original is
+            $\left(\dfrac{3(1-\sqrt{22})}{\sqrt{22}}, -\dfrac{3(1-\sqrt{22})}{\sqrt{22}}, -\dfrac{2(1-\sqrt{22})}{\sqrt{22}} \right)$. \\
+             
+        \end{enumerate}
+
+    \item[2. ] Suppose the monopoly's profit is given by $\pi(p,q) = pq-cq$. Let $q= D(p)$ be the market demand.
+        \begin{enumerate}
+            \item  The monopolist’s decision as an optimization problem is:
+            $$ \underset{p>0,q>0}{\max}\ pq - cq\quad \textrm{subject to}\quad q=D(p) $$
+            
+            \item Let $\Pi(c)$ be the maximized profit,
+            $$ \Pi(c) = \underset{p>0,q>0}{\max}\ pq - cq\quad \textrm{subject to}\quad q=D(p) $$
+            
+            Let $p^*$ be the profit maximizing price the monopoly chose, and $q^*$ be the optimal quantity, by Envelop Theorem, 
+            $$ \frac{\partial \Pi}{\partial c} = \frac{\partial}{\partial c}( p^*q^* - cq^* ) = -q^* $$
+            Therefore the statement is \emph{true}. \\
+            
+            \item Take derivative of $\pi$ with respect to $p$:
+            $$ \frac{\partial \pi}{\partial p} = q + p\frac{dq}{dp} - c\frac{dq}{dp} $$
+            
+            We cannot tell the sign of $\dfrac{\partial \pi}{\partial p}$, nor we can tell whether 
+            the monopoly's profit is increasing or decreasing on $p$. Therefore, the statement 
+            is \emph{false}. \\
+        \end{enumerate}
+        
+    
+    \item[3. ] Define the function of the cost of effort:
+    $$ c(e_1,e_2) = \frac{1}{2}(e_1\ e_2) \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}\begin{pmatrix} e_1 \\ e_2 \end{pmatrix} $$
+    
+    The optimization problem is:
+    $$\underset{e_1,e_2}{\max}\ a + 2e_1 + 3e_2\quad \textrm{subject to}\quad c(e_1,e_2) \leq 10 $$
+    \begin{enumerate}
+        \item The Hessian matrix for $c(e_1, e_2)$ is 
+        $$ H(c) = \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix} $$
+        
+        By checking its leading principal minors: $ |H_1| = 3 > 0$, $ |H_2| = 5 > 0$, we know that 
+        the $H$ is positive definite and $c(e_1, e_2)$ is convex. Therefore the set 
+        $ \{ (e_1,e_2): c(e_1,e_2) \leq 10 \}$ is a convex set. \\
+        
+        \item Considered the objective function in increasing in both $e_1$ and $e_2$, the constraint must hold with equality. Unpack the function $c(e_1,e_2)$ first:
+        $$ c(e_1,e_2) = \frac{1}{2}(e_1\ e_2) \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}\begin{pmatrix} e_1 \\ e_2 \end{pmatrix} = 1.5e_1^2 + e_1e_2 + e_2^2 $$ 
+        
+        Set up the Lagrangian:
+        $$ \mathcal{L} = a + 2e_1 + 3e_2 - \lambda(1.5e_1^2 + e_1e_2 + e_2^2 - 10) $$
+        
+        The First-Order Conditions are:
+        \begin{align*}
+            2 - \lambda(3e_1 + e_2) &= 0 \\
+            3 - \lambda(e_1 + 2e_2) &= 0 \\
+            1.5e_1^2 + e_1e_2 + e_2^2 &= 10
+        \end{align*}
+        
+        Solve the equation system, the critical points are:
+        $$ (e_1^*, e_2^*, \lambda^*) = \left( \pm\frac{2}{\sqrt{23}}, \pm\frac{14}{\sqrt{23}}, \pm\frac{\sqrt{23}}{10} \right) $$
+        
+        Since $e_1,e_2$ must be non-negative, the optimal solution is therefore, 
+        $$ (e_1^*, e_2^*) = \left( \frac{2}{\sqrt{23}}, \frac{14}{\sqrt{23}} \right) $$
+    \end{enumerate}
+    
+    
+    \item[4. ] Determine whether each of the following functions is quasiconcave.
+        \begin{enumerate}
+            \item $f(x_1, x_2) = x_1x_2 + x_1^{-1}x_2^{-1}$, $x_1>0, x_2>0$ \\
+            
+            $f(x_1,x_2)$ is not quasiconcave. This can be shown by observing its upper level set. 
+            For a given level $f(x_1, x_2) = a$, we have:
+            $$ (x_1x_2) + (x_1x_2)^{-1} = a $$
+            which is equivalent to,
+            $$ (x_1x_2)^2 + 1 = a (x_1x_2) $$
+            Solve for $x_1x_2$, 
+            $$ x_1x_2 = \frac{a}{2} \pm \sqrt{\left( \frac{a}{2} \right)^2 - 1}$$
+            
+            It is easy to observe that, for large $x_1,x_2$ values, $f(x_1, x_2)$ is increasing on $x_1,x_2$;
+            but for very small $x_1,x_2$ values, $f(x_1, x_2)$ is decreasing on $x_1,x_2$ 
+            ($f(x_1, x_2) \to \infty$ for both $x_1x_2 \to \infty $ and $x_1x_2 \to 0$). \\
+            
+            So for large level $a$, the upper level set looks roughly like this:
+            \begin{figure}[h]
+                \centering
+                \includesvg[width=200pt]{graph}
+            \end{figure}
+            
+            It is clearly not a convex set. So $f(x_1,x_2)$ is not quasiconcave. \\
+            
+            \item $f(x_1,x_2,x_3)=x_1x_2 + x_2x_3 + x_1x_3$, $x_1>0, x_2>0, x_3>0$ \\
+            
+            $f(x_1,x_2,x_3)$ is quasiconcave. This can be shown by checking its bordered Hessian matrix:
+            \[
+                \bar{H} = \begin{pmatrix}
+                0 & x_2+x_3 & x_1+x_3 & x_1+x_2 \\
+                x_2+x_3 & 0 & 1 & 1 \\
+                x_1+x_3 & 1 & 0 & 1 \\
+                x_1+x_2 & 1 & 1 & 0
+                \end{pmatrix}
+            \]
+            
+            Checking its bordered preserving leading principal minors: 
+        
+            \begin{align*}
+               &\begin{vmatrix}
+                0 & x_2+x_3 \\
+                x_2+x_3 & 0 
+                \end{vmatrix}
+                = - (x_2+x_3)^2 < 0 \\     
+              &\begin{vmatrix}
+                0 & x_2+x_3 & x_1+x_3 \\
+                x_2+x_3 & 0 & 1  \\
+                x_1+x_3 & 1 & 0  
+                \end{vmatrix}
+                = 2 (x_1+x_3)(x_2+x_3) > 0 \\
+              &\begin{vmatrix}
+                0 & x_2+x_3 & x_1+x_3 & x_1+x_2 \\
+                x_2+x_3 & 0 & 1 & 1 \\
+                x_1+x_3 & 1 & 0 & 1 \\
+                x_1+x_2 & 1 & 1 & 0
+                \end{vmatrix}
+                = - 4x_1x_2 < 0
+            \end{align*}
+            
+            So we conclue $f(x_1,x_2,x_3)$ is quasiconcave. \\ 
+            
+        \end{enumerate}
+        
+    
+    \item[5.] Let $A$ denote the event that a person has the disease, and let $B$ denote the event that 
+    the test result is positive. We know $P(A)=0.01, P(A^C)=0.99, P(B|A)=0.99, P(B|A^C)=0.03$.
+        \begin{enumerate}
+            \item By the definition of conditional probability,
+            $$ P(B \cap A) = P(B|A)P(A) = 0.99 \times 0.01 = 0.0099 $$
+            $$ P(B \cap A^C) = P(B|A^C)P(A^C) = 0.03 \times 0.99 = 0.0297 $$
+            By the Law of Total Probability,
+            $$  P(B) = P(B \cap A) + P(B \cap A^C) = 0.0099 + 0.0297 = 0.0396 $$
+            Therefore, the probability that a patient has the disease given a positive test result is,
+            $$ P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{0.0099}{0.0396} = 0.25 $$ 
+            
+            \item The event for a patient having the disease is $\{  D+, D- \}$;
+            The event for the test result being positive is $ \{ D+, N+ \}$.\\
+            
+            \item The probability of each of the four singleton subsets:
+            \begin{align*}
+                P(D+) &= 0.99 \times 0.01 = 0.0099 \\
+                P(D-) &= 0.01 - 0.0099 = 0.0001    \\
+                P(N+) &= 0.03 \times 0.99 = 0.0297 \\
+                P(N-) &= 0.99 - 0.0297 = 0.9603
+            \end{align*}
+            
+            \item By definition, $X = 0$ if the test result is misleading, so we have, 
+            $$ X^{-1}(0) = \{  D-, N+ \} \not\in \mathcal{F}_1 $$
+            which means $X$ is not measurable with respect to $\mathcal{F}_1$. \\
+            
+            \item Calculate the probability of $X=0$ and $X=1$: 
+            $$ P(X=0) = P( \{D-\} \cup \{N+\} ) = P(D-) + P(N+) = 0.0001 + 0.0297 = 0.0298 $$
+            $$ P(X=1) = P( \{D+\} \cup \{N-\} ) = P(D+) + P(N-) = 0.0099 + 0.9603 = 0.9702 $$
+            
+            Define $F$ as the cumulative distribution function, then 
+            $$
+                F(a) = \begin{cases}
+                    0       & \textrm{if } a < 0 \\
+                    0.0298  & \textrm{if } 0 \leq a < 1 \\
+                    1       & \textrm{if } a \geq 1 
+                \end{cases}
+            $$
+            
+            \item  The Expectation of $X$ is : $$ E[X] = 0 \cdot P(X=0) + 1 \cdot P(X=1) = 0.9702 $$
+            The Variance of $X$ is : $$ V[X] = E(X^2) - E^2(X) = 0.9702 - 0.9702^2 = 0.02891196 $$
+            
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}
