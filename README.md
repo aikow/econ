@@ -59,4 +59,4 @@ Here is where I find the true inflation: [download](http://infographics.economis
 
 Here is where I keep track of economic data: [goto page](https://tradingeconomics.com/)
 
-Here is where I keep my Chinese blog: [cnblog](https://zemingw.github.io/cnblog/)
+Here is where I keep my Chinese blog: [cnblog](https://zmze.github.io/blog/)
