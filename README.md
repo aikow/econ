@@ -14,6 +14,7 @@ This site is used to keep a record of my lecture notes, summary sheets, exercise
 
 [3Blue1Brown: Essence of Calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
 
+[Cheat Sheet: Analysis 1: Metric Spaces and Applications](MATH6110/MATH6110-SUMMARY/main.pdf)
 
 ### Statistics
 

@@ -1,0 +1,546 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.1 of REVTeX, October 2009
+%
+%   Copyright (c) 2009 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-1}
+
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+\usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{xcolor}
+
+
+\def\R{{\mathbb R}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\N{{\mathbb N}}
+\def\H{{\mathbb H}}
+\def\RP{{\mathbb {RP}}}
+\def\p{\partial}
+\def\O{\Omega}
+\def\pO{{\partial\Omega}}
+\def\bO{\overline\Omega}
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\def\G{\Gamma}
+\def\d{\delta}
+\def\D{\Delta}
+\def\e{\epsilon}
+\def\r{\rho}
+\def\t{\tau}
+\def\l{\lambda}
+\def\L{\Lambda}
+\def\k{\kappa}
+\def\s{\sigma}
+\def\th{\theta}
+\def\o{\omega}
+\def\z{\zeta}
+\def\n{\nabla}
+\def\T{{\mathcal T}}
+\def\X{{\mathcal X}}
+\def\area{\mathrm{area}}
+\def\dist{\mathrm{\rm dist}}
+\def\diag{\mathrm{diag}}
+\def\spt{\mathrm{spt\,}}
+\def\diam{\mathrm{diam\,}}
+\def\dim{\mathrm{dim\,}}
+\def\graph{\mathrm{graph\,}}
+\def\interior{\mathrm{int\,}}
+\def\exterior{\mathrm{ext\,}}
+\def\diag{\mathrm{diag\,}}
+\def\Image{\mathrm{Image}\,}
+\def\osc{\mathop{\text{\rm osc}}}
+\def\ra{\rightarrow}
+\def\rai{\rightarrow\infty}
+
+%\fontsize{10mm}{8mm}\selectfont
+
+\renewenvironment{proof}{\color{gray}\footnotesize\emph{Proof.}}{}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\imply}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\labelitemi}{$\cdot$}
+\newcommand{\defn}[1]{\underline{#1}}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\card}[1]{\overline{\overline{#1}}}
+\newcommand{\inject}{\hookrightarrow}
+\newcommand{\surject}{\twoheadrightarrow}
+\newcommand{\power}[1]{\mathcal P(#1)}
+\setlength\parindent{0pt} % no indent
+\setlist[itemize]{leftmargin=*}
+
+
+\begin{document}
+\small
+
+%\preprint{AIP/123-QED}
+
+\title[MATH6110 - ADVANCED ANALYSIS I: METRIC SPACES AND APPLICATIONS]{KEYPOINT SUMMARY}% Force line breaks with \\
+
+
+% \author{A. Author}
+%  \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+% \author{B. Author}%
+%  \email{Second.Author@institution.edu.}
+% \affiliation{
+% Authors' institution and/or address%\\This line break forced with \textbackslash\textbackslash
+% }%
+
+% \author{C. Author}
+%  \homepage{http://www.Second.institution.edu/~Charlie.Author.}
+% \affiliation{%
+% Second institution and/or address%\\This line break forced% with \\
+% }%
+
+% \date{\today}% It is always \today, today,
+%              %  but any date may be explicitly specified
+
+% \begin{abstract}
+% An article usually includes an abstract, a concise summary of the work
+% covered at length in the main body of the article. It is used for
+% secondary publications and for information retrieval purposes.
+% %
+% Valid PACS numbers may be entered using the \verb+\pacs{#1}+ command.
+% \end{abstract}
+
+% \pacs{Valid PACS appear here}% PACS, the Physics and Astronomy
+%                              % Classification Scheme.
+% \keywords{Suggested keywords}%Use showkeys class option if keyword
+%                               %display desired
+\maketitle
+
+% \begin{quotation}
+% The ``lead paragraph'' is encapsulated with the \LaTeX\
+% \verb+quotation+ environment and is formatted as a single paragraph before the first section heading.
+% (The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.)
+% Note that numbered references are allowed in the lead paragraph.
+% %
+% The lead paragraph will only be found in an article being prepared for the journal \emph{Chaos}.
+% \end{quotation}
+
+\emph{Note: This summary is neither exhaustive nor formal.
+It is meant to give the intuition behind the mathmatical concepts, and
+extract core idea for essential proofs.}
+
+\section{Cardinality}
+\begin{enumerate}
+  \item $A$ is a set, $\card{A}$ denote the \defn{cardinality} of $A$.
+      \begin{itemize}
+        \item $\card{A} = \card{B}$ if there exists a bijection $A \sim B$.
+        \item $\card{A} \le \card{B}$ if there exists an injection $A \inject B$.
+        \item $\card{\emptyset}=0$, $\card{\{1,2,\dots,n\}}=n$, $\card{\N}=d$, $\card{\R}=c$.
+      \end{itemize}
+
+  \item \defn{Schr\"oder-Bernstein Theorem}:
+  % if there exist injective functions $f : A \inject B$ and $g : B \inject A$
+  % between the sets $A$ and $B$, then there exists a bijective function
+  % $h : A \leftrightarrow B$.
+    \begin{itemize}
+      \item $A \inject B,\ B \inject A \imply A \sim B$
+      \item $\card{A} \le \card{B},\ \card{B} \le \card{A} \imply \card{A} = \card{B}$
+    \end{itemize}
+
+  \item $A$ is \defn{finite}/\defn{denumerable}/\defn{countable}:
+  $$\left.
+      \begin{align*}
+         &\left.
+          \begin{align*}
+             A \sim \emptyset \\
+             A \sim \{ 1,2,\dots,n \}\\
+          \end{align*}
+         \right\rbrace\text{finite}\\
+          & A \sim N \qquad\textrm{denumerable}
+      \end{align*}
+  \right\rbrace\text{countable}$$
+  Otherwise, $A$ is \defn{uncountable}.
+
+  \item Important results on cardinality of sets:
+    \begin{itemize}
+      \item $\N^k \sim \N$ \\
+        \begin{proof}
+          Consider $f(n_1, \dots, n_k) = p_1^{n_1}\cdots p_k^{n_k}$.
+        \end{proof}
+
+      \item $\N^{\N} \sim \R$ \\
+        \begin{proof}
+          Code $\N^{\N}$ into binary strings and show it is uncountable. Consider
+          $f(n_1, n_2, \dots) = \frac{1}{10^{n_1}}+\frac{1}{10^{n_1+n_2}}+\cdots$.
+        \end{proof}
+
+      \item $\power{\N} \sim \R$ \\
+          \begin{proof}
+            $\power{\N} \to \R$: $(n_1,n_2,n_3,\dots) \to 0.b_1b_2b_3\dots $.\\
+            $\R \to \power{\Q}$: $\{a \in \Q: a < x, x \in \R\}$.
+          \end{proof}
+
+      \item $\R\times\R \sim R$, $\R^k \sim \R$ \\
+          \begin{proof}
+           $(0.a_1a_2\dots, 0.b_1b_2\dots) \to (0.a_1b_1a_2b_2\dots)$.
+          \end{proof}
+
+      \item The set of all real valued functions on $[0,1]$ $\sim 2^c$ \\
+          \begin{proof}
+            Note $A \inject \power{[0,1]\times\R}$.
+          \end{proof}
+
+      \item $A$ is any set, $\card{A} < \card{\power{A}}$.\\
+          \begin{proof}
+            Clearly there exists $f: A \inject \power{A}$.
+            But $f$ cannot be surjective. Consider
+            $X = \{ a \in A: a \notin f(a) \}$.
+          \end{proof}
+
+      \item The union of a countable family of countable sets is countable.
+      \item The union of a cardinality $c$ family of sets each with cardinality
+      $c$ has cardinality $c$.\\
+          \begin{proof}
+            Consider $\{A_{\a}\}_{\a\in S}$.
+            There exists a bijection $f_{\a}: A_{\a} \leftrightarrow \R$.
+            Define $f: A \inject S\times\R$ as $f(x) = (\a, f_{\a}(x))$ where $x\in A_{\a}$.
+          \end{proof}
+    \end{itemize}
+
+\end{enumerate}
+
+
+
+
+\section{Vector Spaces}
+\begin{enumerate}
+  \item A \defn{vector space} (linear space) over $\R$ is a set $V$
+   with two operations \emph{addition} and \emph{scalar multiplication} such that
+      \begin{enumerate}
+        \item $u + v = v + u$
+        \item $(u+v) + w = u + (v+w)$
+        \item $\exists 0 \in V$, $0+v=v$
+        \item $(\a + \b) u = \a  u + \b  u$ \\
+              $\a  (u + v) = \a  u + \a  v $
+        \item $(\a\b) u = \a (\b u)$
+        \item $1 u = u$
+      \end{enumerate}
+      where $u,v,w \in V$ and $\a,\b \in \R$.
+
+      \begin{itemize}
+        \item {\footnotesize A vector space is a space closed under addition and
+        scalar multiplication, i.e. it is a space that allows linear operations.}
+        \item A set of vectors $\{v_1,v_2,\dots,v_n\}$ in $V$ is called \defn{linearly independent}
+        if $a_1v_1 + a_2v_2 + \dots + a_nv_n =0$ $\imply$ $a_1=a_2=\dots=a_n=0$.
+
+      \end{itemize}
+
+  \item A \defn{normed vector space} is a vector space $V$ over $\R$ with a function
+  $\norm{\cdot}: V \to \R$ such that
+      \begin{enumerate}
+        \item $\norm{u} \ge 0$, $\norm{u}=0$ iff $u=0$
+        \item $\norm{\a u} = |\a| \norm{u}$
+        \item $\norm{u+v} \le \norm{u} + \norm{v}$
+      \end{enumerate}
+
+      \begin{itemize}
+        \item {\footnotesize A normed vector space is a vector space where the
+        length of vectors can be measured. }
+        \item Euclidean norm: $\norm{x} = \sqrt{x_1^2+\dots+x_n^2}$
+        \item Infinity norm: $\norm{x}_{\infty} = \max_{1\le i\le n} |x_i|$
+        \item $p$-norm: $\norm{x}_{p} = \left(|x_1|^p+\dots+|x_n|^p\right)^{\frac{1}{p}}$\\
+            \begin{proof}
+              Minkowski's inequality:\\
+              $ \left(\sum_{k}^{n}|x_k+y_k|^p\right)^{\frac{1}{p}} \le
+                   \left(\sum_{k}^{n}|x_k|^p\right)^{\frac{1}{p}} +
+                   \left(\sum_{k}^{n}|y_k|^p\right)^{\frac{1}{p}}
+              $
+            \end{proof}
+      \end{itemize}
+
+    \item An \defn{inner product space} is a vector space $V$ over $\R$ with a
+    function $\boldsymbol{\cdot}: V \times V \to \R$ such that
+        \begin{enumerate}
+          \item $u \cdot u \ge 0$, $u \cdot u = 0$ iff $u=0$
+          \item $u \cdot v = v \cdot u$
+          \item $(u+v)\cdot w = u \cdot w + v \cdot w$
+          \item $(\a u)\cdot v = \a (u\cdot v)$
+        \end{enumerate}
+        \begin{itemize}
+          % \item {\footnotesize Inner products allow the rigorous introduction of
+          % intuitive geometrical notions such as the length of a vector or the
+          % angle between two vectors.}
+          \item Angle $\theta$ between $u,v$: $u \cdot v=\cos\theta \norm{u}\norm{v}$.
+          \item $u,v$ are \defn{orthogonal} if $u \cdot v=0$.
+          \item Every inner product space is a normed space if define
+          $\norm{u} = (u\cdot u)^{\frac{1}{2}}$ as the norm.
+          \item \defn{Cauchy-Schwarz Inequality}: $|u\cdot v| \le \norm{u}\norm{v}$\\
+              \begin{proof}
+                $f(\l)=(u-\l v)\cdot (u-\l v) \ge 0$, $\forall\l$.\\
+                Substitute in $\l=\frac{u\cdot v}{\norm{v}^2}$.
+              \end{proof}
+        \end{itemize}
+\end{enumerate}
+
+
+
+\section{Matrix Spaces}
+\begin{enumerate}
+  \item A \defn{metric space} $(X,d)$ is a set $X$ together with a function
+  $d:X\times X \to\R$ such that
+      \begin{enumerate}
+        \item $d(x,y) \ge 0$, $d=0$ iff $x=y$
+        \item $d(y,x) = d(x,y)$
+        \item $d(x,y) \le d(x,z) + d(z,y)$
+      \end{enumerate}
+      \begin{itemize}
+        \item {\footnotesize A metric space is a set for which distances
+        between all members of the set are defined.}
+        \item Any normed space $(V, \norm{\cdot})$ is a metric space.
+      \end{itemize}
+
+  \item Suppose $(X,d)$ is a metric space, and $S\subset X$.
+  $(S,d_S)$ is a \defn{metric subspace} if we define
+  $d_S(x,y) = d(x,y)$ for $x,y\in S$.
+      \begin{itemize}
+        \item $\forall a\in S$, $B_r^S(a) = S \cap B_r^X(a)$
+        \item
+        $A$ is open in $S$ $\iff$ $A=S\cap U$, $U$ is open in $X$;\\
+        $A$ is closed in $S$ $\iff$ $A=S\cap C$, $C$ is closed in $X$.\\
+          \begin{proof}
+            $A$ open in $S$ $\imply A=\cup_{x\in A}B_{r_x}^{S}(x) =
+            \cup_{x\in A}(S\cap B_{r_x}(x)) =
+            S \cap (\cup_{x\in A}B_{r_x}(x))$.
+            Thus $U = \cup_{x\in A}B_{r_x}(x)$.
+          \end{proof}
+      \end{itemize}
+
+  \item \defn{Limit and Isolated Points}
+      \begin{itemize}
+        \item $x$ is a limit point in $A$ if every $B_r(x)$ contains points of
+        $A$ other than $x$.
+        \item $x$ is a limit point iff $\exists(x_n)\subset A$ and $x_n \to x$.
+        \item $x$ is a isolated point if $\exists r$ such that $B_r(x)\cap A=\{x\}$.
+      \end{itemize}
+
+  \item \defn{Interior, Exterior and Boundary}
+      \begin{itemize}
+        \item $x \in \interior A$ if $\exists r (B_r(x)\subset A)$
+        \item $x \in \exterior A$ if $\exists r (B_r(x)\subset A^C)$
+        \item $\exterior A = \interior A^C$, $\interior A = \exterior A^C$
+        \item $x \in \partial A$ (boundary of $A$) if any $B_r(x)$ contains
+        both points of $A$ and points of $A^C$.
+        \item $X = \interior A \cup \exterior A \cup \partial A$
+      \end{itemize}
+
+  \item \defn{Open Sets}
+      \begin{itemize}
+        \item $A$ is open if $A = \interior A$.
+        \item $A$ is open $\imply A = \cup_{x\in A}B_{r_x}(x)$
+        \item If $A_i$ are open, $\cap_{i=1}^{k} A_i$ is open;\\
+              If $A_i$ are open, $\cup_{i\in I} A_i$ is open.
+        \item $\interior A$ is open; $\exterior A$ is open.
+      \end{itemize}
+
+   \item \defn{Closed Sets}
+      \begin{itemize}
+        \item $A$ is closed if $A^C$ is open.
+        \item $A$ is closed iff $\closure{A}=A$.
+        \item $A$ is closed iff $A$ contains all its limit points.
+        \item $A\subset R^k$ is closed iff $A$ is complete.
+        \item If $B_i$ are closed, $\cup_{i=1}^{k} B_i$ is closed;\\
+              If $B_i$ are closed, $\cap_{i\in I} B_i$ is closed.
+        \item Closure of a set is closed.
+        \item Closed does \emph{not} imply bounded.
+
+      \end{itemize}
+
+    \item \defn{Closure}
+        \begin{itemize}
+          \item $\closure{A} = A \cup \{\textrm{limit point of } A\}$
+          \item $\closure{A} = \interior A \cup \partial A$
+          \item $\closure{A} = A \cup \partial A$
+          \item $\closure{A} = (\exterior A)^C$
+          \item $x\in\closure{A}$ iff every $B_r(x)$ contains a point of $A$.
+          \item $x\in\closure{A}$ iff there exists $(x_n)\subset A$ with $x_n\to x$.
+        \end{itemize}
+\end{enumerate}
+
+
+
+
+\section{Sequences and Convergence}
+\begin{enumerate}
+
+\item $(x_n)$ \defn{converges} to $x$ if $\forall \e, \exists N, [\forall n>N \imply d(x,x_n) < \e$].
+
+\item $(x_n)$ is \defn{Cauchy} if $\forall \e, \exists N, [\forall m,n>N \imply d(x_m,x_n) < \e$].
+
+  \begin{itemize}
+    \item Every convergent/Cauchy sequence is bounded.\\
+      \begin{proof}
+        convergence $\imply$ $(x_n)$ is bounded after some $N$, left only finite elements.
+      \end{proof}
+    \item $\R^k$: sequence $(x_n)$ converges $\iff$ $(x_n)$ is Cauchy.
+    \item $X$: sequence $(x_n)$ converges $\not\Leftarrow\Rightarrow$ $(x_n)$ is Cauchy.
+  \end{itemize}
+
+\item A metric space is \defn{complete} if every Cauchy sequence converges in itself.
+    \begin{itemize}
+      \item $S \subset \R^k$ is complete \emph{iff} it is closed.
+    \end{itemize}
+
+\item \defn{Monotone Convergence Theorem}:
+if a sequence is increasing (decreasing) and bounded
+by a supremum (infimum), it will converge to the supremum (infimum).\\
+    \begin{proof}
+      Let $c = \sup_{n} \{a_n\}$. $\forall \e>0, \exists N$ s.t.
+      $c-\e < a_N \leq a_n \leq c$, $\forall n>N$. As $\e \to 0$, $a_n \to c$.
+    \end{proof}
+
+\item \defn{Banach Fixed-Point Theorem}:
+If $(X,d)$ is a \emph{complete} metric space, and $f: X \to X$ is a \emph{contraction},
+i.e. $\exists \lambda \in [0,1)$ such that $d(f(x), f(y)) \leq \lambda d(x,y)$,
+then there exists a unique fixed point $f(x)=x$. \\
+    \begin{proof}
+      First show $(x_n)$ is Cauchy, then prove $d(x, f(x)) \to 0$.
+    \end{proof}
+\end{enumerate}
+
+
+\section{Sequences and Compactness}
+\begin{enumerate}
+  \item \defn{Bolzano-Weierstrass Theorem}: Every bounded sequence in $\R^k$
+  has a convergent subsequence. \\
+      \begin{proof}
+        Geometric intuition: if a sequence in $\R^k$ is bounded, we can always
+        trap it in a whatever small subspace. Construct a convergent subsequence
+        by trapping it a smaller and smaller subspace.
+      \end{proof}
+
+    \item A metric space is (sequentially) \defn{compact} if every sequence
+    has a convergent subsequence.
+        \begin{itemize}
+          \item $\R^k$: compact $\iff$ closed, bounded (\defn{Beine-Borel Thm})
+          \item $X$: compact $\not\Leftarrow\Rightarrow$ closed, bounded. \\
+              \begin{proof}
+                Consider $X=C[0,1]$. $\closure{B_1(\bm{0})} \subset X$ is
+                closed and bounded, but \emph{not} compact.
+              \end{proof}
+          \footnotesize
+          \item Compactness is sort of a topological generalization of finiteness.
+          \color{gray} For example, if a set A is finite then every function
+          $f:A \to \R$ is bounded and has max/min. If A is compact, the every
+          \emph{continuous} function $f:A \to \R$ is bounded and has max/min.
+
+        \end{itemize}
+\end{enumerate}
+
+
+\section {Limits and Continuity}
+\begin{enumerate}
+  \item Let $f: X \to Y$. The following are equivalent:
+      \begin{enumerate}[(i)]
+        \item $\lim_{x \to a} f(x) = b$;
+        \item $x_n \to a  \imply  f(x_n) \to b$;
+        \item $x \in B_{\d}^{X}(a)\setminus\{a\} \imply f(x) \in B_{\e}^{Y}(b)$.
+      \end{enumerate}
+      \begin{proof}
+        (ii)$\imply$(iii): Suppose the opposite. Let $x_n \in B_{1/n}^{X}(a)$,
+        then $x_n \to a$ and $f(x_n) \to b$, but by assumption $\exists\e$ s.t.
+        $f(x_n)\notin B_{\e}^{Y}(b)$. contradiction.
+        (iii)$\imply$(ii): Suppose $x_n \to a$. (iii) $\imply$
+        $\forall\e\ \exists\d\ \exists x_n\in B_{\d}^{X}(a)$ $\imply$
+        $f(x_n)\in B_{\e}^{Y}(b)$ $\imply$ $f(x_n)\to b$.
+      \end{proof}
+
+  \item $f: X \to Y$ is \defn{continuous} at $a \in X$ if
+  $a$ is an isolated point, or $\lim_{x\to a} f(x)=f(a)$.
+      \begin{itemize}
+        \item Every function is continuous at isolated points.
+        \footnotesize
+        \item Intuitively, a continuous function is a function for which
+        sufficiently small changes in the input result in arbitrarily small
+        changes in the output.
+      \end{itemize}
+
+  \item \defn{Quantitative Meansures of Continuity}
+      \begin{itemize}
+        \item $f:X \to Y$ is \defn{Lipschitz continuous} if there exists a
+        constant $M$ such that $d_Y(f(x_1), f(x_2)) \leq M d_X(x_1,x_2)$.
+        $M$ is called the Lipschitz constant.
+
+        \item $f:X \to Y$ is \defn{H\"older continuous} with exponent $\a\in (0,1]$
+        if there exists a constant $M$ such that
+        $d_Y(f(x_1),f(x_2)) \leq M \left[d_X(x_1, x_2)\right]^{\a}$.
+      \end{itemize}
+
+  \item \defn{Continuity and Compactness}:  $f: X \to Y$ is continuous,
+  if $K \subset X$ is compact, then $f(K)$ is compact in Y.\\
+      \begin{proof}
+        $\forall (y_n) \subset f(K)$, $\exists (x_n): f(x_n)=y_n$.
+        $K$ is compact $\imply \exists (x_{n_j}) \to x$;
+        $f$ is continuous $\imply f(x_{n_j}) \to f(x)$ $\imply y_{n_j} \to f(x)$.
+      \end{proof}
+
+      \emph{Cor.} Continuous function on a compact set is bounded.
+
+
+  \item \defn{Extreme Value Theorem}: Each continuous function on a compact
+  set attains its maximum and minimum.
+      \begin{proof}
+        $K$ compact $\imply$ $f(K)$ compact $\imply$ $f(K)$ closed and bounded
+        $\imply$ exist least upper bound $\gamma$ and $\gamma \in f(K)$
+        (take a sequence approaching $\gamma$ and extract its convergent
+        subsequence). Therefore, $\exists x_0 \in K$ s.t. $\gamma=f(x_0)$.
+      \end{proof}
+
+  \item \defn{Continuity and Open Sets}: The following statements are equivalent:
+      \begin{enumerate}[(i)]
+        \item $f: X \to Y$ is continuous on $X$;
+        \item $f^{-1}(E)$ is open whenever $E$ is an open set in $Y$;
+        \item $f^{-1}(E)$ is closed whenever $E$ is a closed set in $Y$.
+      \end{enumerate}
+      \begin{proof}
+        $f$ continuous $\imply \forall\e\ \exists\d\ f(B_{\d}(x)) \subset B_{\e}(f(x)) \subset E$
+        $\imply B_{\d}(x) \subset f^{-1}(E)$.
+        On the other hand, $f^{-1}(B_{\e}(f(x)))$ is an open set
+        $\imply \exists B_{\d}(x) \subset f^{-1}(B_{\e}(f(x)))$
+        $\imply f(B_{\d}(x)) \subset B_{\e}(f(x))$ $\imply$ $f$ is continuous.
+      \end{proof} \\
+
+      \emph{Note.} Continuous functions do \emph{not} necessarily
+      map open sets to open sets, or closed sets to closed sets.
+
+      \emph{Cor.} \mbox{If $f: X\to\R$ is continuous, $\{x: f(x)<0\}$ is open.}
+
+\end{enumerate}
+
+
+\end{document}
