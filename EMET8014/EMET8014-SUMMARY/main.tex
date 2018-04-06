@@ -1,0 +1,434 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.1 of REVTeX, October 2009
+%
+%   Copyright (c) 2009 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-1}
+
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+%\usepackage{graphicx}% Include figure files
+%\usepackage{dcolumn}% Align table columns on decimal point
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+%\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{extarrows}
+\usepackage{xcolor}
+\usepackage{bm}% bold math
+
+%\fontsize{10mm}{8mm}\selectfont
+
+% note environment for extra note behind body text
+\newenvironment{note}{\color{gray}\footnotesize}{}
+
+% underline  definitions
+\newcommand{\defn}[1]{\underline{#1}}
+
+% common sets
+\def\R{{\mathbb R}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\N{{\mathbb N}}
+\def\H{{\mathbb H}}
+% statistics symbols
+\def\P{\mathbb{P}}
+\def\E{\mathbb{E}}
+\def\Var{\mathrm{Var}}
+\def\Cov{\mathrm{Cov}}
+\def\Corr{\mathrm{Corr}}
+\def\normal{\mathrm{N}}
+\def\plim{\mathrm{plim}}
+
+\newcommand{\eqtext}[1]{\xlongequal{\text{#1}}}%
+
+% refine itemize style
+\setlist[itemize]{leftmargin=*}
+\renewcommand{\labelitemi}{$\cdot$}
+
+% no indentation
+\setlength\parindent{0pt}
+%\setlength\linespread{1.6}
+\renewcommand{\baselinestretch}{1.3}
+
+\begin{document}
+\small
+
+%\preprint{AIP/123-QED}
+
+\title[EMET8014 - FUNDAMENTALS OF ECONOMETRIC METHODS]{KEYPOINT SUMMARY I}% Force line breaks with \\
+
+
+% \author{A. Author}
+%  \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+% \author{B. Author}%
+%  \email{Second.Author@institution.edu.}
+% \affiliation{
+% Authors' institution and/or address%\\This line break forced with \textbackslash\textbackslash
+% }%
+
+% \author{C. Author}
+%  \homepage{http://www.Second.institution.edu/~Charlie.Author.}
+% \affiliation{%
+% Second institution and/or address%\\This line break forced% with \\
+% }%
+
+% \date{\today}% It is always \today, today,
+%              %  but any date may be explicitly specified
+
+% \begin{abstract}
+% An article usually includes an abstract, a concise summary of the work
+% covered at length in the main body of the article. It is used for
+% secondary publications and for information retrieval purposes.
+% %
+% Valid PACS numbers may be entered using the \verb+\pacs{#1}+ command.
+% \end{abstract}
+
+% \pacs{Valid PACS appear here}% PACS, the Physics and Astronomy
+%                              % Classification Scheme.
+% \keywords{Suggested keywords}%Use showkeys class option if keyword
+%                               %display desired
+\maketitle
+
+% \begin{quotation}
+% The ``lead paragraph'' is encapsulated with the \LaTeX\
+% \verb+quotation+ environment and is formatted as a single paragraph before the first section heading.
+% (The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.)
+% Note that numbered references are allowed in the lead paragraph.
+% %
+% The lead paragraph will only be found in an article being prepared for the journal \emph{Chaos}.
+% \end{quotation}
+
+\section{Random Variables}
+
+\begin{enumerate}
+    \item[] Random variable: a random variable $X$ is a function from a
+    sample space $S$ into $\R$ with certain probabilities.
+\end{enumerate}
+
+\subsection{Discrete Random Variables}
+\begin{enumerate}
+  \item Discrete random variable: $\P(X = x_i) = p_i$
+  \item Bivariate random variable: $\P(X=x_i, Y=y_j) = p_{ij}$
+  \item Marginal probability: $$\P(X=x_i) = \sum_j \P(X=x_i, Y=y_j)$$
+  \item Conditional probability: $$\P(X=x_i|Y=y_j) = \frac{\P(X=x_i,Y=y_j)}{\P(Y=y_j)}$$
+  \item Independence: $$\P(X=x_i,Y=y_j)=\P(X=x_i)\P(Y=y_j)$$
+\end{enumerate}
+
+\subsection{Continuous Random Variables}
+\begin{enumerate}
+  \item Continuous random variable: $$\P(x_1\le X\le x_2)=\int_{x_1}^{x_2}f(x)dx$$
+  where $f(x)$ is called the density function.
+
+  \item Cumulative distribution function:
+  $$ F(x) = \P(X \le x) = \int_{-\infty}^{x} f(t)dt $$
+
+  \item Bivariate continuous random variable:\footnotesize
+  $$ \P(x_1 \le X \le x_2, y_1 \le Y \le y_2) = \int_{y_1}^{y_2}\int_{x_1}^{x_2}f(x,y)dxdy $$
+  \normalsize where $f(x,y)$ is called the joint density function. \\
+  For more general case,
+  $$ \P((X,Y) \in S) = \iint_{S} f(x,y)dxdy $$
+  If region $S$ can be characterized by $a \le x \le b$, $h(x) \le y \le g(x)$, we have
+  $$ \iint_{S} f(x,y)dxdy = \int_a^b\left[\int_{h(x)}^{g(x)}f(x,y)dy\right]dx$$
+
+  \item Marginal probability (marginal density): {\footnotesize
+    \begin{align*}
+      \P(x_1 \le X \le x_2) &= \P(x_1 \le X \le x_2, -\infty \le Y \le +\infty) \\
+                            &= \int_{-\infty}^{+\infty}f(x,y)dy
+    \end{align*}
+   }
+
+   \item Conditional density:
+   $$ f(x,y|S) = \begin{cases}
+                     \dfrac{f(x,y)}{\P[(x,y)\in S]} &\textrm{for } (x,y)\in S\\
+                     0 &\textrm{otherwise}
+                 \end{cases}
+   $$
+   If region $S$ can be characterized by $a \le x \le b$, $h(x) \le y \le g(x)$,
+   the condition density of $X$ is
+   $$ f(x|S) = \begin{cases}
+                     \dfrac{\int_{h(x)}^{g(x)}f(x,y)dy}{\P[(x,y)\in S]} &\textrm{for } a \le x \le b\\
+                     0 &\textrm{otherwise}
+                 \end{cases}
+   $$
+   Especially, the conditional density of $X$ given $y_1 \le Y \le y_2$ is defined by
+   $$ f(x|y_1 \le Y \le y_2) = \frac{\int_{y_1}^{y_2}f(x,y)dy}
+         {\int_{-\infty}^{+\infty}\left[\int_{y_1}^{y_2}f(x,y)dy\right]dx}
+   $$
+   The conditional density of $X$ given $Y=y_1$ is
+   $$ f(x|Y=y_1) = \frac{f(x,y_1)}{f(y_1)} $$
+
+   \item Independence: $f(x,y)=f(x)f(y)$
+
+   \item Random variable transformation: $Y = \phi(X)$\\
+       \begin{align*}
+         F_Y(y) &= \P(Y < y) = \P(\phi(X) < y) \\
+                &= \P(X < \phi^{-1}(y)) \\
+                &= F_X(\phi^{-1}(y)) \\
+         f_Y(y) &= \frac{dF_Y(y)}{dy}
+       \end{align*}
+       If $\phi$ is a strictly monotonic differentiable function,
+       $$ f_Y(y) = f[\phi^{-1}(y)]\left\rvert\frac{d\phi^{-1}(y)}{dy}\right\rvert $$
+
+\end{enumerate}
+
+
+\section{Moments}
+\subsection{Expectation}
+\begin{enumerate}
+    \item Expected value (discrete): $\E(X) = \sum_{i=1}^{\infty}x_i\P(x_i)$
+    \item Expected value (continuous): $\E(X) = \int_{-\infty}^{\infty} xf(x) dx$
+    \item Median: $m$ such that $\P(X \le m) = \frac{1}{2}$
+    \item Expectation of transformation of random variable:
+        \begin{align*}
+            & \E[\phi(X)] = \sum_{i=1}^{\infty} \phi(x_i) \P(x_i) \\
+            & \E[\phi(X)] = \int_{-\infty}^{\infty} \phi(x)f(x) dx \\
+            & \E[\phi(X,Y)] = \sum_{i=1}^{\infty}\sum_{j=1}^{\infty} \phi(x_i,y_j) \P(x_i,y_j) \\
+            & \E[\phi(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \phi(x,y)f(x,y) dxdy
+        \end{align*}
+    \item Properties of expectation:
+        \begin{itemize}
+            \item $\E(\alpha)=\alpha$
+            \item $\E(\alpha X + \beta Y) = \alpha\E(X) + \beta\E(Y)$
+            \item If $X,Y$ are \emph{independent}, $\E(XY) = \E(X)\E(Y)$
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Conditional Expectation}
+\begin{enumerate}
+    \item Conditional expectation:
+        \begin{itemize}
+            \item $\E[\phi(X,Y)|X] = \sum_{j=1}^{\infty} \phi(X,y_j)\P(y_j|X)$
+            \item $\E[\phi(X,Y)|X] = \int_{-\infty}^{+\infty} \phi(X,y)f(y|X)dy$
+            \item Note $\E[\phi(X,Y)|X]$ is a function of $X$.
+        \end{itemize}
+
+    \item Law of iterated expectations:
+        \begin{itemize}
+            \item $\E[\phi(X,Y)] = \E[\E[\phi(X,Y)|X]]$
+            \item $\E[\phi(X)|X] = \phi(X)$
+            \item $\E[\phi(X)Y|X] = \phi(X)\E[Y|X]$
+        \end{itemize}
+
+\end{enumerate}
+
+\subsection{Variance and Covariance}
+\begin{enumerate}
+    \item Variance:
+        \begin{itemize}
+            \item $\Var(X) = \E[X - \E(X)]^2$
+            \item $\Var(X) = \E(X^2) - (\E(X))^2$
+            \item $\Var(\alpha X + \beta) = \alpha^2 \Var(X)$
+            \item $\Var(X\pm Y) = \Var(X) + \Var(Y) \pm 2\Cov(X,Y)$
+            \item \mbox{$X,Y$ independent, $\Var(X_1+\cdots+X_n) = \sum_{i=1}^n \Var(X_i)$}
+        \end{itemize}
+
+    \item Covariance:
+        \begin{itemize}
+            \item $\Cov(X,Y) = \E[(X - \E(X))(Y - \E(Y))]$
+            \item $\Cov(X,Y) = \E(XY) - \E(X)\E(Y)$
+            \item $X,Y$ independent $\not\Leftarrow\Rightarrow$ $\Cov(X,Y)=0$
+        \end{itemize}
+
+    \item Correlation:
+        \begin{itemize}
+            \item $\Corr(X,Y) = \dfrac{\Cov(X,Y)}{\sqrt{\Var(X)\Var(Y)}}$
+            \item $\Corr(\alpha X, \beta Y) = \Corr(X,Y)$
+            \item $-1 \le \Corr(X,Y) \le 1$ \\
+        \end{itemize}
+
+\end{enumerate}
+
+
+\subsection{Random Variable Predictor}
+\begin{enumerate}
+    \item[] The best \emph{predictor} of $Y$ based on $X$ is the predicting
+    function $\phi(X)$ that minimizes $\E[Y-\phi(X)]^2$.
+\end{enumerate}
+\begin{enumerate}
+    \item The best predictor of $Y$ based on $X$ is $\E[Y|X]$.\\
+        \begin{note}
+            \begin{align*}
+                \E[Y - \phi(X)]^2 &= \E[Y-\E(Y|X) + \E(Y|X) - \phi(X)]^2 \\
+                    &= \E[Y-\E(Y|X)]^2 + \E[\E(Y|X) - \phi(X)]^2 \\
+                    &\quad+ \underbrace{2\E[(Y-\E(Y|X))(\E(Y|X) - \phi(X))]}_{=0} \\
+                    &\ge \E[Y-\E(Y|X)]^2
+            \end{align*}
+        \end{note}
+
+    \item The best linear predictor $\phi(X)=\alpha + \beta X$ is given by
+      $$ \beta^* = \frac{\Cov(X,Y)}{\Var(X)}, \alpha^* = \E(Y)-\beta^*\E(X) $$
+        \begin{note}
+            Minimize $\E(Y-\alpha-\beta X)^2$, the FOC gives $\alpha^*, \beta^*$.
+        \end{note}
+\end{enumerate}
+
+
+
+\section{Normal Random Variables}
+
+\subsection{Normal Distribution}
+\begin{enumerate}
+  \item Normal density function:
+      $$ f(x)=\frac{1}{\sqrt{1\pi}\sigma}\exp\left[-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right]$$
+      \begin{note}
+        Gaussian integral: $\int_{-\infty}^{+\infty}e^{-x^2}dx=\sqrt{\pi}$.
+      \end{note}
+
+  \item $\E(X) = \mu$, $\Var(X)=\sigma^2$
+
+    \begin{note}
+      Note: $\int x e^{-\frac{1}{2}x^2}dx = - e^{-\frac{1}{2}x^2}$
+    \end{note}
+
+  \item If $X \sim \normal(\mu, \sigma^2)$, $Z=\dfrac{X-\mu}{\sigma}\sim\normal(0,1)$
+  \item If $X \sim \normal(\mu,\sigma^2)$, and $Y=\alpha+\beta X$, then we have
+  $Y \sim \normal(\alpha + \beta\mu, \beta^2 \sigma^2)$.
+
+  \item If $X_1,X_2$ are \emph{independent} and $X_1 \sim \normal(\mu_1,\sigma_1^2)$,
+  $X_2 \sim \normal(\mu_2,\sigma_2^2)$, then we have $X_1+X_2 \sim \normal(\mu_1+\mu_2, \sigma_1^2+\sigma_2^2)$.
+  If $X_1,X_2$ are not independent, $X_1+X_2$ is \emph{not} necessarily normal.
+\end{enumerate}
+
+\subsection{Bivariate Normal Distribution}
+\begin{enumerate}
+  \item Multivariate normal density function:
+  $$ f(\bm{x}) = (2\pi)^{-\frac{n}{2}}|\bm{\Sigma}|^{-\frac{1}{2}}
+      \exp\left[-\frac{1}{2}(\bm{x}-\bm{\mu})^T \bm{\Sigma}^{-1}
+      (\bm{x}-\bm{\mu})\right]
+  $$
+  where $\bm{\Sigma}$ is the variance-covariance matrix.
+
+
+  \item If $(X,Y)$ are bivariate normally distributed
+        \[ (X,Y) \sim \normal\left(
+              \begin{pmatrix}
+                \mu_X\\
+                \mu_Y
+              \end{pmatrix},
+              \begin{pmatrix}
+                \sigma_X^2            & \rho\sigma_X\sigma_Y \\
+                \rho\sigma_X\sigma_Y  & \sigma_Y^2
+              \end{pmatrix}
+           \right)
+        \]
+        Then we have
+        \begin{align*}
+          X &\sim \normal(\mu_X, \sigma_X^2) \\
+          Y &\sim \normal(\mu_Y, \sigma_Y^2) \\
+          X|Y &\sim \normal\left(\mu_X + \rho\frac{\sigma_X}{\sigma_Y}(Y-\mu_Y), \sigma_X^2(1-\rho^2)\right) \\
+          Y|X &\sim \normal\left(\mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(X-\mu_X), \sigma_Y^2(1-\rho^2)\right) \\
+          \alpha X + \beta Y &\sim \normal(\alpha\mu_X+\beta\mu_Y, \alpha^2\sigma_X^2 + \beta^2\sigma_Y^2 + 2\alpha\beta\rho\sigma_X\sigma_Y)
+        \end{align*}
+
+   % \item If $(X,Y)$ are bivariate normal, then $\alpha X + \beta Y$ is normal: \footnotesize
+   % $$ \alpha X + \beta Y \sim \normal(\alpha\mu_X+\beta\mu_Y, \alpha^2\sigma_X^2 + \beta^2\sigma_Y^2 + 2\alpha\beta\rho\sigma_X\sigma_Y)$$
+
+\end{enumerate}
+
+\section{Large Sample Theory}
+
+\subsection{Modes of Convergence}
+\begin{enumerate}
+  \item Convergence in probability: $X_n \overset{p}{\to} X$ if
+    $$\forall\epsilon>0, \lim_{n\to\infty}\P(|X_n-X|<\epsilon)=1$$
+    \begin{note}
+      The random variable $Y=X_n-X$ $\to 0$ as $n\to\infty$.
+    \end{note}
+
+  \item Convergence in distribution: $X_n \overset{d}{\to} X$ if
+    $$ \lim_{n\to\infty} F_n(x) = F(x)$$
+  where $F_n$ and $F$ are the cumulative distribution functions of
+  random variables $X_n$ and $X$ respectively.
+
+  \item $X_n \overset{p}{\to} X \not\Leftarrow\Rightarrow X_n \overset{d}{\to} X$
+
+  \item Continuous mapping theorem: \\
+  Let $g(\cdot)$ be a \emph{continuous} function. Then
+    \begin{itemize}
+      \item $X_n \overset{p}{\to} X \implies g(X_n) \overset{p}{\to} g(X)$
+      \item $X_n \overset{d}{\to} X \implies g(X_n) \overset{d}{\to} g(X)$
+    \end{itemize}
+
+  \item Slutsky Theorem: If $X_n \overset{d}{\to} X$ and $Y_n \overset{p}{\to} \alpha$, then
+    \begin{itemize}
+      \item $X_n + Y_n \overset{d}{\to} X + \alpha$
+      \item $X_n Y_n \overset{d}{\to} \alpha X$
+      \item $X_n/Y_n \overset{d}{\to} X/\alpha$ ($\alpha\neq 0$)\\
+    \end{itemize}
+\end{enumerate}
+
+
+\subsection{Law of Large Numbers}
+\begin{enumerate}
+  \item Chebyshev's inequality: suppose $g(\cdot)$ is a \emph{nonnegative}
+        continuous function, then we have
+        $$ \P[g(X) \ge \epsilon] \le \frac{\E[g(X)]}{\epsilon}, \forall\epsilon>0 $$
+
+  \item Law of Large Numbers: Let $\{X_i\}$ be $i.i.d.$ random variables with
+  $\E(X_i) = \mu$ and $\Var(X_i) = \sigma^2 <\infty$.
+  Define $$\overline{X}_n = \frac{1}{n}\sum_{i=1}^{n}X_i$$
+  Then $\overline{X}_n \overset{p}{\to} \mu$ as $n\to\infty$.
+    \begin{note}
+      \begin{align*}
+        \P(|\overline{X}_n - \mu| > \epsilon) &= \P(|\overline{X}_n - \mu|^2 > \epsilon^2) \\
+          &\leq \frac{\E(\overline{X}_n - \mu)^2}{\epsilon^2} \\
+          &= \frac{\sigma^2}{n\epsilon^2} \to 0
+      \end{align*}
+    \end{note}
+
+\end{enumerate}
+
+
+\subsection{Moment Generating Funtions}
+\begin{enumerate}
+  \item The moment generating function of $X$:
+  $$ M_X(t) = \E(e^{Xt}) = 1 + \E(X)t + \E(X^2)\frac{t^2}{2!}+\cdots $$
+  \item Given $M_X(t)$, $\E(X^n) = \left.\dfrac{d^n M_X(t)}{dt^n}\right\rvert_{t=0}$
+  \item If $M_X(t)=M_Y(t)$, then $F_X(x) = F_Y(x)$.
+  \item If $X,Y$ independent, $M_{X+Y}(t) = M_X(t) M_Y(t)$
+  \item If $\lim_{n\to\infty} M_{X_n}(t) = M_X(t)$, then $X_n \overset{d}{\to} X$.
+  \item If $X \sim \normal(\mu, \sigma^2)$, $M_X(t)=\exp\left(\mu+\frac{1}{2}\sigma^2t^2\right)$.
+\end{enumerate}
+
+\subsection{Central Limit Theorem}
+\begin{enumerate}
+  \item[] Let $\{X_i\}$ be $i.i.d.$ random variables with
+  $\E(X_i) = \mu$ and $\Var(X_i) = \sigma^2 <\infty$.
+  Define $\overline{X}_n = \frac{1}{n}\sum_{i=1}^{n}X_i$. Then
+  $$ \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}} \overset{d}{\to} \normal(0,1) $$
+  \begin{note}
+    \emph{Proof.} Let $Y =(\overline{X}_n - \mu)/\sigma$.
+    \begin{enumerate}
+      \item[(i)] $M_{\frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}}(t) \eqtext{iid} M_Y\left(n^{-\frac{1}{2}}t\right)^n$
+      \item[(ii)]$M_Y\left(n^{-\frac{1}{2}}t\right)^n \eqtext{Taylor} 1 + \frac{t^2}{2n} + o(n^{-1})$
+      \item[(iii)] $M_Y\left(n^{-\frac{1}{2}}t\right)^n = \left[\left(1 + \frac{t^2}{2n} + o(n^{-1})\right)^{\frac{2n}{t^2}}\right]^{\frac{t^2}{2}}\to e^{\frac{t^2}{2}}$
+    \end{enumerate}
+  \end{note}
+\end{enumerate}
+\end{document}

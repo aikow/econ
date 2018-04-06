@@ -47,6 +47,9 @@ This site is used to keep a record of my lecture notes, summary sheets, exercise
 
 [Introductory Econometrics: Key Question Review](EMET8005/EMET8005-KEY-QUESTION-REVIEW/main.pdf)
 
+[Fundamentals of Econometric Methods: Part I](EMET8014/EMET8014-SUMMARY/main.pdf)
+
+[Fundamentals of Econometric Methods: Part II]()
 
 ### Miscellaneous
 
