@@ -274,7 +274,8 @@ extract core idea for essential proofs.}
         length of vectors can be measured. }
         \item Euclidean norm: $\norm{x} = \sqrt{x_1^2+\dots+x_n^2}$
         \item Infinity norm: $\norm{x}_{\infty} = \max_{1\le i\le n} |x_i|$
-        \item $p$-norm: $\norm{x}_{p} = \left(|x_1|^p+\dots+|x_n|^p\right)^{\frac{1}{p}}$\\
+        \item $p$-norm: $\norm{x}_{p} = \left(|x_1|^p+\dots+|x_n|^p\right)^{\frac{1}{p}}$
+
             \begin{proof}
               Minkowski's inequality:\\
               $ \left(\sum_{k}^{n}|x_k+y_k|^p\right)^{\frac{1}{p}} \le
@@ -282,6 +283,15 @@ extract core idea for essential proofs.}
                    \left(\sum_{k}^{n}|y_k|^p\right)^{\frac{1}{p}}
               $
             \end{proof}
+
+        \item If $1 \le p \le q \le \infty$, then $\norm{x}_p \ge \norm{x}_q$.
+
+            \begin{proof}
+              Normalize $x$ to $\frac{x}{\norm{x}_p}$ so that $\norm{x}_p=1$.
+              Then it is easy to see $\norm{x}_q \le 1$ because for each
+              element $|x_i|^q \le |x_i|^p$.
+            \end{proof}
+            
       \end{itemize}
 
     \item An \defn{inner product space} is a vector space $V$ over $\R$ with a
