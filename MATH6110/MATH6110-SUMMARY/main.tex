@@ -36,7 +36,7 @@
 %\usepackage[mathlines]{lineno}% Enable numbering of text and display math
 %\linenumbers\relax % Commence numbering lines
 \usepackage{enumitem}
-\usepackage{enumerate}
+%\usepackage{enumerate}
 \usepackage{xcolor}
 
 
@@ -174,7 +174,7 @@ extract core idea for essential proofs.}
     \end{itemize}
 
   \item $A$ is \defn{finite}/\defn{denumerable}/\defn{countable}:
-  $$\left.
+  \[\left.
       \begin{align*}
          &\left.
           \begin{align*}
@@ -184,39 +184,45 @@ extract core idea for essential proofs.}
          \right\rbrace\text{finite}\\
           & A \sim N \qquad\textrm{denumerable}
       \end{align*}
-  \right\rbrace\text{countable}$$
+  \right\rbrace\text{countable}\]
   Otherwise, $A$ is \defn{uncountable}.
 
   \item Important results on cardinality of sets:
     \begin{itemize}
-      \item $\N^k \sim \N$ \\
+      \item $\N^k \sim \N$
+
         \begin{proof}
           Consider $f(n_1, \dots, n_k) = p_1^{n_1}\cdots p_k^{n_k}$.
         \end{proof}
 
-      \item $\N^{\N} \sim \R$ \\
+      \item $\N^{\N} \sim \R$
+
         \begin{proof}
           Code $\N^{\N}$ into binary strings and show it is uncountable. Consider
           $f(n_1, n_2, \dots) = \frac{1}{10^{n_1}}+\frac{1}{10^{n_1+n_2}}+\cdots$.
         \end{proof}
 
-      \item $\power{\N} \sim \R$ \\
+      \item $\power{\N} \sim \R$
+
           \begin{proof}
             $\power{\N} \to \R$: $(n_1,n_2,n_3,\dots) \to 0.b_1b_2b_3\dots $.\\
             $\R \to \power{\Q}$: $\{a \in \Q: a < x, x \in \R\}$.
           \end{proof}
 
-      \item $\R\times\R \sim R$, $\R^k \sim \R$ \\
+      \item $\R\times\R \sim R$, $\R^k \sim \R$
+
           \begin{proof}
            $(0.a_1a_2\dots, 0.b_1b_2\dots) \to (0.a_1b_1a_2b_2\dots)$.
           \end{proof}
 
-      \item The set of all real valued functions on $[0,1]$ $\sim 2^c$ \\
+      \item The set of all real valued functions on $[0,1]$ $\sim 2^c$
+
           \begin{proof}
             Note $A \inject \power{[0,1]\times\R}$.
           \end{proof}
 
-      \item $A$ is any set, $\card{A} < \card{\power{A}}$.\\
+      \item $A$ is any set, $\card{A} < \card{\power{A}}$.
+
           \begin{proof}
             Clearly there exists $f: A \inject \power{A}$.
             But $f$ cannot be surjective. Consider
@@ -225,12 +231,14 @@ extract core idea for essential proofs.}
 
       \item The union of a countable family of countable sets is countable.
       \item The union of a cardinality $c$ family of sets each with cardinality
-      $c$ has cardinality $c$.\\
+      $c$ has cardinality $c$.
+
           \begin{proof}
             Consider $\{A_{\a}\}_{\a\in S}$.
             There exists a bijection $f_{\a}: A_{\a} \leftrightarrow \R$.
             Define $f: A \inject S\times\R$ as $f(x) = (\a, f_{\a}(x))$ where $x\in A_{\a}$.
           \end{proof}
+
     \end{itemize}
 
 \end{enumerate}
@@ -291,7 +299,7 @@ extract core idea for essential proofs.}
               Then it is easy to see $\norm{x}_q \le 1$ because for each
               element $|x_i|^q \le |x_i|^p$.
             \end{proof}
-            
+
       \end{itemize}
 
     \item An \defn{inner product space} is a vector space $V$ over $\R$ with a
@@ -310,17 +318,19 @@ extract core idea for essential proofs.}
           \item $u,v$ are \defn{orthogonal} if $u \cdot v=0$.
           \item Every inner product space is a normed space if define
           $\norm{u} = (u\cdot u)^{\frac{1}{2}}$ as the norm.
-          \item \defn{Cauchy-Schwarz Inequality}: $|u\cdot v| \le \norm{u}\norm{v}$\\
+          \item \defn{Cauchy-Schwarz Inequality}: $|u\cdot v| \le \norm{u}\norm{v}$
+
               \begin{proof}
                 $f(\l)=(u-\l v)\cdot (u-\l v) \ge 0$, $\forall\l$.\\
                 Substitute in $\l=\frac{u\cdot v}{\norm{v}^2}$.
               \end{proof}
+
         \end{itemize}
 \end{enumerate}
 
 
 
-\section{Matrix Spaces}
+\section{Metric Spaces}
 \begin{enumerate}
   \item A \defn{metric space} $(X,d)$ is a set $X$ together with a function
   $d:X\times X \to\R$ such that
@@ -342,13 +352,15 @@ extract core idea for essential proofs.}
         \item $\forall a\in S$, $B_r^S(a) = S \cap B_r^X(a)$
         \item
         $A$ is open in $S$ $\iff$ $A=S\cap U$, $U$ is open in $X$;\\
-        $A$ is closed in $S$ $\iff$ $A=S\cap C$, $C$ is closed in $X$.\\
+        $A$ is closed in $S$ $\iff$ $A=S\cap C$, $C$ is closed in $X$.
+
           \begin{proof}
             $A$ open in $S$ $\imply A=\cup_{x\in A}B_{r_x}^{S}(x) =
             \cup_{x\in A}(S\cap B_{r_x}(x)) =
             S \cap (\cup_{x\in A}B_{r_x}(x))$.
             Thus $U = \cup_{x\in A}B_{r_x}(x)$.
           \end{proof}
+
       \end{itemize}
 
   \item \defn{Limit and Isolated Points}
@@ -413,10 +425,12 @@ extract core idea for essential proofs.}
 \item $(x_n)$ is \defn{Cauchy} if $\forall \e, \exists N, [\forall m,n>N \imply d(x_m,x_n) < \e$].
 
   \begin{itemize}
-    \item Every convergent/Cauchy sequence is bounded.\\
+    \item Every convergent/Cauchy sequence is bounded.
+
       \begin{proof}
         convergence $\imply$ $(x_n)$ is bounded after some $N$, left only finite elements.
       \end{proof}
+
     \item $\R^k$: sequence $(x_n)$ converges $\iff$ $(x_n)$ is Cauchy.
     \item $X$: sequence $(x_n)$ converges $\not\Leftarrow\Rightarrow$ $(x_n)$ is Cauchy.
   \end{itemize}
@@ -428,7 +442,8 @@ extract core idea for essential proofs.}
 
 \item \defn{Monotone Convergence Theorem}:
 if a sequence is increasing (decreasing) and bounded
-by a supremum (infimum), it will converge to the supremum (infimum).\\
+by a supremum (infimum), it will converge to the supremum (infimum).
+
     \begin{proof}
       Let $c = \sup_{n} \{a_n\}$. $\forall \e>0, \exists N$ s.t.
       $c-\e < a_N \leq a_n \leq c$, $\forall n>N$. As $\e \to 0$, $a_n \to c$.
@@ -437,17 +452,20 @@ by a supremum (infimum), it will converge to the supremum (infimum).\\
 \item \defn{Banach Fixed-Point Theorem}:
 If $(X,d)$ is a \emph{complete} metric space, and $f: X \to X$ is a \emph{contraction},
 i.e. $\exists \lambda \in [0,1)$ such that $d(f(x), f(y)) \leq \lambda d(x,y)$,
-then there exists a unique fixed point $f(x)=x$. \\
+then there exists a unique fixed point $f(x)=x$.
+
     \begin{proof}
       First show $(x_n)$ is Cauchy, then prove $d(x, f(x)) \to 0$.
     \end{proof}
+
 \end{enumerate}
 
 
 \section{Sequences and Compactness}
 \begin{enumerate}
   \item \defn{Bolzano-Weierstrass Theorem}: Every bounded sequence in $\R^k$
-  has a convergent subsequence. \\
+  has a convergent subsequence.
+
       \begin{proof}
         Geometric intuition: if a sequence in $\R^k$ is bounded, we can always
         trap it in a whatever small subspace. Construct a convergent subsequence
@@ -458,11 +476,13 @@ then there exists a unique fixed point $f(x)=x$. \\
     has a convergent subsequence.
         \begin{itemize}
           \item $\R^k$: compact $\iff$ closed, bounded (\defn{Beine-Borel Thm})
-          \item $X$: compact $\not\Leftarrow\Rightarrow$ closed, bounded. \\
+          \item $X$: compact $\not\Leftarrow\Rightarrow$ closed, bounded.
+
               \begin{proof}
                 Consider $X=C[0,1]$. $\closure{B_1(\bm{0})} \subset X$ is
                 closed and bounded, but \emph{not} compact.
               \end{proof}
+
           \footnotesize
           \item Compactness is sort of a topological generalization of finiteness.
           \color{gray} For example, if a set A is finite then every function
@@ -476,7 +496,7 @@ then there exists a unique fixed point $f(x)=x$. \\
 \section {Limits and Continuity}
 \begin{enumerate}
   \item Let $f: X \to Y$. The following are equivalent:
-      \begin{enumerate}[(i)]
+      \begin{enumerate}
         \item $\lim_{x \to a} f(x) = b$;
         \item $x_n \to a  \imply  f(x_n) \to b$;
         \item $x \in B_{\d}^{X}(a)\setminus\{a\} \imply f(x) \in B_{\e}^{Y}(b)$.
@@ -512,7 +532,8 @@ then there exists a unique fixed point $f(x)=x$. \\
       \end{itemize}
 
   \item \defn{Continuity and Compactness}:  $f: X \to Y$ is continuous,
-  if $K \subset X$ is compact, then $f(K)$ is compact in Y.\\
+  if $K \subset X$ is compact, then $f(K)$ is compact in Y.
+
       \begin{proof}
         $\forall (y_n) \subset f(K)$, $\exists (x_n): f(x_n)=y_n$.
         $K$ is compact $\imply \exists (x_{n_j}) \to x$;
@@ -524,6 +545,7 @@ then there exists a unique fixed point $f(x)=x$. \\
 
   \item \defn{Extreme Value Theorem}: Each continuous function on a compact
   set attains its maximum and minimum.
+
       \begin{proof}
         $K$ compact $\imply$ $f(K)$ compact $\imply$ $f(K)$ closed and bounded
         $\imply$ exist least upper bound $\gamma$ and $\gamma \in f(K)$
@@ -532,7 +554,7 @@ then there exists a unique fixed point $f(x)=x$. \\
       \end{proof}
 
   \item \defn{Continuity and Open Sets}: The following statements are equivalent:
-      \begin{enumerate}[(i)]
+      \begin{enumerate}
         \item $f: X \to Y$ is continuous on $X$;
         \item $f^{-1}(E)$ is open whenever $E$ is an open set in $Y$;
         \item $f^{-1}(E)$ is closed whenever $E$ is a closed set in $Y$.
