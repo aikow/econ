@@ -536,8 +536,8 @@ then there exists a unique fixed point $f(x)=x$.
 
       \begin{proof}
         $\forall (y_n) \subset f(K)$, $\exists (x_n): f(x_n)=y_n$.
-        $K$ is compact $\imply \exists (x_{n_j}) \to x$;
-        $f$ is continuous $\imply f(x_{n_j}) \to f(x)$ $\imply y_{n_j} \to f(x)$.
+        $K$ compact $\imply \exists (x_{n_j}) \to x$;
+        $f$ continuous $\imply f(x_{n_j}) \to f(x)$ $\imply y_{n_j} \to f(x)$.
       \end{proof}
 
       \emph{Cor.} Continuous function on a compact set is bounded.
@@ -565,13 +565,30 @@ then there exists a unique fixed point $f(x)=x$.
         On the other hand, $f^{-1}(B_{\e}(f(x)))$ is an open set
         $\imply \exists B_{\d}(x) \subset f^{-1}(B_{\e}(f(x)))$
         $\imply f(B_{\d}(x)) \subset B_{\e}(f(x))$ $\imply$ $f$ is continuous.
-      \end{proof} \\
+      \end{proof}
 
       \emph{Note.} Continuous functions do \emph{not} necessarily
       map open sets to open sets, or closed sets to closed sets.
 
       \emph{Cor.} \mbox{If $f: X\to\R$ is continuous, $\{x: f(x)<0\}$ is open.}
 
+   \item The function $f: X \to Y$ is \defn{uniformly continuous} if for each
+     $\e > 0$ there exists $\d > 0$ such that $d(x, x') < \d \imply d(f(x), f(x')) < \e$,
+     forall $x,x' \in X$.
+          \begin{itemize}
+            \item In general continuity, $\d$ depends on both $\e$ and $x$.
+            \item In uniform continuity, $\d$ depends only on $\e$, not on $x$.
+            \item If $f$ is continuous and $X$ is \emph{compact}, then $f$ is uniformly continuous.
+            \item A continuous real-valued functions defined on closed and bounded subset of $\R^n$
+                  is uniformly continuous.
+          \end{itemize}
+
+    \item \defn{Uniform continuity and Cauchy sequences}: If $f: X\to Y$ is uniformly continuous,
+       then $(x_n)$ is Cauchy in $X$ $\imply$ $(f(x_n))$ is Cauchy in $Y$.
+       {\footnotesize\color{gray}
+        If $f$ is only continuous, $(f(x_n))$ may not converge
+        (consider $f(x) = \frac{1}{x}$ on $(0, \infty)$).
+       }
 \end{enumerate}
 
 
