@@ -1,0 +1,715 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.1 of REVTeX, October 2009
+%
+%   Copyright (c) 2009 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-1}
+
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{xcolor}
+
+%\fontsize{10mm}{8mm}\selectfont
+
+% proof environment for proof sketch
+\renewenvironment{proof}{\color{gray}\footnotesize}{}
+
+% underline  definitions
+\newcommand{\defn}[1]{\underline{#1}}
+
+% common sets
+\def\R{{\mathbb R}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\N{{\mathbb N}}
+% greek letters
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\def\G{\Gamma}
+\def\d{\delta}
+\def\D{\Delta}
+\def\e{\epsilon}
+%\def\r{\rho}
+%\def\l{\lambda}
+\def\L{\Lambda}
+\def\k{\kappa}
+\def\s{\sigma}
+\def\th{\theta}
+\def\o{\omega}
+\def\z{\zeta}
+\def\n{\nabla}
+% statistics symbols
+\def\P{\mathbb{P}}
+\def\E{\mathbb{E}}
+\def\N{\mathcal{N}} % normal distribution
+\def\Var{\mathrm{Var}}
+\def\Cov{\mathrm{Cov}}
+\def\Corr{\mathrm{Corr}}
+\def\Bias{\mathrm{Bias}}
+\def\MSE{\mathrm{MSE}}
+\def\H{\textbf{\textrm{H}}} % Hessian matrix
+\def\plim{\mathrm{plim}}
+\def\msto{\xrightarrow{m.s.}}
+\def\pto{\overset{p}{\to}}
+\def\dto{\overset{d}{\to}}
+\def\asim{\overset{a}{\sim}}
+\def\h{\hat}
+\def\t{\tilde}
+\def\l{\left}
+\def\r{\right}
+\newcommand{\sumn}[1]{\sum_{i=1}^{n} #1}
+\newcommand{\mean}[1]{\frac{1}{n}\sum_{i=1}^{n} #1}
+\newcommand{\mat}[1]{\bm{#1}}
+\renewcommand{\vec}[1]{\bm{#1}}
+
+% refine itemize style
+%\setlist[itemize]{leftmargin=*}
+\renewcommand{\labelitemi}{$\cdot$}
+
+% no indentation
+\setlength\parindent{0pt}
+%\setlength\linespread{1pt}
+
+\begin{document}
+%\small
+
+%\preprint{AIP/123-QED}
+
+\title[EMET8014 - FUNDAMENTALS OF ECONOMETRIC METHODS]{KEYPOINT SUMMARY II}% Force line breaks with \\
+
+
+% \author{A. Author}
+%  \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+% \author{B. Author}%
+%  \email{Second.Author@institution.edu.}
+% \affiliation{
+% Authors' institution and/or address%\\This line break forced with \textbackslash\textbackslash
+% }%
+
+% \author{C. Author}
+%  \homepage{http://www.Second.institution.edu/~Charlie.Author.}
+% \affiliation{%
+% Second institution and/or address%\\This line break forced% with \\
+% }%
+
+% \date{\today}% It is always \today, today,
+%              %  but any date may be explicitly specified
+
+% \begin{abstract}
+% An article usually includes an abstract, a concise summary of the work
+% covered at length in the main body of the article. It is used for
+% secondary publications and for information retrieval purposes.
+% %
+% Valid PACS numbers may be entered using the \verb+\pacs{#1}+ command.
+% \end{abstract}
+
+% \pacs{Valid PACS appear here}% PACS, the Physics and Astronomy
+%                              % Classification Scheme.
+% \keywords{Suggested keywords}%Use showkeys class option if keyword
+%                               %display desired
+\maketitle
+
+% \begin{quotation}
+% The ``lead paragraph'' is encapsulated with the \LaTeX\
+% \verb+quotation+ environment and is formatted as a single paragraph before the first section heading.
+% (The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.)
+% Note that numbered references are allowed in the lead paragraph.
+% %
+% The lead paragraph will only be found in an article being prepared for the journal \emph{Chaos}.
+% \end{quotation}
+
+\section{Preliminaries}
+\begin{enumerate}
+    \item Biasness: $\hat\theta$ is unbiased if
+          $\Bias{(\hat\theta)}=\E{(\hat\theta)}-\theta=0$.
+
+    \item Efficiency: $\hat\theta$ is efficient if
+          $\Var{(\hat\theta)}\le\Var{(\tilde\theta)}$
+          for all unbiased estimator $\tilde\theta$.
+
+    \item Consistency: $\hat\th$ is consistent if $\hat\th \pto \th$.
+
+    % \item Convergence in probability: $\hat\theta \pto \theta$ if
+    %       $\forall\e>0$, $\lim_{n\to\infty} \P(|\hat\theta-\theta|>\e)=0$.
+
+    \item Mean square error: $\MSE (\hat\th) = \E\left[(\hat\th - \th)^2\right]$
+
+    \item Mean square convergence: $\hat\th \msto \th$ if $\MSE (\hat\th)\to 0$ as $n\to\infty$.
+    %$\lim_{n\to\infty} \MSE (\hat\th) = 0$.
+        \begin{itemize}
+            \item $\MSE (\hat\th) = \Var{(\hat\th)} + (\Bias{(\hat\th, \th)})^2$
+            \item $\hat\th \msto \th$ iff $\Bias (\hat\th)\to 0$ and $\Var{(\hat\th)}\to 0$
+        \end{itemize}
+
+    \item Small o (Convergence in probability):
+          $X_n = o_p(n^k)$ if $\forall\e>0$,$\lim_{n\to\infty} \P\left(\left\rvert\frac{X_n}{n^k}\right\rvert > \e\right)=0$
+
+    \item Big O (Stochastic boundedness):
+          $X_n = O_p(n^k)$ if $\forall\e>0$, $\exists K>0, N>0$ s.t. $\forall n>N$,
+          $\P\left(\left\rvert\frac{X_n}{n^k}\right\rvert > K\right)<\e$
+\end{enumerate}
+
+\section{Simple Linear Regression}
+
+Let $y_i = \b x_i + \e_i $. How to find an estimator for $\b$? \\
+
+Derive an estimator by solving
+$$ \min_{\b} \sumn (y_i - \b x_i)^2 $$
+
+The first-order condition gives
+$$ \h\b = \frac{\sumn x_iy_i }{\sumn x_i^2} = \b + \frac{\mean x_i\e_i}{\mean x_i^2}$$
+
+By Law of Large Numbers (LLN),
+\begin{itemize}
+    \item $\mean x_i\e_i \pto \E(x_i\e_i)$
+    \item $\mean x_i^2 \pto \E(x_i^2)$
+\end{itemize}
+
+$\h\b$ is $\emph{consistent}$ if $\E(x_i\e_i)=0$ and $\E(x_i^2)\neq 0$.\\
+
+To derive the \emph{asymptotic normality}, consider
+
+$$ \sqrt{n} (\h\b - \b) = \sqrt{n}\cdot\frac{\mean x_i\e_i}{\mean x_i^2} $$
+
+Assume $\E(x_i^2\e_i^2)$ is finite, by Central Limit Theorem,
+\begin{itemize}
+    \item $\sqrt{n}\cdot\mean x_i\e_i \dto \N(0, \Var{(x_i\e_i)})$
+\end{itemize}
+
+Since $\mean x_i^2 \pto \E(x_i^2)$, by Slutsky's Theorem,
+$$ \sqrt{n} (\h\b - \b) \dto \N\left(0, \frac{\Var{(x_i\e_i)}}{[\E(x_i^2)]^2}\right) $$
+
+
+\section{Multiple Linear Regression}
+
+\subsection{Notation}
+Suppose the model is specified by
+$$ y_i = \b_0 + x_{i1}\b_1 + \cdots + x_{ik}\b_k + \e_i $$
+Let $\vec x_i, \vec\b$ be $k \times 1$ vectors,
+\[
+\vec x_i =
+\begin{bmatrix}
+1 \\
+x_{i1}\\
+\vdots\\
+x_{ik}
+\end{bmatrix}, \quad
+\vec \b =
+\begin{bmatrix}
+\b_0 \\
+\b_1 \\
+\vdots \\
+\b_k
+\end{bmatrix}
+\]
+Then the model can be written as $y_i = \vec x_i'\vec\b + \e_i$.\\
+
+Let $\mat X,\vec Y,\vec\e$ be matrices containing all observations,
+\[
+\mat X =
+\begin{bmatrix}
+  \vec x_1' \\
+  \vdots \\
+  \vec x_k'
+\end{bmatrix}
+= \begin{bmatrix}
+1 & x_{i1} & \cdots & x_{ik} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & \cdots & x_{nk} \\
+\end{bmatrix},
+\vec Y =
+\begin{bmatrix}
+y_1 \\
+\vdots \\
+y_n
+\end{bmatrix},
+\vec \e =
+\begin{bmatrix}
+\e_1 \\
+\vdots \\
+\e_n
+\end{bmatrix}
+\]
+Therefore, $\vec Y = \mat X \vec\b + \vec\e$.
+
+\subsection{Assumptions}
+\begin{enumerate}
+    \item[(A1)] Linearity: $y_i = \vec x_i' \vec\b + \e_i = x_{i1}\b_1 + \cdots + x_{ik}\b_k + \e_i$
+    \item[(A2)] Full rank: $\E(\vec x_i \vec x_i')$ is nonsingular.
+    \item[(A3)] Exogeneity: $\E(\e_i|\vec x_j) = 0$, for $i,j=1,\dots,n$
+    \item[(A4)] Homoskedasticity and nonautocorrelation: \\
+    $\Var(\vec\e | \mat X) = \s^2 \mat I$ ($\Var(\e_i) = \s^2$ and $\Cov(\e_i, \e_j)=0$)
+    \item[(A5)] Independent and identical data: $\{(y_i, \vec x_i)\}$ are i.i.d.
+\end{enumerate}
+
+If the regressors can be treated as nonstochastic (as they would be in an experiment situation
+in which the analyst choose the values in $\mat X$), $\mat X$ can be treated as contant matrix.
+If $\mat X$ is stochastic (random variables), the anasysis should be done conditioned on the
+observed $\mat X$. For notation simplicity, in the following text, $\mat X$ is treated as
+constant wherever possible.
+
+\subsection{The OLS Estimator}
+
+Minimizing the sum of squared residuals:
+$$ \min_{\vec\b} \sumn (y_i - \vec x_i'\vec\b)^2 $$
+or equivalently,
+$$ \min_{\vec\b} (\vec Y - \mat X \vec\b)(\vec Y - \vec X\vec\b)' $$
+The first-order condition gives
+$$ \vec{\h\b} = (\mat X' \mat X)^{-1}(\mat X' \vec Y) = \left(\sumn \vec x_i \vec x_i'\right)^{-1} \left(\sumn \vec x_i y_i \right) $$
+
+\subsection{Properties of OLS Estimator}
+\subsubsection{Unbiasedness}
+$\E[\vec{\h\b}] = \vec\b + \E[(\mat X' \mat X)^{-1}\mat X' \vec \e]
+  = \vec\b + (\mat X' \mat X)^{-1}\mat X' \E(\vec \e)= \vec\b$
+
+    % \begin{align*}
+    %     \E[\vec{\h\b}]
+    %     &= \vec\b + \E[(\mat X' \mat X)^{-1}\mat X' \vec \e] \\
+    %     &= \vec\b + (\mat X' \mat X)^{-1}\mat X' \underbrace{\E(\vec \e)}_{=0} \\
+    %     &= \vec\b
+    % \end{align*}
+
+\subsubsection{Efficiency}
+OLS is the most efficient unbiased linear estimator. \\
+
+\emph{Proof.} Let $\vec{\t\b}=\mat C'\vec y$ be another unbiased linear estimator.
+Since $\vec{\t\b}$ is unbiased, $\E(\vec{\t\b})=\E(\mat C'\vec y)=\E(\mat C' (\mat X\vec \b + \vec\e)) = \mat C'\mat X \vec\b = \vec\b$,
+which implies $\mat C' \mat X = \mat I$.
+Therefore, $\vec{\t\b}=\mat C' \mat X \vec b + \mat C'\vec \e = \vec\b + \mat C'\vec \e$.
+
+% Then $\Var{(\vec{\t\b})} = \Var{(\mat C'\vec \e)} = \E(\mat C' \vec\e \vec\e' \mat C) = \mat C' \E(\vec\e\vec\e') \mat C = \s^2 \mat C'\mat C = \s^2(\mat X' \mat X)^{-1} + \s^2[\mat C' - (\mat X' \mat X)^{-1}\mat X'][\mat C' - (\mat X' \mat X)^{-1} \mat X']' \ge \s^2 (\mat X' \mat X)^{-1}$.\\
+
+\begin{align*}
+\Var{(\vec{\t\b})} &= \Var{(\mat C'\vec \e)} = \E(\mat C' \vec\e \vec\e' \mat C) = \s^2 \mat C'\mat C \\
+&= \s^2(\mat X' \mat X)^{-1} + \s^2\mat Z\mat Z'\\
+&\ge \s^2 (\mat X' \mat X)^{-1}
+\end{align*}
+where $\mat Z = \mat C' - (\mat X' \mat X)^{-1}\mat X'$.\\
+
+Gauss-Markov Theorem: the least square estimator $\vec{\h\b}$ is
+the minimal variance (most efficient) linear unbiased estimator.
+
+\subsubsection{Consistency}
+
+\begin{align*}
+    &\Var{(\vec{\h\b})}
+     = \E[(\vec{\h\b}-\vec{\b})(\vec{\h\b}-\vec{\b})'] \\
+    &= \textstyle \E\l[\l(\sum_i \vec x_i\vec x_i'\r)^{-1} \l(\sum_i \vec x_i\e_i\r) \l(\sum_i \vec x_i\e_i\r)' \l(\sum_i \vec x_i\vec x_i'\r)^{-1}\r] \\
+    &= \textstyle \E\l[\l(\sum_i \vec x_i\vec x_i'\r)^{-1} \l(\sum_i\sum_j \vec x_i\e_i\e_j \vec x_j'\r) \l(\sum_i \vec x_i\vec x_i'\r)^{-1}\r] \\
+    &= \textstyle \E\l[\l(\sum_i \vec x_i\vec x_i'\r)^{-1} \l(\sum_i \vec x_i\vec x_i' \s^2 \r) \l(\sum_i \vec x_i\vec x_i'\r)^{-1}\r] \\
+    &= \textstyle \s^2 \l(\sumn \vec x_i \vec x_i'\r)^{-1}
+    = \frac{\s^2}{n} \l(\mean \vec x_i \vec x_i'\r)^{-1} \\
+    &\to \mat 0 \textrm{ as } n \to \infty
+\end{align*}
+
+Therefore, $\vec{\h\b} \msto \vec{\b}$ and $\vec{\h\b} \pto \vec{\b}$.
+
+\subsubsection{Asymptotic normality}
+
+Multiply by the ``stabler" $\sqrt{n}$,
+$$ \sqrt{n}(\vec{\h\b}-\vec{\b}) = \l(\mean \vec x_i \vec x_i'\r)^{-1} \l(\sqrt{n}\cdot\mean \vec x_i \e_i\r)$$
+
+The following properties hold as $n \to \infty$,
+\begin{itemize}
+    \item $\l(\mean \vec x_i \vec x_i'\r)^{-1} \pto [\E(\vec x_i \vec x_i')]^{-1}$ by LLN;
+    \item $\sqrt{n}\cdot\mean \vec x_i \e_i \dto \N(\vec 0, \Var{(\vec x_i \e_i)})$ by CLT;
+    \item $\Var{(\vec x_i \e_i)} = \E(\vec x_i\vec x_i'\e_i^2) = \s^2 \E(\vec x_i \vec x_i')$
+\end{itemize}
+
+Therefore, $\sqrt{n}(\vec{\h\b}-\vec{\b}) \dto \N(\vec 0, \s^2 [\E(\vec x_i \vec x_i')]^{-1})$. \\
+
+In practice, $\E(\vec x_i \vec x_i')$ is estimated by $\mean \vec x_i \vec x_i'$, \\
+and $\s^2$ is estimated by either
+    \begin{itemize}
+        \item $\h{\s^2} = \mean e_i^2$, or
+        \item $s^2 = \frac{\vec e' \vec e}{n - k}$.
+    \end{itemize}
+where $e_i$ and $\vec e$ both stand for residuals.
+
+
+\subsection{Violation of Assumptions}
+
+\subsubsection{Multicollinearity}
+If $\mat X' \mat X$ is ``close" to singular, i.e. $\det(\mat X'\mat X)\approx 0$, then $\Var (\vec{\h\b}) = \s^2 (\mat X' \mat X)^{-1}$ will be very large,
+which leads to imprecise estimator.
+
+\subsubsection{Heteroskedasticity}
+If $\E(\e_i^2 | \vec x_i) = \s_i^2$ different for each $i$.
+Assume $\E(\e_i\e_j) = 0$ for $i\neq j$.
+Reevaluate the properties of OLS estimator:
+
+\begin{align*}
+    \E(\vec{\h\b}) &=\textstyle \vec\b + \l(\sumn \vec x_i \vec x_i'\r)^{-1} \sumn \vec x_i \E(\e_i) = \vec\b \\
+    \Var(\vec{\h\b}) &=\textstyle \frac{1}{n} \l(\frac{1}{n}\sum_i \vec x_i \vec x_i'\r)^{-1} \l(\frac{1}{n}\sum_i \vec x_i \vec x_i' \s_i^2\r) \l(\frac{1}{n}\sum_i \vec x_i \vec x_i'\r)^{-1} \\
+    &\to \mat 0 \textrm{ as } n\to\infty
+\end{align*}
+$\vec{\h\b}$ is still unbiased and consistent.\\
+
+Asymptotic normality:
+
+$$ \sqrt{n}(\vec{\h\b} - \vec{\b}) = \l(\mean \vec x_i \vec x_i'\r)^{-1} \l(\sqrt{n}\cdot \mean \vec x_i \e_i \r) $$
+
+\begin{itemize}
+    \item $\l(\mean \vec x_i \vec x_i'\r)^{-1} \pto [\E(\vec x_i \vec x_i')]^{-1}$ by LLN;
+    \item Though $\e_i$ is heteroskedastic, we still have $\sqrt{n}\cdot\mean \vec x_i \e_i \dto \N(0, \mean \Var{(\vec x_i\e_i)})$ under some conditions.
+\end{itemize}
+
+If we define:
+\begin{itemize}
+    \item $\mat Q = \E(\vec x_i \vec x_i')$
+    \item $\mat R = \frac{1}{n}\sum_i\Var{(\vec x_i\e_i)} = \frac{1}{n}\sum_i\E(\vec x_i\vec x_i')\s_i^2$
+\end{itemize}
+Then, $\sqrt{n}(\vec{\h\b} - \vec{\b}) \dto \N(\vec 0, \mat Q^{-1} \mat R \mat Q^{-1})$.\\
+
+% Therefore, $\vec{\h\b}\asim\N(\vec{\b}, \frac{1}{n}\mat Q^{-1} \mat R \mat Q^{-1})$.
+
+Therefore, in heteroskedastic case, $\vec{\h\b}$ still conforms to asymptotic normality. But the variance is no longer $\s^2 (\mat X'\mat X)^{-1}$.
+So traditional  statistical inference based on $s^2(\mat X'\mat X)^{-1}$
+will be misleading. \\
+
+Robust standard error:
+$$ \vec{\t R_n} = \mean \vec x_i \vec x_i' e_i^2 $$
+where $e_i$ is the residual.
+It can be shown, under some conditions, $\vec{\t R_n} \pto \vec{R}$.
+
+\subsubsection{Problem of dependency}
+If $\{\vec x_i\}$ are not independent, $\vec{\h\b}$ is still unbiased, but
+it might not be consistent, because LLN and CLT no longer hold.
+
+\subsubsection{Endogeneity}
+Endogeneity problem rises when $\E(\vec x_i \e_i)\neq \vec 0$.
+Two sources of endogeneity: (a) measurement error; (b) ommited variable.\\
+
+\paragraph{Measurement error}
+$$ y_i = x_i^* \b + \e_i $$
+Suppose $x_i^*$ stands for the measurement error free value of $x_i$.
+Let $x_i^u = x_i^* + v_i$ where $v_i$ is the measurement error.
+For simplicity, assume $\E(x_i^*) = \E(v_i) = 0$, $\Var(v_i) = \s_v^2$.
+And assume the best scenario when there is a measurement error:
+$x_i^* \perp \e_i, x_i^* \perp v_i, v_i \perp \e_i$.
+$$ y_i = (x_i^u-v_i) \b + \e_i^u = x_i^u \b + \e_i - \b v_i = x_i^u \b + \e_i^u $$
+where $\e_i^u = \e_i - \b v_i$.
+$$ \E(x_i^u\e_i^u) = \E((x_i^* + v_i)(\e_i - \b v_i)) = \E(-\b v_i^2) = -\b \s_v^2 \neq 0 $$
+So we have endogeneity problem.
+If we regress $y_i$ on $x_i^u$,
+\begin{align*}
+\h\b &= \frac{\sumn x_i^u y_i}{\sumn (x_i^u)^2} = \b + \frac{\sumn x_i^u \e_i^u}{\sumn (x_i^u)^2} \\
+& \pto \b + \frac{\E(x_i^u \e_i^u)}{\Var (x_i^u)} = \b\left( 1-\frac{\s_v^2}{\Var (x_i^*) + \s_v^2}\right)
+\end{align*}
+
+Several observations:
+\begin{enumerate}
+  \item If $\s_v^2=0$, $\h\b$ is consistent.
+  \item The larger the measurement error $\s_v^2$, the larger the bias.
+  \item $\h\b$ always has the same sign as $\b$.
+  \item Attenuation bias: $|\h\b| \le |\b|$. Therefore, if the result is
+  significant in measurement error cases, it is also significant in
+  measurement-error free case.
+\end{enumerate}
+
+\paragraph{Omitted variable}
+$$ y_i = x_i \b + z_i\g + \e_i $$
+Suppose $\E(x_i\e_i) = 0$, $\Cov(x_i, z_i)\neq 0$.
+If the variable $z_i$ is omitted in the model,
+$$ y_i = x_i \b + \d_i $$
+where $\d_i = z_i\g + \e_i$. Then $\d_i$ is corrleted with $x_i$.
+
+To resolve the omitted variable bias, we need to use instrumental variable (IV) estimation.
+
+
+\section{IV Estimation}
+
+\subsection{The IV Estimator}
+Suppose the structural model is
+$$ y_i = \vec x_i' \vec\b + \e_i $$
+where $e_i$ is correleted with $\vec x_i$.\\
+
+Suppose $\vec z_i$ are instruments satisfying:
+\begin{itemize}
+  \item $\vec z_i$ has the same dimension as $\vec x_i$;
+  \item $\E(\vec z_i \vec x_i')$ has full rank;
+  \item $\E(\vec z_i\e_i) = 0$.
+\end{itemize}
+
+Then we have
+$$ \E(\vec z_i \e_i) = \E(\vec z_i (y_i - \vec x_i'\vec\b)) = \E(\vec z_i y_i) - \E(\vec z_i \vec x_i')\vec\b = 0 $$
+Therefore, $\vec\b = (\E(\vec z_i\vec x_i'))^{-1}\E(\vec z_i y_i)$.\\
+
+Define the IV estimator:
+$$\vec{\h\b}_{IV} = \l(\mean \vec z_i \vec x_i'\r)^{-1} \l( \mean \vec z_i y_i \r)$$
+
+\subsubsection{Consistency}
+$$\vec{\h\b}_{IV} = \vec\b + \l(\mean \vec z_i \vec x_i'\r)^{-1} \l( \mean \vec z_i \e_i \r)$$
+By Law of Large Numbers,
+\begin{itemize}
+  \item $\l(\mean \vec z_i \vec x_i'\r)^{-1} \pto [\E(\vec z_i \vec x_i')]^{-1}$;
+  \item $\mean \vec z_i \e_i \pto \E(\vec z_i \e_i) = 0$.
+\end{itemize}
+Therefore, $\vec{\h\b}_{IV} \pto \vec\b$.\\
+
+Note: IV estimator is generally biased, but consistent.
+
+\subsubsection{Asymptotic normality}
+$$ \sqrt{n}(\vec{\h\b}_{IV} - \vec\b) = \l(\mean \vec z_i \vec x_i'\r)^{-1} \l(\sqrt{n}\cdot \mean \vec z_i \e_i \r) $$
+
+\begin{itemize}
+  \item  $\l(\mean \vec z_i \vec x_i'\r)^{-1} \pto [\E(\vec z_i \vec x_i')]^{-1}$ by LLN;
+  \item $\sqrt{n}\cdot \mean \vec z_i \e_i \dto \N(\vec 0, \E(\vec z_i \vec z_i'\e_i^2))$ by CLT.
+\end{itemize}
+Therefore, by Slutsky's Theorem,
+$$\sqrt{n}(\vec{\h\b}_{IV} - \vec\b) \dto \N(\vec 0, [\E(\vec x_i \vec z_i')]^{-1}\E(\vec z_i \vec z_i'\e_i^2)[\E(\vec z_i \vec x_i')]^{-1} )$$
+
+\subsection{2SLS Estimator}
+Suppose in a more general case,
+$$ \vec Y = \underset{n\times k}{\mat X}\vec\b + \vec\e $$
+where $\mat X = \begin{bmatrix}\vec X_1, \dots, \vec X_k\end{bmatrix}$, and $\E(\vec\e|\mat X)\neq 0$.\\
+
+Suppose $\underset{n\times l}{\mat Z}$ are instruments, where $l \ge k$, i.e. there could be more instruments than independent variables.\\
+
+The following two procedures are equivalent:
+\paragraph{IV estimation}
+\begin{enumerate}
+  \item[1)] Regress $\mat X$ on $\mat Z$, get fitted $\mat{\h X} = \mat Q$;
+  \item[2)] Regress $\vec Y$ on $\mat X$ using $\mat Q$ as the instrument.
+\end{enumerate}
+\paragraph{2SLS estimation}
+\begin{enumerate}
+  \item[1)] Regress $\mat X$ on $\mat Z$, get fitted $\mat{\h X} = \mat Q$;
+  \item[2)] Regress $\vec Y$ on $\mat{\h X}$.
+\end{enumerate}
+
+\emph{Proof.} Regressing $\mat X$ on $\mat Z$:
+\begin{align*}
+  \vec{\h\g_1} &= (\mat Z'\mat Z)^{-1} \mat Z' \vec X_1, &\quad \mat Q_1 &= \mat Z\vec{\h\g_1} \\
+  \vec{\h\g_2} &= (\mat Z'\mat Z)^{-1} \mat Z' \vec X_2, &\quad \mat Q_2 &= \mat Z\vec{\h\g_2} \\
+  &\vdots & \vdots \\
+  \vec{\h\g_k} &= (\mat Z'\mat Z)^{-1} \mat Z' \vec X_k, &\quad \mat Q_k &= \mat Z\vec{\h\g_k} \\
+\end{align*}
+%Let $\mat{\h  X} = \mat Q = \begin{bmatrix}\vec Q_1  & \dots & \vec Q_k \end{bmatrix}$, then
+Then,
+\begin{align*}
+  \mat{\h X} &= \mat Q = \begin{bmatrix}\vec Q_1 & \vec Q_2 & \cdots & \vec Q_k \end{bmatrix} \\
+  &= \begin{bmatrix}\mat Z (\mat Z'\mat Z)^{-1} \mat Z' \vec X_1  & \cdots & \mat Z (\mat Z'\mat Z)^{-1} \mat Z' \vec X_k \end{bmatrix} \\
+  &= \mat Z (\mat Z'\mat Z)^{-1} \mat Z'  \begin{bmatrix}\vec X_1  & \cdots & \vec X_k \end{bmatrix} \\
+  &= \mat Z (\mat Z'\mat Z)^{-1} \mat Z'\mat X
+\end{align*}
+
+If we regress $\vec Y$ on $\mat X$ using $\mat Q$ as IV, then
+\begin{align*}
+\vec{\h\b}_{IV} &= (\mat Q'\mat X)^{-1}(\mat Q' \vec Y) \\
+&= (\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z'\mat X)^{-1}(\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z' \vec Y)
+\end{align*}
+
+If we regress $\vec Y$ directly on $\mat{\h X}$,
+\begin{align*}
+\vec{\h\b}_{2SLS} &= (\mat{\h X}'\mat{\h X})^{-1}(\mat{\h X}' \vec Y)  \\
+&= (\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z'\cdot \mat Z (\mat Z'\mat Z)^{-1} \mat Z'\mat X)^{-1} \\
+&\qquad(\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z' \vec Y)\\
+&= (\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z'\mat X)^{-1}(\mat X' \mat Z (\mat Z'\mat Z)^{-1} \mat Z' \vec Y)
+\end{align*}
+Therefore, $\vec{\h\b}_{IV} = \vec{\h\b}_{2SLS}$.
+
+
+\section{Maximum Likelihood Extimation}
+
+\subsection{The Likelihood Function}
+Let $\{ z_i \}$ be i.i.d. $f(z_i | \vec\th)$ is the \emph{pdf} for $z_i$
+conditioned on a set of parameters $\underset{k \times 1}{\vec\th}$.
+
+The likelihood function is the joint density function:
+$$ L(\vec\th|\vec Z) = f(z_1, \dots, z_n |\vec\th) = \Pi_{i=1}^n f(z_i|\vec\th)$$
+
+It is usually simpler to work with the log of the likelihood function:
+$$ \ln L(\vec\th|\vec Z) = \sumn \ln f(z_i|\vec\th) $$
+
+The maximum likelihood estimator (MLE) is
+$$ \vec{\h\th}_{ML} = \underset{\vec\th \in \vec\Theta}{\mathrm{argmax}} \sumn \ln f(z_i|\vec\th) $$
+
+\subsection{The Likelihood Inequality}
+Suppose $z_i \sim f(z|\vec\th_0)$ where $\vec\th_0$ is the true parameter.
+Then for any $\vec\th$, the following inequality holds
+$$ \E[\ln f(z|\vec\th_0)] \ge \E[\ln f(z|\vec\th)] $$
+
+\emph{Proof.}
+\begin{align*}
+  &\E[\ln f(z|\vec\th)] - \E[\ln f(z|\vec\th_0)] = \E[\ln f(z|\vec\th) - \ln f(z|\vec\th_0)] = \\
+  &\E\l[\ln \frac{f(z|\vec\th)}{f(z|\vec\th_0)} \r] \le \ln\E\l[ \frac{f(z|\vec\th)}{f(z|\vec\th_0)} \r]
+  =\ln \int\frac{f(z|\vec\th)}{f(z|\vec\th_0)}f(z|\vec\th_0)dz = 0
+\end{align*}
+
+
+\subsection{Assumptions}
+\begin{enumerate}
+  \item [(A1)] $\{ z_i \}$ are i.i.d.
+  \item [(A2)] $\vec\th_0$ is the true parameter, $\Theta$ is a compact set;
+  \item [(A3)] $\Var(\n_{\vec\th} \ln f(z_i|\vec\th_0))$ is nonsingular;
+  \item [(A4)] First, second and third own and cross derivatives of $\ln f(z_i|\vec\th)$ with respect to $\vec\th$ are all bounded;
+  \item [(A5)] Let $\Omega_{\mat Z}$ be the support of $\mat Z$, then either
+    \begin{enumerate}
+      \item $\Omega_{\mat Z}$ does not depend on $\vec\th$, or
+      \item $f(\vec Z|\vec\th)=0$ on the boundary of $\Omega_{\mat Z}$.
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection{Score Function}
+
+Define the score function:
+$$ s(z_i|\vec\th) = \n_{\vec\th} \ln f(z_i|\vec\th) $$
+
+Properties of the score function:
+\begin{enumerate}
+  \item $\{s(z_i|\vec\th)\}$ are i.i.d. because $\{ z_i \}$ are i.i.d.
+  \item If (A5) holds, then $\E[s(z_i|\vec\th_0)] = 0$.
+\end{enumerate}
+
+\emph{Proof.}
+By definition,
+$$ \int_{\Omega_{\mat Z}} f(z_i|\vec\th) dz = 1 $$
+Therefore, $\displaystyle \frac{\partial}{\partial \vec\th} \int_{\Omega_{\mat Z}} f(z_i|\vec\th) dz = 0$.
+By Leibniz rule,
+$$ \int_{A(\vec\th)}^{B(\vec\th)} \frac{\partial}{\partial \vec\th} f(z_i|\vec\th) dz
++ B'(\vec\th)f(B(\vec\th)|\vec\th) - A'(\vec\th)f(A(\vec\th)|\vec\th) = 0 $$
+
+Under (A5), either
+\begin{enumerate}
+  \item $A'(\vec\th) = B'(\vec\th) = 0$, or
+  \item $f(A(\vec\th)|\vec\th) = f(B(\vec\th)|\vec\th) = 0$
+\end{enumerate}
+In either case, we conclue
+$$ \int_{A(\vec\th)}^{B(\vec\th)} \frac{\partial}{\partial \vec\th} f(z_i|\vec\th) dz = 0 $$
+
+Therefore,
+\begin{align*}
+\E[s(z_i|\vec\th_0)] &= \int_{\Omega_{\mat Z}} s(z_i|\vec\th_0) f(z_i|\vec\th_0) dz \\
+ &= \int_{\Omega_{\mat Z}} \frac{\ln f(z_i|\vec\th_0)}{\partial\vec\th}f(z_i|\vec\th_0) dz\\
+ &= \int_{\Omega_{\mat Z}} \frac{1}{f(z_i|\vec\th_0)} \frac{f(z_i|\vec\th_0)}{\partial\vec\th}f(z_i|\vec\th_0) dz\\
+ &= \int_{\Omega_{\mat Z}} \frac{\partial}{\partial \vec\th} f(z_i|\vec\th_0) dz = 0
+\end{align*}
+
+\subsection{Properties of MLE}
+
+\subsubsection{Consistency}
+% By the likelihood inequality,
+% $$ \frac{1}{n} \ln L(\vec{\h\th}) \ge \frac{1}{n} \ln L(\vec\th_0) $$
+% $$ \lim_{n\to\infty} \P\left\{ \frac{1}{n} \ln L(\vec{\h\th}) < \frac{1}{n} \ln L(\vec\th_0) \right\} =1 $$
+% which implies, $\frac{1}{n} \ln L(\vec{\h\th}) \to \frac{1}{n} \ln L(\vec\th_0)$.
+Under some regularity conditions, we have $\vec{\h\th} \to \vec\th_0$.
+
+\subsubsection{Asymptotic normality}
+$$ \vec{\h\th}_{ML} = \underset{\vec\th \in \vec\Theta}{\mathrm{argmax}} \mean \ln f(z_i|\vec\th) $$
+
+The first-order condition is
+$$ \mean \frac{\partial\ln f(z_i|\vec{\h\th})}{\partial\vec\th} = 0 \Leftrightarrow \mean s(z_i|\vec{\h\th}) = 0 $$
+
+Let $\displaystyle \H(z_i|\vec\th) = \frac{\partial s(z_i|\vec{\th})}{\partial\vec\th} = \frac{\partial^2 s(z_i|\vec{\th})}{\partial\vec\th\partial\vec\th'}$.\\
+
+Taylor expand the FOC around $\vec\th_0$:
+$$ \mean s(z_i|\vec\th_0) + \mean \H(z_i|\vec\th_0)(\vec{\h\th} - \vec\th_0) = 0 $$
+
+Therefore,
+$$ \sqrt{n}(\vec{\h\th} - \vec\th_0) = \l(- \mean \H(z_i|\vec\th_0)\r)^{-1} \l(\sqrt{n}\cdot\mean s(z_i|\vec\th_0) \r) $$
+
+\begin{itemize}
+  \item By Law of Large Numbers,
+        \begin{align*}
+            \l(- \mean \H(z_i|\vec\th_0)\r)^{-1}
+                    &\pto \E[-\H(z_i|\vec\th_0)]^{-1} \\
+                     &\to \E[s(z_i|\vec\th_0)s(z_i|\vec\th_0)']^{-1}
+        \end{align*}
+  \item By Central Limit Theorem,
+       \begin{align*}
+            \sqrt{n}\cdot\mean s(z_i|\vec\th_0)
+                   &\dto \N(\vec 0, \Var(s(z_i|\vec\th_0))) \\
+                   &\to \N(\vec 0, \E[s(z_i|\vec\th_0)s(z_i|\vec\th_0)'])
+        \end{align*}
+% \item \mbox{ $\l(- \mean \H(z_i|\vec\th_0)\r)^{-1} \pto \E[-\H(z_i|\vec\th_0)]^{-1} = \E[s(z_i|\vec\th_0)s(z_i|\vec\th_0)']^{-1}$ }
+% \item \mbox{ $\sqrt{n}\cdot\mean s(z_i|\vec\th_0) \dto \N(\vec 0, \Var(s(z_i|\vec\th_0))) = \N(\vec 0, \E[s(z_i|\vec\th_0)s(z_i|\vec\th_0)'])$ }
+\end{itemize}
+
+By Slutsky's Theorem,
+$$ \sqrt{n}(\vec{\h\th} - \vec\th_0) \dto \N(\vec 0, \E[s(z_i|\vec\th_0)s(z_i|\vec\th_0)']^{-1}) $$
+
+
+\subsubsection{Asymptotic efficiency}
+$\vec{\h\th}$ is asymptotic efficient, meaning $\vec{\h\th}$ has an asymptotic covariance matrix
+that is not larger than the asymptotic covariance of any other consistent, asymptotically normally
+distributed estimator.
+
+\subsubsection{Invariance}
+If $\vec{\h\th}$ is the MLE of $\vec{\th}$, $g(\vec{\h\th})$ is the MLE for $g(\vec{\th})$
+for $g$ a continuously differentiable function.
+
+\subsection{Delta Method}
+If there is a sequence of random variables $\{x_n\}$ satisfying
+$$ \sqrt{n}(x_n - \th) \dto \N(0, \s^2) $$
+Then for any $g$ satisfying the perperty that $g'(\th)$ exists and non-zero valued, we have
+$$ \sqrt{n}(g(x_n) - g(\th)) \dto \N(0, \s^2 [g'(\th)]^2) $$
+
+\subsection{Quasi-MLE}
+Consider the maximum likelihood estimation of the linear model
+$$ y_i = \vec x_i' \vec\b + \e_i $$
+Assume $\e_i \sim \N(0,\s^2)$ ($\e_i$ may not be normal, but we assume it anyway).
+Then the log likelihood function is
+\begin{align*}
+  L(\vec\b, \s^2) &= \ln f(y_1, \vec x_1, \dots, y_n, \vec x_n | \vec\b, \s^2) \\
+    &= \ln f(y_1, \dots, y_n| \vec x_1, \dots, \vec x_n, \vec\b, \s^2) \\
+    &\qquad + \ln f(\vec x_1, \dots, \vec x_n|\vec\b, \s^2)
+\end{align*}
+We assume $\vec\b, \s^2$ do not depend on $\vec x_1, \dots, \vec x_n$,
+therefore $f(\vec x_1, \dots, \vec x_n|\vec\b, \s^2) = f(\vec x_1, \dots, \vec x_n)$.
+We can drop it from the likelihood function without altering the result.
+\begin{align*}
+  (\vec\b, \s^2) &= \underset{\vec\b, \s^2}{\mathrm{argmax}} \ln f(y_1, \dots, y_n| \vec x_1, \dots, \vec x_n, \vec\b, \s^2) \\
+                 &= \underset{\vec\b, \s^2}{\mathrm{argmax}} \sumn \ln f(y_i|\vec x_i, \vec\b, \s^2)
+\end{align*}
+
+Since $\e_i \sim \N(0,\s^2)$, $y_i|\vec x_i, \vec\b, \s^2 \sim \N(\vec x_i'\vec\b, \s^2)$.
+$$ f(y_i|\vec x_i, \vec\b, \s^2) = \frac{1}{\sqrt{2\pi\s^2}}\exp\l(-\frac{(y_i - \vec x_i'\vec\b)^2}{2\s^2}\r)$$
+
+Therefore, the likelihood function can be instantiated as
+$$ L(\vec\b, \s^2) = \sumn \left[ -\frac{1}{2}\ln (2\pi) - \frac{1}{2}\ln(\s^2) - \frac{(y_i - \vec x_i'\vec\b)^2}{2\s^2} \right] $$
+
+The first-order condition gives
+\begin{align*}
+  \vec{\h\b} &= \l( \sumn \vec x_i \vec x_i' \r)^{-1} \l( \sumn \vec x_i y_i \r) \\
+  \h{\s^2} &= \mean (y_i - \vec x_i' \vec{\h\b})^2
+\end{align*}
+which is exactly the same as the OLS estimator.
+
+\vspace{7.5in} % placeholder
+
+\end{document}
