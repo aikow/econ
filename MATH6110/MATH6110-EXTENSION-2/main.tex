@@ -1,0 +1,227 @@
+\documentclass[12pt,a4paper]{amsart}
+
+\newcommand{\suc}[1]{#1^+}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\turnin}{\faPencilSquareO}
+
+
+\usepackage[charter]{mathdesign}
+\usepackage{XCharter}
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{fontawesome}
+\usepackage{amssymb,amsmath,amsthm}
+
+\title{Analysis I Advanced Extension 2018: Assignment 2}
+\author{By Zeming Wang}
+
+\begin{document}
+\maketitle
+
+\subsection*{Problem 1: Incompleteness of $\bbQ$}
+In this problem we will show that $\mathbb{Q}$ is not a complete field: namely, we will find a Cauchy sequence in $\mathbb{Q}$ that does not converge in $\mathbb{Q}$.
+
+Define a sequence $(a_n)$ recursively, as follows.
+Set $a_0 = 2$.
+For each $n \geq 0$, set
+\[
+  a_{n+1} = \frac{a_n}{2} + \frac{1}{a_n}.
+\]
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+\item \turnin\ Show that $a_n^2 > 2$ for each $n\in \bbN$.
+
+\begin{proof}
+Prove by induction. $a_n^2 > 2$ holds for $n=0$, since $a_0=2$.
+Suppose $a_n^2 > 2$ holds for $n=k$. For $n=k+1$, we have
+$$ a_{k+1}^2 = \left(\frac{a_k}{2} + \frac{1}{a_k}\right)^2
+           = \frac{a_k^2}{4} + \frac{1}{a_k^2} + 1
+           \ge 2\sqrt{\frac{a_k^2}{4}\cdot \frac{1}{a_k^2}} + 1
+           = 1+1 = 2
+$$
+The equality holds only if $\dfrac{a_k^2}{4} = \dfrac{1}{a_k^2}$
+i.e. $a_k^2 = 2$. But $a_k^2 > 2$  by induction hypothesis,
+therefore $a_{k+1}^2 > 2$.
+Hence, $a_n^2 > 2$ for each $n\in \bbN$.
+\end{proof}
+
+
+\item \turnin\ Show that for each $n \geq 0$, we have
+  \[
+    0 < \left(\frac{a_n}{2} - \frac{1}{a_n}\right) < \frac{1}{2^n}.
+  \]
+
+\begin{proof}
+By part (a), we have $a_n > 0$ and $a_n^2 > 2$ for all $n\in \bbN$.
+$$ a_n^2 > 2 \Leftrightarrow \frac{a_n}{2} > \frac{1}{a_n} $$
+Therefore, $\left(\dfrac{a_n}{2} - \dfrac{1}{a_n}\right)>0$ is proved.\\
+
+\noindent
+Prove the other part by induction. For $n=0$, the inequality holds because
+$$ 0 < \left(\frac{a_0}{2} - \frac{1}{a_0}\right) = \frac{1}{2}<\frac{1}{2^0} $$
+Suppose the proposition holds for $n=k$, i.e.
+\begin{align*}
+0 < \left(\dfrac{a_k}{2} - \dfrac{1}{a_k}\right) < \dfrac{1}{2^k}
+\Leftrightarrow
+0 < a_k - \left(\dfrac{a_k}{2} + \dfrac{1}{a_k}\right) < \dfrac{1}{2^k}
+\Leftrightarrow
+0 < (a_k - a_{k+1}) < \dfrac{1}{2^k}
+\end{align*}
+Therefore, $a_{k+1} < a_k$ and $\dfrac{1}{a_{k+1}} > \dfrac{1}{a_k}$.
+Now consider $n=k+1$, we have
+\begin{align*}
+\left(\frac{a_{k+1}}{2} - \frac{1}{a_{k+1}}\right)
+  < \left(\frac{a_{k+1}}{2} - \frac{1}{a_{k}}\right)
+  = \frac{1}{2}\left(\frac{a_{k}}{2} + \frac{1}{a_{k}}\right) - \frac{1}{a_k}
+  = \frac{1}{2}\left(\frac{a_{k}}{2} - \frac{1}{a_{k}}\right)
+  < \frac{1}{2^{k+1}}
+\end{align*}
+Therefore, the proposition holds for $n=k+1$ and thus for all $n \in\bbN$.
+\end{proof}
+
+\item \turnin\ Conclude that $a_n$ is a decreasing sequence.
+  That is, for each $n \in \bbN$, we have $a_{n+1} < a_n$.
+
+\begin{proof}
+By part (b), we have $\left(\dfrac{a_n}{2} - \dfrac{1}{a_n}\right)>0$ for all $n$. Therefore,
+$$ a_{n+1} - a_n = \frac{a_n}{2} + \frac{1}{a_n} - a_n = \frac{1}{a_n} - \frac{a_n}{2} < 0 $$
+which shows $a_n$ is a decreasing sequence.
+\end{proof}
+
+\item \turnin\ Show that $a_n$ is a Cauchy sequence.
+
+\begin{proof}
+By part (b), we have $0 < a_n - a_{n+1} < \dfrac{1}{2^n}$. \\
+\noindent
+Suppose $N \in\bbN$, $\forall n > m > N$, we have
+\begin{align*}
+|a_m - a_n| &\le |a_{m} - a_{m+1}| + |a_{m+1} - a_{m+2}| + \cdots + |a_{n-1} - a_{n}|  \\
+&< \frac{1}{2^m} + \frac{1}{2^{m+1}} + \cdots + \frac{1}{2^{n-1}}
+= \frac{1}{2^m} \left(1 + \frac{1}{2} + \cdots + \frac{1}{2^{n-m-1}} \right)
+\end{align*}
+The sequence $1 + \dfrac{1}{2} + \cdots + \dfrac{1}{2^{n-m-1}}$ is bounded, and
+$\dfrac{1}{2^m} \to 0$ as $N\to\infty$. Therefore, $|a_m - a_n| \to 0$ as $N\to\infty$,
+which shows $a_n$ is Cauchy.
+\end{proof}
+
+\item \turnin\ Show that the sequence $(a_n^2)$ converges to $2 \in \bbQ$.
+
+\begin{proof}
+By part (b), we have $\left(\dfrac{a_n}{2} - \dfrac{1}{a_n}\right) < \dfrac{1}{2^n}$.
+Therefore, $\left(\dfrac{a_n}{2} - \dfrac{1}{a_n}\right)^2 < \dfrac{1}{2^{2n}}$.
+$$ |a_{n+1}^2 - 2| = \left\rvert \frac{a_n^2}{4} +\frac{1}{a_n^2} - 1 \right\rvert
+     = \left\rvert \left(\dfrac{a_n}{2} - \dfrac{1}{a_n}\right)^2 \right\rvert
+     < \frac{1}{2^{2n}}
+$$
+Therefore, $|a_{n+1}^2 - 2|\to 0$ as $n\to\infty$, which is equivalent to say $a_n^2 \to 2$.
+\end{proof}
+
+\item \turnin\ Suppose that $(a_n)$ converges to a limit $q \in \bbQ$.
+  Prove explicitly that we must have $q^2 = 2$.
+  \emph{(Hint: you may show that for each rational $\epsilon > 0$, we have $|q^2-2| < \epsilon$.)}
+
+\begin{proof}
+\setlength{\parskip}{0.5em}
+Fix $\epsilon > 0$. Let $\epsilon_1 = \dfrac{\epsilon}{2(\sqrt{2}+q)}$, $\epsilon_2 = \dfrac{\epsilon}{2}$.
+
+\begin{compactenum}[(i)]
+  \setlength{\itemsep}{0.5em}
+  \item $a_n \to q$ implies $\exists N_1 > 0$, such that
+        $\forall n>N_1$ $\Rightarrow$ $|a_n - q| < \epsilon_1$.
+  \item By part (e), $a_n^2 \to 2$ implies $\exists N_2 > 0$ such that
+        $\forall n>N_2$ $\Rightarrow$ $|a_n^2 - 2| < \epsilon_2$.
+\end{compactenum}
+\noindent
+Therefore, by taking $n>\max\{ N_1, N_2\}$, we have
+\begin{align*}
+|q^2 - 2| &\le |a_n^2 - q^2| + |a_n^2 - 2| = |(a_n+q)(a_n - q)| + |a_n^2 - 2|  \\
+ &< |a_n+q|\epsilon_1 + \epsilon_2
+  <(\sqrt{2} + q)\cdot \frac{\epsilon}{2(\sqrt{2}+q)} + \frac{\epsilon}{2}
+  = \epsilon
+\end{align*}
+Since $\epsilon$ can be arbitrarily small, we have $q^2=2$.
+\end{proof}
+
+\item Using the fact that there is no rational number $q$ such that $q^2 = 2$ (you don't need to prove this), conclude that $\bbQ$ is not complete.
+
+\begin{proof}
+By part (d), $(a_n)$ is Cauchy in $\bbQ$, however $a_n \to q \notin\bbQ$. Thus $\bbQ$ is not complete.
+\end{proof}
+
+\end{compactenum}
+
+\subsection*{Problem 2: The $p$-adic norm}
+For this problem, you may use the unique factorization property of integers and its consequences.
+Recall that unique factorization means that every positive integer has a unique (up to order) expansion as a product of prime powers.
+
+Fix a prime number $p$.
+We recall the definition of the $p$-adic distance.
+Observe that for any $x \in \bbQ$, there is a unique integer $a$ such that
+\[
+  x = p^a \frac{r}{s},
+\]
+where $r, s \in \bbZ$ such that $p \nmid r$ and $p \nmid s$.
+In this case, We set $|x|_p = p^{-a}$.
+Given $x, y \in \bbQ$, we define the $p$-adic distance as $d_p(x,y) = |x-y|_p$.
+\begin{compactenum}[(a)]
+\item \turnin\ Show that $d_p$ is a metric.
+  Moreover show that it satisfies the strong triangle inequality: if $x, y\in \bbQ$, then $|x+y|_p \leq \max\{|x|_p,|y|_p\}$.
+
+  \begin{proof}
+    To show $d_p$ is a metric, we need to show:
+      \begin{enumerate}
+        \item $|x-y|_p \ge 0$, and $|x-y|_p = 0$ iff $x=y$;
+        \item $|x-y|_p = |y-x|_p$;
+        \item $|x-y|_p \le |x-z|_p + |z-y|_p$.
+      \end{enumerate}
+      (a) is clear since for any $x \in \bbQ$ there is a unique $|x|_p = p^{-a}$ and
+      $|x|_p = p^{-a} > 0$ if $x\neq 0$, $|x|_p = 0$ if $x=0$ by definition.
+      Therefore, $|x-y|_p \ge 0$ for any $x,y\in\bbQ$ and $|x-y|_p = 0$ iff $x=y$.\\
+      (b) is also clear since $(x-y)$ and $(y-x)$ only differs in sign, and they
+      share the same $p^a$ for some $a$. If $x=y=0$, the equality also holds
+      since $|x-y|_p = |y-x|_p = 0$. \\
+      (c) if we can prove the strong triangle inequality, (c) will just follow. Because if
+      $$ |x+y|_p \leq \max\{|x|_p,|y|_p\} \leq |x|_p + |y|_p $$
+      Then we have
+      $$ |x-y|_p = |x-z+z-y|_p \leq |x-z|_p + |z-y|_p $$
+      So we only need to prove that the strong triangle inequality holds.
+      To show this, first note that if $x=0$ or $y=0$ or $x=y=0$, the inequality trivally holds.
+      So let $x\neq 0$ and $y\neq 0$ and suppose $x=p^a \frac{r}{s}$ and $y=p^b\frac{r'}{s'}$
+      where $p \nmid r,s$ and $p \nmid r',s'$.
+      Without loss of generality, we may assume $a\ge b$, and thus $|x|_p \le |y|_p$. Then,
+      $$ x+y = p^a \frac{r}{s} + p^b\frac{r'}{s'} = p^b\left(p^{a-b} \frac{r}{s} + \frac{r'}{s'}\right)  $$
+      If $x+y = p^c \frac{r''}{x''}$ for some $c$, it must be $c\ge b$.
+      Therefore, we have $|x+y|_p \le p^{-b} = \max\{|x|_p,|y|_p\}$.
+  \end{proof}
+
+\item \turnin\ Define a sequence $a_n\colon \bbN \to \bbQ$ by setting $a_0 = 1$ and $a_{n+1} = a_n + p^n$.
+  Show that $a_n$ is a Cauchy sequence that converges in $\bbQ$ under the $p$-adic metric.
+  Find its limit (with proof).
+
+  \begin{proof}
+    Note that since $a_{n+1} - a_n = p^n$, we have $|a_{n+1} - a_n|_p = p^{-n}$.
+    Suppose $m>n>N$, by triangle inequality proved in part (a), we have
+    \begin{align*}
+      |a_m - a_n|_p &\le |a_m - a_{m-1}|_p + \cdots + |a_{n+1} - a_n|_p \\
+                    &= p^{-(m-1)} + p^{-(m-2)} + \cdots + p^{-(n+1)} + p^{-n} \\
+                    &= p^{-n} \left(1+ \frac{1}{p} + \frac{1}{p^2} + \cdots + \frac{1}{p^{m-n-1}}\right)
+                     = p^{-n} \sum_{k=0}^{m-n-1} \frac{1}{p^k}
+    \end{align*}
+    We know the series $\sum_{k=0}^{m-n-1} \frac{1}{p^k}$ is bounded, and $p^{-n}\to 0$ as $n\to \infty$.
+    Therefore, as $N\to\infty$, $|a_m - a_n|_p \to 0$, which proves $(a_n)$ is Cauchy. \\
+    Note $a_n = 1+1+p+p^2+\cdots+p^{n-1}$, we would guess $a_n\to 1+\frac{1}{1-p}$
+    (since the geometric series converge to $\frac{1}{1-p}$). To prove this,
+    \begin{align*}
+      \left\rvert a_n - \left(1 + \frac{1}{1-p}\right) \right\rvert_p &=
+          \left\rvert a_{n} - a_{n-1} + \cdots + a_1-a_0 - \frac{1}{1-p}\right\rvert_p \\
+          &\le |a_{n} - a_{n-1}|_p + \cdots + |a_1-a_0|_p + \frac{1}{1-p} \\
+          &= p^{-(n-1)}+\codts + p^{-1} + 1 +  \frac{1}{1-p} \\
+          &= \frac{1-p^{-n}}{1-p^{-1}} + \frac{1}{1-p} \\
+          &\to \frac{p}{p-1} + \frac{1}{1-p} = 0 \qquad\textrm{ as } n\to\infty
+    \end{align*}
+    Therefore, we conclude $\lim_{n\to\infty} a_n = 1+\frac{1}{1-p}$.
+  \end{proof}
+\end{compactenum}
+\end{document}

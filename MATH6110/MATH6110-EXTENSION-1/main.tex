@@ -1,0 +1,129 @@
+\documentclass[12pt,a4paper]{amsart}
+
+\newcommand{\suc}[1]{#1^+}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\turnin}{\faPencilSquareO}
+\newcommand{\set}[1]{\{#1\}}
+
+\usepackage[charter]{mathdesign}
+\usepackage{XCharter}
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{fontawesome}
+
+\title{Analysis I Advanced Extension 2018: Assignment 1}
+\author{Due on 16 March 2018\\Instructor: Asilata Bapat}
+\begin{document}
+\maketitle
+
+\noindent Questions marked with a \turnin\ symbol are to be turned in for credit.
+The others are just for practice and fun.
+(Be careful; some of these are tricky!)
+The parts are weighted equally.
+
+\subsection*{Problem 1: Warm-up}
+
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+%\item Show that if $n \in \bbN$, then $\suc{n} \neq 0$.
+\item[(b)] \turnin\ Show that if $n \in \bbN$, then $\suc{n} \neq n$.
+
+\begin{proof}
+By definition $\suc{n} = n \cup \{n\}$.
+Suppose, for a contradiction, $\suc{n} = n$, then $n \cup \{n\} = n$.
+This would mean $\{n\} \subset n$. But this cannot happen.
+By the axiom of foundation, $n \cap \{n\} = \emptyset$.
+If $\{n\} \subset n$, $n \cap \{n\} = \{n\} \neq \emptyset$.
+Therefore, it must be $\suc{n} \neq n$.
+\end{proof}
+
+\item[(c)] \turnin\ Give an example of some $n \in \bbN$ and a proper subset $x \subsetneq n$, such that $x \notin n$.
+  You should write out both $n$ and $x$ fully by listing their elements.
+
+\begin{proof}
+  Let $n = 2 = \set{ \emptyset, \set{\emptyset} }$. Let $x = \set{\set{\emptyset}}$.
+  Then clearly, $x \subsetneq n$, but $x \notin n$.
+\end{proof}
+
+\item[(d)] \turnin\ Show that for every set $x$, we have $x \notin x$.
+
+\begin{proof}
+Consider the set $\set{x}$. By the axiom of foundation, there must be an element in $\set{x}$
+that is disjoint with itself. Since $x$ is the only element in the set, we must have $x \cap \set{x} = \emptyset$.
+Notice that if $x \in x$, $x \cap \set{x} \neq \emptyset$. So we must have $x \notin x$.
+\end{proof}
+
+\end{compactenum}
+
+\vspace{1em}
+\subsection*{Problem 2: Every $n \in \bbN$ has at most one predecessor}
+The aim of this problem is to prove the theorem we stated in class: if $m, n \in \bbN$ such that $\suc{m} = \suc{n}$, then $m = n$.
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+\item \turnin\
+  Let $T = \{n \in \bbN \mid \forall x \in n, x \subseteq n\}$.
+  Show that $T = \bbN$.
+
+\begin{proof}
+Prove by induction.
+Let $P(n)$ be the proposition: $\forall x \in n, x \subseteq n$.\\
+$P(0)$ is vacuously true. Suppose $P(n)$ is true. We want to show $\forall x \in \suc{n}, x \subseteq \suc{n}$.\\
+If $x \in \suc{n} = n \cup \set{n}$, either $x \in n$, or $x \in \set{n}$.
+If $x \in n$, by induction hypothesis, $x \subseteq n \subseteq \suc{n}$.
+If $x \in \set{n}$, then $x=n$, we also have $x \subseteq \suc{n}$.
+So $x \subseteq \suc{n}$ in both cases.
+Therefore we conclude $P(n)$ is true for all $n \in \bbN$, i.e. $T=\bbN$.
+\end{proof}
+
+\item \turnin\ Now let $T = \{n \in \bbN \mid \forall m\in \bbN, \text{ if } \suc{m} = \suc{n} \text{ then } m = n\}$.
+  Use the previous part of the problem to show that $T = \bbN$.
+
+\begin{proof}
+Suppose $m,n \in \bbN$ and $m \neq n$. Then either $m \in n$ or $n \in m$
+(since $\forall x \in \bbN$, $x \in \suc{x}$, and for any $m \neq n$, we can always establish the relation
+$(\suc{(\suc{(\suc{m})})})\cdots = n$ or $(\suc{(\suc{(\suc{n})})})\cdots = m$).
+If $m \in n$, then we have $\set{m} \subseteq n$. Also by (a), $m \subseteq n$. So $\suc{m} = m \cup \set{m} \subseteq n$.
+Since $n \subsetneq \suc{n}$ ($n \neq \suc{n}$ proved in 1(b)), we have $\suc{m} \subsetneq \suc{n}$.
+In the other case, if $n \in m$, similarly, we can prove $\suc{n} \subsetneq \suc{m}$. In either case, $\suc{m} \neq \suc{n}$.
+Therefore we conclude: $\forall m,n \in \bbN$, if $m \neq n$, then $\suc{m} \neq \suc{n}$. Hence, $T = \bbN$ is proved.
+\end{proof}
+
+\end{compactenum}
+
+\vspace{1em}
+\subsection*{Problem 3: Ordinal numbers}
+A set $\alpha$ is called an ordinal number if the following properties hold.
+\begin{compactitem}
+\item For every $x$, if $x \in \alpha$ then $x \subseteq \alpha$.
+\item Every non-empty subset $T \subseteq \alpha$ has a smallest element with respect to the relation $\in$.
+  That is, there is some $m \in T$ such that for every $x \in T$, either $m \in x$ or $m = x$.
+\end{compactitem}
+\vspace{0.5em}
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+\item \turnin\ Show that $\emptyset$ is an ordinal number.
+
+\begin{proof}
+The statement is vacuously true, since $\emptyset$ has no element or subset.
+\end{proof}
+
+\item \turnin\ Show that if $\alpha \neq \emptyset$ is an ordinal number, then $\emptyset \in \alpha$.
+
+\begin{proof}
+$\alpha$ is an ordinal number, so the two properties hold. Let the non-empty subset $T$ be $\alpha$ itself.
+The 2nd property ensures there exists $m \in \alpha$ such that for every $x \in \alpha$, either $m \in x$ or $m=x$.
+Take $x=\emptyset$, clearly, $\emptyset \in \alpha$. Since $m \notin \emptyset$, it must be $m=\emptyset$.
+Therefore, the existence of $m \in \alpha$ guarantees $\emptyset \in \alpha$.
+\end{proof}
+
+% \item Show that if $\alpha$ is an ordinal number and $\beta \in \alpha$, then $\beta$ is an ordinal number.
+% \item Show that if $\alpha\neq \beta$ are ordinal numbers and $\alpha \subseteq \beta$, then $\alpha \in \beta$.\\
+%   \emph{(Remark: Compare with part (c) of Problem 1.)}
+% \item Show that if $\alpha\neq \beta$ are ordinal numbers, then either $\alpha \in \beta$ or $\beta \in \alpha$.
+% \item Show that every $n \in \bbN$ is an ordinal number.
+%   Use this to show that $\bbN$ is an ordinal number.
+% \item Can you construct an ordinal number $\beta$ such that $\bbN \in \beta$?
+
+\end{compactenum}
+
+\end{document}

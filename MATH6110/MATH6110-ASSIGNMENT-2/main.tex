@@ -1,0 +1,291 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+%\usepackage[alphabetic]{amsrefs}
+%\usepackage{calrsfs}
+%\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{color}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\def\R{{\mathbb R}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\N{{\mathbb N}}
+\def\H{{\mathbb H}}
+\def\RP{{\mathbb {RP}}}
+\def\p{\partial}
+\def\O{\Omega}
+\def\pO{{\partial\Omega}}
+\def\bO{\overline\Omega}
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\def\G{\Gamma}
+\def\d{\delta}
+\def\D{\Delta}
+\def\e{\epsilon}
+\def\r{\rho}
+\def\t{\tau}
+\def\l{\lambda}
+\def\L{\Lambda}
+\def\k{\kappa}
+\def\s{\sigma}
+\def\th{\theta}
+\def\o{\omega}
+\def\z{\zeta}
+\def\n{\nabla}
+\def\T{{\mathcal T}}
+\def\X{{\mathcal X}}
+\def\area{\mathrm{area}}
+\def\dist{\mathrm{\rm dist}}
+\def\diag{\mathrm{diag}}
+\def\spt{\mathrm{spt\,}}
+\def\diam{\mathrm{diam\,}}
+\def\dim{\mathrm{dim\,}}
+\def\graph{\mathrm{graph\,}}
+\def\interior{\mathrm{int\,}}
+\def\exterior{\mathrm{ext\,}}
+\def\diag{\mathrm{diag\,}}
+\def\Image{\mathrm{Image}\,}
+\def\osc{\mathop{\text{\rm osc}}}
+
+
+\def\ra{\rightarrow}
+\def\rai{\rightarrow\infty}
+
+\overfullrule0pt \hoffset=0cm
+\parskip=4pt
+\parindent=0pt
+\baselineskip=20pt
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+\huge
+\vspace*{1.0in} MATH2320/3116/6110
+\\\vspace{0.5in} \textsc{Assignment 2}
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Lecture: John Urbas}
+\\\vspace{0.1in} \textsc{Tutor: Sophie Chen}
+\\\vspace{0.1in} \textsc{Tutorial: Wednesday 5-6 pm}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: 29 March 2018}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+%All questions are of equal value.
+
+%\bigskip
+
+
+{\bf 1.} [4+4+4+4=16 points]
+
+Let $(X,d)$ be a metric space.
+
+(a) Show that  $\tilde d(x,y)=\min\{1,d(x,y) \}$ defines a metric on $X$.
+
+\begin{proof}
+  To show $\tilde{d}$ is a metric, we need to show:
+  \begin{enumerate}[(i)]
+    \item $\tilde{d}(x,y) \geq 0$, $\tilde{d}(x,y)=0$ iff $x=y$;
+    \item $\tilde{d}(x,y) = \tilde{d}(y,x)$;
+    \item $\tilde{d}(x,y) \leq \tilde{d}(x,z) + \tilde{d}(z,y)$.
+  \end{enumerate}
+  It is clear that (i) and (ii) hold because $d(x,y)$ is a metric.
+  It only remains to show the triangle inequality holds, i.e.
+
+  $$ \tilde{d}(x,y) \leq \tilde{d}(x,z) + \tilde{d}(z,y) $$
+
+  If $d(x,y) \leq 1$, then $\tilde{d}(x,y) = d(x,y)$.
+  If both $d(x,z) \leq 1$ and $d(z,y) \leq 1$,  we have
+  $\tilde{d}(x,z) = d(x,z)$ and $\tilde{d}(z,y) = d(z,y)$.
+  The triangle inequality holds for $\tilde{d}$, because
+  it holds for $d$. If either $d(x,z) > 1$ or $d(z,y) > 1$, we must have
+  $\tilde{d}(x,z) + \tilde{d}(z,y) > 1$. Because $\tilde d(x,z) \leq 1$,
+  the triangle inequality also holds. \\
+
+  If $d(x,y) > 1$, then $\tilde{d}(x,y) = 1$. On the right hand side,
+  if both $d(x,z) \leq 1$ and $d(z,y) \leq 1$,
+  $\tilde d(x,z)+\tilde d(z,y) = d(x,z)+d(z,y) \geq d(x,y) > 1 = \tilde d(x,y)$.
+  If either $d(x,z) > 1$ or $d(z,y) > 1$, we have
+  $\tilde{d}(x,z) + \tilde{d}(z,y) > 1 = \tilde{d}(x,y)$.
+  Therefore, the triangle inequality also holds.
+\end{proof}
+
+\medskip
+
+(b) Is $\hat d=d^2$ necessarily a metric on $X$? Give a proof or a counterexample.
+
+\begin{proof}
+No. To show a counterexample, consider the metric space $X=\R$ and $d(x,y)=|x-y|$.
+Let $x > z > y$, using the $\hat d=d^2$ metric, we have
+$$ |x-y|^2 = |x-z + z-y|^2 = |x-z|^2 + |z-y|^2 + 2|x-z||z-y| > |x-z|^2 + |z-y|^2 $$
+So $\hat d=d^2$ is not a metric.
+\end{proof}
+
+\medskip
+
+(c) Let $X$ be a nonempty set and suppose that $d:X\times X\ra \R$
+satisfies
+$$ d(x,x)=0 \quad\mbox{for all} \quad x\in X, $$
+$$ d(x,y)=d(y,x)\in [1,2] \quad\mbox{for all}\quad x,y\in X, \ x\neq y. $$
+Prove that $d$ is a metric on $X$.
+
+\begin{proof}
+  The nonnegativity and symmetry are trivial. The triangle inequality
+  $$d(x,y) \leq d(x,z) + d(z,y), \qquad\forall x,y,z \in X $$
+  must hold because if $d(x,y) > d(x,z) + d(z,y)$, with $d(x,z) \in [1,2]$
+  and $d(z,y) \in [1,2]$, we would have $d(x,y) > 2$, which contradicts the
+  definition of $d(x,y) \in [1,2]$. Therefore, $d$ is a metric on $X$.
+\end{proof}
+
+\medskip
+
+(d) Let $X$ be a nonempty set and suppose that $d:X\times X\ra \R$ satisfies all the axioms of
+a metric except that the triangle inequality is reversed:
+$$ d(x,y) \ge d(x,z)+d(z,y) \quad\mbox{for all}\quad x,y,z\in X. $$
+Prove that $X$ contains exactly one element.
+
+\begin{proof}
+  Follow the reversed triangle inequality, we have
+  $$ d(x,y) \ge d(x,z)+d(z,y) $$
+  $$ d(x,z) \ge d(x,y)+d(y,z) $$
+  $$ d(y,z) \ge d(y,x)+d(x,z) $$
+  Sum up for both sides, and use axiom of symmetry,
+  $$ d(x,y) + d(x,z) + d(y,z) \ge 2(d(x,y) + d(x,z) + d(y,z) )$$
+  Therefore,
+  $$ d(x,y) + d(x,z) + d(y,z) \le 0 $$
+  By the axiom of nonnegativity, this implies
+  $$ d(x,y) = d(x,z) = d(y,z) = 0 $$
+  which further implies $x = y = z$.
+  The above result holds for all $x,y,z\in X$, which proves
+  $X$ contains only one element.
+\end{proof}
+
+\bigskip
+
+
+{\bf 2.} [5+10=15 points]
+
+(a) Let $(X,d)$ be a metric space. Prove that the complement of any finite set $F\subset X$
+is open.
+
+\begin{proof}
+  If $F^C$ is empty, i.e. $F = X$, then $F^C$ is open.
+  If $F^C \neq \emptyset$, $\forall x \in F^C$, let
+  $$ d_m = \min_{y \in F} \{ d(x,y) \} $$
+  Then $B(x, d_m) \subset F^C$, because all points in $F$ have a distance from $x$
+  greater than or equal to $d_m$. Therefore, $F^C$ is open.
+\end{proof}
+
+\medskip
+
+(b) Let $X$ be a  set containing infinitely many elements, and let $d$ be a metric on $X$.
+Prove that $X$ contains an open set $U$ such that $U$ and its complement $U^c=X\backslash U$
+are both infinite.
+
+\begin{proof}
+  Note that if $x \in X$ is a limit point, then any open ball around $x$ contains infinitely many points.
+  Because $\forall r_1>0$, by the definition of a limit point, $\exists x_1 \in B_{r_1}(x)$.
+  Let $r_2 = \frac{1}{2}d(x,x_1)$, then $\exists x_2 \in B_{r_2}(x)$.
+  Then we can define $r_3 = \frac{1}{2}d(x,x_2)$, and $\exists x_3 \in B_{r_3}(x)$...
+  This process can go on forever. Thus we can find infinitely many points in a neighbourhood of $x$.\\
+
+  If we can find two limit points $x,y \in X$, we can define $U = B(x, d(x,y)/2)$.
+  $U$ is certainly an open set with infinitely many points.
+  $U^C$ is also infinite because $B(y, d(x,y)/2) \subset U^C$. \\
+
+  If $X$ contains at most one limit point, then it must contain infinitely many isolated points.
+  Define $X' = \{ x\in X: x \textrm{ is an isolated point}\}$.
+  Note that $X'$ and every subset of $X'$ is open because
+  $\forall x \in X'$, $\exists r>0$ such that $B_r(x)=\{x\} \subset X'$.
+  So it only remains to show $X'$ can be separated into two infinite disjoint subsets.\\
+
+  If $X'$ is countable, i.e. $X' = \{x_i\}_{i\in\N}$. This can be done by separating $X'$ into
+  $U = \{ X_{2i}\}_{i\in\N}$ and $X'\setminus U = \{ X_{2i+1}\}_{i\in\N}$.
+  Then $U$ is open and $U$ and $U^C$ both infinite.
+  If $X'$ is uncountable, by the well-ordering theorem, we can order the elements of $X'$
+  into $x_1, x_2, x_3, \dots$, then we can define $U$ in the same way.
+  Thus, the proposition is proved.
+\end{proof}
+
+\bigskip
+
+
+{\bf 3.} [4+4+6=14 points]
+
+(a) Prove that if $B_r(x)$ and $B_s(y)$ are two nonempty open balls in $\R^n$ and $B_r(x)=B_s(y)$,
+then $x=y$ and $r=s$. In other words, in $\R^n$ every ball has a unique centre and a unique radius.
+
+\begin{proof}
+  It is equivalent to prove if either $x \neq y$ or $r \neq s$, then $B_r(x) \neq B_r(y)$.
+  Suppose $x \neq y$ and $r = s$, then $d(x,y)>0$. Let $0 < \epsilon < d(x,y)$. Define
+  $$ z = x + \frac{x-y}{\norm{x-y}}(r-\epsilon) $$
+  Then $z \in B_r(x)$, because $d(z,x) = \norm{\frac{x-y}{\norm{x-y}}(r-\epsilon)} = r - \epsilon < r$.
+  But $d(z,y)= \norm{ x-y + \frac{x-y}{\norm{x-y}}(r-\epsilon) } =\norm{x-y} + (r-\epsilon)=r + (d(x,y)-\epsilon) >r$,
+  so $z \notin B_r(y)$. Therefore, $B_r(x) \neq B_r(y)$. \\
+
+  Suppose $x=y$ and suppose without lost of generality $r<s$. Let $0<\epsilon<s-r$, and
+  $$ z = x + \frac{x}{\norm{x}}(r+\epsilon) $$
+  Then $d(z,x) = r+\epsilon > r$ and $d(z,y)=r+\epsilon < s$. So $z \in B_r(x)$ but $z \notin B_r(y)$,
+  which implies $B_r(x) \neq B_r(y)$.\\
+
+  Hence, we proved every ball in $\R^n$ has unique centre and radius.
+\end{proof}
+
+\medskip
+
+(b) Is the result in (a) true if we replace $\R^n$ by an arbitrary metric space?
+Give a proof or a counterexample.
+
+\begin{proof}[Solution]
+Not true. Consider the discrete metric space $(X,d)$ where
+$$
+d(x,y) =
+\begin{cases}
+  1 \qquad\textrm{if } x \neq y\\
+  0 \qquad\textrm{if } x=y
+\end{cases}
+$$
+Let $r>1, s>1$, then $B_r(x) = B_s(y) = X$ for all $x,y \in X$.
+\end{proof}
+
+\medskip
+
+(c) Let $C[0,1]$ denote the collection of continuous real valued functions on $[0,1]$
+equipped with the metric
+$$ d(f,g)= \sup_{x\in[0,1]} |f(x)-g(x)|. $$
+Let $C$ be the set of constant functions in $C[0,1]$.
+Find the interior, exterior and boundary of $C$ in $C[0,1]$.
+Justify your answers carefully.
+
+\begin{proof}[Solution]
+The interior of $C$ is $\emptyset$. Because $\forall f \in C$, and $\forall \epsilon > 0$,
+we can always find a non-constant function $g$ such that $d(f,g) < \epsilon$.
+For example, suppose $f(x) = a$, let $0 < r < \epsilon$, and
+$g(x) = r\sin x + a$. Then $|g(x) - f(x)| = |r\sin x| \leq r < \epsilon$. \\
+
+The boundary of $C$ is $C$ itself. The above proof shows there always exists a
+non-constant function in $B_{\epsilon}(f)$, $\forall f \in C$, $\forall \epsilon > 0$.
+We can also show there always some constant function $h \in B_{\epsilon}(f)$.
+For example, if $f(x)=a$, let $0 < r < \epsilon$ and $h(x)=a-r$. Then
+$|f(x)-h(x)|=|a-(a-r)|=r < \epsilon$. Therefore $\partial C = C$.\\
+
+We know $C[0,1] = \interior{C} \cup \exterior{C} \cup \parital C = \exterior{C} \cup C$.
+Therefore, $\exterior{C} = C[0,1]\setminus C = C^{C}$.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,149 @@
+\documentclass[12pt, a4paper]{amsart}
+
+\usepackage[charter]{mathdesign}
+\usepackage{XCharter}
+\usepackage[margin=1in]{geometry}
+\usepackage{paralist}
+\usepackage{fontawesome}
+
+\newcommand{\turnin}{\faPencilSquareO}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\LL}{\operatorname{LL}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\fc}{\operatorname{fc}}
+\newcommand{\met}{\operatorname{met}}
+\renewcommand{\int}[1]{\operatorname{int}(#1)}
+
+\title{Analysis I Advanced Extension 2018: Assignment 3}
+% \author{Due on 25 May 2018\\Instructor: Asilata Bapat}
+\author{By Zeming Wang}
+
+\begin{document}
+\maketitle
+
+\subsection*{Problem 1: Interior and closure}
+Let $X$ be a topological space. Prove the following.
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+\item \turnin\ $\operatorname{int}(A)$ is open.
+
+\begin{proof}
+By definition of an interior point, $\forall x \in \int{A}$,
+$\exists V_x \in \calO$ such that $x \in V_x$ and $V_x \subset \int{A}$.
+Therefore, $\displaystyle \int{A} = \cup_{x\in\int{A}} V_x$
+($V_x \subset \int{A}$, therefore $\cup_x V_x \subset \int{A}$;
+$\forall x\in \int{A}$, $x \in V_x$, therefore $\int{A} \subset \cup_x V_x$).
+By definition, the union of open sets is open. Therefore, $\int{A}$ is open.
+\end{proof}
+
+\item \turnin\ Every open set contained in $A$ is contained in $\operatorname{int}(A)$.
+
+\begin{proof}
+Let $U$ be any open set contained in $A$. Then $\forall x \in U$, $x \in U \subset A$.
+By definition, $x$ is an interior point of $A$ since $U$ is open.
+Therefore, every point in $U$ is an interior point.
+Therefore, $U \subset \int{A}$.
+\end{proof}
+
+\item \turnin\ Conclude that $A$ is open if and only if $A = \operatorname{int}(A)$.
+
+\begin{proof} $ $\\
+\noindent
+($\Rightarrow$) If $A$ is open, then $\forall x \in A$, we have $x \in A \subset A$, therefore $x\in\int{A}$.
+Since it holds for all $x \in A$, we have $A \subset \int{A}$. Obviously, $\int{A} \subset A$.
+Threfore, $A = \int{A}$.\\
+\noindent
+($\Leftarrow$) If $A = \int{A}$, then $\forall x \in A$,
+$\exists V_x \in \calO$ such that $x\in V_x$ and $V_x \subset A$.
+Therefore, $A = \cup_{x \in A} V_x$, which is open by definition.
+\end{proof}
+
+% \item By running the above arguments on $X \setminus A$, conclude the following: $\overline{A}$ is closed, every closed set containing $A$ contains $\overline{A}$, and $A$ is closed if and only if $A = \overline{A}$.
+\end{compactenum}
+\vspace{1em}
+
+\subsection*{Problem 2: The lower limit topology on $\bbR$}
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+\item \turnin\ If $A \subset \bbR_{\LL}$, then show that $x \in \bbR_{\LL}$ lies in $\overline{A}$ if and only if there is a sequence $(x_n)$ in $A$ such that $x_n \geq x$, and $|x_n - x|$ converges to $0$.
+
+\begin{proof}$ $\\
+\noindent ($\Rightarrow$) Suppose $x\in\overline{A}$, 
+then by definition, every neighborhood of $x$ contains a point of $A$. 
+Consider the neighborhood $\left[x, x+\frac{1}{n}\right)$, $n\in\mathbb{N}$.
+Then there exists $x_n \in \left[x, x+\frac{1}{n}\right)$ for all $n\in\mathbb{N}$.
+By taking $n\to\infty$, we have $|x_n - x| \to 0$.
+
+\noindent ($\Leftarrow$) Suppose there exists $(x_n) \subset A$ such that $x_n\ge x$ and $|x_n - x|\to 0$. Then for every neighborhood $U$ of $x$, there exists $N\in\mathbb{N}$ 
+such that for $n>N$, $[x,x_n) \subset U$ (because for any neighborhood $[a,b)$ such that $x \in [a,b)$, as $n\to\infty$, we eventually have $|x_n-x| < |b-x|$, which implies $x_n \in [a,b)$). Therefore, $x\in\overline{A}$.
+\end{proof}
+
+\item \turnin\ Show that $\bbR_{\LL}$ is totally disconnected.
+  That is, the connected components of $\bbR_{\LL}$ are just the points of $\bbR_{\LL}$.
+  Equivalently, show that any subspace of $\bbR_{\LL}$ with more than one point is disconnected.
+  
+\begin{proof}
+Let $x$ be an arbitrary point in $\bbR_{\LL}$. For any subset $A \subset \bbR_{\LL}$ 
+that contains $x$, if $A$ contains at least one other point than $x$, say $y$, assume $x<y$, then we can separate 
+$A$ by two nonempty disjoint open sets $A\cap [y, +\infty)$ and $A \cap (-\infty, y)$, then $A$ cannot be connected.
+Therefore, the connected component for any $x\in\bbR_{\LL}$ is only the point itself, 
+which proves $\bbR_{\LL}$ is totally disconnected.
+\end{proof}
+
+\end{compactenum}
+\vspace{1em}
+
+
+\subsection*{Problem 3: Miscellaneous}
+\begin{compactenum}[(a)]
+  \setlength{\itemsep}{0.5em}
+% \item Show that if $X$ is equipped with the discrete topology, and $Y$ is any topological space, then every function $f \colon X \to Y$ is continuous.
+
+\item \turnin\ Give an example of two topological spaces $X$ and $Y$, and a function $f\colon X \to Y$ that is continuous, one-to-one, and onto, but whose inverse is not continuous.
+
+\begin{proof}
+Consider the function $f: [0, 2\pi) \to \mathbb{S}^1$ ($\mathbb{S}^1$ is the unit circle) given by $$ f: \theta \mapsto (\cos \theta, \sin \theta)$$
+$f$ is continuous, since any point $(\cos \theta_0, \sin \theta_0)\in\mathbb{S}^1$ 
+can be approached arbitrarily close by $(\cos \theta, \sin \theta)$ 
+if we make $\theta$ sufficiently close to $\theta_0$. 
+Especially, $(1,0)\in\mathbb{S}^1$ can be approached by $\theta\to 0$ from the right.
+
+\noindent However, $f^{-1}$ cannot be continuous, since $\mathbb{S}^1$ is compact, 
+while $[0,2\pi)$ is not (a continuous function maps compact space to compact space). 
+\end{proof}
+
+% \item Let $\mathcal{B}$ be a basis for a topology on some set $X$.
+%   If $U$ is any open subset of $X$ and if $x \in U$, show that there is some $V \in \mathcal{B}$ such that $x \in V$ and $V \subset U$.
+
+\item \turnin\ Show that if a subspace $A$ of a topological space $X$ is connected, then $\overline{A}$ is also connected.
+
+\begin{proof}
+Suppose on the contrary $\overline{A}$ is not connected. Then there exists two non-empty
+open sets $U,V$ such that $\overline{A} = U\cup V$ and $U \cap V = \emptyset$.
+By definition of subspace topology, there exists open sets $U',V'$ in $X$ such that 
+$U = U'\cap\overline{A}$ and $V = V'\cap\overline{A}$. 
+
+\noindent Now we claim $U' \cap A \neq \emptyset$, $V' \cap A \neq \emptyset$.
+To see this, let $x \in U = U'\cap\overline{A}$.
+Since $U'$ is open, there exists $u\subset U'$ such that $x\in u$.
+But since $x\in\overline{A}$, by definition, there exists $y\in A$ such that $y\in u$
+and $y\neq x$. Then $y \in U' \cap A$. Therefore, $U' \cap A \neq \emptyset$.
+Symmetrically, we also have $V' \cap A \neq \emptyset$.
+
+\noindent Then $U' \cap A$ and $V' \cap A$ are two disjoint open sets and 
+$A = (U' \cap A) \cup (V' \cap A)$, which implies $A$ is disconnected --- 
+a contradiction. Therefore, $\overline{A}$ must be connected.
+\end{proof}
+
+\item \turnin\ Give a counterexample to show that the converse of the previous part is false.
+
+\begin{proof}
+Consider the topological space of real numbers. 
+Let $A = (0,1)\cup (1,2)$. Then $\overline{A} = [0,2]$. 
+$\overline{A}$ is connected, but obviously $A$ is not.
+\end{proof}
+
+\end{compactenum}
+
+
+\end{document}

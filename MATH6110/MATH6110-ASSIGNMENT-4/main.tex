@@ -1,0 +1,422 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+%\usepackage[alphabetic]{amsrefs}
+%\usepackage{calrsfs}
+%\usepackage{graphicx}
+\usepackage{bm}
+
+\def\R{{\mathbb R}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\N{{\mathbb N}}
+\def\H{{\mathbb H}}
+\def\RP{{\mathbb {RP}}}
+\def\p{\partial}
+\def\O{\Omega}
+\def\pO{{\partial\Omega}}
+\def\bO{\overline\Omega}
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\def\G{\Gamma}
+\def\d{\delta}
+\def\D{\Delta}
+\def\e{\epsilon}
+\def\r{\rho}
+\def\t{\tau}
+\def\l{\lambda}
+\def\L{\Lambda}
+\def\k{\kappa}
+\def\s{\sigma}
+\def\th{\theta}
+\def\o{\omega}
+\def\z{\zeta}
+\def\n{\nabla}
+\def\T{{\mathcal T}}
+\def\X{{\mathcal X}}
+\def\area{\mathrm{area}}
+\def\dist{\mathrm{\rm dist}}
+\def\diag{\mathrm{diag}}
+\def\spt{\mathrm{spt\,}}
+\def\diam{\mathrm{diam\,}}
+\def\dim{\mathrm{dim\,}}
+\def\graph{\mathrm{graph\,}}
+\def\interior{\mathrm{interior\,}}
+\def\diag{\mathrm{diag\,}}
+\def\Image{\mathrm{Image}\,}
+\def\osc{\mathop{\text{\rm osc}}}
+
+
+\def\ra{\rightarrow}
+\def\rai{\rightarrow\infty}
+
+%\setlength{\parindent}{0pt}
+
+\overfullrule0pt \hoffset=0cm
+\parskip=4pt
+\parindent=0pt
+\baselineskip=20pt
+
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+\huge
+\vspace*{1.0in} MATH2320/3116/6110
+\\\vspace{0.5in} \textsc{Assignment 4}
+\normalsize
+\\\vspace{0.5in} \textsc{By}
+\\\vspace{0.1in} \textsc{Zeming Wang}
+\\\vspace{0.1in} \textsc{u6114134}
+\normalsize
+\\\vspace{0.5in} \textsc{Lecture: John Urbas}
+\\\vspace{0.1in} \textsc{Tutor: Sophie Chen}
+\\\vspace{0.1in} \textsc{Tutorial: Wednesday 5-6 pm}
+\normalsize
+\\\vspace{0.5in} \textsc{Due: 7 May 2018}
+\end{center}
+
+\newpage
+\setcounter{page}{1}
+
+% \thispagestyle{empty}
+%
+% \begin{center}{\bf MATH2320/3116/6110 Analysis 1 2018}\end{center}
+%
+%
+%
+% \medskip
+%
+% \begin{center}{\bf Assignment 4 }\end{center}
+%
+% \medskip
+%
+% \begin{center}{\it Due 5pm Monday 7 May 2018}
+%  \end{center}
+%
+% \smallskip
+%
+%
+% {\sl Marking scheme: 45 points + 5 points for presentation. Total 50 points. }
+%
+% \medskip
+
+
+%All questions are of equal value.
+
+%\bigskip
+
+
+
+
+{\bf 1.} [23 points]
+
+Let $l^\infty$ denote the vector space of bounded sequences of real numbers, with addition and scalar multiplication defined componentwise.
+Define a norm $\|\cdot\|$ on $l^\infty$ by
+$$\|{\bm x}\|=\sup_{i\in\N}|x_i| <\infty
+\quad\mbox{where ${\bm x}=(x_1,x_2,x_3,\dots)$}. $$
+
+(a) [5 points] Prove that $l^\infty$ is complete with respect to the norm $\|\cdot\|$.
+
+\begin{proof}
+  To prove $l^\infty$ is complete, we need to show every Cauchy sequence in $l^\infty$ converges.
+  Let $(\bm x_n) \in l^\infty$ be Cauchy. Then by definition,
+  $\forall\e>0$, $\exists N\in\N$ such that $\forall m,n>N$, we have
+  $$\| \bm x_m - \bm x_n \| = \sup_{i}|x_{m,i}-x_{n,i}|<\e $$
+  Then for any $i$-th terms in $\bm x_m$ and $\bm x_n$, we have
+  $$ |x_{m,i} - x_{n,i}| \le \sup_{i}|x_{m,i}-x_{n,i}|<\e $$
+  This implies the sequence $(x_{n,i})_{n=1}^{\infty} \subset \R$ is Cauchy for any given $i$.
+  Since $\R$ is complete, $(x_{n,i})_{n=1}^{\infty}$ converge.
+  Let $x_i = \lim_{n\to\infty} x_{n,i}$.
+
+  Then we claim: $\bm x = (x_1, x_2, \dots)$ is the limit for $\bm x_n$.
+
+  For $m,n>N$, by triangle inequality, we have
+  $$ \|\bm x_m - \bm x \| \le \|\bm x_m - \bm x_n\| + \|\bm x_n - \bm x \| $$
+
+  Fix $m>N$ and let $n\to\infty$, then
+  $$ \|\bm x_n - \bm x \| = \sup_{i} |x_{n,i} - x_i| \to 0 $$
+  since $x_i = \lim_{n\to\infty} x_{n,i}, \forall i\in\N$.
+
+  By $(\bm x_n)$ being Cauchy, we have $\|\bm x_m - \bm x_n\| < \e $. Therefore,
+  $$ \|\bm x_m - \bm x \| \le \|\bm x_m - \bm x_n\| + \|\bm x_n - \bm x \| \le\e $$
+
+  This is true for any $m>N$. Hence, we conclude $\bm x_m\to \bm x \in l^\infty$
+  as $m\to\infty$ and therefore $l^\infty$ is complete.
+\end{proof}
+\medskip
+
+(b) [9 points] Consider the following subspaces of $l^\infty$.
+\begin{itemize}
+	\item[(i)]  $c=\mbox{the space of convergent sequences}$;  \medskip
+
+	\item[(ii)] $c_0=\mbox{the space of sequences converging to 0}$;  \medskip
+
+	\item[(iii)] $ c_{00}=\mbox{the space of sequences which are eventually 0}$.  \smallskip
+
+\end{itemize}
+
+Are $c$, $c_0$, $c_{00}$ closed subspaces of $l^\infty$? Prove your answer in each case.
+
+\begin{proof}[Proof (i)]$ $
+First note $c$ is a subspace, because by the properties of convergence, we have
+\begin{enumerate}
+  \item If $\bm x, \bm y \in c$, then $\bm x + \bm y \in c$;
+  \item If $\bm x\in c$, $\a\in\R$, then $\a\cdot\bm x \in c$;
+  \item Finally, $\bm 0 = (0,0,0,\cdots) \in c$.
+\end{enumerate}
+
+$c$ is also closed. Let $(\bm x_n)\subset c$ and $\bm x_n \to \bm x$.
+It is sufficient to show $\bm x \in c$, i.e. $\bm x$ is also a convergent sequence.
+
+$\bm x_n$ being a convergent sequence implies $\bm x_n$ is Cauchy, therefore
+$\forall\e>0$, $\exists K\in\N$ such that $\forall i,j>K$, we have
+$$ |x_{n,i} - x_{n,j}| < \frac{\e}{3} $$
+
+Since $\bm x_n \to \bm x$, $x_{n,i}\to x_i$ for each $i$.
+Therefore $\exists N\in\N$ such that $\forall n>N$,
+$$ |x_{n,i} - x_i| < \frac{\e}{3}, \quad |x_{n,j} - x_j| < \frac{\e}{3} $$
+
+Then by triangle inequality,
+$$ |x_i - x_j| \le |x_{n,i} - x_i| + |x_{n,i} - x_{n,j}| + |x_{n,j} - x_j| < \e $$
+which shows $\bm x$ is Cauchy. By the completeness of $\R$, $\bm x$ is also convergent.
+\end{proof}
+
+\begin{proof}[Proof (ii)]
+It is easy to see $c_0$ is also a linear subspace. $c_0$ is also closed.
+
+Let $(\bm x_n) \subset c_0$ and $\bm x_n \to \bm x$. We will show $\bm x\in c_0$.
+
+$\bm x_n \in c_0$ implies $\forall\e>0$, $\exists N\in\N$ such that
+for $k>K$, $|x_{n,k} - 0| < \frac{\e}{2}$.
+
+$\bm x_n \to \bm x$ implies $\exists N\in\N$ such that for $n>N$,
+$|x_{n,k} - x_k| < \frac{\e}{2}$.
+
+Then by triangle inequality, we have
+$$ |x_k - 0| \le |x_{n,k} - x_k| + |x_{n,k} - 0| < \e $$
+which shows $\bm x$ is also a sequence converging to $0$.
+\end{proof}
+
+\begin{proof}[Proof (iii)]
+$c_{00}$ also forms a subspace, by noting that, if $\bm x \in c_{00}$,
+then $\exists N_1\in\N$ such that $x_i=0$ whenever $i>N_1$; and
+$\bm y \in c_{00}$ implies $\exists N_2\in\N$ such that $y_i=0$ whenever $i>N_2$.
+Then we have $x_i + y_i = 0$ by taking $i> \max\{N_1, N_2\}$.
+Therefore, $\bm x + \bm y \in c_{00}$.
+And $\a \cdot \bm x\in c_{00}$ also holds with $\forall\a\in\R$,
+just by noting $\a\cdot x_i = 0$ whenever $i > N_1$.
+
+But $c_{00}$ is not closed. As a counterexample, consider the sequence
+$$ \bm x_n = \Big( \underbrace{1,\frac{1}{2}, \cdots, \frac{1}{n}}_{n},0,0,\cdots \Big)$$
+$\bm x_n \in c_{00}$ and $\bm x_n$ converges to $\bm x = \Big(1,\frac{1}{2}, \frac{1}{3}, \cdots \Big)$,
+because $\| \bm x_n - \bm x \| = \frac{1}{n+1} \to 0$ as $n\to\infty$.
+But $\bm x\notin c_{00}$. Therefore, $c_{00}$ is not closed.
+\end{proof}
+\medskip
+
+(c) [9 points] State whether the following subsets of $l^\infty$ are (sequentially) compact.
+Give reasons for your answers.
+
+\begin{itemize}
+	\item[(i)] $\displaystyle{ A = \left\{ {\bm x}=(x_n)\in l^\infty: |x_j| \le 1 \mbox{ for $j=1,\dots,k$} \right\}}$
+	where $k\in \N$ is fixed;
+
+  \begin{proof}
+  $A$ is not compact. Consider the following sequence in $A$:
+  \begin{align*}
+    \bm x_1 &= ( \underbrace{0, 0,\cdots, 0}_{k},1,1,1,\cdots ) \\
+    \bm x_2 &= ( \underbrace{0, 0,\cdots, 0}_{k},2,2,2,\cdots ) \\
+            &\vdots \\
+    \bm x_n &= ( \underbrace{0, 0,\cdots, 0}_{k},n,n,n,\cdots )  \\
+            &\vdots
+  \end{align*}
+  It is clear $(\bm x_n) \subset A$. But $(\bm x_n)$ do not contain a convergent subsequence.
+  Therefore, $A$ is not compact.
+  \end{proof}
+
+	\item[(ii)] $\displaystyle{ B = \left\{ {\bm x}=(x_n)\in l^\infty:  \|{\bm x}\|\le 1, \ x_n=0 \mbox{ for all } n>k \right\}}$
+	where $k\in \N$ is fixed;
+
+  \begin{proof}
+  $B$ is compact. Let $(\bm x_n)$ be a sequence in $B$:
+  \begin{align*}
+    \bm x_1 &= ( \underbrace{x_{11}, x_{12},\cdots, x_{1k}}_{k},0,0,0,\cdots ) \\
+    \bm x_2 &= ( \underbrace{x_{21}, x_{22},\cdots, x_{2k}}_{k},0,0,0,\cdots ) \\
+            &\vdots \\
+    \bm x_n &= ( \underbrace{x_{n1}, x_{n2},\cdots, x_{nk}}_{k},0,0,0,\cdots )  \\
+            &\vdots
+  \end{align*}
+  Then for every $n$, let $\bm x_n^k = (x_{n1}, x_{n2}, \dots, x_{nk}) \in [-1,1]^k \subset \R^k$.
+  By Bolzano Weierstrass Theorem, every bounded sequence in $\R^k$ has a convergent subsequence.
+  Therefore, $(\bm x_n^k)_{n=1}^{\infty}$ has a convergent subsequence, by relabelling,
+  we can also denote it as $(\bm x_n^k)$. By appending infinitely many $0$s at the end of every $\bm x_n^k$,
+  we get a convergent subsequence $(\bm x_n)$ in $B$.
+  \end{proof}
+
+	\item[(iii)] $\displaystyle{C = \left\{ {\bm x}\in l^\infty:  \|{\bm x}\|\le 1 \right\}}$.
+
+  \begin{proof}
+    $C$ is not compact. Consider the sequnce $(\bm x_{n})\subset C$ where $x_{n,i} = \sin ni$.
+     It is clear that $|x_{n,i}| \le 1$ and $\|\bm x\|\le 1$. But it does not contain a convergent subsequence.
+     To see this, extract any subsequence from  $(\bm x_{n})$, by relabelling, call it also  $(\bm x_{n})$.
+     Let $\e = 1$. For any $N\in\N$, let $m,n>N$, we have
+     $$ \| \bm x_m - \bm x_n \| = \sup_{i} |x_{m,i} - x_{n,i}| = \sup_{i} |\sin mi - \sin ni| $$
+     Since $\sup |\sin mi - \sin ni| = 2$, by taking $m,n$ sufficiently large, we can always
+     have $\| \bm x_m - \bm x_n \| > \e$.
+     Therefore, $(\bm x_n)$ is not Cauchy and therefore do not converge.
+  \end{proof}
+\end{itemize}
+
+
+
+\bigskip
+
+
+{\bf 2.} [10 points]
+
+(a) [4 points] Let $(X,d)$ and $(Y,\r)$ be metric spaces, $X$ compact, and suppose  $f:X\rightarrow Y$ and
+$f_n:X \rightarrow Y$ are continuous functions such that $\r(f_n(x),f(x))$ \underline{decreases}
+to $0$ as $n\ra \infty$ for each $x\in X$. Prove that $f_n$ converges uniformly to $f$.
+
+% Hint: Reduce to Dini's theorem (Theorem 12.1.3 in the notes), see also Remark (i) following the
+% theorem.
+
+\begin{proof}
+  Let $g_n: X\to\R$ be defined as $g_n(x) = \rho(f_n(x),f(x))$.
+  Then $(g_n)$ is a decreasing sequnce and $g_n \to 0$ pointwise as $n\to\infty$.
+
+  To apply Dini's Theorem, we also require $g_n$ to be continuous.
+  But this follows immediately from the continuity of $f_n$ and $f$:
+  Let $x_n \to x \in X$. $f_n$ and $f$ being continuous implies that
+  $f_n(x_n) \to f_n(x)$ and $f(x_n) \to f(x)$.
+  Therefore $\rho(f_n(x_n),f(x_n)) \to \rho(f_n(x),f(x))$,
+  i.e. $g_n(x_n) \to g_n(x)$.
+
+  Given $X$ being compact, by Dini's Theorem, $g_n \to 0$ uniformly. i.e.\\
+  $\rho(f_n,f) \to 0$ uniformly. Then by definition, $f_n \to f$ uniformly.
+\end{proof}
+\medskip
+
+(b) [6 points] For each of the following sequences of functions, determine whether it converges
+(either pointwise or uniformly), and find the limit function if it exists.
+Justify your answer in each case.
+
+\medskip
+
+\begin{itemize}
+
+\item[(i)] $\displaystyle{g_n(x)= \frac{1}{1+nx^2}}$,  \quad $x\in\R$.
+
+\medskip
+
+\item[(ii)] $\displaystyle{h_n(x)= \frac{1}{n}\cos(e^{nx})}$,  \quad $x\in\R$.
+
+\end{itemize}
+
+\begin{proof}
+(i) It is easy to see $g_n(x)$ converges pointwise to
+\[
+g(x) = \begin{cases}
+      1 \qquad\textrm{ if } x = 0 \\
+      0 \qquad\textrm{ if } x\neq 0
+    \end{cases}
+\]
+Because for $x=0$, $g_n(x)=1$; for $x\neq 0$, $g_n(x)\to 0$ as $n\to\infty$.
+
+But the convergence is not uniformly.
+
+Let $\e \in (0,1)$. $\forall N\in\N$,
+fix $n>N$. By making $x$ sufficiently small, in particular,
+$$ |x| < \sqrt{\frac{1}{n}\left(\frac{1}{\e}-1\right)} $$
+and $x\neq 0$, we have $g(x)=0$, and
+$$ |g_n(x) - g(x)| = \frac{1}{1+nx^2} > \e $$
+Therefore, $g_n$ does not converge to $g$ uniformly.\\
+
+(ii) $h_n(x)$ converge to $h(x)=0$ uniformly.
+
+For any $\e>0$, let $N = \frac{1}{\e}$, then for $n>N$, we have
+$$ |h_n(x) - 0| = \frac{1}{n} |\cos(e^{nx})| \le \frac{1}{n} < \e $$
+Therefore $h_n(x)\to 0$ as $n\to\infty$ uniformly.
+\end{proof}
+
+\medskip
+
+
+
+\bigskip
+
+
+{\bf 3.} [12 points]
+
+Let $(X,d)$ and $(Y,\r)$ be metric spaces and $f:X\rightarrow Y$.
+
+\medskip
+
+(a)  [4 points] Prove that $f$ is uniformly continuous on $X$ if and only if for any sequences
+$(x_n)$ and $(z_n)$ in $X$,
+$$ d(x_n,z_n) \rightarrow 0 \quad\Longrightarrow\quad \r(f(x_n),f(z_n)) \rightarrow 0. $$
+
+\begin{proof} $ $
+
+  $(\Rightarrow)$ Suppose $f$ is uniformly continuous. Let $(x_n)$ and $(z_n)$ be two sequences
+  with $d(x_n, z_n) \to 0$. Then $\forall \e>0$, $\exists \d>0$ such that
+  $d(x_n, z_n) < \d$ $\Rightarrow$ $\rho(f(x_n), f(z_n)) < \e$.
+  This shows $d(x_n, z_n) \to 0 \Rightarrow \rho(f(x_n), f(z_n)) \to 0$.\\
+
+  $(\Leftarrow)$ Suppose $d(x_n, z_n) \to 0 \Rightarrow \rho(f(x_n), f(z_n)) \to 0$,
+  but suppose $f$ is not uniformly continuous.
+  Then $\exist\e>0$, $\forall\d>0$, $\exists x,z \in X$ such that
+  $d(x,z) < \d$ but $\rho(f(x), f(z)) \ge \e$.
+  Fix such $\e$, let $\d = \frac{1}{n}$. Then for any $n\in\N$,
+  $\exists x_n,z_n \in X$ such that $d(x_n, z_n) < \frac{1}{n}$
+  but $\rho(f(x_n), f(z_n)) \ge \e$.
+  Then we constructed two sequences $(x_n)$ and $(z_n)$ with $d(x_n,z_n)\to 0$,
+  but $\rho(f(x_n), f(z_n)) \not\to 0$ for all $n$ --- a contradiction.
+\end{proof}
+\medskip
+
+(b)  [3 points] Prove that if $f:X\rightarrow Y$ is uniformly continuous, then $f$ maps
+Cauchy sequences to Cauchy sequences, i.e.,
+$$ (x_n) \mbox{ is Cauchy in $X$} \quad\Longrightarrow\quad
+(f(x_n))  \mbox{ is Cauchy in $Y$}. \eqno(*) $$
+
+\begin{proof}
+  $f$ being uniformly continuous implies $\forall\e>0$, $\exists\d>0$ such that
+  $$ d(x_1, x_2) < \d \Rightarrow \rho(f(x_1), f(x_2)) < \e $$
+  Let $(x_n)$ be Cauchy, then for this $\d$, $\exists N\in\N$ such that
+  $$\forall m,n>N \Rightarrow d(x_m, x_n) < \d $$
+  But this implies $\rho(f(x_m), f(x_n))<\e$ for $m,n>N$.
+
+  Therefore, $(f(x_n))$ is Cauchy in $Y$.
+\end{proof}
+\medskip
+
+
+(c) [3 points] Is $(*)$ true if $f$ is continuous but not uniformly continuous?
+Prove or provide a counterexample.
+
+\begin{proof}
+$(*)$ does not necessarily hold if $f$ is continuous but not uniformly continuous.
+For example $f(x) = \frac{1}{x}$ is continuous on $(0,\infty)$ but not uniformly continuous.
+Let $x_n = \frac{1}{n}$. It is easy to see $(x_n)$ is Cauchy, but $(f(x_n))$ diverge.
+\end{proof}
+\medskip
+
+
+(d) [2 points] Is $(*)$ true if $f$ is continuous and $(X,d)$ is complete?
+Give a reason for your answer.
+
+\begin{proof}
+  Yes. For an illustration, let $(x_n)$ be Cauchy in $X$. Since $(X,d)$ is complete,
+  $(x_n)$ also converge, say, $x_n \to x$. Then by continuity of $f$,
+  we must also have $f(x_n) \to f(x)$.
+  So $(f(x_n))$ is a convergent sequence in $Y$ and is therefore Cauchy.
+\end{proof}
+\bigskip
+
+
+\end{document}

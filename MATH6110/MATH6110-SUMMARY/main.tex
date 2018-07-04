@@ -71,6 +71,7 @@
 \def\n{\nabla}
 \def\T{{\mathcal T}}
 \def\X{{\mathcal X}}
+\def\F{{\mathcal F}}
 \def\area{\mathrm{area}}
 \def\dist{\mathrm{\rm dist}}
 \def\diag{\mathrm{diag}}
@@ -85,10 +86,12 @@
 \def\osc{\mathop{\text{\rm osc}}}
 \def\ra{\rightarrow}
 \def\rai{\rightarrow\infty}
+\def\Ra{\Rightarrow}
 
 %\fontsize{10mm}{8mm}\selectfont
 
 \renewenvironment{proof}{\color{gray}\footnotesize\emph{Proof.}}{}
+
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\imply}{\Rightarrow}
 \renewcommand{\iff}{\Leftrightarrow}
@@ -174,17 +177,19 @@ extract core idea for essential proofs.}
     \end{itemize}
 
   \item $A$ is \defn{finite}/\defn{denumerable}/\defn{countable}:
-  \[\left.
-      \begin{align*}
+  \[
+   \left.
+      \begin{aligned}
          &\left.
-          \begin{align*}
+          \begin{aligned}
              A \sim \emptyset \\
              A \sim \{ 1,2,\dots,n \}\\
-          \end{align*}
+          \end{aligned}
          \right\rbrace\text{finite}\\
           & A \sim N \qquad\textrm{denumerable}
-      \end{align*}
-  \right\rbrace\text{countable}\]
+      \end{aligned}
+  \right\rbrace\text{countable}
+  \]
   Otherwise, $A$ is \defn{uncountable}.
 
   \item Important results on cardinality of sets:
@@ -525,6 +530,19 @@ then there exists a unique fixed point $f(x)=x$.
         \item $f:X \to Y$ is \defn{Lipschitz continuous} if there exists a
         constant $M$ such that $d_Y(f(x_1), f(x_2)) \leq M d_X(x_1,x_2)$.
         $M$ is called the Lipschitz constant.
+        {\footnotesize
+            \begin{itemize}
+                \item If $f:(a,b)\to\R$ is differentiable and $f′$ is bounded then $f$
+                is Lipschitz continuous.
+                {\color{gray}
+                  This follows from the mean value theorem: if
+                  $|f′(\xi)| \le L$ for all $\xi\in(a,b)$ then
+                  $|f(x)-f(y)| \le |f′(\xi)||x-y| \le L|x-y|$ for all $x,y\in(a,b)$.
+                }
+                \item If $f$ is Lipschitz continuous and differentiable at $x$
+                then $f′(x)$ is bounded by the Lipschitz constant.
+            \end{itemize}
+        }
 
         \item $f:X \to Y$ is \defn{H\"older continuous} with exponent $\a\in (0,1]$
         if there exists a constant $M$ such that
@@ -579,17 +597,350 @@ then there exists a unique fixed point $f(x)=x$.
             \item In general continuity, $\d$ depends on both $\e$ and $x$.
             \item In uniform continuity, $\d$ depends only on $\e$, not on $x$.
             \item If $f$ is continuous and $X$ is \emph{compact}, then $f$ is uniformly continuous.
-            \item A continuous real-valued functions defined on closed and bounded subset of $\R^n$
-                  is uniformly continuous.
+            \item A continuous real-valued functions defined on closed and bounded subset of $\R^n$ is uniformly continuous.
+            \item If $f$ is Lipschitz continuous then it is uniformly continuous.
+            {\footnotesize\color{gray} The converse is not true, for example,
+            $f(x) = \sqrt{|x|}$ is uniformly continuous but not Lipschitz. }
           \end{itemize}
 
     \item \defn{Uniform continuity and Cauchy sequences}: If $f: X\to Y$ is uniformly continuous,
        then $(x_n)$ is Cauchy in $X$ $\imply$ $(f(x_n))$ is Cauchy in $Y$.
-       {\footnotesize\color{gray}
-        If $f$ is only continuous, $(f(x_n))$ may not converge
-        (consider $f(x) = \frac{1}{x}$ on $(0, \infty)$).
-       }
+       {\footnotesize\color{gray} If $f$ is only continuous, $(f(x_n))$ may
+        not converge (consider $f(x) = \frac{1}{x}$ on $(0, \infty)$).}
+
+    \item \defn{Continuous Extension Theorem}: If $f: A \to Y$ is uniformly continuous,
+    then $f$ can be uniquely extended to $\overline{A}$ maintaining the uniform continuity.
+    {\footnotesize\color{gray} $\bar{f}(x)$ on the boundary of $A$ can be unambiguously
+    defined by $\lim_{n\to\infty} f(x_n)$ for $x\in\partial A$ with $(x_n)\subset A$ and
+    $x_n\to x$.}
 \end{enumerate}
 
+\section{Convergence of Functions}
+\begin{enumerate}
+    \item Let $S$ be a set and $(Y,\rho)$ a metric space. A sequence of functions
+    $f_n : S \to Y$ \defn{converges} to a function $f: S \to Y$ \defn{pointwise}
+    if for each $x\in S$ and any $\e>0$, $\exists N\in\N$ such that $n>N$ $\implies$
+    $\rho(f_n(x), f(x)) < \e$.
+    {\footnotesize\color{gray} (Note: $N$ depends on both $x$ and $\e$) }
+
+    \item A sequence $f_n: S \to Y$ \defn{converge uniformly} to a function
+    $f: S \to Y$ if $\forall\e>0$, $\exists N\in\N$ such that $n>N \implies$
+    $\rho(f_n(x), f(x)) < \e$, $\forall x\in S$.
+    {\footnotesize\color{gray} (Note: convergence is uniform with respect to $x$.
+    $N$ depends only on $\e$, not on $x$)}
+        \begin{itemize}
+            \item Uniform convergence $\not\Leftarrow\Rightarrow$ Pointwise convergence
+            \item $(f_n)$ converging to $f$ uniformly is equivalent to $f_n \to f$
+            in \defn{uniform metric}: $d_u(f_n,f) = \sup_{x\in S}\rho(f_n(x), f(x))$.
+        \end{itemize}
+
+    \item A sequence $(f_n)$ is \defn{uniformly Cauchy} if $\forall\e>0$, $\exists N\in\N$,
+    such that $m,n>N$ $\implies$ $\rho(f_m(x), f_n(x)) < \e$, $\forall x\in S$.
+        \begin{itemize}
+            \item $(f_n)$ is uniformly Cauchy if and only if it is Cauchy in
+            uniform metric.
+        \end{itemize}
+
+    \item \defn{Theorem}: Let $\F = \{f| f: S \to Y\}$. If $(Y,\rho)$ is complete,
+    then every Cauchy sequence $(f_n)\subset\F$ converges uniformly to some $f\in\F$,
+    i.e. $\F$ is complete. \\
+    \begin{proof}
+        Let $(f_n)$ be Cauchy $\Rightarrow$ $\sup |f_m(x) - f_n(x)| < \e$
+                       $\Rightarrow$ $|f_m(x) - f_n(x)| < \e, \forall x$
+                       $\Rightarrow$ $\forall x, (f_n(x))$ is Cauchy in $Y$.
+        $Y$ is complete $\Rightarrow$ $f_n(x) \to f(x) \in Y$.
+        $\rho(f_m(x), f(x)) \le \rho(f_m(x), f_n(x)) + \rho(f_n(x),f(x))$.
+        Let $n\to\infty$, we have $\rho(f_m(x), f(x))\le\e,\forall x$.
+        i.e. $f_m\to f$ uniformly.
+    \end{proof}
+
+    \item \defn{Theorem}: Suppose $(f_n)$ is a sequence of continuous functions
+    from $X$ to $Y$. Suppose $f_n \to f$ uniformly. Then $f$ is also continuous
+    (uniform limits of continuous functions are continuous). \\
+    \begin{proof}
+      $f_n \to f$ uniformly $\Ra$ $\rho(f_n(x), f(x))<\e$.
+      $f_n$ continuous $\Ra$ $d(x,x_0) < \d \Ra \rho(f_n(x), f_n(x_0)) < \e$.
+      $\r(f(x), f(x_0)) \le \r(f(x), f_n(x)) + \r(f_n(x), f_n(x_0)) +
+      \r(f_n(x_0), f(x_0)) < 3\e$. Therefore $f$ is continuous at $x_0$.
+    \end{proof}
+
+    \item \defn{Corollary}: Let $C_b(X,Y)$ be the set of continuous and bounded
+    functions from $X$ to $Y$. If $(Y,\rho)$ is complete, then $C_b(X,Y)$ is a
+    complete metric space when equipped with the uniform metric.
+
+    \item Suppose $f_n \to f$ uniformly, then
+        \begin{itemize}
+            \item $\int_a^b f_n(x) dx \to \int_a^b f(x) dx$ uniformly;
+            \item $\int_a^x f_n(t) dt \to \int_a^x f(t) dt$ uniformly;
+            \item $\lim_{n\rai} \int_a^b f_n(x)dx = \int_a^b \lim_{n\rai} f_n(x)dx$;
+            \item The limit of differentiable may not be differentiable.
+        \end{itemize}
+
+\end{enumerate}
+
+\section{Compactness}
+\begin{enumerate}
+    \item A metric space $(X,d)$ is \defn{sequentially compact} if every sequence
+    in $X$ has a convergent subsequence.
+
+    \item A space $K$ is \defn{compact} if every open cover of $K$
+    ($K \subset \cup_{i\in I} U_i$) has a finite subcover ($K \subset \cup_{i=1}^{N} U_i$).
+    \item If $(X,d)$ is a metric space, $K \subset X$ is compact iff $K$ is
+    sequentially compact.
+    {\footnotesize\color{gray} This is not true in general topological space.}
+
+    \item Consequences of compactness:
+        \begin{itemize}
+            \item $K$ compact $\Ra$ $K$ is closed and bounded;
+            \item In $\R^n$, $K$ is compact $\Leftrightarrow$ $K$ is closed and bounded;
+            \item A closed subset of a compact space is compact; \\
+                \begin{proof}
+                    Let $A \subset X$ be closed. Let $\{U_i\}$ cover $A$.
+                    Then $(\cup_i U_i) \cup (X\setminus A) $ is an open cover for $X$.
+                    There exists finite subcover $(\cup_{i=1}^N U_i) \cup (X\setminus A)$.
+                    Then $\cup_{i=1}^N U_i$ is a finite subcover for $A$.
+                \end{proof}
+
+            \item $f:X \to Y$ being continuous, if $K\subset X$ is compact,
+                  then $f(K)$ is compact in $Y$; \\
+                \begin{proof}
+                    Let $\{U_i\}$ cover $f(K)$. Then $f^{-1}(\cup U_i)=\cup f^{-1}(U_i)$
+                    cover $K$. $K$ is compact $\Ra\exists$ finite subcover
+                    $\cup_{i=1}^N f^{-1}(U_i)$.
+                    Then $\cup_{i=1}^N U_i$ is a finite subsover for $f(K)$.
+                \end{proof}
+
+            \item $f:X \to Y$ being continuous, if $K\subset X$ is compact,
+                  then $f$ is uniformly continuous on $K$; \\
+                \begin{proof}
+                    $f$ is continuous $\Ra$ $\forall\e>0$, $\forall x\in X$,
+                    $\exists\d_x >0$ such that $|x-x'|<\d_x$ $\Ra$ $|f(x)-f(x')|<\e$.
+                    $\cup_{x\in X} B(x, \d_x)$ cover $X$, $X$ is compact,
+                    there exists finite subcover. Let $\d = \min \{\d_{x_1}, \dots,
+                    \d_{x_n}\}$. Then there exists a $\d$ independent of $x$.
+                \end{proof}
+
+            \item $f:X \to Y$ being continuous, if $K\subset X$ is compact,
+                  then $f$ achieves its maximum and minimum on $K$.
+        \end{itemize}
+
+    \item A set $X$ is \defn{totally bounded} if for any $\d$, there exist finitely many
+    points $x_1, \dots x_N \in X$ such that $X \subset \cup_{i=1}^N B_\d(x_i)$.
+        \begin{itemize}
+            \item Totally boundedness $\not\Leftarrow\Rightarrow$ boundedness.
+            \item A subset $E$ in $\R^n$ is totally bounded iff $E$ is bounded.
+            \item A subset of a metric space is totally bounded iff its closure
+            is totally bounded.
+        \end{itemize}
+
+    \item \defn{Theorem}: A space $X$ is compact if and only if it is complete and
+    totally bounded. \\
+    \begin{proof}
+    ($\Ra$) $\{B_{\d}(x)\}_{x\in X}$ cover $X$ $\Ra$ finite subcover $\Ra$ totally bounded.
+    ($\Leftarrow$) Let $(x_n)\subset X$. Cover $X$ with finite many balls of radius $1$.
+    There must be a subsequence $(x_n^1) \subset (x_n)$ trapped in of one these balls,
+    i.e. $(x_n^1) \subset B_1$.
+    Cover $X$ with finite many balls of radius $\frac{1}{2}$, then
+    $\exists (x_n^2) \subset B_{\frac{1}{2}}$.
+    Keep going, $(x_n^3) \subset B_{\frac{1}{3}}, \dots $
+    Let $y_k = x_k^k$. Then $(y_n)$ is Cauchy, by completeness,
+    $(y_n)$ is a convergent subsequence of $(x_n)$.
+    \end{proof}
+
+    \item Let $\F \subset C(X,Y)$ (continuous functions from $X$ to $Y$)
+    $\F$ is \defn{uniformly equicontinuous}
+    if $\forall\e>0$, $\exists\d>0$, such that $d(x,x')<\d$ $\Ra$ $\r(f(x), f(x'))<\e$,
+    $\forall x,x' \in X$, $\forall f\in\F$.
+    {\footnotesize\color{gray}(The same $\d$ holds for all $x\in X$ and all $f\in\F$)
+
+        \begin{itemize}
+            \item Uniformly continuity is usually shown by showing the family of
+            functions $\F$ is Lipschitz with the same constant for all $f\in\F$;
+            or every $f$ is Holder continuous with the same $\a$ and the same
+            Holder constant.
+        \end{itemize}
+    }
+    \item \defn{Arzela-Ascoli theorem}: $\F \subset C(X,\R^n)$ is \emph{compact} iff
+    $X$ is compact and $\F$ is closed,bounded and uniformly equicontinuous.\\
+    \begin{proof}
+        \begin{itemize}
+            \item Uniform equicontinuous $\Ra$ $d(x,y)<\d \Ra |f(x)-f(y)|<\e$;
+            \item $X$ totally bounded $\Ra$ $\exists x_1, \dots x_n$, $|x-x_i|<\d$,
+            and this implies $|f(x) - f(x_i)| < \e$;
+            \item $|f(X)|\le K$ totally bounded $\Ra$ $\exists y_1 \dots y_m$,
+            $|f(x) - y_i| < \e$;
+            \item Construct discrete function $\a: \{x_1 \dots x_n\}\to\{y_1\dots y_m\}$
+            (there are at most $m^n$ such $\a$);
+            \item Find $g_\a$ for each $\a$ such that $|g_\a(x_i) - \a(x_i)|<\e$;
+            \item For any $f\in\F$, choose the $\a$ such that $|f(x_i) - \a(x_i)|<\e$
+            and the corresponding $g_\a$, then choose $x_i$ such that $|x-x_i|<\d$,
+            then we have $|f(x) - g_\a(x)| \le |f(x) - f(x_i)| + |f(x_i) - \a(x_i)| +
+            |\a(x_i) - g_\a(x_i)| + |g_\a(x_i) - g_\a(x)|$;
+            \item So all $f\in\F$ are within the balls of finitely many $g_\a$.
+        \end{itemize}
+    \end{proof}
+\end{enumerate}
+
+
+\section{Connectedness}
+\begin{enumerate}
+    \item A space $X$ is \defn{connected} if there do not exist nonempty open sets
+    $U,V$ such that $U \cap V = \emptyset$ and $X = U \cup V$.
+        \begin{itemize}
+            \item Equivalently, $X$ is connected if there do not exist nonempty
+            closed sets $U,V$ such that $U \cap V = \emptyset$ and $X = U \cup V$.
+            \item $X$ is connected if and only if the only subset of $X$ that are
+            both open and closed are $\emptyset$ and $X$.
+            \item If $A$ is connected, then $\overline{A}$ is connected.
+            \item Let $A_1, A_2, \dots$ be connected, if $A_i \cap A_{i+1} \neq \emptyset$,
+            then $\cup_{i=1}^{\infty} A_i$ is connected.
+        \end{itemize}
+
+    \item A space $X$ is \defn{path connected} if $\forall a,b \in X$, there exists
+    a continuous function $f: [0,1]\to X$ such that $f(0)=a$, $f(1)=b$.
+        \begin{itemize}
+            \item Path connected $\Ra$ connected.
+            {\footnotesize\color{gray} The converse if not true,  counter-example:
+            $X=\{(x,y): y=\sin \frac{1}{x}\} \cup \{(0,y): -1\le y\le 1\}$ is
+            connected but not path-connected.}
+        \end{itemize}
+
+    \item Connectedness in $\R^n$:
+        \begin{itemize}
+            \item $S\subset\R$ is connected iff it is an interval.
+            \item $U$(open)$\subset\R^n$ is connected iff it is path-connected.\\
+                % \begin{proof}
+                %     Fix $a\in U$. Let $E =\{x \in U: $ there is a path in $U$ from
+                %     $x$ to $a\}$. $E$ is open because for any $z \in B_r(x), x\in E$,
+                %     $g(t) = (1-t)x + tz$ gives a path from $x$ to $z$, and there is
+                %     a path from $a$ to $x$, hence there is a path from $a$ to $z$.
+                %     $E$ is also closed, because if $(x_n)\subset E$ and $x_n\to x$.
+                %     There is a path from $a$ to $x_n$, and there is a path from
+                %     $x_n$ to $x$ within $B_r(x)$, so there is a path from $a$ to $x$.
+                %     $U$ is connected, the only both open and closed sets are
+                %     $U, \emptyset$. Therefore $E=U$.
+                % \end{proof}
+        \end{itemize}
+
+    \item \defn{Theorem}: The continuous image of a connected set is connected.\\
+        \begin{proof}
+            Let $f: X \to Y$ be continuous. Suppose $f(X)$ is not connected.
+            Then $\exists E\subset f(X)$ that is both open and closed.
+            $\exists E', E'' \subset Y$ s.t. $E=E'\cap f(X)$, $E = E''\cap f(X)$.
+            Then we have $f^{-1}(E) = f^{-1}(E') = f^{-1}(E'') \neq \emptyset$
+            which is also both open and closed $\Ra$ $X$ is not connected ---
+            contradiction.
+        \end{proof}
+
+    \item Corollary (Intermediate value theorem) Suppose $X$ is connected,
+    $f: X \to \R$ is continuous. Let $x,y\in X$, $f(x)=a$, $f(y)=b$, $a<b$.
+    Then for any $c\in (a,b)$, $\exists z \in X$, such that $f(z)=c$. \\
+        \begin{proof}
+            $f(X)$ is connected because $f$ is continuous. $f(X)\subset\R$,
+            so it is an interval. It then follows $c\in f(X)$ for any
+            $c \in (a,b)$.
+        \end{proof}
+\end{enumerate}
+
+\section{Application: Differential Equations}
+\begin{enumerate}
+    \item Assume $U$ (open) $\subset \R\times\R^n$, and $f: U\to\R^n$ is continuous.
+    The problem of the form
+    $$ \begin{cases}
+        \frac{d\bm x}{dt} = f(t, \bm x) \\
+        \bm x(t_0) = \bm x_0
+    \end{cases}
+    $$
+    is called an \defn{initial value problem} (IVP).
+    A \defn{solution} to an IVP is a function $\bm x: I \to \R^n$ for some open
+    interval $I$ containing $(t_0, \bm x_0)$ such that $\bm x$ solves the
+    differential equation and the initial condition.
+        \begin{itemize}
+            \item Solving the IVP is equivalent to solving the integral equation:
+                  $$\bm x(t) = t_0 + \int_{t_0}^{t} f(s,\bm x(s))ds $$
+        \end{itemize}
+
+    \item \defn{Peano's existence theorem}: Assume $f$ is continuous on
+    $U\subset \R\times\R$. Let $(t_0, x_0)\subset U$.
+    Then there exists $h>0$ such that the IVP has a $C^1$ solution for
+    $t \in [t_0 - h, t_0 + h]$.
+
+    \begin{proof}
+      \begin{itemize}
+        \item Let $A_{h,k}(t_0, x_0) = \{(t,x):|t - t_0| \le h, |x - x_0| \le k\}$.
+        \item $A_{h,k}$ is a compact $\Ra$ $f$ is bounded,  $|f(t,x)|\le M$.
+        \item Let $h \le \frac{k}{M}$.
+        \item Approximate $x(t)$ at $t_0$ with
+          \[ x_n(t) =
+              \begin{cases}
+                x_0 + (t-t_0)f(t_0, x_0) \\
+                 \qquad\textrm{ for } t \in [t_0, t_0+\frac{h}{n}] \\
+                x_n(t_0+\frac{h}{n}) + (t-(t_0+\frac{h}{n}))f(t_0+\frac{h}{n}, x_n(t_0+\frac{h}{n})) \\
+                 \qquad\textrm{ for } t \in [t_0+\frac{h}{n}, t_0+\frac{2h}{n}]\\
+                \qquad\vdots \\
+                x_n(t_0+i\frac{h}{n}) + (t-(t_0+i\frac{h}{n}))f(t_0+i\frac{h}{n}, x_n(t_0+i\frac{h}{n})) \\
+                 \qquad\textrm{ for } t \in [t_0+i\frac{h}{n}, t_0+(i+1)\frac{h}{n}]\\
+                 \qquad\vdots
+              \end{cases}
+          \]
+          \item $|\frac{d}{dt}x_n(t)| = |f(\cdot)| \le M$, so $x_n$ is Lipschitz
+                on $A_{h,k}$ with constant $M$.
+          \item $(x_n)$ is a sequence of closed, bounded and uniformly equicontinuous
+                functions. Therefore $(x_n)$ is a compact subset of $C[t_0-h,t_0+h]$.
+                There exists $(x_{n_j})$ such that $x_{n_j} \to x$.
+          \item $x$ is the solution to the IVP problem.
+      \end{itemize}
+    \end{proof}
+
+    \item Assume $f: U (\subset \R\times\R) \to \R$ is continuous.
+    $f$ is \defn{locally Lipschitz} with respect to $x$ if for every
+    $A_{h,k}(t_0, x_0) \subset U$, there exists $K$ such that
+    $$|f(t,x_1) - f(t,x_2)| \le K|x_1 - x_2|$$
+    for all $(t,x_1), (t,x_2) \in A_{h,k}(t_0, x_0)$.
+
+    \item \defn{Local uniqueness}: Assume $f$ is continuous on $U\subset \R\times\R$
+    and \emph{locally Lipschitz} with respect to $x$. Let $(t_0, x_0)\subset U$.
+    Then there exists $h>0$ such that the IVP has a \emph{unique} $C^1$ solution
+    for $t \in [t_0 - h, t_0 + h]$.
+
+    \begin{proof}
+      \begin{itemize}
+        \item Define $A_{h,k}(t_0, x_0) = \{(t,x):|t - t_0| \le h, |x - x_0| \le k\}$.
+        \item $A_{h,k}$ is a compact $\Ra$ $f$ is bounded,  $|f(t,x)|\le M$.
+        \item $f$ is locally Lipschitz on $A_{h,k}(t_0, x_0)$, so $\exists K$ s.t.
+              $|f(t,x_1) - f(t,x_2)| \le K|x_1 - x_2|$, for all $x_1, x_2\in A_{h,k}$.
+        \item Assume $h \le \min\left\{ \frac{k}{M}, \frac{1}{2K} \right\}$.
+        \item Define $C^*[t_0-h, t_0+h] = C[t_0-h, t_0+h] \cap \{x: |x(t)-x_0| \le k \}$.
+              $C^*[t_0-h, t_0+h]$ can be shown to be a complete space.
+        \item Define $T: C^*[t_0-h, t_0+h] \to C^*[t_0-h, t_0+h]$
+              $$ (Tx)(t) = x_0 + \int_{t_0}^{t} f(s,x(s)) ds $$
+        \item Show $T$ is a contraction:
+        $|(Tx_1)(t) - (Tx_2)(t)| \le \int_{t_0}^{t} |f(s,x_1(s)) - f(s,x_2(s))| ds
+         \le K \int_{t_0}^{t} |x_1(s) - x_2(s)|ds \le Kd(x_1,x_2)h \le \frac{1}{2}d(x_1,x_2)$.
+        \item $T$ has a fixed point, which is the solution to the IVP for $t \in [t_0 - h, t_0 + h]$.
+      \end{itemize}
+    \end{proof}
+
+    Usually we show the solution exists on $[t_0 - h, t_0 + h]$ and then show
+    it can be \defn{extended} beyond this scope.
+
+    \begin{proof}
+      \begin{itemize}
+        \item Go back by $\frac{h}{2}$. Consider the IVP:
+              \[ \begin{cases}
+                  y' = f(t,y) \\
+                  y(t_0 + \frac{h}{2}) = x(t_0 + \frac{h}{2})
+              \end{cases}\]
+        \item Solution exists on $[t_0 - \frac{h}{2}, t_0 + \frac{3}{2}h]$.
+        \item $x$ and $y$ overlap on $[t_0-\frac{h}{2}, t_0+h]$.
+              By uniqueness of the solution, $x$ and $y$ must coincide.
+        \item Solution $x$ can be extended to $[t_0-h, t_0+\frac{3}{2}h]$.
+        \item Iterate the argument until reach the boundary of $U$.
+      \end{itemize}
+    \end{proof}
+
+\end{enumerate}
+
+\vspace{3in} % placeholder
 
 \end{document}
