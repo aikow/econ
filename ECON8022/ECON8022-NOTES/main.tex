@@ -1,0 +1,1480 @@
+\documentclass[10pt,a4]{article}
+
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{lineno}
+
+
+
+
+
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\@combinedblfloats{\box\@outputbox}{\unvbox\@outputbox}{}{%
+  \errmessage{\noexpand\@combinedblfloats could not be patched}%
+}%
+\makeatother
+
+
+\usepackage[round]{natbib}
+\let\cite\citep
+
+
+
+
+\renewenvironment{abstract}
+  {{\bfseries\noindent{\abstractname}\par\nobreak}\footnotesize}
+  {\bigskip}
+
+\renewenvironment{quote}
+  {\begin{tabular}{|p{13cm}}}
+  {\end{tabular}}
+
+\titlespacing{\section}{0pt}{*3}{*1}
+\titlespacing{\subsection}{0pt}{*2}{*0.5}
+\titlespacing{\subsubsection}{0pt}{*1.5}{0pt}
+
+
+\usepackage{authblk}
+
+
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{latexsym}
+\usepackage{textcomp}
+\usepackage{longtable}
+\usepackage{tabulary}
+\usepackage{booktabs,array,multirow}
+\usepackage{amsfonts,amsmath,amssymb}
+\providecommand\citet{\cite}
+\providecommand\citep{\cite}
+\providecommand\citealt{\cite}
+% You can conditionalize code for latexml or normal latex using this.
+\newif\iflatexml\latexmlfalse
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}%
+
+\AtBeginDocument{\DeclareGraphicsExtensions{.pdf,.PDF,.eps,.EPS,.png,.PNG,.tif,.TIF,.jpg,.JPG,.jpeg,.JPEG}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[greek,english]{babel}
+
+
+
+
+
+
+% Use this header.tex file for:
+% 1. frontmatter/preamble LaTeX definitions
+%  - Example: \usepackage{xspace}
+% 2. global macros available in all document blocks
+%  - Example: \def\example{This is an example macro.}
+%
+% You should ONLY add such definitions in this header.tex space,
+%  and treat the main article content as the body/mainmatter of your document
+% Preamble-only macros such as \documentclass and \usepackage are
+% NOT allowed in the main document, and definitions will be local to the current block.
+\usepackage{amssymb, amsmath, amsthm, latexsym}
+
+
+
+\title{Class Notes on Macroeconomic Theory}
+
+\author[1]{Zeming Wang}%
+\affil[1]{Australian National University}%
+\date{}
+
+
+
+
+\begin{document}
+
+\maketitle
+ 
+\tableofcontents
+
+% \begingroup
+% \let\center\flushleft
+% \let\endcenter\endflushleft
+% \maketitle
+% \endgroup
+
+\newpage
+
+
+
+
+
+
+\section{Dynamic Programming}
+
+{\label{895037}}
+
+Consider a typical problem (social planner's problem): a social planner
+plans for the economy how much to consume and invest for each period in
+time to maximize the lifetime utility. Mathematically, the social
+planner wants to solve the optimisation problem:
+
+~
+
+$$ \max_{\{c_t\}} \sum_{t=0}^{\infty} \beta^t U(c_t) $$
+
+subject to the budget constraint:
+$$ c_t + i_t = f(k_t) $$
+
+and the law of motion of capital:
+$$ k_{t+1} = (1-\delta)k_t + i_t $$
+
+
+
+Assume $k_0$ is given. $\beta$ the discount factor satisfies $0<\beta<1$. 
+
+We also assume, throughout this note, the utility function $U$ satisfies the following properties:
+\begin{itemize}
+\item $U$ is a twice continuously differentiable real-valued function;
+\item $U$ is strictly increasing and strictly concave;
+\item Inada condition: $\lim_{c\to 0} U'(c) = \infty$, $\lim_{c\to\infty} U'(c)=0$.
+\end{itemize}
+
+The production technology $f$ satisfies the properties:
+\begin{itemize}
+\item $f$ is twice continuously differentiable;
+\item $f$ is homogeneous of degree one in its input;
+\item The output of $f$ is increasing in each input at a decreasing rate;
+\item Inada condition: $\lim_{k\to 0} f'(k) = \infty$, $\lim_{k\to\infty} f'(k)=0$.
+\end{itemize}
+
+For simplicity, in this notes, we assume capital depreciates fully by the end of each period, i.e. $\delta=1$. And we substitute the budget constraint into the objective function to avoid solving optimisation problem with constraints. Therefore, the problem can be reduced to:
+
+$$ \max_{\{k_{t+1}\}} \sum_{t=0}^{\infty} \beta^t U(f(k_t) - k_{t+1}) $$
+
+
+
+How do we solve a sequence of $\{k_{t+1}\}_{t=0}^{\infty}$? In paticular, how do we maximize over infinite time horizon? To shed some light on the technique, we begin with somewhat more approachable finite horizon prblem, and extend it to infinite horizon. 
+
+\subsection{Finite Horizon}
+
+{\label{609724}}\par\null
+
+Suppose the time ends at $T$, we want to solve:
+
+$$ \max_{\{k_{t+1}\}} \sum_{t=0}^{T} \beta^t U(f(k_t) - k_{t+1}) $$
+
+\subsubsection{Solve by brutal force}
+
+{\label{571029}}\par\null
+
+Set up a Lagrangian:
+
+$$ \mathcal{L} = \sum_{t=0}^{T} \beta^t U(f(k_t) - k_{t+1}) $$
+
+The first-order condition (with respect to $k_{t+1}$) is:
+
+$$ -\beta^t U'(c_t) + \beta^{t+1} U'(c_{t+1}) f'(k_{t+1}) = 0 $$
+
+Rearrange it a little bit:
+
+$$ \underbrace{\frac{U'(c_t)}{\beta U'(c_{t+1})}}_{\textrm{MRS: marginal rate of substitution}} = 
+   \underbrace{f'(k_{t+1})}_{\textrm{MRT: marginal rate of transformation}}
+$$
+
+This intertemporal first-order condition is called the \textbf{Euler equation}.
+
+
+
+Additionally, a boundary condition needs to be satisfied:
+
+$$ k_{T+1} = 0 $$
+
+There are $T+1$ unknowns $\{k_{t+1}\}_{t=0}^{T}$ and $T+1$ equations, we should be able to solve all $\{k_{t+1}\}_{t=0}^{T}$.
+
+\subsubsection{Discover the recursive nature of the
+problem}
+
+{\label{336406}}
+
+If we can discover the recursive nature of the problem, we can hopefully simplify it. Let $V_T(k_0)$ be the \textbf{value function}.
+\[
+    \begin{aligned}
+        V_T(k_0) &= \max \sum_{t=0}^T \beta^t U(f(k_t)-k_{t+1}) \\
+                 &= \max \{U(f(k_0)-k_1) + \beta \sum_{t=0}^{T-1} \beta^t U(f(k_t)-k_{t+1})\}  \\ 
+                 &= \max \{U(f(k_0)-k_1) + \beta V_{T-1}(k_1)\}
+    \end{aligned}
+\]
+If $V_{T-1}$ is known, we will be able to solve it just like solving one-choice-variale optimisation!
+
+
+
+The clue is from the boundary condition. Since $k_{T+1} = 0$, $V_{-1}(k_{T+1})=0$ is known. Then we will be able to solve backward: $V_0, V_1,..., V_T$.
+
+$$ V_0(k_T) = \max_{k_{T+1}} \{U(f(k_T)-k_{T+1}) + \beta \underbrace{V_{-1}(k_{T+1})}_{=0}\}$$
+The optimal choice is of course $ k_{T+1} = 0 $, and the value function becomes $ V_0(k_T) = U(f(k_T)) $.
+
+Now $V_0(k_T)$ is known, we can use it to solve $V_1(k_{T-1})$:
+$$ V_1(k_{T-1}) = \max_{k_{T}} \{U(f(k_{T-1})-k_{T}) + \beta \underbrace{V_{0}(k_{T})}_{\textrm{known}}\}$$
+Solve this maximization problem, we we will get 
+$$ k_{T} = g_{T-1}(k_{T-1}) $$
+i.e. choice variable $k_T$ as a function of the given state $k_{T-1}$. $g_{T-1}$ is called the \textbf{policy function} at date $T-1$. It tells us the optimal choice at $T-1$.
+Substitute in $ k_{T} = g_{T-1}(k_{T-1}) $, we value function is given by
+$$V_1(k_{T-1}) = U(f(k_{T-1})-g_{T-1}(k_{T-1})) + \beta V_0(k_{T}) $$
+
+Now $V_1(k_{T-1})$ is known, we can continue to solve $V_2(k_{T-2})$.
+$$\vdots$$
+
+Keep going with this process, we will solve a sequence of functions: $\{V_{-1}, V_0, V_1,..., V_T\}$ and $\{g_T, g_{T-1}, ... , g_0\}$, which are the solutions to the finite horizon problem.
+
+\subsection{Infinite Horizon}
+
+{\label{327193}}
+
+Exploring the finite horizon problem enlightens us to solve the the
+infinite horizon problem recursively. It turns out solving the infinite
+horizon problem recursively is even easier than the finite horizon
+problem.~
+
+It can be proved, as $T\to\infty$, we have $V_T \to V$, i.e. the value function will have the same form for all period $t$. 
+
+
+We can thus write the recursive optimization problem as:
+
+$$ V(k) = \max_{k'} \{ U(f(k)-k') + \beta V(k') \} $$
+
+This is called the \textbf{Bellman equation}. The solution to the Bellman equation is the value function $V$.
+
+
+
+To solve the value function, define
+$$ (TV)(k) = \max_{k'} \{ U(f(k)-k') + \beta V(k') \} $$
+
+$T$ is a function that maps a given function $V$ to a new $V$. If we can find the fixed point of $T$, i.e. $(TV)(k) = V(k)$, then it is the solution to our Bellman equation.
+
+But how do we know such a fixed point exists, and how can we find it? To
+answer these questions, we need a small technical detour on Banach fixed
+point theorem.
+
+\par\null
+
+\subsubsection{Banach fixed point
+theorem}
+
+{\label{335214}}\par\null
+
+\textbf{Banach fixed point theorem}: If $(S,d)$ is a \emph{complete} metric space and $T:S \to S$ is a \emph{contraction}, then there is a unique fixed point for $T$.
+
+
+
+\textbf{Blackwell's sufficient condition for a contraction}: Let $M: B(X) \to B(X)$ be any map satisfying
+\begin{itemize}
+\item Monotonicity: For any $v,w \in B(X)$ such that $w \ge v \implies Mw \ge Mv$.
+\item Discounting: There exists a $0 \le \selectlanguage{greek}β \selectlanguage{english}< 1$ such that $M(w+c)=Mw+\selectlanguage{greek}β\selectlanguage{english}c$, for all $w \in B(X)$ and $c \in \mathbb{R}$. (Define $(f+c)(x)=f(x)+c$)
+\end{itemize}
+Then $M$ is a contraction with modulus $\beta$.
+
+\subsubsection{Fixed point for the infinite horizon
+problem}
+
+{\label{142845}}
+
+Given the assumptions on $U$ and $f$, the value function is continuous, and the state space $S \ni k$ is  bounded (there is an upper bound for capital accumulation). $T: C_b(S) \to C_b(S)$ is a mapping from the space of continuous bounded functions ($C_b(S)$) to itself. It can be proved the space $C_b(S)$ is complete when equipped with the uniform metric $d_u(v,w) = \sup_{x\in S}|v(x) - w(x)|$. 
+
+The Blackwell's sufficient condition is also satisfied:
+\begin{itemize}
+\item Monotonicity: let $v,w \in C_b(S)$ and $w \ge v$, 
+      $$ Tw = \max\{U + \beta w\} \ge \max\{U + \beta v\} = Tv $$
+\item Discounting: let $w \in C_b(S)$ and let $c \in \mathbb{R}$, 
+      $$ T(w+c) = \max\{U + \beta(w+c)\} = \max\{U + \beta w\} + \beta c = Tw + \beta c $$
+\end{itemize}
+
+Therefore, $T$ is contraction on a complete metric space. By Banach fixed point theorem, $T$ has a unique fixed point. 
+
+\subsubsection{Solving the Bellman
+equation}
+
+{\label{838588}}
+
+The contraction mapping argument also provides us a mechanical way to
+solve the fixed point for the Bellman equation. We can iterate on an
+arbitrary initial guess for the value function, even the guess is
+incorrect, the iteration will eventually converge to the true value
+function. This is the way how computers solve the problem. In terms of
+solving the Bellman equation by hand, we usually guess the value
+function (or policy function) to be a particular form, and solve for the
+parameters. Specifically, there are mainly two approaches: value
+function approach and policy function approach.
+
+\par\null
+
+To demostrate these two approaches, in the following text, we specialize the utility function and the production function to the following form:
+$$ U(c) = \ln (c) $$
+$$ f(k) = k^{\alpha} $$
+
+\par\null
+
+\textbf{Value function (Bellman operator) approach:}
+
+\par\null
+
+Guess $V(k) = A + B \ln(k)$. Substitute this form into the Bellman equation:
+$$ A + B \ln(k) = \max_{k'} \{\ln(k^{\alpha} - k') + \beta(A + B \ln(k'))\}$$
+
+Solve for $k'$: 
+$$k' = \frac{\beta B}{1 + \beta B} k^{\alpha}$$
+
+Substitute $k'$ into the value function:
+$$ A + B \ln(k) = \ln(k^{\alpha} - \frac{\beta B}{1 + \beta B} k^{\alpha}) + \beta(A + B \ln(\frac{\beta B}{1 + \beta B} k^{\alpha})) $$
+
+Rearrange the equation:
+$$ A + B\ln(k) = \beta A + \ln(\frac{1}{1+\beta B}) + \beta B \ln(\frac{\beta B}{1+\beta B}) + (1+\beta B)\alpha \ln(k) $$
+
+To make LHS = RHS, we require
+$$ B = (1+\beta B)\alpha $$
+$$ A = \beta A + \ln(\frac{1}{1+\beta B}) + \beta B \ln(\frac{\beta B}{1+\beta B}) $$
+Therefore, 
+$$ B = \frac{\alpha}{1-\alpha\beta}$$
+$$ A = \frac{1}{1-\beta}\left[\ln(1-\alpha\beta)+\frac{\alpha\beta}{1-\alpha\beta}\ln(\alpha\beta)\right]$$
+Therefore, 
+$$ k' = g(k) = \alpha\beta k^{\alpha} $$
+$$ V(k) = \frac{1}{1-\beta}\left[\ln(1-\alpha\beta)+\frac{\alpha\beta}{1-\alpha\beta}\ln(\alpha\beta)\right] + \frac{\alpha}{1-\alpha\beta}\ln(k)$$
+
+\textbf{Policy function (Euler operator) approach}
+
+\par\null
+
+Guess $k' = g(k) = \theta k^{\alpha}$, then $c = (1-\theta)k^{\alpha}$. Substitute this into the Euler equation:
+$$ \frac{1}{(1-\theta)k^{\alpha}} = \alpha\beta\frac{1}{(1-\theta)k'^{\alpha}}k'^{\alpha-1} = \alpha\beta\frac{1}{(1-\theta)k'}$$
+$$ \frac{1}{(1-\theta)k^{\alpha}} = \alpha\beta\frac{1}{(1-\theta)\theta k^{\alpha}}$$
+$$\frac{1}{1-\theta} = \alpha\beta\frac{1}{\theta(1-\theta)}$$
+Therefore, $\theta = \alpha\beta$.
+
+
+
+In both approaches, we can see the optimal savings rate is a fixed proportion of the total income. The fixed proportion $\alpha\beta$ is called the \textbf{Golden rule} of savings.
+
+\newpage
+
+\section{Deterministic Competitive
+Equilibrium}
+
+{\label{984904}}
+
+In stead of modelling the economy from a social planner's perspective,
+it is more realistic to model the economy in a competitive equilibrium
+setting, in which households maximise their utilities and firms maximise
+their profits. In the following context, we assume homogeneous
+households and firms, i.e. the economy can be represented by only one
+household and one firm that behave competitively to each other.~
+
+\subsection{Arrow-Debreu Equilibrium}
+
+{\label{623891}}
+
+In an Arrow-Debreu setting, there is a centralised market that opens
+only at the very beginning of time. In this market, agents contract on
+how much to transfer to each other in all dates in the future, once and
+for all. All future plans and transfers are then determined. Agents
+trade to trade to maximise their lifetime utilities and profits.~
+
+~
+
+Let $q_t^0$ be the relative price of a date-$t$ claim to (consumption or investment) goods in units of date-$0$ goods. 
+
+\textbf{Household's problem:}
+
+$$ \max_{\{c_t,n_t,i_t\}} \sum_{t=0}^{\infty}\beta^t U(c_t, n_t) - \mu\underbrace{\left[\sum_{t=0}^{\infty}q_t^0(c_t+i_t) - \sum_{t=0}^{\infty}q_t^0(r_tk_t + w_tn_t) - \Pi_0\right]}_{\textrm{lifetime budget constraint}} $$
+
+\begin{center}subject to $k_{t+1} = (1-\delta)k_t + i_t$\end{center}
+
+
+
+The first-order conditions are:
+\[
+    \begin{aligned}
+        c_t &: \beta^t U_c - \mu q_t^0 = 0 \\
+        n_t &: \beta^t U_n + \mu q_t^0 w_t = 0 \\
+        k_{t+1} &: q_t^0 - q_{t+1}^0 (1-\delta) - q_{t+1}^0 r_{t+1} = 0
+    \end{aligned}
+\]
+
+We can further derive:
+$$ -\frac{U_n(c_t, n_t)}{U_c(c_t, n_t)} = w_t $$
+$$ \frac{U_c(c_t, n_t)}{\beta U_c(c_{t+1}, n_{t+1})} = \frac{q_t^0}{q_{t+1}^0} $$
+$$ \frac{q_t^0}{q_{t+1}^0} = 1-\delta + r_{t+1} $$
+
+These conditions says: wage is the price for leisure in terms of
+consumption; the relative price cross two periods is equal to the
+marginal rate of substitution of consumption between the periods and the
+gross return through the time.~
+
+\par\null
+
+\textbf{Firm's problem:}
+
+\par\null
+
+$$\Pi_0 = \max_{\{K_t,N_t\}} \sum_{t=0}^{\infty} q_t^0 [F(K_t, N_t) - r_tK_t - w_tN_t]$$
+
+
+
+The first-order condition gives:
+$$ F_K(K_t, N_t) = r_t $$
+$$ F_N(K_t, N_t) = w_t $$
+
+\textbf{Arrow-Debreu equilibrium}
+
+\textbf{}
+
+An Arrow-Debreu equilibrium is a date-contingent allocation $\{C_t, N_t, K_{t+1}\}$ and prices $\{q_t^0, q_t^0w_t, q_t^0r_t\}$ such that 
+\begin{itemize}
+\item Given prices, $\{c_t, n_t, k_{t+1}\}$ is optimal for the household;
+\item Given prices, $\{K_t, N_t\}$ is optimal for the firm;
+\item Market clears for all dates: $c_t = C_t, k_t=K_t, i_t=I_t, n_t=N_t$; $K_{t+1}=(1-\delta)K_t + I_t$; $C_t+I_t=F(K_t,N_t)$.
+\end{itemize}
+
+\subsection{Sequential Competitive
+Equilibrium}
+
+{\label{273711}}
+
+In a sequential competitive equilibrium modelling, households and firms
+maximise trade for each period, therefore the budget constraint has to
+hold for every period (instead of a single lifetime budge constraint).
+We assume households own all the capital, and firms pay rent to use the
+capital. There is an alternative model in which firms own capital and
+households own shares of the firms, but we skip this model in this
+note.~
+
+\par\null
+
+\textbf{Household's problem}
+
+\textbf{}
+
+$$\max \sum_{t=0}^{\infty}\left[\beta^t U(c_t, n_t) - \mu_t(c_t + i_t - r_tk_t - w_tn_t - \pi_t) \right]$$
+$$\textrm{subject to } k_{t+1}=(1-\delta)k_t + i_t$$
+
+
+
+The first-order conditions are:
+\[
+    \begin{aligned}
+        c_t &: \beta^t U_c - \mu \mu_t^0 = 0 \\
+        n_t &: \beta^t U_n + \mu \mu_t^0 w_t = 0 \\
+        k_{t+1} &: \mu_t^0 - \mu_{t+1}^0 (1-\delta) - \mu_{t+1}^0 r_{t+1} = 0
+    \end{aligned}
+\]
+Therefore we have:
+$$ -\frac{U_n(c_t, n_t)}{U_c(c_t, n_t)} = w_t $$
+$$ \frac{U_c(c_t, n_t)}{\beta U_c(c_{t+1}, n_{t+1})} = \frac{\mu_t^0}{\mu_{t+1}^0} $$
+$$ \frac{\mu_t^0}{\mu_{t+1}^0} = 1-\delta + r_{t+1} $$
+
+\textbf{Firm's problem}
+
+\textbf{}
+
+The firm maximizes its profit for each period $t$:
+$$\pi_t = \max_{\{K_t,N_t\}} [F(K_t, N_t) - r_tK_t - w_tN_t]$$
+
+The first-order conditions are as usual:
+$$ F_K(K_t, N_t) = r_t $$
+$$ F_N(K_t, N_t) = w_t $$
+
+\textbf{Sequential competitive equilibrium}
+
+\textbf{}
+
+A sequential competitive equilibrium is an allocation $\{C_t, N_t, K_{t+1}\}$ and prices $\{w_t, r_t\}$ such that 
+\begin{itemize}
+\item Given prices, the plan $\{c_t, n_t, k_{t+1}\}$ is optimal for the household;
+\item Given prices, $\{N_t, K_t\}$ maximize the firm's prifit;
+\item Market clears for every period $t$.
+\end{itemize}
+
+We can see the equilibrium system in a sequential competitive setting is in effect identical to that in the Arrow-Debreu setting. $\frac{q_t^0}{q_{t+1}^0}$ is just a special case for $\frac{\mu_t}{\mu_{t+1}}$.
+
+We can also find that the equilibrium allocations implied by a
+competitive market are identical to the social planner's allocations,
+which means the competitive equilibrium allocations are Pareto efficient
+(First Welfare theorem). Conversely, we can also find equilibrium prices
+to support a Pareto optimal allocation for different market arrangement
+(Second Welfare theorem).~
+
+\par\null
+
+\subsection{Recursive Competitive
+Equilibrium}
+
+{\label{793453}}\par\null
+
+If the equilibrium decision rules are time invariant, we can describe a competitive equilibrium in a recursive fashion, in which the households maximise:
+$$ V(k,K) = \max_{c,n,k'} \{ U(c,n) + \beta V(k',K') \}$$
+
+A recursive competitive equilibrium in an economy is 
+\begin{itemize}
+    \item a value function: $V(k,K)$
+    \item decision functions: $c = g^c(k,K)$, $n = g^n(k,K)$, $k' = g^k(k,K)$
+    \item prices: $r(K)$, $w(K)$
+    \item law of motion: $K' = G(K)$
+\end{itemize}
+such that 
+\begin{itemize}
+    \item given prices, $g^c,g^n,g^k$ solve the household's Bellman equation;
+    \item $r(K)$ and $w(K)$ satisfy the firm's optimization condition;
+    \item market clears: $k=K$, $g^k(k,K) = G(K)$, $g^c(k,K)=C$, $g^n(k,K)=N$, $K'-(1-\delta)K + C=F(K,N)$.
+\end{itemize}
+
+Solving for a recursive competitive equilibrium involves more work than
+solving for a sequential equilibrium, since it involves solving for the
+value function and policy functions, which specify not only equilibrium
+behaviors but also ``off-equilibrium'' behaviors: what the agents could
+do if he deviates from the representative agent.
+
+
+\newpage 
+
+\section{Fiscal Policy and Optimal
+Taxation~}
+
+{\label{229543}}\par\null
+
+Suppose a tax $\tau_t$ is levied on households' income (rent and wage) in each period $t$. Suppose tax is collected to form public capital $G$ in production. Assume labor supply $L_t=1$, and $\{\tau_t\}_{t=0}^{\infty}$ are exogenously given. We specialize the utility function
+$$ U(c) = \ln c $$ 
+and the production function
+$$ F(K,G) = AG^{\theta}K^{\alpha}$$
+
+
+
+The household's problem becomes:
+$$ \max_{\{c_t, k_{t+1}\}} \left\{ \sum_{t=0}^{\infty} \beta^t\ln(c_t): c_t + k_{t+1} = (1-\tau_t)(w_t + r_tk_t + \pi_t) \right\}$$
+
+The firm's problem is as usual:
+$$ \pi_t = \max \{F(K_t, G_t) - r_t K_t - w_t \}$$
+
+What is the recursive competitive equilibrium in the presence of
+taxation?~
+
+\par\null
+
+\subsection{Optimal Savings under
+Taxation~~}
+
+{\label{553361}}\par\null
+
+Rewrite the household's problem to a Bellman equation:
+
+$$V^h(k_t, G_t) = \max_{c_t,k_{t+1}} \{\ln(c_t) + \beta V^h(k_{t+1}): c_t + k_{t+1} = (1-\tau_t)F(k_t,G_t)\}$$
+
+
+
+Guess the solution having form $V^h(k,G)=A + B\ln(k)+C\ln(G)$. 
+Solving the Bellman equation gives the policy functions:
+$$ k_{t+1} = (1-\tau_t)(\alpha\beta)y_t $$
+$$ c_t = (1-\tau_t)(1-\alpha\beta)y_t $$
+where $y_t = AG_t^{\theta}k_t^{\alpha}$.
+
+Therefore the optimal decision is still to save a fixed proportion
+(\(\alpha\beta\)) of after-tax income.
+
+\par\null
+
+\subsection{Optimal Taxation}
+
+{\label{810937}}
+
+What is the optimal tax rates~\(\{\tau_t\}_{t=0}^{\infty}\) in an economy where
+agents best respond according to their competitive equilibrium behavior?
+We model this decision problem (optimal taxation) as a government's
+Bellman equation:
+
+\par\null
+
+$$V^G(k_t, G_t) = \max_{\tau_t} \{ \ln[\underbrace{(1-\tau_t)(1-\alpha\beta)y_t}_{\textrm{best choice of household}}] + \beta V^G(k_{t+1}, G_{t+1})\}$$
+$$ \textrm{subject to } k_{t+1} = (1-\tau_t)\alpha\beta y_t, G_{t+1} = \tau_t y_t $$
+
+Guess $V^G(k,G) = A + B\ln(k) + C\ln(G)$. 
+
+We will solve 
+$$ V^G(k,G) = A + \frac{\alpha}{1-(\alpha+\theta)\beta}\ln(k) + \frac{\theta}{1-(\alpha+\theta)\beta}\ln(G) $$
+
+The optimal tax decision is: $\tau_t = \beta\theta$.
+
+So the optimal tax plan is to tax private-sector income at exactly the
+elasticity of private income with respect to the public capital input.
+
+\par\null
+
+\section{Stochastic Dynamic
+Programming}
+
+{\label{704756}}
+
+\subsection{Stochastic Production
+Technology}
+
+{\label{991631}}
+
+Suppose we introduce a random ``shock" to out production output:
+
+$$ y_t = \theta_t f(k_t) $$
+
+where $\{\theta_t\}$ is a sequence of $i.i.d.$ random variables.
+
+The social planner's problem is now to maximize the lifetime expected utility:
+
+$$\max\left\{ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t U(c_t): c_t + k_{t+1} = \theta_t f(k_t) \right\}$$
+
+where $\mathbb{E}_t$ is the expectation conditioned on information available at date $t$.
+
+
+
+The household's Bellman equation is:
+
+$$ V(k_t, \theta_t) = \max_{c_t, k_{t+1}} \left\{U(c_t) + \beta\mathbb{E}_t V(k_{t+1}, \theta_{t+1}): c_t + k_{t+1} = \theta_t f(k_t) \right\}$$
+
+
+
+If we specify $f(k_t) = \theta_t k_t^{\alpha}$, $U(c_t) = \ln(c_t)$, and further assume $$\ln(\theta_{t+1}) = \rho\ln(\theta_t) + \epsilon_{t+1} $$
+where $\epsilon_{t+1}\sim N(0,\sigma^2)$. 
+What is the household's optimal consumption and savings plan?
+
+Follow the usual steps to solve the Bellman equation by conjecture:
+$$ V(k, \theta) = A + B\ln(k) + C\ln(\theta) $$
+
+Substitute it into the Bellman equation:
+\[
+   \begin{aligned}
+     T \circ V(k,\theta) &= \max \{\ln(\theta k^{\alpha} - k') + \beta\mathbb{E}[A + B\ln(k') + C\ln(\theta')|\theta]\} \\
+     &= \max \{\ln(\theta k^{\alpha} - k') + \beta A + \underbrace{\beta B\ln(k')}_{k_{t+1} \textrm{ is known at date } t} + \underbrace{\beta C\rho\ln(\theta)}_{\mathbb{E}[\ln(\theta')] = \mathbb{E}[\rho\ln(\theta)+\epsilon']=\rho\ln(\theta)} \}
+   \end{aligned}
+\]
+
+We will solve out the value function:
+$$ V(k,\theta) = A + \frac{\alpha}{1-\alpha\beta}\ln(k) + \frac{1}{(1-\beta)(1-\beta\rho)}\ln(\theta) $$
+
+and the policy functions:
+$$
+    \begin{aligned}
+        k' &= \alpha\beta k^{\alpha} \theta \\
+        c' &= (1-\alpha\beta) k^{\alpha} \theta \\
+    \end{aligned}
+$$
+
+So the optimal savings plan is unchanged in face of stochastic
+technological shocks --- save a fixed proportion of total income for
+every period.~
+
+\par\null
+
+\subsection{Stochastic Technology with Markov
+Properties}
+
+{\label{530082}}
+
+Suppose the technology in the production function can take only finitely
+many possible states:~\(\{z_1, z_2, ..., z_n\}\). Suppose the stochastic
+process~\(\{z_t\}\) is governed by a time homogeneous Markov
+chain, i.e. there is a pre-determined probability~\(\mathbb{P}(z_j|z_i)\)
+associated with every~\(z_i, z_j \in \{z_1, ..., z_n \}\).~
+
+The social planner's problem becomes:
+
+$$ V(k, z_i) = \max_{k'}\left\{U(c) + \beta\sum_{z_j}V(k', z_j)\mathbb{P}(z_j|z_i)\right\} $$
+
+Note that for each $k$, there is a vector of value functions:
+$$ \mathbf{V}(k) = (V(k,z_1), ..., V(k,z_n)) = (V_1(k), ..., V_n(k)) $$
+
+The Bellman operator now operates on vectors:
+\[
+\mathbf{T}\circ \mathbf{V}(k) = 
+    \begin{bmatrix}
+        T_1 \circ V(k,z_1) \\
+        T_2 \circ V(k,z_2) \\
+        \vdots \\
+        T_n \circ V(k,z_n)
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        \max\left\{ U(c) + \beta\sum_{j=1}^{n} V(k', z_j)\mathbb{P}(z_j|z_1) \right\} \\
+        \max \left\{ U(c) + \beta\sum_{j=1}^{n} V(k', z_j)\mathbb{P}(z_j|z_2) \right\} \\
+        \vdots \\
+        \max \left\{ U(c) + \beta\sum_{j=1}^{n} V(k', z_j)\mathbb{P}(z_j|z_n) \right\}
+    \end{bmatrix}
+\]
+
+
+
+Therefore, $\mathbf{T}$ is a mapping from $[C_b(K)]^n$ to itself. 
+Since each component $T_i$ of $\mathbf{T}$ is a contraction mapping, $\mathbf{T}$ is also a contraction mapping. So the Banach fixed point theorem applies. We can solve for $\mathbf{T}$ iteratively as we do in single function case. 
+
+\newpage
+
+\section{Equilibrium in Complete
+Markets}
+
+{\label{610479}}
+
+What does the equilibrium look like in the presence of stochastic states
+in an economy? In this section, we will explore a pure exchange economy
+with state-dependent endowments and consumptions in a complete market. A
+\textbf{complete market} is a market where there is a price for every
+asset in every possible states of the world. State-dependent endowments
+for individuals generate uncertainty and risk for individuals. We will
+see how a complete market secures individual risks.
+
+\par\null
+
+Some notations used in this section: 
+
+\begin{itemize}
+\item Stochastic events: $s_t \in S = \{s_1, ..., s_n\}$
+\item History of events: $h_t = (s_0, s_1, ..., s_t)$
+\item Probability of events (history): $\pi(s_t)$, $\pi(h_t)$
+\item Agents: $I = \{1,2,..., m\}$
+\end{itemize}
+
+Endowment for individual $i$ at time $t$ is denoted as $y_t^i(h_t)$. 
+
+The initial state $s_0$ is assumed to be given, i.e. $\pi(s_0)=1$.
+
+\subsection{Social Planner's Problem}
+
+{\label{864866}}
+
+The social planner maximises the expected lifetime utility for all agents in the economy:
+
+$$\max \sum_{t=0}^{\infty}\sum_{h_t}\left\{\sum_{i\in I}\lambda_i\beta^tU(c_t^i(h_t))\pi_t(h_t) + \theta_t(h_t)\sum_{i\in I}[y_t^i(h_t)-c_t^i(h_t)]\right\}$$
+
+$\lambda_i$ is the weight that the planner assigns to each agient $i$. 
+
+Note the Lagrangian multiplier $\theta_t(h_t)$ is also history-contingent. The constraint $$\sum_{i\in I}[y_t^i(h_t)-c_t^i(h_t)]\ge 0$$ requires that the aggregrate consumption must not exceed the aggregate endowment.
+
+
+
+The first-order condition is:
+
+$$ \lambda_i \beta^t U'(c_t^i(h_t)) \pi_t(h_t) - \theta_t(h_t) = 0 $$
+
+Therefore, 
+$$ \frac{U'(c_t^i(h_t))}{U'(c_t^j(h_t))} =\frac{\lambda_j}{\lambda_i} $$
+$$ c_t^i(h_t) = U'^{-1}\left[\frac{\lambda_j}{\lambda_i}U'(c_t^j(h_t))\right] $$
+
+The budge constraint holds:
+
+$$ \sum_{i\in I} y_t^i(h_t) = \sum_{i\in I} c_t^i(h_t) $$
+
+Sum up $c_t^i$ for all $i$:
+
+$$ \sum_{i\in I} U'^{-1}\left[\frac{\lambda_j}{\lambda_i}U'(c_t^j(h_t))\right] = \sum_{i\in I} y_t^i(h_t) $$
+
+Given the assumption on~\(U\), we can uniquely solve
+for~\(c_t^j\). Once we solve~\(c_t^j\),
+every~\(c_t^i\) (\(i\neq j\)) is uniquely determined.
+Therefore, the optimal allocation is only a function of realised
+aggregate endowment and does not depend on the particular
+history~\(h_t\) leading to this outcome or the realisation of
+individual endowment.~
+
+\par\null
+
+\subsection{Arrow-Debreu Equilibrium}
+
+{\label{267939}}
+
+Suppose the market opens only at date~\(t=0\). In the
+centralised market, agents exchange claims on time-\(t\)
+consumption contingent on history~\(h_t\) at
+price~\(q_t^0(h_t)\). Assume there is a complete set of securities
+for all possible~\(h_t\).
+
+\par\null
+
+For each individual $i$, s/he solve the problem:
+
+$$ \max\left\{ \sum_{t=0}^{\infty}\sum_{h_t}\beta^tU(c_t^i(h_t))\pi_t(h_t) + \mu_i\sum_{t=0}^{\infty}\sum_{h_t}q_t^0(h_t)[y_t^i(h_t)-c_t^i(h_t)]\right\} $$
+
+Note that trades happen at date-\(0\) once and for all
+implies that each individual faces only one lifetime budge constraint.
+
+\par\null
+
+The first-order condition is:
+
+$$ \beta^t U'(c_t^i(h_t))\pi_t(h_t) - \mu_i q_t^0(h_t) = 0 $$
+
+Therefore, 
+
+$$ \frac{U'(c_t^i(h_t))}{U'(c_t^j(h_t))} =\frac{\mu_i}{\mu_j} $$
+
+The equilibrium condition here is actually equivalent to the first-order
+condition of the social planner's problem only by
+letting~\(\mu_i = \lambda_i^{-1}\). So we still have the similar result: the
+Arrow-Debreu allocation is a function of the realised aggregate
+endowment and does not depend on either the realisation of individual
+endowment or the particular history leading up to that outcome.
+
+\par\null
+
+The implication is, since agents can trade contracts on all possible
+contingencies in the future, the market aggregate the risks and
+eliminate individual risks. Or we could say, the individual risks are
+fully secured by the complete market.~
+
+\par\null
+
+\subsubsection{Asset pricing
+implications}
+
+{\label{200528}}
+
+In a complete market, every contingency is priced by~\(q_t^0(h_t)\).
+So any other asset is ``redundant''. Any other asset can be priced with
+a combination of~\(q_t^0(h_t)\).~
+
+~
+
+Suppose an asset pays a stream of dividents $\{d_t(h_t)\}_{t\ge 0}$, then the asset has a price at date-$0$:
+
+$$ p^0(h_t) = \sum_{t=0}^{\infty}\sum_{h_t}q_t^0(h_t)d_t(h_t) $$
+
+The price of the asset at date-$t$ is given by:
+
+$$ p^t(h_{t+k}) = \sum_{k\ge 0}\sum_{h_{t+k}|h_t}q_{t+k}^{t}(h_{t+k})d_{t+k}(h_{t+k}) $$
+
+where $q_{t+k}^{t}(h_{t+k})$ is the relative price:
+
+$$ q_{t+k}^{t}(h_{t+k}) = \beta^k \frac{U'(c_{t+k}^{i}(h_{t+k}))}{U'(c_t^i(h_t))}\pi_t(h_{t+k}|h_t) $$
+
+\subsection{Sequential Market with Arrow
+Securities}
+
+{\label{302363}}
+
+Now suppose at each date~\(t\) with
+history~\(h_t\), traders meet to trade for contingent goods
+deliverable at~\(t+1\).
+
+Let~\(a_t^i\left(h_t\right)\) be the total \textbf{asset} or \textbf{wealth}
+owned by individual~\(i\) at date~\(t\).
+
+Individual $i$ solves:
+
+$$ \max \sum_{t=0}^{\infty}\sum_{h_t}\left\{ \beta^tU(c_t^i(h_t))\pi_t(h_t) + \eta_t^i(h_t)\left[y_t^i(h_t) + a_t^i(h_t) - c_t^i(h_t) - \sum_{s_{t+1}}a_{t+1}^i(s_{t+1},h_t)Q_t(s_{t+1}|h_t)\right]\right\}  $$
+
+where $Q_t(s_{t+1}|h_t)$ is called the intertemporal pricing kernel. 
+
+Note that~\(a_{t+1}^i\) can be negative, i.e. agents can borrow
+assets. In principle, we should restrict that each agent cannot borrow
+more than the maximal amount that he could repay --- the present value
+of all his future endowment:
+
+$$-a_{t+1}^i(s_{t+1}) \le \sum_{k\ge 1}\sum_{h_{t+k}|h_{t+1}} q_{t+k}^{t+1}(h_{t+k}) y_{t+k}^i (h_{t+k}) $$
+
+But given the Inada condition, the debt constraint will never bind. If
+the constraint binds, consumption from~\(t+1\) on has to be
+zero forever. But this implies that the consumer has infinite marginal
+utility for future consumptions, s/he could be better off by just saving
+a little from today for future consumption.
+
+The first-order conditions are:
+
+\[
+    \begin{aligned}
+        c_t^i &: \beta^t U(c_t^i(h_t))\pi_t(h_t) -\eta_t^i(h_t) = 0 \\
+        a_{t+1}^i &: -\eta_t^i(h_t)Q_t(s_{t+1}|h_t) + \eta_t^i(s_{t+1}, h_t) = 0
+    \end{aligned}
+\]
+
+We can solve out the pricing kernel: 
+
+$$ Q_t(s_{t+1}|h_t) = \beta\frac{U'(c_{t+1}^i(h_{t+1}))}{U'(c_t^i(h_t))}\pi_t(h_{t+1}|h_t) $$
+
+We will show that, with an appropriate choice of initial wealth
+distribution, there is an equivalence in allocations under Arrow-Debreu
+equilibrium and sequential market equilibrium.
+
+\par\null
+
+\subsubsection{Equivalence of
+equilibriums}
+
+{\label{484195}}
+
+If we define wealth as the present value of all the household's owned \emph{current and future net claims on consumption} ($\Omega_t^i$), i.e.
+
+\[
+    \begin{aligned}
+      a_t^i(h_t) = \Omega_t^i(h_t) &= \sum_{k\ge 0}\sum_{h_{t+k}|h_t} q_{t+k}^t(h_{t+k})[c_{t+k}^i(h_{t+k}) - y_{t+k}^i(h_{t+k})] \\
+      &= \sum_{k\ge 0}\sum_{h_{t+k}|h_t} \beta^k \frac{U'(c_{t+k}^i(h_{t+k}))}{U'(c_t^i(h_t))}\pi_t(h_{t+k}|h_t)[c_{t+k}^i(h_{t+k}) - y_{t+k}^i(h_{t+k})]
+    \end{aligned}
+\]
+
+Then we can rewrite the expected future wealth (the last term in the constraint) as:
+
+\[
+\sum_{s_{t+1}}a_{t+1}^i(s_{t+1},h_t)Q_t(s_{t+1}|h_t) = \sum_{k\ge 1}\sum_{h_{t+k}|h_t} q_{t+k}^t(h_{t+k})[c_{t+k}^i(h_{t+k}) - y_{t+k}^i(h_{t+k})]
+\]
+
+At $t=0$, the budget constaint becomes
+
+$$ c_0^i(s_0) + \sum_{k\ge 1}\sum_{h_k}q_k^0(h_k)[c_k^i(h_k)-y_k^i(h_k)] = y_0^i(s_0) + a_0^i(s_0) $$
+
+The budget constraint is exactly the same as in an Arrow-Debreu setting if we set $a_0^i(s_0)=0$.
+
+In all consecutive future period, $t>0$, if we replace 
+
+$$ \sum_{s_{t+1}} a_{t+1}^i(s_{t+1},h_t)Q_t(s_{t+1}|h_t) = \Omega_t^i(h_t) - [c_t^i(h_t) - y_t^i(h_t)]$$
+
+in the budget constraint, we will get exactly the same $c_t^i$ for each $t$ as in an Arrow-Debreu equilibrium.
+
+\subsection{Recursive Competitive
+Equilibrium}
+
+{\label{763184}}\par\null
+
+If the state $s_t$ is governed by a Markov chain, 
+$$ \pi_t(h_t) = \pi(s_t|s_{t-1})\pi(s_{t-1}|s_{t-2})\cdots\pi(s_1|s_0)\pi(s_0) $$
+then the allocation for each period depend only on the current state: 
+$$ y_t^i(h_t) = y^i(s_t) $$
+$$ c_t^i(h_t) = c^i(s_t) $$
+$$ Q_t(s_{t+1}|h_t) = Q(s_{t+1}|s_t) $$
+
+This enables us to restate the households' utility maximisation problem
+recursively.~
+
+\par\null
+
+For each household $i$, its Bellman equation is:
+
+$$ V^i(a,s) = \max_{c, \hat a} \left\{ U(c) + \beta \sum_{s'}V^i(\hat a(s'), s')\pi(s'|s)\right\} $$
+$$ \textrm{s.t. } c+ \sum_{s'}\hat a(s')Q(s'|s) \le y^i(s) + a $$
+$$ \qquad -\hat a(s') \le \Omega^i(s') $$
+
+The first-order conditions read:
+
+\[
+    \begin{aligned}
+        c &: U'(c) - \mu = 0 \\
+        \hat a &: \beta\frac{\partial V^i}{\partial\hat a}\pi(s'|s) - \mu Q(s'|s) = 0
+    \end{aligned}
+\]
+
+where $\mu$ the is the Lagrangian multiplier for the first constraint. The debt limit will never bind.
+
+By applying the Envelope theorem, 
+$$ \frac{\partial V^i}{\partial a} = \mu = U'(c) $$
+
+we have 
+$$ \frac{\partial V^i}{\partial\hat a} = \mu' = U'(c') $$
+
+Therefore, the pricing kernel can be experssed as:
+
+$$ Q(s'|s) = \beta\frac{U'(c')}{U'(c)}\pi(s'|s) $$
+
+\newpage 
+
+\section{New Keynesian Model}
+
+{\label{711332}}
+
+\subsection{Households' Problem}
+
+{\label{519169}}
+
+We formulate the household's problem as following:
+
+$$\max\mathbb{E}_t\left\{ \sum_{t=0}^{\infty}\beta^tU(C_t,N_t)\right\}$$
+$$\textrm{s.t. } P_tC_t + Q_{t,t+1}A_{t+1} \le W_tN_t + A_t + \Pi_t $$
+
+where $P_t$ stands for the aggregate price for consumption goods; $A_t$ for the net asset owned by the houdehold; and $Q_{t,t+1}$ for the relative price of the assets.
+
+The first-order condition gives:
+
+$$ -\frac{U_n(C_t, N_t)}{U_c(C_t, N_t)} = \frac{W_t}{P_t} $$
+$$ Q_{t,t+1} = \beta\mathbb{E}_t\left\{\frac{\lambda_{t+1}}{\lambda_t}\right\} = \beta\mathbb{E}_t\left\{\frac{U_c(C_{t+1},N_{t+1})}{U_c(C_t, N_t)}\cdot\frac{P_t}{P_{t+1}}\right\}$$
+
+If we specialize the utility function to
+
+$$ U(C_t,N_t) = \frac{U_t^{1-\sigma}}{1-\sigma} - \frac{N_t^{1+\gamma}}{1+\gamma} $$
+
+Then $U_c(C_t,N_t) = C_t^{-\sigma}$. Let $i_t$ be the riskless one-period nominal interest rate, $i_t$ satisfies 
+
+$$ \frac{1}{1+i_t} = Q_{t,t+1} = \beta\mathbb{E}_t\left\{\left(\frac{C_{t+1}}{C_t}\right)^{-\sigma}\frac{P_t}{P_{t+1}}\right\} $$
+
+Log-linearize the above equation (see \href{http://www.columbia.edu/~nc2371/teaching/R9.pdf}{What is log-linearization?}):
+
+$$ -\hat i_t = \mathbb{E}_t \left\{-\sigma(\hat C_{t+1}-\hat C_t) - (\hat P_{t+1}-\hat P_t) \right\} $$
+
+Rearrange it,
+
+$$ \hat C_t = \mathbb{E}_t\hat C_{t+1} - \frac{1}{\sigma}[\hat i_{t} - \mathbb{E}_t\pi_{t+1}]$$
+
+where we define $\pi_{t+1}=\hat P_{t+1} - \hat P_t$ as the inflation rate.
+
+If we assume good markets clear, i.e. $\hat Y_t = \hat C_t $ where $Y_t$ represents the output, then we can rewrite the above equation as
+
+$$ \hat Y_t = \mathbb{E}_t\hat Y_{t+1} - \frac{1}{\sigma}[\hat i_{t} - \mathbb{E}_t\pi_{t+1}]$$
+
+This is the forward-looking Keynesian IS equation. We will return to
+this equation later.~
+
+\par\null
+
+To facilitate the analysis of firms' pricing behavior, we assume the aggregated consumption is composed of consumptions on a list of differentiable goods:
+
+$$ C_t =\left[\int_0^1 C_t(i) ^{\frac{\epsilon-1}{\epsilon}}\right]^{\frac{\epsilon}{\epsilon-1}}$$
+
+Note that we aggregate the consumption bundle by a CES aggregator. 
+
+Similarly, the price is aggregated by 
+
+$$P_t = \left[\int_0^1(P_t(i))^{1-\epsilon}\right]^{\frac{1}{1-\epsilon}}$$
+
+Then we can show the optimal intratemporal allocation of expenditures on each good conforms
+
+$$ C_t(i) = \left(\frac{P_t(i)}{P_t}\right)^{-\epsilon}C_t $$
+
+\subsection{Firms' Problem}
+
+{\label{147524}}
+
+We assume there is a continuum of firms on~\([0,1]\) each
+producing a good differentiated by product type~\(i\).
+
+We assume a capital-free technology:
+$$ Y_t(i) = A_t N_t(i) $$
+
+The firm minimizes its cost:
+
+$$ \min_{N_t} W_tN_t(i) + MC_t[Y_t(i) - A_tN_t(i)]$$
+
+where $MC_t$ is the marginal cost. 
+
+The first-order condition is:
+$$ W_t = MC_t A_t $$
+
+\subsubsection{Marginal cost}
+
+{\label{594939}}\par\null
+
+Let $\displaystyle mc_t := \frac{MC_t}{P_t}$ denote the \textbf{real marginal cost} of the firm. Together with the optimal choice from the household, we can derive:
+
+$$ mc_t = \frac{MC_t}{P_t} = \frac{W_t}{P_t}\cdot\frac{1}{A_t} = -\frac{U_n(C_t,N_t)}{U_c(C_t,N_t)}\frac{1}{A_t} = \frac{N_t^{\gamma}}{C_t^{-\sigma}}\frac{1}{A_t}$$
+
+Assume markets clear, $C_t= Y_t=A_tN_t$, we have 
+
+$$ mc_t = \frac{(Y_t/A_t)^{\gamma}}{Y_t^{-\sigma}}\frac{1}{A_t} = Y_t^{\sigma+\gamma} A_t^{-\gamma-1}$$
+
+Log-linearize this equation:
+
+$$ \hat{mc}_t = (\gamma+\sigma)\hat Y_t - (1+\gamma)\hat A_t $$
+
+This equation establishes the real marginal cost changes as output or
+technology changes.
+
+\par\null
+
+\subsubsection{Price stickiness}
+
+{\label{195467}}
+
+Now we introduce price stickiness. Suppose each period, there is a
+constant probability~\(\left(1-\theta\right)\) that firms get to adjust their
+prices. If firm~\(i\) gets to reset its product price at
+time~\(t\), the firm knows the probability it will be stuck
+at that new price for the next~\(k\) periods ahead will
+be~\(\theta^k\).
+
+The firm choose $P_t^*(i)$ to maximize expected profit:
+
+$$ \max_{P_t(i)}\mathbb{E}_t\sum_{k=0}^{\infty} \theta^k Q_{t,t+k} C_{t+k}(i)[P_t(i) - MC_{t+k}] $$
+$$\textrm{s.t. } C_{t+k}(i) = \left(\frac{P_t(i)}{P_{t+k}}\right)^{-\epsilon} C_{t+k} $$
+
+The first-order condition gives:
+
+$$P_t^*(i) = \frac{\epsilon}{\epsilon-1}\frac{\mathbb{E}_t\sum_{k=0}^{\infty}\theta^kQ_{t,t+k}MC_{t+k}C_{t+k}(i)}{\mathbb{E}_t\sum_{k=0}^{\infty}\theta^kQ_{t,t+k}C_{t+k}(i)}$$
+
+If we substitute the following into the equation, $$Q_{t,t+k}=\beta^k\frac{U_c(C_{t+k}}{U_c(C_t)}\frac{P_t}{P_{t+k}} = \beta^k \Gamma_{t,t+k}$$
+$$C_{t+k}(i) = \left(\frac{P_t(i)}{P_{t+k}}\right)^{-\epsilon} C_{t+k}$$
+$$MC_{t+k} = mc_{t+k}P_{t+k}$$
+
+the condition can be rewritten as:
+
+$$P_t^*(i) = \frac{\epsilon}{\epsilon-1}\frac{\mathbb{E}_t\sum_{k=0}^{\infty}(\beta\theta)^k \Gamma_{t,t+k}mc_{t+k}P_{t+k}^{\epsilon+1}C_{t+k}}{\mathbb{E}_t\sum_{k=0}^{\infty}(\beta\theta)^k \Gamma_{t,t+k}P_{t+k}^{\epsilon}C_{t+k}}$$
+
+Log-linearize this equation around its steady state:
+$$ 
+\begin{aligned}
+\hat P_t^* &= \mathbb{E}_t \sum_{k=0}^{\infty}(\beta\theta)^k\frac{mc_{ss}P_{ss}^{\epsilon+1}C_{ss}}{S_{1,ss}}(\hat\Gamma_{t,t+k} + \hat{mc}_{t+k}+(\epsilon+1)\hat P_{t+k}+\hat C_{t+k}) \\
+&\quad - \mathbb{E}_t\sum_{k=0}^{\infty}(\beta\theta)^k\frac{P_{ss}^{\epsilon}C_{ss}}{S_{2,ss}}(\hat\Gamma_{t,t+k} + \epsilon\hat P_{t+k}+\hat C_{t+k})
+\end{aligned}
+$$
+
+where
+\[
+    \begin{aligned}
+    S_{1,ss} &= \sum_{k=0}^{\infty} (\beta\theta)^k mc_{ss}P_{ss}^{\epsilon+1}C_{ss} = mc_{ss}P_{ss}^{\epsilon+1}C_{ss} \sum_{k=0}^{\infty} (\beta\theta)^k = mc_{ss}P_{ss}^{\epsilon+1}C_{ss} \frac{1}{1-\beta\theta}\\
+    S_{2,ss} &= \sum_{k=0}^{\infty} (\beta\theta)^k P_{ss}^{\epsilon}C_{ss} = P_{ss}^{\epsilon}C_{ss} \sum_{k=0}^{\infty} (\beta\theta)^k = P_{ss}^{\epsilon}C_{ss} \frac{1}{1-\beta\theta} 
+    \end{aligned}
+\]
+
+The log-linearized equation can be simplified to:
+
+$$ \hat P_t^* = (1-\beta\theta)\mathbb{E}_t\sum_{k=0}^{\infty} (\beta\theta)^k (\hat{mc}_{t+k} + \hat P_{t+k}) $$
+
+We can also write it in a recursive form:
+
+$$ \hat P_t^* = (1-\beta\theta)[\hat{mc}_t + \hat P_t] + \beta\theta \mathbb{E}_t \hat P_{t+1}^* $$
+
+\par\null
+
+If we have enough many firms, by Law of Large Numbers, the fraction of
+firms not allowed to change their prices in one-period is
+approximately~\(\theta\). Therefore, the aggregate price index
+can be expressed as
+
+\par\null
+
+$$ P_t = (\theta P_{t-1}^{1-\epsilon} + (1-\theta)(P_t^*)^{1-\epsilon})^{\frac{1}{1-\epsilon}}$$
+
+The log-linearized form is:
+$$ \hat P_t = \theta\hat P_{t-1} + (1-\theta)\hat P_t^* $$
+
+Therefore the inflation is:
+\[
+\begin{aligned}
+\pi_t &= \hat P_t - \hat P_{t-1} = (1-\theta)(\hat P_t^* - \hat P_{t-1}) \\
+&= (1-\theta)\left[ (1-\beta\theta)(\hat{mc}_t + \hat P_t) + \beta\theta\mathbb{E}_t \hat P_{t+1}^* - \hat P_{t-1} \right] \\
+&= (1-\theta)\left[ (1-\beta\theta)\hat{mc}_t + \beta\theta\mathbb{E}_t(\hat P_{t+1}^* - \hat P_t) + \pi_t \right]
+\end{aligned}
+\]
+
+Hence, 
+$$ \pi_t = \beta\mathbb{E}_t\pi_{t+1} + \frac{(1-\theta)(1-\beta\theta)}{\theta}\hat{mc}_t $$
+
+This is called the New-Keynesian Phillips curve. We can read from it
+that the more sticky prices are (higher~\(\theta\)), the smaller
+the elasticity of inflation to marginal cost is.~~
+
+\par\null
+
+\subsection{Equilibrium}
+
+{\label{481134}}
+
+\subsubsection{Natural level of output, output
+gaps}
+
+{\label{616482}}
+
+The natural level of output is defined as the output level when prices
+are completely flexible, which implies~\(\hat{mc}_t = 0\).
+
+Recall $$\hat{mc}_t = (\gamma+\sigma)\hat Y_t - (1+\gamma)\hat A_t$$
+If $\hat{mc}_t = 0$, we get the natural level of output: 
+$$ \hat Y_t^n = \left(\frac{1+\gamma}{\gamma+\sigma}\right)\hat A_t$$
+i.e. the output change only depends on technological shocks.
+
+Define the output gap, $x_t = \hat Y_t - \hat Y_t^n$. 
+
+$$ x_t = \hat Y_t - \hat Y_t^n = \frac{\hat{mc}_t}{\gamma+\sigma} + \frac{1+\gamma}{\gamma+\sigma}\hat A_t - \frac{1+\gamma}{\gamma+\sigma}\hat A_t = \frac{\hat{mc}_t}{\gamma+\sigma} $$
+
+Therefore, $\hat{mc}_t = (\gamma+\sigma)x_t$.
+
+\subsubsection{New-Keynesian
+equilibrium}
+
+{\label{362724}}
+
+We can rewrite out Phillips curve and IS curve in terms of the output
+gap.~ ~
+
+Recall the New-Keynesian Phillipse curve:
+
+$$ \pi_t = \beta\mathbb{E}_t\pi_{t+1} + \frac{(1-\theta)(1-\beta\theta)}{\theta}\hat{mc}_t $$
+
+Replace $\hat{mc}_t$ with $x_t$, we have
+
+\begin{equation}
+\label{eq:ps}
+\pi_t = \beta\mathbb{E}_t\pi_{t+1} + \kappa x_t
+\end{equation}
+
+where $\kappa = \frac{(1-\theta)(1-\beta\theta)(\gamma+\sigma)}{\theta}$.
+
+Recall the Keynesian IS curve:
+
+$$ \hat Y_t = \mathbb{E}_t\hat Y_{t+1} - \frac{1}{\sigma}[\hat i_{t} - \mathbb{E}_t\pi_{t+1}]$$
+
+Replace $\hat Y_t$ with $x_t$:
+$$ x_t + \hat Y_t^n = \mathbb{E}_t(x_{t+1}+\hat Y_{t+1}^n) - \frac{1}{\sigma}[\hat i_{t} - \mathbb{E}_t\pi_{t+1}]$$
+
+Rearrange it, we get:
+
+\begin{equation}
+\label{eq:is}
+x_t = \mathbb{E}_t x_{t+1} - \frac{1}{\sigma}(\hat i_t - \mathbb{E}_t \pi_{t+1} - r_t^n)
+\end{equation}
+
+where $r_t^n = \sigma\mathbb{E}_t(\hat Y_{t+1}^n - \hat Y_t^n) = \sigma\frac{1+\gamma}{\gamma+\sigma}\mathbb{E}_t(\hat A_{t+1} - \hat A_t)$ is a representation of expected technology changes. 
+
+The equilibrium in this New-Keynesian economy is thus defined as follows: given the stochastic process $\{\hat A_t\}$ and a monetary policy plan $\{\hat i_t\}$, a \textbf{rational expectation equilibrium} (REE) is the set of stochastic processes $\{x_t, \pi_t\}$ satisfying \eqref{eq:ps} and \eqref{eq:is}.
+
+\subsection{Simple monetary policy}
+
+{\label{773166}}
+
+Consider the monetary authority following a simple decision rule
+specified by the reaction function:
+
+$$ \hat i_t =\phi_\pi \pi_t $$
+
+Substitute the monetary policy in \eqref{eq:is}, then the REE can be characterized by
+
+\[
+\begin{bmatrix}
+\pi_t \\
+x_t
+\end{bmatrix}
+=
+\underbrace{
+\frac{1}{\sigma+\kappa\phi_\pi}
+\begin{bmatrix}
+\alpha\beta+\kappa & \sigma\kappa \\
+1-\beta\phi_\pi & \sigma 
+\end{bmatrix}
+}_{\mathbf F}
+\begin{bmatrix}
+\mathbb{E}_t \pi_{t+1} \\
+\mathbb{E}_t x_{t+1}
+\end{bmatrix}
++ \frac{1}{\sigma+\kappa\phi_\pi}
+\begin{bmatrix}
+\kappa \\ 1
+\end{bmatrix}
+r_t^n
+\]
+
+It can be shown if $\phi_\pi \ge 1$, $\mathbf F$ is a stable matrix (all its eigenvalues are inside the unit circle), and there exists a unique stable REE $\{x_t, \pi_t\}$ satisfying \eqref{eq:ps} and \eqref{eq:is}.
+
+\newpage
+
+\section{Search and Matching}
+
+{\label{749203}}
+
+This section presents a simple model that a single unemployed worker is
+faced with a contemporaneous decision of accepting a stochastic wage
+offer and be employed immediately, or accepting some unemployment
+benefit payout and thus remaining unemployed for one more period.~
+
+\subsection{Wage Offer Distribution}
+
+{\label{189039}}
+
+Suppose wage offer is a random variable drawn from a distribution with
+cumulative probability:
+
+$$ \mathbb{P}(w \le W) = F(W) $$
+
+We assume~\(F\) satisfying the following properties:
+
+\begin{itemize}
+\tightlist
+\item
+  \(F\) is nondecreasing and continuous;
+\item
+  There exists a finite~\(B\) such that~\(F\left(B\right)=1\)
+\end{itemize}
+
+Then the expected value of~\(w\) is:
+
+$$ \mathbb{E}(w) = \int_0^B w dF(w) = \left[wF(w)\right]_0^B - \int_0^B F(w)dw = B - \int_0^B F(w)dw $$
+
+\subsection{One-Sided Job Search}
+
+{\label{158547}}
+
+Assume a worker facing a job search decision. Given wage
+offer~\(w\), the decision process is a binary action:
+
+\begin{itemize}
+\tightlist
+\item
+  accept~\(w\), and receive~\(w\) per period
+  forever;
+\item
+  reject~\(w\), receive unemployment
+  benefit~\(c\), and wait for next period
+  offer~\(w'\).
+\end{itemize}
+
+\par\null
+
+Let $V(w)$ be the woker's value function:
+
+\[
+V(w) = \begin{cases}
+w + \beta w^2 +\cdots = \frac{w}{1-\beta}, \qquad\textrm{if accept}\\
+c + \beta \int_0^B V(w') dF(w') \qquad\textrm{if reject}
+\end{cases}
+\]
+
+The worker's optimal decision is to choose the action that yields the
+highest payoff. Note that~\(\frac{w}{1-\beta}\) is an increasing function
+in~\(w\), and~\(c + \beta \int_0^B V(w') dF(w')\) is a constant determined
+by the distribution function and is irrespective of~\(w\).
+So there must exists a threshold~\(\overline{w}\)~such that the worker
+optimally accept the offer if~\(w \ge \overline{w}\), and reject
+if~\(w < \overline{w}\).
+
+Therefore, we can write the worker's Bellman equation as
+
+\[
+V(w) = \begin{cases}
+w + \beta w^2 +\cdots = \frac{w}{1-\beta}, \quad\qquad\qquad\textrm{if }w \ge \overline{w}\\
+c + \beta \int_0^B V(w') dF(w') = \frac{\overline{w}}{1-\beta} \qquad\textrm{if }w < \overline{w}
+\end{cases}
+\]
+
+\(\overline{w}\) is called the \textbf{reservation wage}.
+
+\par\null
+
+\subsubsection{Reservation Wage}
+
+{\label{160406}}
+
+We argue that given distribution~\(F\), the reservation
+wage~\(\overline{w}\) is uniquely determined. To prove this argument,
+we arrange the second the equation in the Bellman equation:
+
+~
+
+\[
+\begin{aligned}
+ \frac{\overline{w}}{1-\beta} &= c + \beta \int_0^B V(w') dF(w') \\
+ &= c + \beta \int_0^{\overline{w}} \frac{\overline{w}}{1-\beta} dF(w') + \beta \int_{\overline{w}}^{B} \frac{w'}{1-\beta} dF(w') \\
+ &= c + \frac{\beta\overline{w}}{1-\beta} \int_0^{\overline{w}}dF(w') + \beta \int_{\overline{w}}^{B} \frac{w'}{1-\beta} dF(w')
+\end{aligned}
+\]
+
+Therefore, 
+\[  
+\overline{w}\int_0^{\overline{w}}dF(w') = c + \frac{\beta}{1-\beta}\int_{\overline{w}}^{B} w' dF(w')
+\]
+
+Add $\int_{\overline{w}}^{B} \overline{w} dF(w')$ on both sides, we have:
+
+\begin{equation}
+\label{eq:rw}
+\underbrace{\overline{w} - c}_{\textrm{cost of being unemployed}} = \underbrace{\frac{\beta}{1-\beta}\int_{\overline{w}}^{B} (w'-\overline{w}) dF(w')}_{\textrm{expected benefit of searching one more period}} 
+\end{equation}
+
+Let $g(w) = w - c$, and $h(w) = \frac{\beta}{1-\beta}\int_{w}^{B} (w'-w) dF(w')$.
+
+\[
+\begin{aligned}
+h'(w) &= \frac{\beta}{1-\beta}[F(w)-1] < 0 \\
+h''(w) &= \frac{\beta}{1-\beta}F'(w) > 0
+\end{aligned}
+\]
+
+So \(h\left(w\right)\) is a decreasing convex function of
+\(w\), while \(g\left(w\right)\) is an increasing function
+of \(w\). Therefore there is a unique \(\overline{w}\)
+that equals \(h\left(w\right)\) and \(g\left(w\right)\), which proves the
+unique existence of the reservation wage.
+
+If the unemployment compensation~\(c\)
+increases,~\(g\left(w\right)\) is shifted downwards, it
+follows~\(\overline{w}\) increases --- the worker's threshold
+increases and demands higher wage offers.~
+
+\par\null
+
+\subsubsection{Mean Preserving Spread}
+
+{\label{613325}}
+
+What happened if we change the wage distribution~\(F\)?
+Suppose we change the distribution so as to increase the probability of
+getting higher wages as well as lower wages. Let's call the new
+distribution~\(F'\).~\(F'\) satisfies the
+following properties:
+
+$$\int_0^B[F'(w) - F(w)]dw = 0$$
+$$ F'(w) - F(w) = 
+          \begin{cases}
+             \le 0 \textrm{ for } w \ge \hat w\\
+             \ge 0 \textrm{ for } w \le \hat w
+          \end{cases}
+$$
+
+Such a redistribution represents a \textbf{mean-preserving increase in
+risk} since it redistribute the mass of probability toward the tails of
+the distribution while keeping the mean constant.
+
+To see the effect such redistribution, we rearrange Equation \eqref{eq:rw}:
+\[
+\begin{aligned}
+\overline{w} - c &= \frac{\beta}{1-\beta}\int_{\overline{w}}^{B} (w'-\overline{w}) dF(w') \\
+&= \frac{\beta}{1-\beta}\int_{0}^{B} (w'-\overline{w}) dF(w') - \frac{\beta}{1-\beta}\int_{0}^{\overline{w}} (w'-\overline{w}) dF(w') \\
+&= \frac{\beta}{1-\beta}[\mathbb{E}(w) - \overline{w}] - \frac{\beta}{1-\beta}\int_{0}^{\overline{w}} (w'-\overline{w}) dF(w') \\
+&= \frac{\beta}{1-\beta}[\mathbb{E}(w) - \overline{w}] + \frac{\beta}{1-\beta}\int_{0}^{\overline{w}} F(w') dF(w')
+\end{aligned}
+\]
+
+Therefore, 
+$$ \overline{w} - c = \beta[\mathbb{E}(w) - c] + \beta\int_{0}^{\overline{w}} F(w') dF(w') $$
+
+
+
+Let $g(w) = w - c$, and $h(w) = \beta[\mathbb{E}(w) - c] + \beta\int_{0}^{w} F(w') dF(w') $. 
+\[
+\begin{aligned}
+h'(w) &= F(w) > 0 \\
+h''(w) &= F'(w) > 0
+\end{aligned}
+\]
+Therefore, $h(w)$ is an increasing convex function of $w$. The intersection of $g(w)$ and $h(w)$ uniquely determines $\overline{w}$.
+
+If we replace $F$ with $F'$, note that the mean-preserving condition implies
+$$ \int_0^y F'(w) dw \ge \int_0^y F(w) dw \qquad\textrm{ for } 0 \le y \le B$$
+
+So~\(h\left(w\right)\) is shifted upward. The result is the
+threshold~\(\overline{w}\) increases. The intuition is, greater
+probability of high wage offers increases the value of searching,
+therefore increases the threshold of accepting an offer.~
+
+\newpage
+
+\section{References}
+
+{\label{891579}}
+
+\begin{enumerate}
+\tightlist
+\item
+  Ljungqvist, Lars, and Thomas J. Sargent.~\emph{Recursive macroeconomic
+  theory}. MIT press, 2012.
+\item
+  Miao, Jianjun.~\emph{Economic dynamics in discrete time}. MIT press,
+  2014
+\item
+  Kam,
+  Timothy.~\href{https://phantomachine.github.io/econ8022/index.html\#}{Dynamic
+  Macroeconomics}.
+\end{enumerate}
+
+\par\null\par\null
+
+\selectlanguage{english}
+\clearpage
+\end{document}
+
