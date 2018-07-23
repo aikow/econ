@@ -49,3 +49,7 @@ My undergraduate thesis: [eng](UNDERGRAD/eng_thesis.pdf) / [zh-cn](UNDERGRAD/chn
 Another undergraduate thesis: [thesis](EMET8002/thesis/main.pdf) / [slides](EMET8002/thesis/slides.pdf)
 
 Here is my blog in Chinese: [blog](https://aikow.github.io/blog/)
+
+### Useful Links
+
+Conference board: [Total Economy Database](https://www.conference-board.org/data/economydatabase/)
