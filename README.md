@@ -44,11 +44,13 @@ This site is used to keep a record of my lecture notes, summary sheets, exercise
 
 ### Miscellaneous
 
-My undergraduate thesis: [eng](UNDERGRAD/eng_thesis.pdf) / [zh-cn](UNDERGRAD/chn_thesis_v2.3.pdf) / [slides](UNDERGRAD/slides.pdf)
+My undergraduate thesis: [eng](OTHERS/eng_thesis.pdf) / [zh-cn](OTHERS/chn_thesis_v2.3.pdf) / [slides](OTHERS/slides.pdf)
 
 Another undergraduate thesis: [thesis](EMET8002/thesis/main.pdf) / [slides](EMET8002/thesis/slides.pdf)
 
 Here is my blog in Chinese: [blog](https://aikow.github.io/blog/)
+
+Collection of blog posts: [book](OTHERS/essays.pdf)
 
 ### Useful Links
 
