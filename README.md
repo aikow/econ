@@ -32,7 +32,7 @@ This site is used to keep a record of my lecture notes, summary sheets, exercise
 
 [Quick Reference: Producer and Consumer Duality](ECON8011/Producer-Consumer-Duality/main.pdf)
 
-[Schools of Political Economy Thoughts](http://www.hetwebsite.net/het/thought.htm)
+[Schools of Political Economy Thoughts](http://www.hetwebsite.net/het/thought.htm) ([Diagram](OTHERS/schools.png))
 
 ### Econometrics
 
