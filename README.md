@@ -50,7 +50,7 @@ Another undergraduate thesis: [thesis](EMET8002/thesis/main.pdf) / [slides](EMET
 
 Here is my blog in Chinese: [blog](https://aikow.github.io/blog/)
 
-Collection of blog posts: [book](OTHERS/essays.pdf)
+Collection of blog posts: [book](OTHERS/book.pdf)
 
 ### Useful Links
 
