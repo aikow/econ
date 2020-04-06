@@ -42,16 +42,6 @@ This site is used to keep a record of my lecture notes, summary sheets, exercise
 
 [Fundamentals of Econometric Methods: Part II](EMET8014/EMET8014-SUMMARY-II/main.pdf)
 
-### Miscellaneous
-
-My undergraduate thesis: [eng](OTHERS/eng_thesis.pdf) / [zh-cn](OTHERS/chn_thesis_v2.3.pdf) / [slides](OTHERS/slides.pdf)
-
-Another undergraduate thesis: [thesis](EMET8002/main.pdf) / [slides](EMET8002/slides.pdf)
-
-Here is my blog in Chinese: [blog](https://aikow.com)
-
-Collection of blog posts: [book](OTHERS/book.pdf)
-
 ### Useful Links
 
 Conference board: [Total Economy Database](https://www.conference-board.org/data/economydatabase/)
